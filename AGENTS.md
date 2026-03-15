@@ -26,8 +26,9 @@ Workspace-level rules for `/home/evo/workspace`.
 9. Session ends with Done, Next, Blocked, and Decisions.
 10. Symlinks are documented or auto-scanned.
 11. New `.md` files are registered in conventions.
-12. Google ecosystem tools should default to `evolution-engine` and prefer ADC over raw API keys.
-13. Archive-first is preferred when stale or duplicate surfaces add drag.
+12. `DNA/ops/STACK.md` is the live adopted and active tool registry; do not suggest alternatives to locked tools there unless `STACK.md` and `DECISION_LOG.md` are updated together.
+13. Google ecosystem tools should default to `evolution-engine` and prefer ADC over raw API keys.
+14. Archive-first is preferred when stale or duplicate surfaces add drag.
 
 ## Target Structure
 
@@ -64,10 +65,11 @@ Workspace-level rules for `/home/evo/workspace`.
 3. `/home/evo/workspace/DNA/AGENTS.md`
 4. `/home/evo/workspace/DNA/agents/AI_CONTEXT.md`
 5. `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
-6. `/home/evo/workspace/DNA/ops/TRANSITION.md`
-7. `/home/evo/workspace/DNA/INBOX.md`
-8. `/home/evo/workspace/DNA/ops/DECISION_LOG.md`
-9. `/home/evo/workspace/_docs/MERGE_PLAN_2026-03-10.md` when doing merge-history work only
+6. `/home/evo/workspace/DNA/ops/STACK.md`
+7. `/home/evo/workspace/DNA/ops/TRANSITION.md`
+8. `/home/evo/workspace/DNA/INBOX.md`
+9. `/home/evo/workspace/DNA/ops/DECISION_LOG.md`
+10. `/home/evo/workspace/_docs/MERGE_PLAN_2026-03-10.md` when doing merge-history work only
 
 ## Context Chain
 <- inherits from: /home/evo/workspace/AI_SESSION_BOOTSTRAP.md

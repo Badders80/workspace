@@ -18,6 +18,42 @@
 
 ---
 
+## 2026-03-16: STACK.md Authority Model + Drive Sync Removal
+
+### Decision
+Add `DNA/ops/STACK.md` as the live tool registry and formally confirm
+Google Drive context sync is removed from the workspace.
+
+### Authority Model
+Three surfaces, three distinct purposes:
+- `STACK.md` - live locked and active tool registry (what we use now)
+- `DECISION_LOG.md` - historical rationale ledger (why we decided, this file)
+- `TECH_RADAR.md` - personal research journal (consult on demand, not auto-loaded by agents)
+
+`TECH_RADAR.md` is not part of the agent entry chain. It is a personal
+memory tool: consult it when you want to ask "have we looked at X before?"
+or "find something on the radar that could solve Y."
+
+### Drive Sync Confirmed Removed
+Google Drive context sync (`sync-md-context-gdocs.sh` plus the old 6-hour cron)
+has been decommissioned. Google Drive is assets only going forward.
+The `CONVENTIONS.md` operational sync section is now historical and should
+not be treated as active automation.
+
+### Impact
+- Agents have one unambiguous place to check locked tools (`STACK.md`)
+- `TECH_RADAR.md` retains value as a personal research log without blocking the entry chain
+- No split-brain between tool-governance surfaces
+- Drive sync removal is formally recorded
+
+### Related Files
+- `DNA/ops/STACK.md`
+- `DNA/ops/TECH_RADAR.md`
+- `DNA/ops/CONVENTIONS.md`
+- `DNA/ops/DECISION_LOG.md`
+
+---
+
 ## 2026-03-13: Stage-One Horse Firestore Writes Use Source-Derived Stud Book IDs
 
 ### Decision

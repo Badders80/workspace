@@ -38,10 +38,11 @@ Any custom build must be logged in `ops/DECISION_LOG.md` with rationale and exit
 Before proposing or building anything new, search in this order:
 1. `skills/registry/approved_sources.md`
 2. `skills/registry/starred_repo_registry.json` (canonical) and `.md` snapshot
-3. `ops/TECH_RADAR.md`
-4. `ops/TIER_REGISTRY.md`
+3. `ops/STACK.md`
+4. `ops/TECH_RADAR.md` on demand only when checking prior research or evaluation notes
+5. `ops/TIER_REGISTRY.md`
 
-If a relevant item exists, adaptation should be attempted before custom implementation.
+If a relevant item exists in `STACK.md`, do not propose alternatives unless `STACK.md` and `ops/DECISION_LOG.md` are updated together. If prior evaluation notes exist in `TECH_RADAR.md`, use them to inform the decision instead of restarting research from scratch.
 
 ---
 
@@ -105,7 +106,8 @@ Restricted sources can still be used for research/reference and sandbox learning
 2. Assign lane (`basic`, `structured`, `platform`).
 3. Run a time-boxed pilot (default: 2 weeks).
 4. Record tier placement in `ops/TIER_REGISTRY.md`.
-5. Update `ops/TECH_RADAR.md` and `ops/DECISION_LOG.md` where needed.
+5. Update `ops/STACK.md` and `ops/DECISION_LOG.md` when a tool becomes live, adopted, or locked.
+6. Update `ops/TECH_RADAR.md` when evaluation notes are worth preserving for later on-demand lookup.
 
 ---
 

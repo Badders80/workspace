@@ -40,6 +40,7 @@ All active work lives at `/home/evo/workspace/` (WSL2 Ubuntu, user `evo`).
 | `/home/evo/workspace/DNA/AGENTS.md` | DNA-specific rules |
 | `/home/evo/workspace/DNA/agents/AI_CONTEXT.md` | Quick-loader for any AI assistant |
 | `/home/evo/workspace/DNA/ops/CONVENTIONS.md` | Naming, env, archive conventions |
+| `/home/evo/workspace/DNA/ops/STACK.md` | Live adopted and active tool registry |
 | `/home/evo/workspace/DNA/ops/TRANSITION.md` | Append-only structural handoff log |
 | `/home/evo/workspace/DNA/ops/DECISION_LOG.md` | Architectural decision record |
 | `/home/evo/workspace/_scripts/` | Operational scripts (gate check, context, sync) |
@@ -67,7 +68,14 @@ CONTEXT.md                              ← start here (this file)
         └── AGENTS.md                   ← workspace rules and guardrails
               └── DNA/AGENTS.md         ← DNA-specific rules
                     └── DNA/agents/AI_CONTEXT.md  ← quick loader
+                          └── DNA/ops/CONVENTIONS.md
+                                └── DNA/ops/STACK.md
+                                      └── DNA/ops/TRANSITION.md
+                                            └── DNA/INBOX.md
+                                                  └── DNA/ops/DECISION_LOG.md
 ```
+
+Consult `DNA/ops/TECH_RADAR.md` on demand when evaluating tools or checking prior research.
 
 ---
 

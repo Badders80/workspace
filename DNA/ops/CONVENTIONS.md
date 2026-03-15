@@ -20,6 +20,13 @@
 - SSOT: `/home/evo/.env` only.
 - All env validation and schema enforcement must resolve from `/home/evo`.
 
+## Tool Governance
+
+- `/home/evo/workspace/DNA/ops/STACK.md` is the live registry for adopted, active, and locked tools.
+- Do not suggest alternatives to tools locked in `STACK.md` unless `STACK.md` and `DECISION_LOG.md` are updated together.
+- `/home/evo/workspace/DNA/ops/DECISION_LOG.md` records historical rationale and decision context.
+- `/home/evo/workspace/DNA/ops/TECH_RADAR.md` is a consult-on-demand research journal and is not part of the default agent entry chain.
+
 ## Registered Markdown Files
 
 - `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md`
@@ -30,6 +37,7 @@
 - `/home/evo/workspace/DNA/agents/MEMORY_PROTOCOL.md`
 - `/home/evo/workspace/DNA/INBOX.md`
 - `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
+- `/home/evo/workspace/DNA/ops/STACK.md`
 - `/home/evo/workspace/DNA/ops/DECISION_LOG.md`
 - `/home/evo/workspace/DNA/ops/TECH_RADAR.md`
 - `/home/evo/workspace/DNA/ops/TRANSITION.md`
@@ -51,28 +59,13 @@
 - External archive (retired from active repo): move to `/home/evo/workspace/_archive/`.
 - Second-pass rule: after a build stabilises, promote internal archives to external.
 
-## Operational Sync: Google Docs Context
+## Operational Sync: Google Docs Context (Retired)
 
-- Script: `/home/evo/workspace/_scripts/sync-md-context-gdocs.sh`
-- Remote: `gdrive:_evo-context/_gdocs-key`
-- Mode: one-way push from local workspace to native Google Docs
-- Source scope:
-  - root-level `*.md` in `/home/evo/workspace`
-  - all `*.md` under `DNA/`
-  - all `*.md` under `projects/`
-- Excludes: `_archive`, `_logs`, `_locks`, `_sandbox`, `.git`, `node_modules`, and other non-current/generated paths
-- Automation: cron
-- Cadence: every 6 hours
-
-Operational commands:
-- Verify mirror health:
-  - `/home/evo/workspace/_scripts/sync-md-context-gdocs.sh --verify`
-- Apply sync:
-  - `/home/evo/workspace/_scripts/sync-md-context-gdocs.sh --apply`
-- Prune stale remote docs:
-  - `/home/evo/workspace/_scripts/sync-md-context-gdocs.sh --prune-stale`
-
-- The script usage block is the source of truth for the exact selection and operational behavior.
+- Status: retired 2026-03-16.
+- Google Drive is assets only going forward; no markdown mirror is active.
+- Historical script retained at `/home/evo/workspace/_scripts/sync-md-context-gdocs.sh`.
+- Do not treat Google Docs sync as an active context path, automation dependency, or agent entry surface.
+- The active cloud-facing context path is the GitHub analysis mirror plus `CONTEXT.md`.
 
 ## Operational Sync: Git Analysis Mirror
 

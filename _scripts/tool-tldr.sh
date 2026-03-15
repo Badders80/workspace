@@ -5,7 +5,11 @@
 # Example: tool-tldr "https://github.com/some/cool-tool"
 # ═══════════════════════════════════════════════════════════
 
-EVO_ROOT="/home/evo"
+WORKSPACE_ROOT="/home/evo/workspace"
+DNA_ROOT="$WORKSPACE_ROOT/DNA"
+STACK_FILE="$DNA_ROOT/ops/STACK.md"
+RADAR_FILE="$DNA_ROOT/ops/TECH_RADAR.md"
+INBOX_FILE="$DNA_ROOT/INBOX.md"
 
 color_green='\033[0;32m'
 color_yellow='\033[1;33m'
@@ -26,36 +30,55 @@ Examples:
 
 What it does:
   1. Generates a TLDR template
-  2. Checks if similar tools exist in TECH_RADAR
-  3. Suggests next steps
-  4. Optionally logs to INBOX.md
+  2. Checks STACK.md for live overlap
+  3. Consults TECH_RADAR.md on demand for prior notes
+  4. Suggests next steps
 
 EOF
 }
 
-# Extract domain/keywords for similarity check
-check_similar() {
+# Check live stack first, then consult radar on demand.
+check_existing() {
     local query="$1"
-    local radar="$EVO_ROOT/00_DNA/TECH_RADAR.md"
-    
-    echo -e "${color_blue}🔍 Checking for similar tools in TECH_RADAR...${color_nc}"
-    
-    # Simple keyword matching (fuzzy)
     local keywords=$(echo "$query" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/ /g')
-    local found=0
-    
+    local found_stack=0
+    local found_radar=0
+
+    echo -e "${color_blue}🔍 Checking STACK.md for live tool overlap...${color_nc}"
+
     for word in $keywords; do
         if [[ ${#word} -gt 3 ]]; then
-            if grep -i "$word" "$radar" 2>/dev/null | grep -q "^###"; then
-                echo -e "${color_yellow}  ⚠️  Possible overlap found with:${color_nc}"
-                grep -i "$word" "$radar" 2>/dev/null | grep "^###" | head -3 | sed 's/^/     /'
-                found=1
+            if grep -i "$word" "$STACK_FILE" 2>/dev/null >/dev/null; then
+                if [[ $found_stack -eq 0 ]]; then
+                    echo -e "${color_yellow}  ⚠️  Possible live-stack overlap:${color_nc}"
+                    found_stack=1
+                fi
+                grep -ni "$word" "$STACK_FILE" 2>/dev/null | head -3 | sed 's/^/     /'
             fi
         fi
     done
-    
-    if [[ $found -eq 0 ]]; then
-        echo -e "${color_green}  ✅ No obvious overlaps found${color_nc}"
+
+    if [[ $found_stack -eq 0 ]]; then
+        echo -e "${color_green}  ✅ No obvious live-stack overlap found${color_nc}"
+    fi
+    echo ""
+
+    echo -e "${color_blue}🗂 Consulting TECH_RADAR.md on demand for prior notes...${color_nc}"
+
+    for word in $keywords; do
+        if [[ ${#word} -gt 3 ]]; then
+            if grep -i "$word" "$RADAR_FILE" 2>/dev/null | grep -q "^###"; then
+                if [[ $found_radar -eq 0 ]]; then
+                    echo -e "${color_yellow}  ⚠️  Possible prior evaluation notes:${color_nc}"
+                    found_radar=1
+                fi
+                grep -i "$word" "$RADAR_FILE" 2>/dev/null | grep "^###" | head -3 | sed 's/^/     /'
+            fi
+        fi
+    done
+
+    if [[ $found_radar -eq 0 ]]; then
+        echo -e "${color_green}  ✅ No obvious prior radar notes found${color_nc}"
     fi
     echo ""
 }
@@ -118,13 +141,16 @@ suggest_actions() {
     echo ""
     echo "1. Fill out the template above"
     echo ""
-    echo "2. Add to INBOX.md for processing:"
-    echo "   evo inbox-add"
+    echo "2. Review the live registry first:"
+    echo "   code $STACK_FILE"
     echo ""
-    echo "3. Or directly to TECH_RADAR:"
-    echo "   code $EVO_ROOT/00_DNA/TECH_RADAR.md"
+    echo "3. Capture notes in INBOX.md if it still looks new:"
+    echo "   code $INBOX_FILE"
     echo ""
-    echo "4. Quick decision shortcuts:"
+    echo "4. Consult TECH_RADAR.md on demand for prior notes:"
+    echo "   code $RADAR_FILE"
+    echo ""
+    echo "5. Quick decision shortcuts:"
     echo "   - Obviously crap? Delete and move on"
     echo "   - Educational only? Archive immediately"
     echo "   - Similar to existing? Compare and decide"
@@ -141,7 +167,7 @@ fi
 input="$*"
 
 generate_tldr "$input"
-check_similar "$input"
+check_existing "$input"
 suggest_actions
 
 echo "═══════════════════════════════════════════════════════════"

@@ -1,9 +1,9 @@
 # 🎯 Tech Radar - Tool & Technology Evaluation
 
-**Purpose:** Log, evaluate, and track decisions about new tools so we don't keep having the same conversations.
+**Purpose:** Keep prior tool evaluations and research notes so we do not repeat the same analysis.
 
-**Rule:** If it's not in here, we haven't properly evaluated it yet.
-**Assistant rule:** Check this file and `skills/registry/approved_sources.md` before recommending or re-evaluating tools.
+**Rule:** Consult on demand when you want prior evaluation notes, want to avoid re-researching a tool, or want to see what is already on the radar.
+**Assistant rule:** Check `STACK.md` first for live adopted or locked tools. Consult this file on demand only; it is not part of the default agent entry chain.
 
 ---
 
@@ -254,5 +254,5 @@ Before moving to Trial or Adopt, answer:
 
 ---
 
-**Last updated:** 2026-03-04  
-**Next review:** 2026-03-11
+**Last updated:** 2026-03-16  
+**Next review:** 2026-03-23

@@ -59,6 +59,7 @@ check_file "$WORKSPACE_AI_BOOTSTRAP" "bootstrap present"
 check_file "$WORKSPACE_AGENTS" "workspace AGENTS present"
 check_file "$WORKSPACE_DNA_AGENTS" "DNA AGENTS present"
 check_file "$WORKSPACE_CONVENTIONS" "conventions present"
+check_file "$WORKSPACE_STACK" "stack registry present"
 check_file "$WORKSPACE_TRANSITION" "transition log present"
 check_file "$WORKSPACE_DECISIONS" "decision log present"
 

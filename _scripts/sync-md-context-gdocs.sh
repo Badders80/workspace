@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 #
+# RETIRED: Google Docs markdown sync left the active workspace model on 2026-03-16.
+# Google Drive is assets only. Keep this script for historical reference or diagnostics only.
+# Do not treat it as part of the live agent context chain or active automation surface.
+#
 # One-way workspace Markdown -> native Google Docs mirror (incremental).
 # Updated: 2026-03-14 — expanded to root workspace docs plus DNA/ and projects/ markdown
 #

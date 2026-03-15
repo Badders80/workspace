@@ -15,11 +15,13 @@ Quick loader for any AI assistant entering the active workspace.
 2. `/home/evo/workspace/AGENTS.md`
 3. `/home/evo/workspace/DNA/AGENTS.md`
 4. `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
-5. `/home/evo/workspace/DNA/ops/TRANSITION.md`
-6. `/home/evo/workspace/DNA/INBOX.md`
-7. `/home/evo/workspace/DNA/ops/DECISION_LOG.md`
+5. `/home/evo/workspace/DNA/ops/STACK.md`
+6. `/home/evo/workspace/DNA/ops/TRANSITION.md`
+7. `/home/evo/workspace/DNA/INBOX.md`
+8. `/home/evo/workspace/DNA/ops/DECISION_LOG.md`
 
 Read those files before answering questions about project state.
+Consult `/home/evo/workspace/DNA/ops/TECH_RADAR.md` on demand only when checking prior tool research or evaluation notes.
 
 ## Current Platform Snapshot
 
@@ -56,5 +58,6 @@ Read those files before answering questions about project state.
 When a session changes structure, behavior, or architecture:
 
 - append to `DNA/ops/TRANSITION.md`
+- update `DNA/ops/STACK.md` if the live tool registry changed
 - update `DNA/ops/DECISION_LOG.md` if a real decision was made
 - update `DNA/INBOX.md` or a project README backlog if priorities changed

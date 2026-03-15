@@ -19,7 +19,7 @@ check_file() {
 
 echo "== evo-check =="
 
-if [[ "$PWD" == "$LEGACY_ROOT" || "$PWD" == "$LEGACY_ROOT/"* ]]; then
+if [[ -n "$LEGACY_ROOT" && ( "$PWD" == "$LEGACY_ROOT" || "$PWD" == "$LEGACY_ROOT/"* ) ]]; then
     echo "FAIL  running from legacy root: $PWD"
     STATUS="RED"
 elif [[ "$PWD" != "$WORKSPACE_ROOT" && "$PWD" != "$WORKSPACE_ROOT/"* ]]; then
@@ -33,6 +33,7 @@ check_file "$WORKSPACE_ROOT/AGENTS.md"
 check_file "$WORKSPACE_ROOT/AI_SESSION_BOOTSTRAP.md"
 check_file "$WORKSPACE_ROOT/DNA/AGENTS.md"
 check_file "$WORKSPACE_ROOT/DNA/ops/CONVENTIONS.md"
+check_file "$WORKSPACE_ROOT/DNA/ops/STACK.md"
 check_file "$SYSTEM_HOME/.env"
 
 if [ "$STATUS" = "GREEN" ]; then

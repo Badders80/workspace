@@ -5,7 +5,11 @@
 # Usage: ai-tool-handler "tool name or url" "source context"
 # ═══════════════════════════════════════════════════════════
 
-EVO_ROOT="/home/evo"
+WORKSPACE_ROOT="/home/evo/workspace"
+DNA_ROOT="$WORKSPACE_ROOT/DNA"
+STACK_FILE="$DNA_ROOT/ops/STACK.md"
+RADAR_FILE="$DNA_ROOT/ops/TECH_RADAR.md"
+INBOX_FILE="$DNA_ROOT/INBOX.md"
 TOOL_NAME="$1"
 SOURCE="${2:-cli conversation}"
 DATE=$(date +%Y-%m-%d)
@@ -27,34 +31,45 @@ echo -e "${BLUE}Source:${NC} $SOURCE"
 echo -e "${BLUE}Date:${NC} $DATE"
 echo ""
 
-# Check if already in TECH_RADAR
-echo "🔍 Checking TECH_RADAR for existing evaluation..."
+# Check the live stack first, then consult the radar on demand.
+echo "🔍 Checking STACK.md for live registry overlap..."
 
 # Normalize the search (remove https, github.com, etc.)
 SEARCH_TERM=$(echo "$TOOL_NAME" | sed 's|https://||;s|http://||;s|github.com/||;s|www.||' | cut -d'/' -f1)
 
-if grep -i "$SEARCH_TERM" "$EVO_ROOT/00_DNA/TECH_RADAR.md" 2>/dev/null | grep -q "^###"; then
-    echo -e "${YELLOW}⚠️  ALREADY EVALUATED${NC}"
+if grep -i "$SEARCH_TERM" "$STACK_FILE" 2>/dev/null >/dev/null; then
+    echo -e "${YELLOW}⚠️  ALREADY IN STACK.md${NC}"
     echo ""
-    grep -i -A5 -B1 "^###.*$SEARCH_TERM" "$EVO_ROOT/00_DNA/TECH_RADAR.md" 2>/dev/null | head -20
+    grep -ni "$SEARCH_TERM" "$STACK_FILE" 2>/dev/null | head -20
     echo ""
-    echo -e "${BLUE}Found in TECH_RADAR. Not adding duplicate.${NC}"
+    echo -e "${BLUE}Found in STACK.md. Do not add a duplicate or propose an alternative without updating the live registry and DECISION_LOG.md.${NC}"
+    exit 0
+fi
+
+echo "🗂 Consulting TECH_RADAR.md on demand for prior notes..."
+
+if grep -i "$SEARCH_TERM" "$RADAR_FILE" 2>/dev/null | grep -q "^###"; then
+    echo -e "${YELLOW}⚠️  PRIOR EVALUATION NOTES FOUND${NC}"
+    echo ""
+    grep -i -A5 -B1 "^###.*$SEARCH_TERM" "$RADAR_FILE" 2>/dev/null | head -20
+    echo ""
+    echo -e "${BLUE}Found prior notes in TECH_RADAR.md. Not adding duplicate.${NC}"
     exit 0
 fi
 
 # Check for similar tools (broader search)
-echo "🔍 Checking for similar tools..."
+echo "🔍 Checking for similar tools in TECH_RADAR.md..."
 KEYWORDS=$(echo "$TOOL_NAME" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/ /g')
 SIMILAR_FOUND=0
 
 for word in $KEYWORDS; do
     if [[ ${#word} -gt 4 ]]; then
-        if grep -i "$word" "$EVO_ROOT/00_DNA/TECH_RADAR.md" 2>/dev/null | grep -q "^###"; then
+        if grep -i "$word" "$RADAR_FILE" 2>/dev/null | grep -q "^###"; then
             if [[ $SIMILAR_FOUND -eq 0 ]]; then
                 echo -e "${YELLOW}⚠️  SIMILAR TOOLS FOUND:${NC}"
                 SIMILAR_FOUND=1
             fi
-            grep -i "$word" "$EVO_ROOT/00_DNA/TECH_RADAR.md" 2>/dev/null | grep "^###" | sed 's/^### /  • /'
+            grep -i "$word" "$RADAR_FILE" 2>/dev/null | grep "^###" | sed 's/^### /  • /'
         fi
     fi
 done
@@ -82,9 +97,6 @@ ENTRY="
 **Logged by:** AI handler
 "
 
-# Add to INBOX.md
-INBOX_FILE="$EVO_ROOT/00_DNA/INBOX.md"
-
 # Create temp file with new entry
 TEMP_FILE=$(mktemp)
 echo "$ENTRY" > "$TEMP_FILE"
@@ -111,21 +123,29 @@ echo "════════════════════════�
 echo "📋 NEXT STEPS FOR AI:"
 echo "═══════════════════════════════════════════════════════════"
 echo ""
-echo "1. Evaluate against current stack:"
+echo "1. Check STACK.md first:"
+echo "   - If it belongs in the live stack, update STACK.md and DECISION_LOG.md together"
+echo "   - Do not recommend alternatives to locked tools already there"
+echo ""
+echo "2. Consult TECH_RADAR.md on demand:"
+echo "   - Use prior notes if they exist"
+echo "   - Only add or refresh radar notes when they are worth preserving"
+echo ""
+echo "3. Evaluate against current stack:"
 echo "   - What problem does it solve?"
 echo "   - Do we already have a solution?"
 echo "   - Is it significantly better?"
 echo ""
-echo "2. Quick verdict:"
+echo "4. Quick verdict:"
 echo "   🔴 Reject = Not for us / Duplicates existing"
 echo "   🟡 Assess = Interesting, needs research"  
 echo "   🟢 Trial = Test in sandbox"
 echo "   🔵 Adopt = Production ready"
 echo ""
-echo "3. If Assess or Trial:"
+echo "5. If Assess or Trial:"
 echo "   - Move to TECH_RADAR.md"
 echo "   - Set decision deadline"
 echo ""
-echo "View inbox: code $EVO_ROOT/00_DNA/INBOX.md"
-echo "View radar: code $EVO_ROOT/00_DNA/TECH_RADAR.md"
+echo "View inbox: code $INBOX_FILE"
+echo "View radar: code $RADAR_FILE"
 echo "═══════════════════════════════════════════════════════════"

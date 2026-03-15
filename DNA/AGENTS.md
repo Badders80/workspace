@@ -12,6 +12,7 @@ Rules for files under `/home/evo/workspace/DNA`.
 ## Guardrails
 
 - `DNA/` is the operating brain for the workspace.
+- `DNA/ops/STACK.md` is the live tool registry for adopted and active tooling.
 - Register new markdown files in `/home/evo/workspace/DNA/ops/CONVENTIONS.md` before use.
 - Keep transition notes append-only in `/home/evo/workspace/DNA/ops/TRANSITION.md`.
 

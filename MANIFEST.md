@@ -1,6 +1,6 @@
 # Workspace Manifest
 Created: 2026-03-10
-Updated: 2026-03-12
+Updated: 2026-03-16
 Status: ACTIVE
 
 ## Structure
@@ -19,13 +19,14 @@ Status: ACTIVE
 - `AGENTS.md` - workspace operating rules
 - `DNA/ops/TRANSITION.md` - append-only structural handoff log
 - `DNA/INBOX.md` - deferred queue and active cleanup items
+- `DNA/ops/STACK.md` - live adopted and active tool registry
 - `DNA/ops/DECISION_LOG.md` - architectural history and current path notices
-- `DNA/ops/CONVENTIONS.md` - workspace conventions, including Google Docs sync scope and operational commands
+- `DNA/ops/CONVENTIONS.md` - workspace conventions, registry authority, and active automation notes
 - `_docs/STORAGE_POLICY.md` - where `C:` vs `S:` should be used for installs, data, WSL, Docker, and scratch workloads
 
 ## Automation
-- Google Docs Sync - automated workspace Markdown to native Google Docs sync is active. See `DNA/ops/CONVENTIONS.md` for scope, cadence, and operational commands.
-- Analysis Mirror - scripted workspace-to-GitHub analysis mirror is available for cloud AI review without heavy archives or generated assets. See `DNA/ops/CONVENTIONS.md` for scope and commands.
+- Google Docs Sync - retired 2026-03-16. Google Drive is assets only and is not part of the active agent context path.
+- Analysis Mirror - scripted workspace-to-GitHub analysis mirror is the active cloud AI review path without heavy archives or generated assets. See `DNA/ops/CONVENTIONS.md` for scope and commands.
 
 ## Active Projects
 - Evolution_Platform - live platform, canonical at `projects/Evolution_Platform`

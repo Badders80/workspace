@@ -7,6 +7,7 @@ WORKSPACE_AGENTS="$WORKSPACE_ROOT/AGENTS.md"
 WORKSPACE_DNA_AGENTS="$WORKSPACE_ROOT/DNA/AGENTS.md"
 WORKSPACE_AI_CONTEXT="$WORKSPACE_ROOT/DNA/agents/AI_CONTEXT.md"
 WORKSPACE_CONVENTIONS="$WORKSPACE_ROOT/DNA/ops/CONVENTIONS.md"
+WORKSPACE_STACK="$WORKSPACE_ROOT/DNA/ops/STACK.md"
 WORKSPACE_TRANSITION="$WORKSPACE_ROOT/DNA/ops/TRANSITION.md"
 WORKSPACE_INBOX="$WORKSPACE_ROOT/DNA/INBOX.md"
 WORKSPACE_DECISIONS="$WORKSPACE_ROOT/DNA/ops/DECISION_LOG.md"
@@ -21,6 +22,7 @@ workspace_context_files() {
 /home/evo/workspace/DNA/AGENTS.md
 /home/evo/workspace/DNA/agents/AI_CONTEXT.md
 /home/evo/workspace/DNA/ops/CONVENTIONS.md
+/home/evo/workspace/DNA/ops/STACK.md
 /home/evo/workspace/DNA/ops/TRANSITION.md
 /home/evo/workspace/DNA/INBOX.md
 /home/evo/workspace/DNA/ops/DECISION_LOG.md
@@ -36,13 +38,15 @@ MANDATORY: Read these workspace files before responding:
 3. /home/evo/workspace/DNA/AGENTS.md
 4. /home/evo/workspace/DNA/agents/AI_CONTEXT.md
 5. /home/evo/workspace/DNA/ops/CONVENTIONS.md
-6. /home/evo/workspace/DNA/ops/TRANSITION.md
-7. /home/evo/workspace/DNA/INBOX.md
-8. /home/evo/workspace/DNA/ops/DECISION_LOG.md
+6. /home/evo/workspace/DNA/ops/STACK.md
+7. /home/evo/workspace/DNA/ops/TRANSITION.md
+8. /home/evo/workspace/DNA/INBOX.md
+9. /home/evo/workspace/DNA/ops/DECISION_LOG.md
 
 Treat /home/evo/workspace as canonical.
 Treat /home/evo as control plane only.
 Prefer workspace paths over any older /home/evo paths.
+Consult /home/evo/workspace/DNA/ops/TECH_RADAR.md on demand only for prior tool evaluation notes.
 Summarize what you learned before continuing.
 EOF
 }

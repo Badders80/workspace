@@ -175,6 +175,12 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Blocked: The live workspace root still is not intended to be used as a normal git worktree; the durable operational path is the cached mirror clone at `/home/evo/.cache/workspace-analysis-mirror`.
 - Decisions: Runtime gateway snapshots are excluded from the mirror, the script performs a lightweight secret preflight before committing, and local git hooks are bypassed only inside the cached mirror clone after that preflight passes.
 
+### 2026-03-16 [agent: Codex][stack-registry-authority]
+- Done: Created `/home/evo/workspace/DNA/ops/STACK.md`, inserted it into the required agent context chain and validation scripts, retired Google Docs sync in the live docs, marked `sync-md-context-gdocs.sh` as retired, and aligned tool-governance helpers so `STACK.md` is checked first while `TECH_RADAR.md` is consult-on-demand only.
+- Next: Keep `STACK.md` and `DECISION_LOG.md` updated together whenever a tool becomes adopted, active, locked, or replaced.
+- Blocked: `TECH_RADAR.md` still contains older Adopt history entries; if they diverge from `STACK.md`, treat `STACK.md` as authoritative.
+- Decisions: `STACK.md` is now the live tool registry, `TECH_RADAR.md` is not part of the default entry chain, and Google Drive remains assets only.
+
 ## Context Chain
 ← inherits from: /home/evo/workspace/DNA/AGENTS.md
 → overrides by: none

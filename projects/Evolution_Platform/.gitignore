@@ -59,3 +59,6 @@ quick-fix-commands.sh
 evolution-git-cleanup.sh
 check-required-env-vars.sh
 .vercel
+.env
+.env.local
+.env*.local
