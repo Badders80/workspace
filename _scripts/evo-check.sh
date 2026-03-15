@@ -4,7 +4,7 @@ set -u
 
 WORKSPACE_ROOT="/home/evo/workspace"
 SYSTEM_HOME="/home/evo"
-LEGACY_ROOT="/home/evo2"
+LEGACY_ROOT=""  # evo2 removed 2026-03-16
 STATUS="GREEN"
 
 check_file() {

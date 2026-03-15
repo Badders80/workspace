@@ -54,10 +54,20 @@
 **/tmp/
 **/temp/
 
+# Large binary historical docs
+/_docs/Old_Bibles/
+
+# Nested git repos — tracked separately
+/projects/
+/gateways/
+
+# One-off migration scripts
+/migrate_seed_to_cloud.py
+
 # Workspace-specific generated and local-state surfaces
 /gateways/openclaw/workspace/.openclaw/workspace-state.json
-/OpenClaw_Sandbox/experiments/evolution-reel-studio/node_modules/
-/OpenClaw_Sandbox/experiments/evolution-reel-studio/public/clips/
-/OpenClaw_Sandbox/experiments/evolution-reel-studio/public/overlays/*.mp4
+/gateways/openclaw/sandbox/experiments/evolution-reel-studio/node_modules/
+/gateways/openclaw/sandbox/experiments/evolution-reel-studio/public/clips/
+/gateways/openclaw/sandbox/experiments/evolution-reel-studio/public/overlays/*.mp4
 /projects/reel-generator/assets/
 /projects/Evolution_Platform/public/videos/

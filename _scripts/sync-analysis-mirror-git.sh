@@ -218,7 +218,7 @@ This repository is the text-first operating mirror of the active workspace. It i
 
 ## Excluded
 
-- \`_archive/\`, \`_logs/\`, \`_locks/\`, \`_sandbox/\`, \`models/\`, and \`OpenClaw_Sandbox/\`
+- \`_archive/\`, \`_logs/\`, \`_locks/\`, \`_sandbox/\`, \`models/\`, and \`gateways/openclaw/sandbox/\`
 - Dependency installs and build output such as \`node_modules/\`, \`.next/\`, \`dist/\`, and \`build/\`
 - Local env and credential-shaped files
 - Runtime-only state such as \`.openclaw/\`

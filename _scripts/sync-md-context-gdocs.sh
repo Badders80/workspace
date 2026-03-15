@@ -69,7 +69,6 @@ Options:
 
 Behavior:
   - Source root: /home/evo/workspace (canonical post-2026-03-10)
-  - evo2 source removed — /home/evo2 is frozen legacy, not scanned.
   - Selects current workspace markdown only:
       * Root-level markdown files in /home/evo/workspace
       * Any markdown under DNA/

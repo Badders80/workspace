@@ -2,7 +2,7 @@
 
 ## Migration Status
 
-WORKSPACE ACTIVE - `/home/evo/workspace` is canonical. `/home/evo/` is control plane only. `/home/evo2` is frozen legacy. Site-wide alignment and GCP routing cleanup are the current workstream.
+WORKSPACE ACTIVE - `/home/evo/workspace` is canonical. `/home/evo/` is control plane only. Site-wide alignment and GCP routing cleanup are the current workstream.
 
 ## Scope
 
@@ -12,7 +12,6 @@ Workspace-level rules for `/home/evo/workspace`.
 
 - Canonical root is `/home/evo/workspace`.
 - `/home/evo/` is system home only, dotfiles, wrappers, and auth.
-- `/home/evo2` is frozen legacy.
 
 ## Laws
 
@@ -44,8 +43,7 @@ Workspace-level rules for `/home/evo/workspace`.
 
 ## Guardrails
 
-- Do not treat `/home/evo/` or `/home/evo2` as source of truth for active workspace content.
-- Replace stale `/home/evo2` and pre-workspace `/home/evo` path references in docs and scripts before issuing new agent sessions.
+- Do not treat `/home/evo/` as source of truth for active workspace content.
 - Use `_locks/` for folder-level ownership during merge execution.
 - Keep deferred material isolated until explicitly re-scoped.
 - Keep local JSON and file fallbacks in place until repository seams are tested.

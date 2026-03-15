@@ -1,5 +1,7 @@
 # Merge Plan
 
+> /home/evo2 deleted 2026-03-16. This document is historical.
+
 All /home/evo2 path references in docs, scripts, and env files must be replaced with /home/evo before any agent is given a new session.
 
 Date: 2026-03-10

@@ -1,5 +1,7 @@
 # TRANSITION
 
+> /home/evo2 deleted 2026-03-16. This document is historical.
+
 ## Purpose
 
 Append-only merge and workspace-consolidation handoff log for the `/home/evo/workspace` canonical root.

@@ -8,7 +8,6 @@ Quick loader for any AI assistant entering the active workspace.
 
 - `/home/evo/workspace` is the only canonical build surface.
 - `/home/evo` is control plane only: dotfiles, wrappers, auth, global tool config.
-- `/home/evo2` is frozen legacy.
 
 ## Required Read Order
 

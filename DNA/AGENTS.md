@@ -8,7 +8,6 @@ Rules for files under `/home/evo/workspace/DNA`.
 
 - Canonical root is `/home/evo/workspace`.
 - `/home/evo/` is system home only, not a working surface.
-- `/home/evo2` is legacy reference only.
 
 ## Guardrails
 

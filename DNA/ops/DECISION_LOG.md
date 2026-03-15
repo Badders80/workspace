@@ -1211,7 +1211,7 @@ Use a dedicated Git analysis mirror for the workspace, built from a clean export
 - Drive the mirror through a separate cached clone plus clean export, not through normal commits from `/home/evo/workspace`.
 - Exclude from the root snapshot:
   - `_archive/`, `_logs/`, `_locks/`, `_sandbox/`, and `models/`
-  - `OpenClaw_Sandbox/`
+  - `gateways/openclaw/sandbox/`
   - dependency installs and build output such as `node_modules/`, `.next/`, and `dist/`
   - local env files, machine-local state, and credential-shaped files
   - heavyweight generated media and review outputs that are not needed for code/system analysis

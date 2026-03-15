@@ -7,7 +7,6 @@
 ## Legacy Roots
 
 - `/home/evo/` is system home only, dotfiles only, and not canonical.
-- `/home/evo2` is reference-only and not canonical.
 
 ## Naming
 
@@ -19,7 +18,6 @@
 ## Env Governance
 
 - SSOT: `/home/evo/.env` only.
-- No `/home/evo2 -> /home/evo` mirror policy remains valid after re-root.
 - All env validation and schema enforcement must resolve from `/home/evo`.
 
 ## Registered Markdown Files
@@ -86,7 +84,7 @@ Operational commands:
   - root-level markdown plus key build/control files
   - all selected text/code/config files under `DNA/`, `_docs/`, `_scripts/`, `gateways/`, and `projects/`
 - Excludes:
-  - `_archive`, `_logs`, `_locks`, `_sandbox`, `models`, and `OpenClaw_Sandbox`
+  - `_archive`, `_logs`, `_locks`, `_sandbox`, `models`, and `gateways/openclaw/sandbox`
   - embedded `.git` directories, dependency installs, caches, and build output
   - `.env` and other credential-shaped files
   - runtime-only state such as `.openclaw` and `workspace-gateway-*` snapshots

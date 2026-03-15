@@ -1,29 +1,54 @@
-# Workspace Analysis Mirror
+# Mirror Manifest
 
-Generated: 2026-03-15 20:09:53 UTC
-Source root: `/home/evo/workspace`
-Mode: curated one-way Git mirror for cloud analysis
+Defines what lives where and why. Updated: 2026-03-16.
 
-## Purpose
+---
 
-This repository is the text-first operating mirror of the active workspace. It is intended to give cloud-based AI tools the logic, contracts, scripts, and build surface of the system without dragging along archives, dependency installs, generated media, or local runtime state.
+## Architecture
 
-## Included
+### GitHub — AI Context (source of truth)
 
-- Root-level markdown plus key build and control files
-- `DNA/`, `_docs/`, `_scripts/`, `gateways/`, and `projects/`
-- Source code, scripts, build/config files, and text-based data such as JSON, YAML, TOML, HTML, and SQL
+`Badders80/workspace` is the single entry point for any AI session.
 
-## Excluded
+```
+Badders80/workspace
+├── CONTEXT.md                    ← cloud AI entry point
+├── AGENTS.md                     ← agent rules
+├── AI_SESSION_BOOTSTRAP.md       ← session orientation
+├── DNA/                          ← brand, ops conventions, decision log
+└── _scripts/                     ← operational scripts
+```
 
-- `_archive/`, `_logs/`, `_locks/`, `_sandbox/`, `models/`, and `OpenClaw_Sandbox/`
-- Dependency installs and build output such as `node_modules/`, `.next/`, `dist/`, and `build/`
-- Local env and credential-shaped files
-- Runtime-only state such as `.openclaw/`
-- Runtime gateway snapshots such as `gateways/openclaw/workspace/workspace-gateway-*/`
-- Heavy generated media such as `projects/reel-generator/assets/` and `projects/Evolution_Platform/public/videos/`
+Fetch `https://raw.githubusercontent.com/Badders80/workspace/main/CONTEXT.md` to orient any session.
 
-## Snapshot
+### Google Drive — Assets Only
 
-- Selected files: 466
-- Approx payload size: 6.6M
+`gdrive:_evo-context/` is for assets that can't live in git.
+
+```
+gdrive:_evo-context/
+├── pitch decks
+├── images and brand assets
+└── investor content
+```
+
+**No markdown mirrors.** The rclone `sync-md-context-gdocs.sh` cron was retired 2026-03-16.
+
+---
+
+## What Changed (2026-03-16)
+
+| Before | After |
+|--------|-------|
+| rclone cron pushed workspace markdown to Drive every 6h | Removed — cron retired |
+| Drive `_gdocs-key/workspace/` was the AI context mirror | Deleted |
+| AI sessions fetched context via Drive docs | AI sessions fetch `CONTEXT.md` from GitHub |
+
+---
+
+## Other Repos
+
+| Repo | Purpose |
+|------|---------|
+| `Badders80/SSOT` | Mission Control React/Vite app |
+| `Badders80/Evolution-3.1` | Evolution Stables public website |

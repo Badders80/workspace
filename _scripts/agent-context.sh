@@ -42,7 +42,7 @@ MANDATORY: Read these workspace files before responding:
 
 Treat /home/evo/workspace as canonical.
 Treat /home/evo as control plane only.
-Prefer workspace paths over any older /home/evo or /home/evo2 references.
+Prefer workspace paths over any older /home/evo paths.
 Summarize what you learned before continuing.
 EOF
 }

@@ -12,7 +12,6 @@ Status: ACTIVE - site-wide alignment audit in progress
 - Do not treat `/home/evo/` as the source of truth for active code or governance docs.
 
 ## Legacy Roots
-- `/home/evo2` is frozen legacy and historical reference only.
 - Older `/home/evo/00_DNA` references are historical and should be treated as drift unless explicitly archived.
 
 ## Required Context Files
