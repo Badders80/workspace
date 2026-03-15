@@ -39,3 +39,13 @@ Deferred workspace items and active cleanup queue.
 -> overrides by: none
 -> live map: /home/evo/workspace/AI_SESSION_BOOTSTRAP.md
 -> conventions: /home/evo/workspace/DNA/ops/CONVENTIONS.md
+
+---
+
+## Session Backlog — 2026-03-16
+
+- [ ] TECH_RADAR: add entry for lossless-claw (Assess)
+- [ ] TECH_RADAR: add entry for skills.sh (Trial)
+- [ ] BUILD_SOP.md — new-build checklist with skills/agent selection step
+- [ ] Starred repo inventory doc — document what exists so nothing gets rebuilt
+- [ ] Evolution_Marketplace — create GitHub remote and connect local repo
