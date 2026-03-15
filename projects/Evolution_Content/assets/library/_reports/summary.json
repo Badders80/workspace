@@ -1,0 +1,41 @@
+{
+  "file_count": 224,
+  "generated_at_utc": "2026-03-10T23:30:50.998371+00:00",
+  "name_collision_count": 0,
+  "pairwise_shared_hash_groups": {
+    "content_factory_assets__platform_public_images": 15,
+    "raw_bundle__content_factory_assets": 5,
+    "raw_bundle__platform_public_images": 34
+  },
+  "source_count": 3,
+  "sources": [
+    {
+      "note": "Structured working library for content generation and horse media.",
+      "root": "/mnt/s/Evolution-Content-Factory/assets",
+      "shared_files": 20,
+      "shared_hash_groups": 15,
+      "source": "content_factory_assets",
+      "total_files": 80,
+      "unique_files": 60
+    },
+    {
+      "note": "Live platform image/public asset copy.",
+      "root": "/home/evo/workspace/projects/Evolution_Platform/public/images",
+      "shared_files": 45,
+      "shared_hash_groups": 44,
+      "source": "platform_public_images",
+      "total_files": 84,
+      "unique_files": 39
+    },
+    {
+      "note": "Recovered source bundle re-homed into the workspace library.",
+      "root": "/home/evo/workspace/projects/Evolution_Content/assets/library/originals",
+      "shared_files": 34,
+      "shared_hash_groups": 34,
+      "source": "raw_bundle",
+      "total_files": 60,
+      "unique_files": 26
+    }
+  ],
+  "unique_hash_count": 159
+}

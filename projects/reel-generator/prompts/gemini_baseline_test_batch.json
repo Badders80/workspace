@@ -1,0 +1,33 @@
+{
+  "label": "gemini-baseline-compare",
+  "images": [
+    {
+      "prompt": "Thoroughbred racehorse mid-gallop, jockey in racing silks, golden hour lighting, photorealistic, cinematic",
+      "negative_prompt": "",
+      "type": "test",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "prompt": "Thoroughbred racehorse mid-gallop on dirt track, powerful motion, dust kicking from hooves, jockey in racing silks crouched forward, golden hour lighting, cinematic depth of field, photorealistic, professional sports photography, 50mm lens, motion blur background",
+      "negative_prompt": "static, standing still, multiple horses, cartoon, illustration, low quality, blurry subject",
+      "type": "test",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "prompt": "Winner's circle celebration, Thoroughbred racehorse being led by handler, jockey mounted wearing winner's garland, crowd in soft-focus background, Dubai Meydan Racecourse environment, warm afternoon light, documentary style, photorealistic, professional photography",
+      "negative_prompt": "empty track, no people, cartoon, illustration, night time, artificial lighting",
+      "type": "test",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "prompt": "Close-up portrait of jockey in racing silks, intense focused expression, helmet with visor, shallow depth of field, motion blur background suggesting speed, golden hour natural light, photorealistic, professional sports portrait photography, 85mm lens equivalent",
+      "negative_prompt": "full body, wide shot, multiple people, static background, cartoon, illustration, low quality",
+      "type": "test",
+      "width": 1024,
+      "height": 1024
+    }
+  ]
+}

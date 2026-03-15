@@ -1,0 +1,82 @@
+{
+  "label": "library-v1",
+  "images": [
+    {
+      "prompt": "Extreme close-up Thoroughbred horse head and neck in sharp focus, dark bay coat with detailed muscle texture, jockey in deep blue racing silks entering frame from right, black studio background, premium sports portrait lighting, photorealistic, cinematic, subject isolation, documentary photography style",
+      "negative_prompt": "wide shot, full body horse, daylight environment, crowd, cartoon, painting, extra riders, distorted anatomy",
+      "type": "foreground",
+      "width": 2048,
+      "height": 1080
+    },
+    {
+      "prompt": "Close-up Thoroughbred horse profile with braided mane and alert ears, jockey in white and navy silks leaning forward, dramatic rim lighting, black void background, premium editorial sports photography, ultra-detailed, photorealistic, shallow depth of field",
+      "negative_prompt": "multiple horses, busy background, daylight paddock, illustration, low detail, deformed tack",
+      "type": "foreground",
+      "width": 2048,
+      "height": 1080
+    },
+    {
+      "prompt": "Horse racing rail and trackside barrier elements in middle distance, shallow depth of field, warm late-afternoon light, paddock textures, architectural racecourse details only, soft edges, cinematic realism, motion-ready composition",
+      "negative_prompt": "hero horse, close-up subject, grandstand skyline, people, text overlays, cartoon, hard shadows",
+      "type": "midground",
+      "width": 2048,
+      "height": 1080
+    },
+    {
+      "prompt": "Thoroughbred racehorse mid-gallop on dirt track, powerful forward motion, dust exploding from hooves, jockey in royal blue silks crouched low, golden hour backlight, cinematic sports photography, photorealistic, panning blur in background, premium racing aesthetic",
+      "negative_prompt": "static pose, multiple horses, illustration, muddy low detail, broken legs, warped saddle",
+      "type": "test",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "prompt": "Front three-quarter view of a Thoroughbred charging down the straight, nostrils flared, dirt track spray, jockey in dark blue and white silks, telephoto sports photography look, dramatic evening light, photorealistic, cinematic depth separation",
+      "negative_prompt": "cartoon, blurry subject, crowd blocking frame, extra horses, malformed anatomy, generic fantasy horse",
+      "type": "test",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "prompt": "Side-on Thoroughbred race action at full stride, taut muscles, flying mane, jockey in premium blue silks, soft stadium background blur, high-end commercial racing campaign look, photorealistic, dynamic composition",
+      "negative_prompt": "still horse, flat light, illustration, duplicate limbs, broken perspective, cluttered frame",
+      "type": "test",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "prompt": "Winner's circle celebration with Thoroughbred horse being led by handler, jockey mounted and smiling subtly, premium blue silks, crowd in soft-focus background, warm afternoon light, documentary realism, cinematic sports feature photography",
+      "negative_prompt": "empty scene, no people, cartoon, night lighting, exaggerated smiles, surreal colors, low quality",
+      "type": "test",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "prompt": "Post-race horse and jockey in a calm celebratory walk, handler beside the horse, premium raceday atmosphere, blurred spectators behind barriers, golden light, editorial sports photojournalism, photorealistic",
+      "negative_prompt": "isolated studio portrait, no crowd, illustration, distorted faces, warped reins, low realism",
+      "type": "test",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "prompt": "Close-up portrait of a focused jockey in blue racing silks, helmet and visor visible, intense expression, shallow depth of field, speed implied through background blur, natural golden hour light, premium sports portrait, photorealistic",
+      "negative_prompt": "wide shot, multiple people, cartoon, lifeless expression, low detail, static flat background",
+      "type": "test",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "prompt": "Wide panoramic racecourse environment at golden hour, grandstand visible, racetrack in foreground, subtle city skyline haze, extended canvas for panning, cinematic gradient sky, photorealistic, premium racing venue atmosphere",
+      "negative_prompt": "close-up people, horses dominating frame, text, signage clutter, stormy weather, illustration",
+      "type": "background",
+      "width": 2662,
+      "height": 1404
+    },
+    {
+      "prompt": "Wide racecourse paddock and rail environment with elegant lighting, layered depth, soft haze, panoramic composition with overscan for motion graphics, premium editorial realism, photorealistic",
+      "negative_prompt": "close-up horse, people front and center, flat sky, cartoon, overprocessed HDR, narrow composition",
+      "type": "background",
+      "width": 2662,
+      "height": 1404
+    }
+  ]
+}
