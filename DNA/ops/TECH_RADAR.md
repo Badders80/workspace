@@ -22,6 +22,7 @@ _Last updated: 2026-03-16_
 | n8n AI Workflows | Automation | TRIAL | Docker running, testing Claude workflow integration |
 | NotebookLM for Prompt Creation | Prompt Eng | TRIAL | Testing vs current prompt method |
 | skills.sh | Skills/Agent | TRIAL | Public skill marketplace, cross-tool SKILL.md format |
+| tasks/lessons.md Rulebook | Agent Memory | TRIAL | Correction logging -> permanent rules read at session start. Prevents repeat mistakes. |
 | SuperClaude Framework | Agent Tooling | ASSESS | 30 slash commands, 16 agent personas - evaluate for EVO-STATION |
 | claude-mem | Memory | ASSESS | SQLite + Chroma persistent memory, web viewer :37777 |
 | lossless-claw | Memory | ASSESS | OpenClaw plugin - DAG summarisation, no context loss |
@@ -35,6 +36,7 @@ _Last updated: 2026-03-16_
 | Google Workspace Studio | Automation | ASSESS | No-code Gemini agents in Workspace - overlaps with n8n |
 | Google Antigravity | Agent IDE | ASSESS | Parallel agents + UI gen - overlaps with current stack |
 | NotebookLM MCP Server | Memory | ASSESS | Plug-and-play agent memory - overlaps with DNA system |
+| Handoff Documents ("Reheat" Workflow) | Session Memory | ARCHIVE | Already implemented via DNA chain / AI_SESSION_BOOTSTRAP.md. Steal: enforce explicit end-of-session update ritual. |
 | Godofprompt Agentic AI | Educational | ARCHIVE | Conceptual framework only |
 | Wizofai Mindset Reset | Educational | ARCHIVE | Philosophical, not actionable |
 | Claude Code Features Guide | Educational | ARCHIVE | Already adopted, tutorial only |
@@ -77,3 +79,9 @@ Next step: [specific action]
 - **Quarterly** - review Adopt items, still best choice?
 
 _Last updated: 2026-03-16 | Next review: 2026-03-23_
+
+## Context Chain
+<- inherits from: /home/evo/workspace/DNA/AGENTS.md
+-> overrides by: none
+-> live map: /home/evo/workspace/AI_SESSION_BOOTSTRAP.md
+-> conventions: /home/evo/workspace/DNA/ops/CONVENTIONS.md

@@ -49,3 +49,6 @@ Deferred workspace items and active cleanup queue.
 - [ ] BUILD_SOP.md — new-build checklist with skills/agent selection step
 - [ ] Starred repo inventory doc — document what exists so nothing gets rebuilt
 - [ ] Evolution_Marketplace — create GitHub remote and connect local repo
+- [ ] Fix just check — missing .env symlinks for Evolution_Content and Evolution_Marketplace
+- [ ] End-of-session ritual — add a Codex prompt template that always updates `AI_SESSION_BOOTSTRAP.md` + `DNA/INBOX.md` before session close; store it in `DNA/ops/TEMPLATES.md` or an equivalent governed surface
+- [ ] Trial correction rulebook — add `DNA/ops/lessons.md` to the `AI_SESSION_BOOTSTRAP.md` load sequence if present, create an initial empty `lessons.md`, then test one deliberate correction/reopen loop and log the result

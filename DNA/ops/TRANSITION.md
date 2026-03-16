@@ -181,6 +181,18 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Blocked: `TECH_RADAR.md` still contains older Adopt history entries; if they diverge from `STACK.md`, treat `STACK.md` as authoritative.
 - Decisions: `STACK.md` is now the live tool registry, `TECH_RADAR.md` is not part of the default entry chain, and Google Drive remains assets only.
 
+### 2026-03-16 [agent: Codex][tech-radar-handoff-documents]
+- Done: Added a raw tech-radar intake note for the Charles J Dove Claude Code handoff-document reel, distilled it into `DNA/ops/TECH_RADAR.md` as an `ASSESS` item, and brought the radar intake surface into context-chain compliance while registering the new markdown files in conventions.
+- Next: Pilot the workflow in one active repo if session restart cost becomes painful, using a local markdown handoff file rather than any cloud doc surface.
+- Blocked: No workspace trial has been run yet, so the pattern remains research only and is not part of the adopted stack.
+- Decisions: Treat session handoff documents as a workflow pattern on the radar, not an adopted tool change; any future trial should stay markdown-first and should not revive retired Google Docs sync.
+
+### 2026-03-16 [agent: Codex][tech-radar-memory-rules]
+- Done: Reclassified the handoff-documents workflow from `ASSESS` to `ARCHIVE` because the DNA chain already covers the underlying problem, added a `TRIAL` radar entry plus raw intake note for the `tasks/lessons.md` correction-rulebook pattern, and queued both the explicit session-close ritual and the lessons-log experiment in `DNA/INBOX.md`.
+- Next: Trial the correction-rulebook pattern in one bounded agent path and only promote it if it measurably reduces repeated corrections without bloating the bootstrap load.
+- Blocked: There is no baseline yet for repeat-correction frequency or token-cost impact, so the lessons rulebook remains an experiment rather than an adopted memory layer.
+- Decisions: Do not duplicate `AI_SESSION_BOOTSTRAP.md` with separate handoff documents; steal only the mandatory end-of-session ritual. Treat `lessons.md` as complementary anti-pattern memory, not a replacement for the DNA chain.
+
 ## Context Chain
 ← inherits from: /home/evo/workspace/DNA/AGENTS.md
 → overrides by: none
