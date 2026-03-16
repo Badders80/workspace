@@ -193,6 +193,18 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Blocked: There is no baseline yet for repeat-correction frequency or token-cost impact, so the lessons rulebook remains an experiment rather than an adopted memory layer.
 - Decisions: Do not duplicate `AI_SESSION_BOOTSTRAP.md` with separate handoff documents; steal only the mandatory end-of-session ritual. Treat `lessons.md` as complementary anti-pattern memory, not a replacement for the DNA chain.
 
+### 2026-03-16 [agent: Codex][tech-radar-intake-stage-1]
+- Done: Rewrote `DNA/ops/tech-radar-intake/README.md` to document the new Stage 1 intake-only workflow, added the referenced `DNA/ops/GEM_TECH_RADAR_PROCESSOR.md` path as a governed stub so the workflow no longer points at a missing file, and registered that markdown file in `DNA/ops/CONVENTIONS.md`.
+- Next: Replace the processor stub with the real Grok/Gem system prompt and how-to guide when that source text is available.
+- Blocked: The actual processor prompt body was not included in this session, so the new processor document is a placeholder rather than the final operating prompt.
+- Decisions: `tech-radar-intake/` is now explicitly a raw-dump Stage 1 surface only; distillation and Codex prompt generation belong to the separate processor stage.
+
+### 2026-03-16 [agent: Codex][tech-radar-batch-sync]
+- Done: Added the new multi-item raw intake batch, aligned `TECH_RADAR.md` with the processor-based intake workflow, added `Nano Banana 2 Prompt Libraries`, `Claude Three-Tier Memory Hierarchy`, `Claude Skills`, `Obsidian + Claude Second Brain`, `Undescribed Instagram Reel`, and `AI Design Workflows`, and reclassified `Paperclip`, `Lossless Claw`, and `Skills.sh` to match the latest fit assessments while updating related inbox tasks.
+- Next: Run the backlog trials for `Paperclip`, `Lossless Claw`, and the Claude three-tier memory merge only if those workstreams rise above current platform priorities.
+- Blocked: Several of the source items are Instagram reels or posts with no durable primary-source docs captured yet, so these remain judgment-based radar entries rather than verified implementation plans.
+- Decisions: Treat creative-image prompt libraries as future-facing `ASSESS` only, keep design-only workflow posts archived for domain mismatch, and prefer the latest explicit fit verdict when it conflicts with an older radar status.
+
 ## Context Chain
 ← inherits from: /home/evo/workspace/DNA/AGENTS.md
 → overrides by: none

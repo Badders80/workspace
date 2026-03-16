@@ -5,7 +5,7 @@
 > when asked "have we looked at X?" or "find something that could solve Y."
 >
 > Raw intake dumps -> DNA/ops/tech-radar-intake/YYYY-MM-DD_batch.md
-> Workflow: save link -> intake dump -> distil to table row -> git commit
+> Workflow: save link -> intake dump -> processor -> Codex prompt -> git commit
 
 _Last updated: 2026-03-16_
 
@@ -21,13 +21,15 @@ _Last updated: 2026-03-16_
 | OpenClaw Mission Control Template | Agent Dashboard | ADOPT | Default dashboard bootstrap |
 | n8n AI Workflows | Automation | TRIAL | Docker running, testing Claude workflow integration |
 | NotebookLM for Prompt Creation | Prompt Eng | TRIAL | Testing vs current prompt method |
-| skills.sh | Skills/Agent | TRIAL | Public skill marketplace, cross-tool SKILL.md format |
 | tasks/lessons.md Rulebook | Agent Memory | TRIAL | Correction logging -> permanent rules read at session start. Prevents repeat mistakes. |
+| Paperclip AI Agent Framework | Multi-Agent Orchestration | TRIAL | Open-source agent teams with roles/budgets/goals. Autonomous run + human override. Budget safety. |
+| Lossless Claw | Memory / OpenClaw Plugin | TRIAL | Local DB lossless message storage + condensation. 25:1 ratio, exact recall. Never forget. |
+| Claude Three-Tier Memory Hierarchy | Claude Config / Memory | TRIAL | Global/project/auto tiers + modular rules/skills/agents. Token-aware, gitignored auto. |
+| Nano Banana 2 Prompt Libraries | Prompt Engineering / Image Gen | ASSESS | Curated photoreal prompts + JSON/Python dev formats from GitHub/Google. Programmatic image gen potential. |
 | SuperClaude Framework | Agent Tooling | ASSESS | 30 slash commands, 16 agent personas - evaluate for EVO-STATION |
+| Skills.sh Agent Skills | Agent Modularity | ASSESS | Open directory of installable procedural skills for agents. `npx` add; leaderboard adoption. |
 | claude-mem | Memory | ASSESS | SQLite + Chroma persistent memory, web viewer :37777 |
-| lossless-claw | Memory | ASSESS | OpenClaw plugin - DAG summarisation, no context loss |
 | AionUi | Multi-Agent | ASSESS | Electron desktop, auto-detects CLIs |
-| Paperclip | Orchestration | ASSESS | Multi-agent company simulation |
 | OpenClaw Core Runtime | Agent Runtime | ASSESS | Full runtime - advanced path only |
 | 21st.dev | Design | ASSESS | npm for design engineers, largest shadcn/ui marketplace |
 | Magic MCP (21st-dev) | Dev Tooling | ASSESS | MCP server for AI-powered frontend dev |
@@ -37,6 +39,10 @@ _Last updated: 2026-03-16_
 | Google Antigravity | Agent IDE | ASSESS | Parallel agents + UI gen - overlaps with current stack |
 | NotebookLM MCP Server | Memory | ASSESS | Plug-and-play agent memory - overlaps with DNA system |
 | Handoff Documents ("Reheat" Workflow) | Session Memory | ARCHIVE | Already implemented via DNA chain / AI_SESSION_BOOTSTRAP.md. Steal: enforce explicit end-of-session update ritual. |
+| Claude Skills (Markdown Workflows) | Session Memory / Config | ARCHIVE | Persistent markdown rules auto-applied. Duplicate of our global/project `CLAUDE.md` hierarchy. Steal: limit 5-10 non-overlapping items guideline. |
+| Obsidian + Claude Second Brain | Knowledge Memory | ARCHIVE | External graph for Claude context. Covered by DNA chain + git. |
+| Undescribed Instagram Reel | Unknown | ARCHIVE | No extractable content/tool. |
+| AI Design Workflows (Claude/Perplexity) | Design Tools | ARCHIVE | UX ideation aids. Not core dev stack. |
 | Godofprompt Agentic AI | Educational | ARCHIVE | Conceptual framework only |
 | Wizofai Mindset Reset | Educational | ARCHIVE | Philosophical, not actionable |
 | Claude Code Features Guide | Educational | ARCHIVE | Already adopted, tutorial only |
@@ -57,19 +63,11 @@ Before moving to Trial or Adopt:
 
 ## How to Add New Discoveries
 
-Save raw notes to `DNA/ops/tech-radar-intake/YYYY-MM-DD_batch.md` first.
-Then distil to a single table row above.
+1. Save raw notes to `DNA/ops/tech-radar-intake/YYYY-MM-DD_batch.md` or a single-tool intake file.
+2. Feed the raw dump to the processor documented in `DNA/ops/GEM_TECH_RADAR_PROCESSOR.md`.
+3. Apply the resulting Codex prompt to update the table and any related governance files.
 
-Intake template:
-```
-Tool: [name + URL]
-Discovered: YYYY-MM-DD
-Source: [where you found it]
-Problem it solves: [one line]
-Hot take: [one line]
-Status: Assess/Trial/Reject
-Next step: [specific action]
-```
+Raw intake can be messy: transcript, README paste, rough notes, or just a URL plus one sentence.
 
 ---
 

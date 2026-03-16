@@ -44,11 +44,13 @@ Deferred workspace items and active cleanup queue.
 
 ## Session Backlog — 2026-03-16
 
-- [ ] TECH_RADAR: add entry for lossless-claw (Assess)
-- [ ] TECH_RADAR: add entry for skills.sh (Trial)
 - [ ] BUILD_SOP.md — new-build checklist with skills/agent selection step
 - [ ] Starred repo inventory doc — document what exists so nothing gets rebuilt
 - [ ] Evolution_Marketplace — create GitHub remote and connect local repo
 - [ ] Fix just check — missing .env symlinks for Evolution_Content and Evolution_Marketplace
 - [ ] End-of-session ritual — add a Codex prompt template that always updates `AI_SESSION_BOOTSTRAP.md` + `DNA/INBOX.md` before session close; store it in `DNA/ops/TEMPLATES.md` or an equivalent governed surface
 - [ ] Trial correction rulebook — add `DNA/ops/lessons.md` to the `AI_SESSION_BOOTSTRAP.md` load sequence if present, create an initial empty `lessons.md`, then test one deliberate correction/reopen loop and log the result
+- [ ] Steal Claude Skills limit — add to a `CLAUDE.md` template or `DNA/ops/TEMPLATES.md`: `Limit global/project rules/skills to 5-10 clearly defined, non-overlapping items for reliability.`
+- [ ] Trial Paperclip — create `trial/paperclip-agents`, test a dry-run install under `gateways/openclaw/`, and log budget/stop behavior without changing the wider workspace
+- [ ] Trial Lossless Claw — create `trial/lossless-claw`, install under `gateways/openclaw/`, run a long-context dry run, and log recall/compression behavior
+- [ ] Merge three-tier Claude setup — review the Google Doc, add a modular `.claude/rules/` dir pattern, define an auto `MEMORY.md` trigger, and update templates with token-cap and negative-rules guidance
