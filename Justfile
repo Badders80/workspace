@@ -131,8 +131,8 @@ update:
 # Backup DNA and projects
 backup:
     @echo "💾 Creating backup..."
-    @mkdir -p /home/evo/workspace/_archive/backups/auto
-    @tar czf "/home/evo/workspace/_archive/backups/auto/evo-backup-$(date +%Y%m%d-%H%M%S).tar.gz" \
+    @mkdir -p /home/evo/_archive/backups/auto
+    @tar czf "/home/evo/_archive/backups/auto/evo-backup-$(date +%Y%m%d-%H%M%S).tar.gz" \
         -C /home/evo/workspace \
         --exclude='node_modules' \
         --exclude='.next' \
@@ -141,7 +141,7 @@ backup:
         --exclude='models' \
         --exclude='.cache' \
         DNA projects _docs _locks _logs _sandbox _scripts AGENTS.md AI_SESSION_BOOTSTRAP.md Justfile MANIFEST.md 2>/dev/null
-    @echo "✅ Backup created in workspace/_archive/backups/auto/"
+    @echo "✅ Backup created in /home/evo/_archive/backups/auto/"
 
 # Full system check + update
 doctor: check backup
@@ -188,3 +188,9 @@ analysis-mirror:
 
 analysis-mirror-apply:
     bash /home/evo/workspace/_scripts/sync-analysis-mirror-git.sh --apply
+
+workspace-full:
+    bash /home/evo/workspace/_scripts/sync-workspace-full-git.sh --remote-url https://github.com/Badders80/workspace_full.git
+
+workspace-full-apply:
+    bash /home/evo/workspace/_scripts/sync-workspace-full-git.sh --apply --remote-url https://github.com/Badders80/workspace_full.git

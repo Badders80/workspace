@@ -10,7 +10,7 @@ Status: ACTIVE
 - _docs/ - planning and execution briefs, including storage policy
 - _locks/ - concurrency coordination
 - _logs/ - audit runs and drift reports
-- _archive/ - dated snapshots of retired material
+- _archive/ - RELOCATED to /home/evo/_archive/ (outside workspace root)
 - _sandbox/ - experiments and temporary work
 - models/ - local model storage
 
@@ -40,10 +40,10 @@ Status: ACTIVE
 - External or vendor infrastructure remains excluded from the active merge core.
 
 ## Archive Index
-- `_archive/projects/2026-03-10/` - non-active projects archived on workspace creation
-- `_archive/projects/2026-03-12/` - `seo-baseline` removed from the active platform surface
-- `_archive/root-cleanup/2026-03-10/` - root loose files archived on workspace creation
-- `_archive/00_DNA/2026-03-10/` - original 00_DNA and DNA folders archived on workspace creation
+- `/home/evo/_archive/projects/2026-03-10/` - non-active projects archived on workspace creation
+- `/home/evo/_archive/projects/2026-03-12/` - `seo-baseline` removed from the active platform surface
+- `/home/evo/_archive/root-cleanup/2026-03-10/` - root loose files archived on workspace creation
+- `/home/evo/_archive/00_DNA/2026-03-10/` - original 00_DNA and DNA folders archived on workspace creation
 
 ## Search
-`rg -n "<term>" /home/evo/workspace/_archive/*/MANIFEST.md`
+`rg -n "<term>" /home/evo/_archive/*/MANIFEST.md`

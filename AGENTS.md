@@ -38,7 +38,7 @@ Workspace-level rules for `/home/evo/workspace`.
 - `/home/evo/workspace/_locks/`
 - `/home/evo/workspace/_logs/`
 - `/home/evo/workspace/_docs/`
-- `/home/evo/workspace/_archive/`
+- `/home/evo/_archive/` (external — outside workspace root, not indexed by agents)
 - `/home/evo/workspace/_sandbox/`
 - `/home/evo/workspace/models/`
 
