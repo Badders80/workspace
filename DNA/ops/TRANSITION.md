@@ -205,6 +205,18 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Blocked: Several of the source items are Instagram reels or posts with no durable primary-source docs captured yet, so these remain judgment-based radar entries rather than verified implementation plans.
 - Decisions: Treat creative-image prompt libraries as future-facing `ASSESS` only, keep design-only workflow posts archived for domain mismatch, and prefer the latest explicit fit verdict when it conflicts with an older radar status.
 
+### 2026-03-17 [agent: Codex][tech-radar-batch-sync-2]
+- Done: Added `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-17_batch.md` to capture the full March 14-17 discovery sweep one by one, updated `TECH_RADAR.md` with new `TRIAL`, `ASSESS`, and `ARCHIVE` entries, promoted `Skills.sh`, `claude-mem`, `AionUi`, and `SuperClaude Framework` to `TRIAL`, and queued the newly promoted trials in `DNA/INBOX.md`.
+- Next: Run the new trial backlog selectively, starting with the lowest-risk workflow enhancers (`Claude Code Hooks`, a small `skills.sh` or free-skills audit, and one bounded `SuperClaude` or `claude-mem` session) before heavier gateway experiments.
+- Blocked: Several discoveries still come from Instagram-only surfaces or an attachment with no durable transcript, so parts of the batch remain guided by the supplied descriptions rather than fully inspectable primary docs.
+- Decisions: Record the sweep in one governed batch file instead of exploding the conventions registry with dozens of new markdown files, and keep locked-tool governance intact by archiving `OpenCode` rather than advancing an orchestrator replacement without matching `STACK.md` and `DECISION_LOG.md` updates.
+
+### 2026-03-17 [agent: Codex][tech-radar-picoclaw]
+- Done: Added a focused intake note for `PicoClaw` at `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-17_picoclaw.md`, registered it in conventions, and added `PicoClaw` to `TECH_RADAR.md` as `ASSESS`.
+- Next: Revisit only if the worker tier needs a very small local runtime and we can isolate a sidecar-style experiment from the adopted `OpenClaw` gateway path.
+- Blocked: The upstream repo explicitly warns that the project is still early and not suitable for production use before `v1.0`, so it is not ready for a serious integration path.
+- Decisions: Treat `PicoClaw` as a worker-runtime research item rather than an `OpenClaw` replacement, which preserves current stack-governance boundaries.
+
 ## Context Chain
 ← inherits from: /home/evo/workspace/DNA/AGENTS.md
 → overrides by: none

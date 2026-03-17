@@ -54,3 +54,14 @@ Deferred workspace items and active cleanup queue.
 - [ ] Trial Paperclip — create `trial/paperclip-agents`, test a dry-run install under `gateways/openclaw/`, and log budget/stop behavior without changing the wider workspace
 - [ ] Trial Lossless Claw — create `trial/lossless-claw`, install under `gateways/openclaw/`, run a long-context dry run, and log recall/compression behavior
 - [ ] Merge three-tier Claude setup — review the Google Doc, add a modular `.claude/rules/` dir pattern, define an auto `MEMORY.md` trigger, and update templates with token-cap and negative-rules guidance
+
+## Tech Radar Backlog - 2026-03-17
+
+- [ ] Trial Claude Code Hooks - prototype a minimal safe hook set, dry-run it in a bounded Claude workflow, and keep any workspace-specific logic outside destructive paths
+- [ ] Trial Free Claude Cowork Skills - audit 5-10 non-overlapping skills, install only the smallest useful subset, and log overlap with existing DNA and `CLAUDE.md` rules
+- [ ] Trial OpenClaw free worker path - validate Ollama or other free-tier routing inside `gateways/openclaw/` only, then record cost, latency, and reliability tradeoffs
+- [ ] Trial Magic Animator - animate one existing design asset, export a code-ready format, and verify whether it actually helps the current UI or marketing flow
+- [ ] Trial skills.sh - install a small skill pack and record whether the ecosystem adds more value than prompt or template reuse alone
+- [ ] Trial claude-mem - test the plugin in one contained Claude session and compare recall plus token drag against the current DNA + lessons approach
+- [ ] Trial AionUi - run one short CLI-unification experiment and document whether the desktop layer beats the current terminal-native workflow
+- [ ] Trial SuperClaude Framework - run one bounded commands or personas workflow and measure whether the extra structure improves planning or review quality

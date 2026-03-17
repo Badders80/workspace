@@ -45,6 +45,8 @@
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-16_batch.md`
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-16_handoff-documents.md`
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-16_correction-rulebook.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-17_batch.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-17_picoclaw.md`
 - `/home/evo/workspace/DNA/ops/TRANSITION.md`
 - `/home/evo/workspace/projects/Evolution_Content/assets/library/README.md`
 - `/home/evo/workspace/_docs/MERGE_PLAN_2026-03-10.md`
