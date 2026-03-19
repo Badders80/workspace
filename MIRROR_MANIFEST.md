@@ -1,6 +1,6 @@
 # Workspace Analysis Mirror
 
-Generated: 2026-03-16 00:04:08 UTC
+Generated: 2026-03-19 20:23:30 UTC
 Source root: `/home/evo/workspace`
 Mode: curated one-way Git mirror for cloud analysis
 
@@ -25,5 +25,5 @@ This repository is the text-first operating mirror of the active workspace. It i
 
 ## Snapshot
 
-- Selected files: 496
-- Approx payload size: 6.9M
+- Selected files: 1436
+- Approx payload size: 24M

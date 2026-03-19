@@ -74,7 +74,7 @@ done
 
 ok "seo-baseline archive state skipped (archive relocated)"
 
-for wrapper in dna-context geminic claudec kimic kiloc aidere evo evo-doctor; do
+for wrapper in dna-context geminic claudec aidere evo evo-doctor; do
   check_wrapper "$wrapper"
 done
 

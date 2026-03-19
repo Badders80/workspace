@@ -1,6 +1,6 @@
 # Workspace Manifest
 Created: 2026-03-10
-Updated: 2026-03-16
+Updated: 2026-03-19
 Status: ACTIVE
 
 ## Structure
@@ -32,16 +32,17 @@ Status: ACTIVE
 - Evolution_Platform - live platform, canonical at `projects/Evolution_Platform`
 - SSOT_Build - mission control build, canonical at `projects/SSOT_Build`
 - Evolution_Content - active content and asset surface, canonical at `projects/Evolution_Content`
-- Evolution_Marketplace - active marketplace surface, canonical at `projects/Evolution_Marketplace`
 
 ## Deferred Or Archived
 - `seo-baseline` was archived out of `Evolution_Platform` on 2026-03-12.
+- `Evolution_Marketplace` was archived out of the active workspace projects on 2026-03-19.
 - Evolution_Studio and Evolution_Intelligence remain deferred rebuild workstreams.
 - External or vendor infrastructure remains excluded from the active merge core.
 
 ## Archive Index
 - `/home/evo/_archive/projects/2026-03-10/` - non-active projects archived on workspace creation
 - `/home/evo/_archive/projects/2026-03-12/` - `seo-baseline` removed from the active platform surface
+- `/home/evo/_archive/projects/2026-03-19/` - `Evolution_Marketplace` removed from active workspace projects
 - `/home/evo/_archive/root-cleanup/2026-03-10/` - root loose files archived on workspace creation
 - `/home/evo/_archive/00_DNA/2026-03-10/` - original 00_DNA and DNA folders archived on workspace creation
 
