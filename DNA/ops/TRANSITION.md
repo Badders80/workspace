@@ -326,7 +326,7 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Decisions: The workspace copy remains canonical for the sidecar, while the Windows-local mirror exists as the UI-friendly Obsidian editing surface.
 
 ### 2026-03-20 [agent: Codex][github-sync-hardening]
-- Done: Reviewed the required workspace context chain, confirmed `Badders80/workspace` remains the curated analysis mirror and `Badders80/workspace_full` remains the broad snapshot surface, and hardened both sync scripts so reviewed hermes-agent sample-token docs and tests no longer block mirror exports while real secret scanning stays active.
+- Done: Reviewed the required workspace context chain, confirmed `Badders80/workspace` remains the curated analysis mirror and `Badders80/workspace_full` remains the broad snapshot surface, and hardened both sync scripts so reviewed sample-token docs and tests no longer block mirror exports while real secret scanning stays active.
 - Next: Use the two sync scripts for fresh GitHub pushes, and only expand the sample-secret allowlist when a reviewed documentation or test fixture is clearly using placeholder tokens rather than live credentials.
 - Blocked: Concurrent `wsl.exe` calls from this desktop thread are unreliable, so git and export operations should be run sequentially from here.
 - Decisions: Keep `workspace` on the curated mirror path and `workspace_full` on the broad export path; keep vault backups and local reference clones out of the curated mirror commit path.
@@ -464,7 +464,7 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Decisions: The workspace copy remains canonical for the sidecar, while the Windows-local mirror exists as the UI-friendly Obsidian editing surface.
 
 ### 2026-03-20 [agent: Codex][github-sync-hardening]
-- Done: Reviewed the required workspace context chain, confirmed `Badders80/workspace` remains the curated analysis mirror and `Badders80/workspace_full` remains the broad snapshot surface, and hardened both sync scripts so reviewed hermes-agent sample-token docs and tests no longer block mirror exports while real secret scanning stays active.
+- Done: Reviewed the required workspace context chain, confirmed `Badders80/workspace` remains the curated analysis mirror and `Badders80/workspace_full` remains the broad snapshot surface, and hardened both sync scripts so reviewed sample-token docs and tests no longer block mirror exports while real secret scanning stays active.
 - Next: Use the two sync scripts for fresh GitHub pushes, and only expand the sample-secret allowlist when a reviewed documentation or test fixture is clearly using placeholder tokens rather than live credentials.
 - Blocked: Concurrent `wsl.exe` calls from this desktop thread are unreliable, so git and export operations should be run sequentially from here.
 - Decisions: Keep `workspace` on the curated mirror path and `workspace_full` on the broad export path; keep vault backups and local reference clones out of the curated mirror commit path.

@@ -174,16 +174,6 @@ EOF
 is_known_sample_secret_file() {
   local rel="$1"
 
-  case "$rel" in
-    gateways/hermes-agent/repo/agent/redact.py|\
-    gateways/hermes-agent/repo/tests/agent/test_redact.py|\
-    gateways/hermes-agent/repo/tests/tools/test_mcp_tool.py|\
-    gateways/hermes-agent/repo/tests/tools/test_skills_guard.py|\
-    gateways/hermes-agent/repo/skills/mcp/native-mcp/SKILL.md)
-      return 0
-      ;;
-  esac
-
   return 1
 }
 
