@@ -20,7 +20,7 @@
 - Added a standalone Windows installer build so the same collector can be deployed onto a Windows 365 Cloud PC without depending on WSL paths.
 - Added an import path under `/_logs/system-health/import/latest/` so external host snapshots can be merged into the central summary when copied back into this workspace.
 - Added `health-alerts.txt`, `trends.json`, and `trends.txt` outputs so the monitor provides active alerts and short-term trend analytics instead of only a point-in-time snapshot.
-- Fixed the WSL collector so cron runs do not falsely mark OpenClaw as down when `systemctl --user` lacks a usable user bus.
+- Fixed the WSL collector so cron runs do not falsely mark a retired runtime as down when `systemctl --user` lacks a usable user bus.
 - Added a lightweight `health-check.sh` command for fast terminal status checks with meaningful exit codes.
 - Added a `browser-drain-check.sh` command to validate whether Chrome/Comet memory comes back after the windows are closed.
 - Added stateful desktop notification support so merged status escalations to `warn` or `critical` attempt a Windows desktop alert without repeating every cycle.

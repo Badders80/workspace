@@ -57,23 +57,23 @@
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-19_march-14-15-review.md`
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-19_priority-shortlist.md`
 - `/home/evo/workspace/DNA/ops/TRANSITION.md`
-- `/home/evo/workspace/_sandbox/research_vault/README.md`
-- `/home/evo/workspace/_sandbox/research_vault/HOME.md`
-- `/home/evo/workspace/_sandbox/research_vault/OBSIDIAN_SETUP.md`
-- `/home/evo/workspace/_sandbox/research_vault/SCHEMA.md`
-- `/home/evo/workspace/_sandbox/research_vault/00_Inbox/Capture Inbox.md`
-- `/home/evo/workspace/_sandbox/research_vault/01_Sources/tokinvest_capital/last-6-months.md`
-- `/home/evo/workspace/_sandbox/research_vault/01_Sources/evolutionstables_website/last-6-months.md`
-- `/home/evo/workspace/_sandbox/research_vault/01_Sources/tokinvest_cap_x/source-profile.md`
-- `/home/evo/workspace/_sandbox/research_vault/01_Sources/evolutionstable_x/source-profile.md`
-- `/home/evo/workspace/_sandbox/research_vault/01_Sources/alex-baddeley_linkedin/source-profile.md`
-- `/home/evo/workspace/_sandbox/research_vault/01_Sources/evolution_linkedin_admin/source-profile.md`
-- `/home/evo/workspace/_sandbox/research_vault/04_Reviews/Review Queue.md`
-- `/home/evo/workspace/_sandbox/research_vault/05_Reports/CEO Report - Latest.md`
-- `/home/evo/workspace/_sandbox/research_vault/05_Reports/CTO Report - Latest.md`
-- `/home/evo/workspace/_sandbox/research_vault/_templates/Manual Capture.md`
-- `/home/evo/workspace/_sandbox/research_vault/_templates/Normalized Note.md`
-- `/home/evo/workspace/_sandbox/research_vault/_templates/Review Report.md`
+- `/home/evo/workspace/research_vault/README.md`
+- `/home/evo/workspace/research_vault/HOME.md`
+- `/home/evo/workspace/research_vault/OBSIDIAN_SETUP.md`
+- `/home/evo/workspace/research_vault/SCHEMA.md`
+- `/home/evo/workspace/research_vault/00_Inbox/Capture Inbox.md`
+- `/home/evo/workspace/research_vault/01_Sources/tokinvest_capital/last-6-months.md`
+- `/home/evo/workspace/research_vault/01_Sources/evolutionstables_website/last-6-months.md`
+- `/home/evo/workspace/research_vault/01_Sources/tokinvest_cap_x/source-profile.md`
+- `/home/evo/workspace/research_vault/01_Sources/evolutionstable_x/source-profile.md`
+- `/home/evo/workspace/research_vault/01_Sources/alex-baddeley_linkedin/source-profile.md`
+- `/home/evo/workspace/research_vault/01_Sources/evolution_linkedin_admin/source-profile.md`
+- `/home/evo/workspace/research_vault/04_Reviews/Review Queue.md`
+- `/home/evo/workspace/research_vault/05_Reports/CEO Report - Latest.md`
+- `/home/evo/workspace/research_vault/05_Reports/CTO Report - Latest.md`
+- `/home/evo/workspace/research_vault/_templates/Manual Capture.md`
+- `/home/evo/workspace/research_vault/_templates/Normalized Note.md`
+- `/home/evo/workspace/research_vault/_templates/Review Report.md`
 - `/home/evo/workspace/projects/Evolution_Content/assets/library/README.md`
 - `/home/evo/workspace/_docs/MERGE_PLAN_2026-03-10.md`
 - `/home/evo/workspace/_docs/SITE_WIDE_ALIGNMENT_AUDIT_2026-03-12.md`
@@ -108,7 +108,7 @@
 - Remote default: `origin` URL from `/home/evo/workspace` when present, or `--remote-url` override
 - Source scope:
   - root-level markdown plus key build/control files
-  - all selected text/code/config files under `DNA/`, `_docs/`, `_scripts/`, `gateways/`, and `projects/`
+  - all selected text/code/config files under `DNA/`, `_docs/`, `_scripts/`, `gateways/`, `projects/`, and `research_vault/`
 - Excludes:
   - `_archive`, `_logs`, `_locks`, `_sandbox`, `models`, and `gateways/openclaw/sandbox`
   - embedded `.git` directories, dependency installs, caches, and build output

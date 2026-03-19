@@ -17,6 +17,7 @@ All active work lives at `/home/evo/workspace/` (WSL2 Ubuntu, user `evo`).
 
 - `/home/evo/` is control plane only — dotfiles, auth, global tool config.
 - `/home/evo/workspace/` is the canonical build surface. Nothing else is authoritative.
+- `/home/evo/workspace/research_vault/` is the tracked sidecar research layer. It lives in this repo but is not part of DNA or the default entry chain.
 
 ---
 
@@ -43,6 +44,7 @@ All active work lives at `/home/evo/workspace/` (WSL2 Ubuntu, user `evo`).
 | `/home/evo/workspace/DNA/ops/STACK.md` | Live adopted and active tool registry |
 | `/home/evo/workspace/DNA/ops/TRANSITION.md` | Append-only structural handoff log |
 | `/home/evo/workspace/DNA/ops/DECISION_LOG.md` | Architectural decision record |
+| `/home/evo/workspace/research_vault/` | Tracked sidecar research vault for capture, review, and promotion |
 | `/home/evo/workspace/_scripts/` | Operational scripts (gate check, context, sync) |
 | `/home/evo/.env` | Secrets — single source of truth, never committed |
 
@@ -54,7 +56,6 @@ All active work lives at `/home/evo/workspace/` (WSL2 Ubuntu, user `evo`).
 |------|---------|
 | 13000 | Mission Control UI (SSOT) |
 | 18000 | Mission Control API |
-| 18789 | OpenClaw agent runtime |
 
 ---
 
@@ -84,5 +85,4 @@ Consult `DNA/ops/TECH_RADAR.md` on demand when evaluating tools or checking prio
 - No build starts until `just check` is GREEN.
 - One `.env` at `/home/evo/.env` — never committed anywhere.
 - `projects/` dirs are separate git repos — not committed to this repo.
-- `gateways/openclaw/` is OpenClaw's dedicated surface — do not modify outside it without approval.
 - Treat `/home/evo/workspace` as canonical; never treat `/home/evo/` as source of truth for code or docs.

@@ -34,7 +34,6 @@ PRUNE_DIR_NAMES=(
   ".cache"
   ".idea"
   ".mypy_cache"
-  ".openclaw"
   ".parcel-cache"
   ".pytest_cache"
   ".ruff_cache"
@@ -69,7 +68,7 @@ Options:
 Mirror scope:
   - Includes the text-first "brains" of the workspace:
       * root-level markdown and key build files
-      * DNA/, _docs/, _scripts/, gateways/, projects/
+      * DNA/, _docs/, _scripts/, gateways/, projects/, research_vault/
       * source code, build/config files, JSON/YAML/TOML data, and scripts
   - Excludes archives, logs, locks, sandboxes, caches, local env files,
     embedded .git dirs, heavy generated media, and runtime-only state.
@@ -115,16 +114,13 @@ is_excluded_path() {
   local rel_lower="$1"
 
   case "$rel_lower" in
-    _archive/*|_locks/*|_logs/*|_sandbox/*|models/*|openclaw_sandbox/*)
+    _archive/*|_locks/*|_logs/*|_sandbox/*|models/*)
       return 0
       ;;
     */.env|*/.env.*|*.pem|*.key|*.p12|*.pfx|*.crt|*:zone.identifier)
       return 0
       ;;
     projects/reel-generator/assets/*|projects/evolution_platform/public/videos/*)
-      return 0
-      ;;
-    gateways/openclaw/workspace/workspace-gateway-*/*)
       return 0
       ;;
   esac
@@ -232,16 +228,14 @@ This repository is the text-first operating mirror of the active workspace. It i
 ## Included
 
 - Root-level markdown plus key build and control files
-- \`DNA/\`, \`_docs/\`, \`_scripts/\`, \`gateways/\`, and \`projects/\`
+- \`DNA/\`, \`_docs/\`, \`_scripts/\`, \`gateways/\`, \`projects/\`, and \`research_vault/\`
 - Source code, scripts, build/config files, and text-based data such as JSON, YAML, TOML, HTML, and SQL
 
 ## Excluded
 
-- \`_archive/\`, \`_logs/\`, \`_locks/\`, \`_sandbox/\`, \`models/\`, and \`gateways/openclaw/sandbox/\`
+- \`_archive/\`, \`_logs/\`, \`_locks/\`, \`_sandbox/\`, and \`models/\`
 - Dependency installs and build output such as \`node_modules/\`, \`.next/\`, \`dist/\`, and \`build/\`
 - Local env and credential-shaped files
-- Runtime-only state such as \`.openclaw/\`
-- Runtime gateway snapshots such as \`gateways/openclaw/workspace/workspace-gateway-*/\`
 - Heavy generated media such as \`projects/reel-generator/assets/\` and \`projects/Evolution_Platform/public/videos/\`
 
 ## Snapshot
@@ -350,6 +344,7 @@ collect_tree_files "$SOURCE_EVO" "_docs" >> "$TMP_LIST"
 collect_tree_files "$SOURCE_EVO" "_scripts" >> "$TMP_LIST"
 collect_tree_files "$SOURCE_EVO" "gateways" >> "$TMP_LIST"
 collect_tree_files "$SOURCE_EVO" "projects" >> "$TMP_LIST"
+collect_tree_files "$SOURCE_EVO" "research_vault" >> "$TMP_LIST"
 sort -u "$TMP_LIST" -o "$TMP_LIST"
 
 TOTAL_FILES="$(wc -l < "$TMP_LIST" | awk '{print $1}')"

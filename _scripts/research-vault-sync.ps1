@@ -3,7 +3,7 @@ param(
     [string]$Direction = "pull"
 )
 
-$workspaceVault = "\\wsl.localhost\Ubuntu\home\evo\workspace\_sandbox\research_vault"
+$workspaceVault = "\\wsl.localhost\Ubuntu\home\evo\workspace\research_vault"
 $localVault = "C:\Users\Evo\Research_Vault"
 
 if ($Direction -eq "pull") {

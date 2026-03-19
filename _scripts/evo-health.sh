@@ -11,7 +11,7 @@
 #   - S: drive (scratch/NVMe) usage
 #   - /home/evo workspace disk usage
 #   - Docker memory footprint
-#   - Key services (openclaw, mission control)
+#   - Key services (mission control)
 #   - Top memory consumers
 # =============================================================================
 
@@ -146,20 +146,6 @@ fi
 
 # =============================================================================
 section "SERVICES — Key Processes"
-
-# OpenClaw gateway
-if systemctl --user is-active openclaw-gateway.service >/dev/null 2>&1; then
-  ok "openclaw-gateway.service (active)"
-else
-  crit "openclaw-gateway.service (NOT active)"
-fi
-
-# OpenClaw port
-if ss -tlnp 2>/dev/null | grep -q ':18789'; then
-  ok "OpenClaw listening on :18789"
-else
-  warn "OpenClaw not listening on :18789"
-fi
 
 # Mission Control (Docker)
 if docker ps --format '{{.Names}}' 2>/dev/null | grep -qi "mission.control\\|mission-control"; then

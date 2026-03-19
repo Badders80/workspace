@@ -458,7 +458,7 @@ Consolidate scattered projects into 4-layer architecture with central vault.
 - ✅ Clean root directory
 - ✅ Clear project boundaries
 - ✅ Single point for API keys
-- ✅ Travel mode ready (OpenClaw + Kimi K2)
+- ✅ Travel mode ready (lightweight CLI stack)
 
 ### Related Files
 - `FINAL_STRUCTURE.md`
@@ -1346,7 +1346,7 @@ The modular SSOT and Firestore write-map docs were already locking in the correc
 Use a dedicated Git analysis mirror for the workspace, built from a clean export of the active text-first build surface rather than from direct commits in the live workspace root.
 
 ### Context
-- The canonical workspace root is not a single clean git tree; several active projects under `projects/` and `gateways/openclaw/workspace` already carry their own embedded git repositories.
+- The canonical workspace root is not a single clean git tree; several active projects and runtime-owned workspaces already carry their own embedded git repositories.
 - A naive root-level `git add .` would create embedded-repository gitlinks, which would not give cloud-based tools the actual source content inside those projects.
 - The full workspace is about `60G`, with `_archive/` alone accounting for roughly `57G`, so a raw mirror would be slow, noisy, and unsafe to publish.
 - The immediate need is a GitHub surface that lets cloud-based AI tools inspect the active system without dragging along historical archives, dependency installs, generated assets, or secret-bearing local files.
@@ -1361,7 +1361,6 @@ Use a dedicated Git analysis mirror for the workspace, built from a clean export
 - Drive the mirror through a separate cached clone plus clean export, not through normal commits from `/home/evo/workspace`.
 - Exclude from the root snapshot:
   - `_archive/`, `_logs/`, `_locks/`, `_sandbox/`, and `models/`
-  - `gateways/openclaw/sandbox/`
   - dependency installs and build output such as `node_modules/`, `.next/`, and `dist/`
   - local env files, machine-local state, and credential-shaped files
   - heavyweight generated media and review outputs that are not needed for code/system analysis

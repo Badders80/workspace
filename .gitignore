@@ -7,6 +7,10 @@
 /_sandbox/
 /models/
 
+# Research vault: keep shared structure and content, ignore per-user editor state
+/research_vault/.obsidian/workspace*.json
+/research_vault/.obsidian/cache/
+
 # Dependency installs and build output
 **/node_modules/
 **/.pnpm-store/

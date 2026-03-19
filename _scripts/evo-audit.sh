@@ -487,7 +487,7 @@ OUT="$RAW_DIR/p12_hidden.txt"
 
   echo ""
   echo "=== Known AI tool dirs ==="
-  for d in .openclaw .gemini .codex .aider .claude .copilot .jules .kimi .openfang .antigravity-server .kombai; do
+  for d in .gemini .codex .aider .claude .copilot .jules .kimi .openfang .antigravity-server .kombai; do
     full="$EVO_HOME/$d"
     if [ -d "$full" ]; then
       size=$(du -sh "$full" 2>/dev/null | cut -f1)

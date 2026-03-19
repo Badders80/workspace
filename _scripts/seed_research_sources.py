@@ -14,7 +14,7 @@ import requests
 
 
 WORKSPACE_ROOT = Path("/home/evo/workspace")
-VAULT_ROOT = WORKSPACE_ROOT / "_sandbox" / "research_vault"
+VAULT_ROOT = WORKSPACE_ROOT / "research_vault"
 SOURCES_ROOT = VAULT_ROOT / "01_Sources"
 CUTOFF = datetime.now(UTC) - timedelta(days=183)
 HEADERS = {"User-Agent": "Mozilla/5.0 (Research Vault Seeder)"}

@@ -58,9 +58,6 @@ Reviewed:
 - `~/.claude/*`
 - `~/.gemini/*`
 - `~/.codex/*`
-- `~/.openclaw/*`
-- `openclaw/`
-- `openclaw-mission-control/`
 
 ### `/home/evo/workspace` canonical surface
 
@@ -116,16 +113,6 @@ Evidence:
 3. Local tool logs contain secret leakage.
 
 `/home/evo/.codex/log/codex-tui.log` contains recorded command payloads that include raw API credentials and token-bearing commands from prior sessions. This is a local-only leak surface, but it is still a real secret sink.
-
-4. OpenClaw stores active auth material in local config.
-
-`/home/evo/.openclaw/openclaw.json` currently stores:
-
-- local gateway auth token
-- Telegram allowlist configuration
-- `dangerouslyDisableDeviceAuth: true`
-
-This may be acceptable for local experimentation, but it is not aligned with a hardened control plane.
 
 ### P1: Root control-plane drift
 
@@ -321,22 +308,6 @@ Required rule:
 
 ## Capability Map
 
-### OpenClaw
-
-Existing capability surface:
-
-- Local gateway config in `/home/evo/.openclaw/openclaw.json`
-- Workspace path already aimed at `/home/evo/workspace/gateways/openclaw/workspace`
-- Telegram channel enabled with allowlist
-- Token auth enabled for gateway
-- Mission Control repo at `/home/evo/openclaw-mission-control`
-- FastAPI backend in `/home/evo/openclaw-mission-control/backend/app/main.py`
-- API-first model documented in `/home/evo/openclaw-mission-control/README.md`
-- Local UI documented at `http://localhost:3000`
-- Backend health documented at `http://localhost:8000/healthz`
-- OpenAPI export script present: `backend/scripts/export_openapi.py`
-- Board webhook API surfaces present in backend router wiring
-
 ### Gemini
 
 Existing capability surface:
@@ -399,7 +370,7 @@ Keep this minimal and stable:
 - shell bootstrap
 - preferred auth defaults
 - tool login state
-- OpenClaw/Gemini/Codex local config
+- Gemini/Codex local config
 
 Do not treat `/home/evo` as a documentation or project working surface.
 

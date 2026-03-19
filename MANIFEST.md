@@ -1,6 +1,6 @@
 # Workspace Manifest
 Created: 2026-03-10
-Updated: 2026-03-19
+Updated: 2026-03-20
 Status: ACTIVE
 
 ## Structure
@@ -13,6 +13,7 @@ Status: ACTIVE
 - _archive/ - RELOCATED to /home/evo/_archive/ (outside workspace root)
 - _sandbox/ - experiments and temporary work
 - models/ - local model storage
+- research_vault/ - tracked sidecar research layer for normalized captures, review, and promotion
 
 ## Operating Docs
 - `AI_SESSION_BOOTSTRAP.md` - canonical workspace entry map

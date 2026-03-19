@@ -26,7 +26,6 @@ Generated: 2026-02-28T07:42:27.183Z
 | [obra/superpowers](https://github.com/obra/superpowers) | Trial | build-system | 65228 | 2026-02-21 | yes | Auto-added from GitHub stars sync; pending review. |
 | [snarktank/antfarm](https://github.com/snarktank/antfarm) | Trial | build-system | 1683 | 2026-02-26 | yes | Auto-added from GitHub stars sync; pending review. |
 | [public-apis/public-apis](https://github.com/public-apis/public-apis) | Assess | General | 401014 | 2026-02-19 | yes | Auto-added from GitHub stars sync; pending review. |
-| [openclaw/openclaw](https://github.com/openclaw/openclaw) | Assess | Agents | 238348 | 2026-02-28 | yes | Auto-added from GitHub stars sync; pending review. |
 | [x1xhlol/system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) | Assess | LLM Infrastructure | 126074 | 2026-02-17 | yes | Auto-added from GitHub stars sync; pending review. |
 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | Assess | General | 112709 | 2026-02-28 | yes | Auto-added from GitHub stars sync; pending review. |
 | [Shubhamsaboo/awesome-llm-apps](https://github.com/Shubhamsaboo/awesome-llm-apps) | Assess | LLM Infrastructure | 97903 | 2026-02-25 | yes | Auto-added from GitHub stars sync; pending review. |
@@ -36,7 +35,6 @@ Generated: 2026-02-28T07:42:27.183Z
 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | Assess | UI/UX | 35425 | 2026-02-27 | yes | Auto-added from GitHub stars sync; pending review. |
 | [ItzCrazyKns/Perplexica](https://github.com/ItzCrazyKns/Perplexica) | Assess | General | 29113 | 2026-02-13 | yes | Auto-added from GitHub stars sync; pending review. |
 | [PicoTrex/Awesome-Nano-Banana-images](https://github.com/PicoTrex/Awesome-Nano-Banana-images) | Assess | General | 21036 | 2025-12-12 | yes | Auto-added from GitHub stars sync; pending review. |
-| [sipeed/picoclaw](https://github.com/sipeed/picoclaw) | Assess | General | 20957 | 2026-02-28 | yes | Auto-added from GitHub stars sync; pending review. |
 | [enescingoz/awesome-n8n-templates](https://github.com/enescingoz/awesome-n8n-templates) | Assess | Automation | 19539 | 2025-11-02 | yes | Auto-added from GitHub stars sync; pending review. |
 | [google-gemini/cookbook](https://github.com/google-gemini/cookbook) | Assess | LLM Infrastructure | 16603 | 2026-02-26 | yes | Auto-added from GitHub stars sync; pending review. |
 | [eigent-ai/eigent](https://github.com/eigent-ai/eigent) | Assess | General | 12729 | 2026-02-27 | yes | Auto-added from GitHub stars sync; pending review. |
@@ -56,7 +54,6 @@ Generated: 2026-02-28T07:42:27.183Z
 | [qualifire-dev/rogue](https://github.com/qualifire-dev/rogue) | Assess | Security | 1010 | 2026-02-24 | yes | Auto-added from GitHub stars sync; pending review. |
 | [FoundationVision/Waver](https://github.com/FoundationVision/Waver) | Assess | General | 900 | 2025-08-27 | yes | Auto-added from GitHub stars sync; pending review. |
 | [unslothai/unsloth-studio](https://github.com/unslothai/unsloth-studio) | Assess | LLM Infrastructure | 130 | 2025-04-07 | yes | Auto-added from GitHub stars sync; pending review. |
-| [AmrDab/clawd-cursor](https://github.com/AmrDab/clawd-cursor) | Assess | General | 97 | 2026-02-27 | yes | Auto-added from GitHub stars sync; pending review. |
 | [Hiroki-org/jules-extension](https://github.com/Hiroki-org/jules-extension) | Assess | General | 9 | 2026-02-27 | yes | Auto-added from GitHub stars sync; pending review. |
 | [maxkelley23/claude-code-hooks](https://github.com/maxkelley23/claude-code-hooks) | Assess | Agents | 7 | 2026-02-08 | yes | Auto-added from GitHub stars sync; pending review. |
 | [Badders80/Evolution-3.1](https://github.com/Badders80/Evolution-3.1) | Assess | General | 1 | 2026-02-26 | yes | Auto-added from GitHub stars sync; pending review. |

@@ -31,7 +31,7 @@ The project is divided into several repos, each serving a specific purpose:
 
 ## Core Bible Documents
 - `/home/evo/00_DNA/brand-identity/Evolution_Content_Factory.md`: Content Factory brand guidelines
-- `/home/evo/00_DNA/brand-identity/Branding.md`: Q7 layer institutional voice
+- `/home/evo/00_DNA/brand-identity/Branding.md`: Ownership-layer institutional voice
 - `/home/evo/00_DNA/build-philosophy/Evolution_OS.md`: Technical architecture & operations manual
 
 ## Key Files to Reference

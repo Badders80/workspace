@@ -4,7 +4,6 @@
 # ═══════════════════════════════════════════════════════════
 
 WORKSPACE_ROOT="/home/evo/workspace"
-GATEWAY_ROOT="$WORKSPACE_ROOT/gateways"
 
 # Colors
 RED='\033[0;31m'
@@ -27,13 +26,8 @@ Commands:
   clean               Remove stopped containers and free disk space
   help                Show this help
 
-Services:
-  openclaw    - OpenClaw gateway (port 18789)
-
 Examples:
   evo docker status
-  evo docker start openclaw
-  evo docker stop openclaw
   evo docker stop-all
 
 EOF
@@ -80,21 +74,13 @@ start_service() {
     local service=$1
     if [[ -z "$service" ]]; then
         echo "Usage: evo docker start [service]"
-        echo "Services: openclaw"
+        echo "No named workspace Docker services are configured."
         return 1
     fi
 
-    case $service in
-        openclaw)
-            echo "Starting OpenClaw gateway..."
-            cd "$GATEWAY_ROOT/openclaw" && docker compose up -d
-            ;;
-        *)
-            echo "Unknown service: $service"
-            echo "Services: openclaw"
-            return 1
-            ;;
-    esac
+    echo "Unknown service: $service"
+    echo "No named workspace Docker services are configured."
+    return 1
 }
 
 stop_service() {
@@ -103,21 +89,13 @@ stop_service() {
     local service=$1
     if [[ -z "$service" ]]; then
         echo "Usage: evo docker stop [service]"
-        echo "Services: openclaw"
+        echo "No named workspace Docker services are configured."
         return 1
     fi
 
-    case $service in
-        openclaw)
-            echo "Stopping OpenClaw gateway..."
-            cd "$GATEWAY_ROOT/openclaw" && docker compose down
-            ;;
-        *)
-            echo "Unknown service: $service"
-            echo "Services: openclaw"
-            return 1
-            ;;
-    esac
+    echo "Unknown service: $service"
+    echo "No named workspace Docker services are configured."
+    return 1
 }
 
 stop_all() {

@@ -18,8 +18,7 @@ Hard Restriction: NO ownership mentions. NO Evolution Stables branding.
 Replaces:
 - pre-workspace EVOLUTION_INTELLIGENCE.md
 
-Internal shorthand: This file defines the Awareness Layer of the Evolution Funnel
-(formerly called “GTI” internally; do not use that term in external content).
+Internal scope: This file defines the Awareness Layer of the Evolution Funnel.
 
 For Ownership Layer brand: see BRAND_SYSTEM.md  
 For technical architecture: see Evolution_OS.md

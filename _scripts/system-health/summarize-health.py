@@ -52,8 +52,6 @@ REMEDIATIONS: dict[str, str] = {
     "wsl_swap_elevated": "WSL has started leaning on swap; stop nonessential guest workloads before latency rises.",
     "workspace_disk_high": "Clean large work artifacts or move bulky datasets/models to S-backed storage before workspace writes slow down.",
     "workspace_disk_elevated": "Review large project, cache, and model directories before the workspace disk becomes constrained.",
-    "openclaw_inactive": "Restart or inspect openclaw-gateway.service and confirm port 18789 is listening again.",
-    "openclaw_service_unconfirmed": "If this came from cron, verify the OpenClaw port and service interactively; the user service bus may be unavailable even when the process is healthy.",
     "snapshot_stale": "Check whether the collector schedule is still installed and whether the relevant task or cron job is running.",
     "snapshot_aging": "Watch the next scheduled run; if freshness keeps slipping, inspect the scheduler before trusting the alerts.",
     "wslconfig_missing": "Create C:\\Users\\<user>\\.wslconfig with explicit memory and processor limits so WSL stays predictable under load.",

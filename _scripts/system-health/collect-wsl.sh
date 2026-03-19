@@ -216,24 +216,7 @@ def service_snapshot() -> dict[str, object]:
         user_env.setdefault("XDG_RUNTIME_DIR", runtime_dir)
         user_env.setdefault("DBUS_SESSION_BUS_ADDRESS", f"unix:path={runtime_dir}/bus")
 
-    for service_name in ("openclaw-gateway.service",):
-        rc, stdout, stderr = run_command(["systemctl", "--user", "is-active", service_name], env=user_env)
-        proc_rc, _, _ = run_command(["pgrep", "-x", "openclaw-gateway"])
-        active = rc == 0 and stdout == "active"
-        if not active and proc_rc == 0:
-            active = True
-        services[service_name] = {
-            "active": active,
-            "state": stdout or "unknown",
-            "systemctl_rc": rc,
-            "systemctl_error": stderr,
-            "process_detected": proc_rc == 0,
-        }
-
-    rc_port, stdout_port, _ = run_command(["ss", "-tln"])
-    services["openclaw_port_18789"] = {
-        "listening": rc_port == 0 and ":18789" in stdout_port,
-    }
+    # Legacy runtime service checks are retired from the active health surface.
     return services
 timestamp = dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat().replace(
     "+00:00", "Z"
@@ -314,17 +297,6 @@ if workspace_disk is not None:
             "workspace_disk_elevated",
             f"Workspace disk used is {workspace_disk['used_pct']}%.",
         )
-
-openclaw_service = services.get("openclaw-gateway.service", {})
-openclaw_port = services.get("openclaw_port_18789", {})
-if not openclaw_service.get("active", False) and not openclaw_port.get("listening", False):
-    add_issue("critical", "openclaw_inactive", "openclaw-gateway.service is not active.")
-elif not openclaw_service.get("active", False) and openclaw_port.get("listening", False):
-    add_issue(
-        "warn",
-        "openclaw_service_unconfirmed",
-        "OpenClaw port is listening, but the user service manager did not confirm service state.",
-    )
 
 severity_rank = {"ok": 0, "warn": 1, "critical": 2}
 overall_status = "ok"

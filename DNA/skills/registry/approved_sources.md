@@ -57,9 +57,8 @@ These are the strongest repos to lean on first for your current stack.
 
 | Repository | Direction | Why |
 |------------|-----------|-----|
-| [snarktank/antfarm](https://github.com/snarktank/antfarm) | Lean for multi-agent orchestration | Best fit for repeatable OpenClaw-centered build workflows |
+| [snarktank/antfarm](https://github.com/snarktank/antfarm) | Lean for multi-agent orchestration | Best fit for repeatable multi-agent build workflows |
 | [gsd-build/get-shit-done](https://github.com/gsd-build/get-shit-done) | Lean for scoped execution | Strong discuss -> plan -> execute structure for long coding tasks |
-| [openclaw/openclaw](https://github.com/openclaw/openclaw) | Keep as core runtime | Foundation layer already aligned with agent-heavy workflow |
 | [VoltAgent/awesome-agent-skills](https://github.com/VoltAgent/awesome-agent-skills) | Lean for skill reuse | Reduces custom skill reinvention |
 | [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) | Lean for battle-tested skill patterns | Large practical skill corpus for rapid execution |
 | [czlonkowski/n8n-mcp](https://github.com/czlonkowski/n8n-mcp) + [czlonkowski/n8n-skills](https://github.com/czlonkowski/n8n-skills) | Lean for automation bridge | Strongest direct path from AI workflow design to n8n execution |
@@ -95,7 +94,7 @@ These are the strongest repos to lean on first for your current stack.
 ### Agent Orchestration & Multi-Agent Systems
 | Repository | What it does | When to use |
 |------------|--------------|-------------|
-| [snarktank/antfarm](https://github.com/snarktank/antfarm) | Agent team builder for OpenClaw | Building multi-agent teams quickly |
+| [snarktank/antfarm](https://github.com/snarktank/antfarm) | Agent team builder for coordinated workers | Building multi-agent teams quickly |
 | [rowboatlabs/rowboat](https://github.com/rowboatlabs/rowboat) | Open source AI coworker with persistent memory | Long-running agent sessions, memory |
 | [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents) | 100+ specialized subagents | Before building custom agents |
 | [qualifire-dev/rogue](https://github.com/qualifire-dev/rogue) | AI red team / adversarial testing | Testing agent behavior before ship |

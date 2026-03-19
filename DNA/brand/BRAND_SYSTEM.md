@@ -20,8 +20,7 @@ Replaces:
 - pre-workspace VISUAL_SYSTEM.md
 - pre-workspace Branding archive batch
 
-Internal shorthand: This file defines the Ownership Layer of the Evolution Funnel
-(formerly called “Q7” internally; do not use that term in external content).
+Internal scope: This file defines the Ownership Layer of the Evolution Funnel.
 
 For Awareness Layer voice: see INTELLIGENCE_SYSTEM.md  
 For technical architecture: see Evolution_OS.md
@@ -37,15 +36,13 @@ Evolution Intelligence (Awareness Layer) earns attention. Evolution Stables
 (Ownership Layer) converts qualified, self-selecting participants into regulated
 digital-syndication owners.
 
-Legacy internal metaphor (for reference only, never external):
+Internal model:
 
-- The GTI (Golf GTI): Fast, fun, accessible, democratic. High-revving, perfect balance of
-  pleasure and performance. Internal label for Evolution Intelligence — the awareness layer.
+- Awareness Layer: Fast, accessible, democratic, high-energy. Governed by
+  `INTELLIGENCE_SYSTEM.md`.
 
-- The Q7 (Audi Q7): Mature, refined, long-horizon, commanding. Built for stewardship.
-  Internal label for Evolution Stables — the ownership platform.
-
-These metaphors are for internal mental models only and must not appear in external content.
+- Ownership Layer: Mature, refined, long-horizon, and stewardship-led.
+  Governed by this file.
 
 ### The Progression
 

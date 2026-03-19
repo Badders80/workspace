@@ -11,16 +11,14 @@ This repository is the text-first operating mirror of the active workspace. It i
 ## Included
 
 - Root-level markdown plus key build and control files
-- `DNA/`, `_docs/`, `_scripts/`, `gateways/`, and `projects/`
+- `DNA/`, `_docs/`, `_scripts/`, `gateways/`, `projects/`, and `research_vault/`
 - Source code, scripts, build/config files, and text-based data such as JSON, YAML, TOML, HTML, and SQL
 
 ## Excluded
 
-- `_archive/`, `_logs/`, `_locks/`, `_sandbox/`, `models/`, and `gateways/openclaw/sandbox/`
+- `_archive/`, `_logs/`, `_locks/`, `_sandbox/`, and `models/`
 - Dependency installs and build output such as `node_modules/`, `.next/`, `dist/`, and `build/`
 - Local env and credential-shaped files
-- Runtime-only state such as `.openclaw/`
-- Runtime gateway snapshots such as `gateways/openclaw/workspace/workspace-gateway-*/`
 - Heavy generated media such as `projects/reel-generator/assets/` and `projects/Evolution_Platform/public/videos/`
 
 ## Snapshot

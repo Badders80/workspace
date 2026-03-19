@@ -2,7 +2,7 @@
 set -euo pipefail
 
 WORKSPACE_ROOT="${WORKSPACE_ROOT:-/home/evo/workspace}"
-VAULT_ROOT="$WORKSPACE_ROOT/_sandbox/research_vault"
+VAULT_ROOT="$WORKSPACE_ROOT/research_vault"
 INBOX_DIR="$VAULT_ROOT/00_Inbox/manual-captures"
 
 mkdir -p "$INBOX_DIR"
