@@ -132,3 +132,27 @@ These are on the radar but not yet adopted. Consult TECH_RADAR.md for evaluation
 - claude-mem — Assess
 - SuperClaude Framework — Assess
 - PocketBase — Assess (potential v2 backend)
+
+---
+
+## Post-Rebuild State (2026-03-20)
+
+Fresh Ubuntu install. Clean slate.
+
+### Active Agent Toolchain
+- Codex CLI 0.116.0 — primary executor
+- Claude Code 2.1.80 — advisor/reviewer
+- Gemini CLI 0.34.0 — Google-stack specialist
+
+### Retired
+- OpenClaw — removed
+- Aider — not installed
+- MiniMax — not installed
+- Docker — not installed
+
+### System Rules
+1. Nothing installed globally unless logged here
+2. No global pip installs — project venvs only
+3. No global npm installs except AI toolchain
+4. Run just syscheck before every session
+5. Monthly vhdx compaction via Optimize-VHD
