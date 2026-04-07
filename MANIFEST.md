@@ -1,17 +1,17 @@
 # Workspace Manifest
 Created: 2026-03-10
-Updated: 2026-03-20
+Updated: 2026-03-22
 Status: ACTIVE
 
 ## Structure
 - DNA/ - operating brain, brand, conventions, skills, prompts
 - projects/ - active project code
 - _scripts/ - workspace gates, launchers, audit runners
-- _docs/ - planning and execution briefs, including storage policy
+- _docs/ - planning, execution briefs, governed brand assets, and lightweight deliverables
 - _locks/ - concurrency coordination
 - _logs/ - audit runs and drift reports
 - _archive/ - RELOCATED to /home/evo/_archive/ (outside workspace root)
-- _sandbox/ - experiments and temporary work
+- _sandbox/ - experiments, intake, and temporary work
 - models/ - local model storage
 - research_vault/ - tracked sidecar research layer for normalized captures, review, and promotion
 

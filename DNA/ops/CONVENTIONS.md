@@ -26,6 +26,7 @@
 - Do not suggest alternatives to tools locked in `STACK.md` unless `STACK.md` and `DECISION_LOG.md` are updated together.
 - `/home/evo/workspace/DNA/ops/DECISION_LOG.md` records historical rationale and decision context.
 - `/home/evo/workspace/DNA/ops/TECH_RADAR.md` is a consult-on-demand research journal and is not part of the default agent entry chain.
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/` is the repository-first discovery library for items that caught attention before any final fit decision.
 
 ## Registered Markdown Files
 
@@ -42,6 +43,7 @@
 - `/home/evo/workspace/DNA/ops/TECH_RADAR.md`
 - `/home/evo/workspace/DNA/ops/GEM_TECH_RADAR_PROCESSOR.md`
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/README.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/TEMPLATE.md`
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-16_batch.md`
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-16_handoff-documents.md`
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-16_correction-rulebook.md`
@@ -56,6 +58,22 @@
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-19_nemotron-super.md`
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-19_march-14-15-review.md`
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-19_priority-shortlist.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_local-claude-code-runner.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_ai-creators-2026-list.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_notebooklm-cinematic-video.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_stop-slop.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_instagram-reel-antigravity.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_ogilvy-writing-rules.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_instagram-start-post-limited.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_mirofish-forecasting.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_claude-content-brain.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_ghostling-libghostty.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_impeccable.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_awesome-codex-subagents.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_claude-code-remotion.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_google-ai-studio-2.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_xiaomi-mimo-v2.md`
+- `/home/evo/workspace/DNA/ops/tech-radar-intake/2026-03-22_batch.md`
 - `/home/evo/workspace/DNA/ops/TRANSITION.md`
 - `/home/evo/workspace/research_vault/README.md`
 - `/home/evo/workspace/research_vault/HOME.md`
@@ -74,11 +92,41 @@
 - `/home/evo/workspace/research_vault/_templates/Manual Capture.md`
 - `/home/evo/workspace/research_vault/_templates/Normalized Note.md`
 - `/home/evo/workspace/research_vault/_templates/Review Report.md`
+- `/home/evo/workspace/_sandbox/README.md`
+- `/home/evo/workspace/_sandbox/agent-stack/README.md`
 - `/home/evo/workspace/projects/Evolution_Content/assets/library/README.md`
 - `/home/evo/workspace/_docs/MERGE_PLAN_2026-03-10.md`
 - `/home/evo/workspace/_docs/SITE_WIDE_ALIGNMENT_AUDIT_2026-03-12.md`
 - `/home/evo/workspace/_docs/STATE_TRAP_MAP_2026-03-12.md`
 - `/home/evo/workspace/_docs/AGENTS_STUB.md`
+- `/home/evo/workspace/_docs/agent-stack/README.md`
+- `/home/evo/workspace/_docs/agent-stack/INSTALL_NOTES.md`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+- `/home/evo/workspace/_docs/agent-stack/PHASE0_MARKETPLACE_READINESS_CHECKLIST_2026-04-06.md`
+- `/home/evo/workspace/_docs/agent-stack/MARKETPLACE_PHASED_EXECUTION_PLAN_2026-04-06.md`
+- `/home/evo/workspace/_docs/agent-stack/PHASE0_PAPERCLIP_OPERATOR_PACK_2026-04-06.md`
+- `/home/evo/workspace/_docs/agent-stack/CEO_PHASE0_INSTRUCTIONS_2026-04-06.md`
+- `/home/evo/workspace/_docs/agent-stack/EXECUTION_WORKER_INSTRUCTIONS_2026-04-06.md`
+- `/home/evo/workspace/_docs/agent-stack/VERIFICATION_WORKER_INSTRUCTIONS_2026-04-06.md`
+- `/home/evo/workspace/_docs/agent-stack/ALLOWLIST_POLICY.md`
+- `/home/evo/workspace/_docs/agent-stack/ROLE_LENSES.md`
+- `/home/evo/workspace/_docs/agent-stack/TICKET_FLOW.md`
+- `/home/evo/workspace/_docs/agent-stack/BUDGET_RULES.md`
+- `/home/evo/workspace/_docs/brand_assets/tokinvest_dds/README.md`
+- `/home/evo/workspace/_docs/presentations/tokinvest_dds_owner_minimalist_2026-03-20/README.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/FOUNDING_ENGINEER_HIRING_PACKET.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/FOUNDING_ENGINEER_SCORECARD.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/FOUNDING_ENGINEER_HIRING_BRIEF.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/ENGINEERING_30_60_90_ROADMAP.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/EXECUTION_BACKLOG.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/ASSESSMENT_AND_INTERVIEW_RUBRIC.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/INTERVIEW_WORKSHEET.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/CANDIDATE_ASSESSMENT_BRIEF.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/SOURCING_BRIEF.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/HIRING_PROCESS_RUNBOOK.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/OUTREACH_TEMPLATES.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/DELIVERY_STATUS.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/HIRING_LAUNCH_KIT.md`
 - `/home/evo/workspace/projects/SSOT_Build/docs/contracts/CURRENT_DATA_CONTRACT_2026-03-13.md`
 - `/home/evo/workspace/projects/SSOT_Build/docs/contracts/FIRESTORE_WRITE_MAP_2026-03-13.md`
 

@@ -89,6 +89,13 @@ Deferred workspace items and active cleanup queue.
 - [x] Reduce `evo-audit-partners.sh` to the preferred core set (`Codex`, `Gemini`, `Groq`, `Anthropic`) and remove retired `Kimi` or `GLM` routes from the first-level runner
 - [x] Align `evo-audit-claude-meta.sh` and `evo-groq-watchdog.sh` to the reduced core partner model and workspace-native path or context-chain outputs
 
+## Tech Radar Backlog - 2026-03-22
+
+- [ ] Trial local Claude Code runner - copy the `lcc` gist to `~/.local/bin/lcc`, make it executable, point it at the local Anthropic-compatible server, and compare one real refactor task against cloud Claude Code using `NVIDIA Nemotron 3 Super`.
+- [ ] Trial stop-slop - load the repo skill and reference files into the main Claude Code workflow, test it on the latest breeding memo, and keep only the scoring or rewrite rules that improve prose without making it rigid.
+- [ ] Trial Impeccable - install the Claude Code design skill in a test shadcn or Next.js surface, run a before-and-after on one component, and record whether the anti-pattern guidance materially improves UI output.
+- [ ] Trial Claude Code + Remotion - recreate a small split-screen plus subtitles workflow in Remotion, drive it through Claude Code, and compare the result against the current Magic Animator path.
+
 ## Post-Nuke Plan - 2026-03-19
 
 - [x] Complete WSL home purge and compact `S:\\WSL_Ubuntu\\ext4.vhdx`

@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tokinvest DDS Owner-Led Minimalist Deck</title>
+  <style>
+    @font-face {
+      font-family: 'Museo Sans';
+      src: url('./assets/MuseoSans-300.otf') format('opentype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Museo Sans';
+      src: url('./assets/MuseoSans-500.otf') format('opentype');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'Museo Sans';
+      src: url('./assets/MuseoSans-700.otf') format('opentype');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    :root {
+      --ink: #041731;
+      --paper: #ffffff;
+      --sand: #ddc7a6;
+      --muted: #586273;
+      --line: rgba(4, 23, 49, 0.14);
+      --soft: rgba(221, 199, 166, 0.26);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #f3f0eb;
+      color: var(--ink);
+      font-family: 'Museo Sans', Arial, sans-serif;
+      line-height: 1.45;
+    }
+
+    .deck {
+      max-width: 1680px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    .slide {
+      scroll-snap-align: start;
+      background: var(--paper);
+      min-height: calc(100vh - 56px);
+      padding: 68px 86px 72px;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(4, 23, 49, 0.06);
+      box-shadow: 0 18px 54px rgba(4, 23, 49, 0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--sand), rgba(221, 199, 166, 0));
+    }
+
+    .slide-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .logo {
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .tokinvest-mark {
+      height: 44px;
+      object-fit: contain;
+      opacity: 0.84;
+    }
+
+    .drc-mark {
+      height: 64px;
+      object-fit: contain;
+    }
+
+    .hero-brand {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .hero-brand .dds-mark {
+      width: min(360px, 42vw);
+      height: auto;
+      object-fit: contain;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    h1 {
+      font-size: clamp(52px, 6vw, 88px);
+      line-height: 0.98;
+      font-weight: 500;
+      max-width: 11ch;
+    }
+
+    h2 {
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: 1.02;
+      font-weight: 500;
+      max-width: 13ch;
+    }
+
+    .subhead {
+      font-size: clamp(20px, 2vw, 28px);
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 30ch;
+      margin-top: 18px;
+    }
+
+    .lede,
+    .body {
+      max-width: 62ch;
+      font-size: clamp(18px, 1.45vw, 24px);
+      color: var(--ink);
+      font-weight: 300;
+    }
+
+    .lede strong,
+    .body strong {
+      font-weight: 500;
+    }
+
+    .rule {
+      width: 110px;
+      height: 2px;
+      background: var(--sand);
+      margin: 26px 0 30px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .badge {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.86);
+      color: var(--ink);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+    }
+
+    .points,
+    .steps {
+      display: grid;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .points.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .points.four {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 34px;
+      align-items: start;
+    }
+
+    .card {
+      border-top: 2px solid var(--sand);
+      background: linear-gradient(180deg, rgba(221, 199, 166, 0.13), rgba(255, 255, 255, 0));
+      padding: 24px 22px 22px;
+      min-height: 100%;
+    }
+
+    .card h3,
+    .step h3 {
+      margin: 0 0 10px;
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .card p,
+    .step p {
+      margin: 0;
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-weight: 300;
+    }
+
+    .label {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .placeholder {
+      height: 190px;
+      border: 1px dashed rgba(4, 23, 49, 0.2);
+      background:
+        linear-gradient(180deg, rgba(221, 199, 166, 0.12), rgba(255, 255, 255, 0)),
+        repeating-linear-gradient(
+          -45deg,
+          rgba(4, 23, 49, 0.03),
+          rgba(4, 23, 49, 0.03) 8px,
+          rgba(255, 255, 255, 0.8) 8px,
+          rgba(255, 255, 255, 0.8) 16px
+        );
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 20px;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .bullet-list li {
+      padding-left: 18px;
+      position: relative;
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .bullet-list li::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--sand);
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    .steps.five {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .step {
+      border-top: 2px solid var(--sand);
+      padding-top: 18px;
+    }
+
+    .step .num {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      margin-top: 34px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .center {
+      text-align: center;
+      align-items: center;
+    }
+
+    .center h1,
+    .center h2,
+    .center .subhead,
+    .center .lede {
+      max-width: none;
+      text-align: center;
+    }
+
+    .center .rule {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .statement {
+      max-width: 24ch;
+    }
+
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 24px;
+      margin-top: 18px;
+    }
+
+    .outcome {
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+
+    .outcome strong {
+      display: block;
+      font-size: 18px;
+      color: var(--ink);
+      margin-bottom: 7px;
+      font-weight: 500;
+    }
+
+    .outcome span {
+      font-size: 17px;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    @media (max-width: 1100px) {
+      .slide {
+        padding: 50px 34px 54px;
+      }
+
+      .two-col,
+      .points.three,
+      .points.four,
+      .steps.five,
+      .outcome-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media print {
+      @page {
+        size: 13.333in 7.5in;
+        margin: 0;
+      }
+
+      html,
+      body {
+        background: #fff;
+        margin: 0;
+        padding: 0;
+      }
+
+      .deck {
+        max-width: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .slide {
+        page-break-after: always;
+        break-after: page;
+        width: 13.333in;
+        min-height: 7.5in;
+        padding: 0.62in 0.78in 0.66in;
+        margin: 0;
+        box-shadow: none;
+        border: none;
+      }
+
+      .slide:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <section class="slide center">
+      <div class="slide-inner">
+        <div class="topbar">
+          <img class="tokinvest-mark" src="./assets/Tokinvest_Master_Logo_Black_Green.png" alt="Tokinvest">
+          <img class="drc-mark" src="./assets/DRC_Horizontal_Official.webp" alt="Dubai Racing Club">
+        </div>
+        <div class="hero-brand">
+          <img class="dds-mark" src="./assets/DDS_Logo_Horizontal_Black.png" alt="Dubai Digital Syndication">
+        </div>
+        <h1>Grounded in tradition.<br>Evolved through innovation.<br>Ownership transformed.</h1>
+        <div class="rule"></div>
+        <div class="badge-row">
+          <div class="badge">VARA Regulated</div>
+          <div class="badge">DRC Partnership</div>
+          <div class="badge">Powered by Tokinvest</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">Why now</div>
+        <h2 class="statement">Racing ownership hasn't kept pace with its audience.</h2>
+        <div class="rule"></div>
+        <p class="body">Syndication and shared ownership are already part of racing's DNA. The principles still hold: pooled resources, expert management, and shared upside. What has not kept pace is access. High minimums, private networks, and locked-in commitments have kept the sport closed to the many. <strong>Dubai Digital Syndication changes the transaction layer, not the sport.</strong></p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">Preserve integrity</div>
+        <h2 class="statement">The sport stays intact. The pathway modernises.</h2>
+        <div class="rule"></div>
+        <div class="points four">
+          <div class="card"><h3>The horse comes first.</h3><p>Care, welfare, and campaign quality remain central.</p></div>
+          <div class="card"><h3>Professional care remains.</h3><p>Training, management, and oversight do not change.</p></div>
+          <div class="card"><h3>Governance stays structured.</h3><p>Ownership remains organised, visible, and accountable.</p></div>
+          <div class="card"><h3>Participation broadens responsibly.</h3><p>The model expands access without diluting what makes racing special.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">The evolution</div>
+        <h2 class="statement">Built on tradition. Evolved through innovation.</h2>
+        <div class="rule"></div>
+        <div class="two-col">
+          <div>
+            <div class="placeholder">Video Placeholder</div>
+            <div class="label">What DDS builds on</div>
+            <ul class="bullet-list">
+              <li>Shared passion and participation</li>
+              <li>Professional training and management</li>
+              <li>Elite bloodstock and heritage</li>
+              <li>The thrill of race day</li>
+            </ul>
+          </div>
+          <div>
+            <div class="placeholder">Video Placeholder</div>
+            <div class="label">What DDS improves</div>
+            <ul class="bullet-list">
+              <li>Fractional entry with lower barriers to participation</li>
+              <li>Primary and secondary market liquidity</li>
+              <li>On-chain transparency and reporting</li>
+              <li>Open, regulated access without relying on private networks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">For horse owners</div>
+        <h2 class="statement">Your ownership stake, working harder.</h2>
+        <div class="rule"></div>
+        <div class="points three">
+          <div class="card">
+            <h3>Liquidity</h3>
+            <p>Create a new capital pathway around an existing asset. Fractional stakes can be listed on a regulated marketplace without changing the underlying care, management, or campaign structure.</p>
+          </div>
+          <div class="card">
+            <h3>Control</h3>
+            <p>Owners decide whether to list, how much participation to offer, and how the opportunity is structured. Owners remain central to the horse, the campaign, and the decision-making around both.</p>
+          </div>
+          <div class="card">
+            <h3>Equity</h3>
+            <p>Owners retain the underlying equity position in the horse. The model is designed to sit around that equity, not replace it, with value anchored in a real horse, a real campaign, and a real ownership structure.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">For horse owners</div>
+        <h2 class="statement">More flexibility around an existing asset.</h2>
+        <div class="rule"></div>
+        <div class="two-col">
+          <div class="card">
+            <h3>Reinvestment</h3>
+            <p>Platform earnings can help offset ownership costs such as training fees, vet bills, and stable costs. The horse continues to compete while the ownership model works harder around it.</p>
+          </div>
+          <div class="card">
+            <h3>Scale</h3>
+            <p>Fractional participation can support broader involvement across multiple horses or seasons without increasing total outlay to the same degree. Ownership becomes easier to extend, not harder to sustain.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">For horse owners</div>
+        <h2 class="statement">Broaden participation. Preserve integrity.</h2>
+        <div class="rule"></div>
+        <p class="body">This is not about replacing owners. It is about helping owners reach new participants, communicate more clearly, and build stronger engagement around each campaign. Structured participation, clearer reporting, and regulated infrastructure create a more modern ownership pathway while preserving the standards and prestige that define the sport.</p>
+        <div class="badge-row">
+          <div class="badge">Structured participation</div>
+          <div class="badge">Clearer reporting</div>
+          <div class="badge">Modern ownership pathway</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">For investors</div>
+        <h2 class="statement">The most prestigious asset class. Now open.</h2>
+        <div class="rule"></div>
+        <div class="points three">
+          <div class="card">
+            <h3>Access</h3>
+            <p>No private network required. Lower entry points create a clearer pathway into elite racing participation through a central, regulated marketplace.</p>
+          </div>
+          <div class="card">
+            <h3>Prestige</h3>
+            <p>The digital-syndication model was proven through New Zealand experience, while the Dubai opportunity is built around Dubai Racing Club horses competing on one of racing's most recognised stages.</p>
+          </div>
+          <div class="card">
+            <h3>Structure</h3>
+            <p>Institutional grade. Real ownership. VARA-regulated. Tokinvest dual-licensed as issuer and broker-dealer. Transparent on-chain reporting.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">Participation</div>
+        <h2 class="statement">Ownership extends beyond race day.</h2>
+        <div class="rule"></div>
+        <p class="body">Ownership transforms spectators into stakeholders. Structured communications, behind-the-scenes access, and digital touchpoints deepen connection around each campaign without changing the fundamentals of the sport.</p>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">The lifecycle</div>
+        <h2 class="statement">From origination to trade. Every step regulated.</h2>
+        <div class="rule"></div>
+        <div class="steps five">
+          <div class="step"><div class="num">01 - Ideate &amp; Originate</div><h3>Structure</h3><p>Define product parameters, duration, and economic profile.</p></div>
+          <div class="step"><div class="num">02 - Issue</div><h3>Issue</h3><p>Products are issued natively on-chain under VARA. The token itself is the financial instrument.</p></div>
+          <div class="step"><div class="num">03 - Distribute</div><h3>List</h3><p>Listed on the Tokinvest marketplace and distributed via partner platforms.</p></div>
+          <div class="step"><div class="num">04 - Trade</div><h3>Trade</h3><p>Primary and secondary market liquidity. Buy, sell, or hold on your own terms.</p></div>
+          <div class="step"><div class="num">05 - Redeem</div><h3>Redeem</h3><p>Structured exit through redemption services and token burn at end of lifecycle.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">Institutional architecture</div>
+        <h2 class="statement">Every layer. Accounted for.</h2>
+        <div class="rule"></div>
+        <div class="points four">
+          <div class="card"><h3>VARA</h3><p>Regulation. Virtual Assets Regulatory Authority. Dubai.</p></div>
+          <div class="card"><h3>Dubai Racing Club</h3><p>Administration. Institutional validation. DRC partnership. Meydan.</p></div>
+          <div class="card"><h3>Tokinvest</h3><p>Platform infrastructure. VARA-licensed Issuer + Broker-Dealer. First ARVA approved.</p></div>
+          <div class="card"><h3>Evolution Stables</h3><p>Proof of the model working in practice. Early digital-syndication experience from New Zealand that helped shape the pathway now expressed as Dubai Digital Syndication.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">Why this matters</div>
+        <h2 class="statement">A stronger participation model for racing.</h2>
+        <div class="rule"></div>
+        <div class="outcome-grid">
+          <div class="outcome"><strong>New pathways for owners</strong><span>Broaden participation around an existing asset while preserving control and integrity.</span></div>
+          <div class="outcome"><strong>Clearer access for investors</strong><span>Create a more legible and structured pathway into elite racing participation.</span></div>
+          <div class="outcome"><strong>Deeper engagement around campaigns</strong><span>Turn race-day attention into a longer, more connected ownership experience.</span></div>
+          <div class="outcome"><strong>Sustainable growth</strong><span>Support broader relevance and participation without compromising the standards of the sport.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="kicker">Why Dubai</div>
+        <h2 class="statement">A natural place to lead the next chapter.</h2>
+        <div class="rule"></div>
+        <div class="points four">
+          <div class="card"><h3>Prestige</h3><p>Dubai already carries global racing authority and recognition.</p></div>
+          <div class="card"><h3>Visibility</h3><p>Few stages offer the same international audience and spotlight as Meydan.</p></div>
+          <div class="card"><h3>Regulatory clarity</h3><p>Forward-looking digital-asset regulation creates structural confidence.</p></div>
+          <div class="card"><h3>Innovation fit</h3><p>Innovation layered onto an already world-class stage strengthens the model.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide center">
+      <div class="slide-inner">
+        <div class="topbar">
+          <img class="tokinvest-mark" src="./assets/Tokinvest_Master_Logo_Black_Green.png" alt="Tokinvest">
+          <div class="partner-mark">
+            <div class="eyebrow">Partner</div>
+            <div class="name">Dubai Racing Club</div>
+          </div>
+        </div>
+        <div class="kicker">Dubai Digital Syndication</div>
+        <h1>Ownership. Evolved.</h1>
+        <div class="rule"></div>
+        <p class="lede">Regulated access to real-world racehorse ownership. The heritage remains. The barriers are gone.</p>
+        <div class="badge-row">
+          <div class="badge">tokinvest.capital</div>
+        </div>
+        <div class="footer">
+          <div>Dubai Digital Syndication is administered by Dubai Racing Club and regulated by VARA. Powered by Tokinvest infrastructure.</div>
+          <div>For informational purposes only. Past performance is not indicative of future results. Copyright (c) 2026 Tokinvest.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

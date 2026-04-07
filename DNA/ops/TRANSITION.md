@@ -218,6 +218,18 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Next: Decide whether to execute a production-alignment fix pass now, starting with `robots.txt` + sitemap parity, private-route `noindex` enforcement, legal-page replacement, and homepage image/LCP reduction.
 - Blocked: Search Console and analytics were not available in this session, so index coverage, query performance, and cannibalization could only be inferred from live crawlable output and Lighthouse.
 - Decisions: For SEO work on `Evolution_Platform`, treat live production output as the source of truth until deployment parity is re-established, because the current repo metadata and crawl directives do not match what the public site is serving.
+
+### 2026-04-06 [agent: Codex][agent-stack-paperclip-runtime-pin]
+- Done: Traced the Paperclip startup failure to the transient `npx paperclipai` dependency graph (`jsdom@28.1.0` -> `cssstyle@6.2.0` -> ESM-only `@asamuzakjp/css-color`), added a managed local runtime at `/home/evo/workspace/_sandbox/agent-stack/.paperclip-runtime/`, added `/home/evo/workspace/_sandbox/agent-stack/paperclip-local.sh`, and updated `/home/evo/workspace/_sandbox/agent-stack/with-node20.sh` so existing `npx --yes paperclipai ...` launches are rerouted through the pinned runtime. Verified both direct `with-node20.sh ... paperclipai` launch and `paperclip-trial.sh start`.
+- Next: If Paperclip ships a fix upstream, remove the local pin by testing the plain transient `npx paperclipai run` path first and then simplifying the wrapper only after parity is proven.
+- Blocked: The upstream transient install path is still broken on this machine today, so a direct `npx --yes paperclipai run ...` outside the wrapper shim remains unsafe.
+- Decisions: Keep the workaround isolated to the sidecar sandbox instead of changing the global Node toolchain or weakening the workspace-wide Node 20 wrapper.
+
+### 2026-04-06 [agent: Codex][agent-stack-phase0-marketplace-checklist]
+- Done: Converted the domestic marketplace game plan into an operational Phase 0 go/no-go checklist at `/home/evo/workspace/_docs/agent-stack/PHASE0_MARKETPLACE_READINESS_CHECKLIST_2026-04-06.md`, indexed it from the agent-stack README, and registered it in conventions so the first marketplace Paperclip proof has a governed readiness surface.
+- Next: Use the checklist to define the first five bounded Paperclip ticket templates and keep the first proof inside the sandbox-only authority model.
+- Blocked: The checklist is ready, but the actual ticket templates and lane-specific Paperclip artifacts still need to be created before execution starts.
+- Decisions: Treat marketplace readiness as a bounded Phase 0 operating question, not a reason to widen workspace tooling or prematurely implement the full North Star architecture.
 - Done: Created `/home/evo/workspace/_scripts/sync-workspace-full-git.sh` as a repeatable broad snapshot export for `workspace_full`, added `just workspace-full` and `just workspace-full-apply`, and set the default exclusions to nested `.git/` directories, secret-shaped files, media assets (`mp3/mp4/jpg/jpeg/png/gif/webp/svg/mov/wav`), and files above the GitHub-safe size threshold.
 - Next: Re-run the workspace-full script whenever a fresh broad agent-facing snapshot is needed, and only widen the exclusions if GitHub rejects a new class of file or the repo becomes too heavy for the intended investigation workflow.
 - Blocked: The broad snapshot still intentionally keeps local installs and generated code when they fit, so repo weight can grow quickly even with media and oversized files excluded.
@@ -330,6 +342,12 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Next: Use the two sync scripts for fresh GitHub pushes, and only expand the sample-secret allowlist when a reviewed documentation or test fixture is clearly using placeholder tokens rather than live credentials.
 - Blocked: Concurrent `wsl.exe` calls from this desktop thread are unreliable, so git and export operations should be run sequentially from here.
 - Decisions: Keep `workspace` on the curated mirror path and `workspace_full` on the broad export path; keep vault backups and local reference clones out of the curated mirror commit path.
+
+### 2026-03-20 [agent: Codex][tokinvest-dds-brand-and-deck-surface]
+- Done: Created a reusable Tokinvest / DDS brand asset home at `/home/evo/workspace/_docs/brand_assets/tokinvest_dds/`, curated the key logo, tagline, guideline, color, and font assets into that surface, extracted the core brand tokens into `brand_tokens.txt`, and built an owner-led minimalist deck handoff at `/home/evo/workspace/_docs/presentations/tokinvest_dds_owner_minimalist_2026-03-20/` with both an editable HTML deck and a Canva-ready slide-copy brief.
+- Next: Review the HTML deck with Sophie and the team, tune the slide density and visual hierarchy in Canva or PowerPoint, and decide whether a native `.pptx` export path should be added later through dedicated deck-generation tooling.
+- Blocked: The current environment does not have a native PowerPoint-generation library or desktop presentation exporter available by default, so the first delivery is HTML plus text handoff rather than a `.pptx`.
+- Decisions: Use `_docs/brand_assets/` as the reusable governed home for cross-project brand packs and `_docs/presentations/` as the working surface for lightweight presentation deliverables.
 
 ### 2026-03-20 [agent: Codex][brand-shorthand-removal]
 - Done: Removed the `GTI` and `Q7` internal shorthand from the live brand system docs, replaced the metaphor block in `DNA/brand/BRAND_SYSTEM.md` with direct Awareness/Ownership language, and cleaned the remaining active legacy context reference in `_docs/EVOLUTION_MASTER_CONTEXT.md`.
@@ -469,8 +487,200 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Blocked: Concurrent `wsl.exe` calls from this desktop thread are unreliable, so git and export operations should be run sequentially from here.
 - Decisions: Keep `workspace` on the curated mirror path and `workspace_full` on the broad export path; keep vault backups and local reference clones out of the curated mirror commit path.
 
+### 2026-03-22 [agent: Codex][startup-governance-reset]
+- Done: Audited Windows startup surfaces, backed up and disabled the legacy EVO startup tasks, replaced them with a single hidden `\EVO\Startup Health` task backed by `C:\evo\startup`, and trimmed optional startup apps and updater noise to reduce boot-time RAM drag.
+- Next: Keep future startup changes inside `C:\evo\startup` only, and route any new login automation through the documented backup and restore scripts instead of one-off Scheduled Tasks, desktop `.bat` files, or Startup-folder shortcuts.
+- Blocked: None.
+- Decisions: `C:\evo\startup` is now the machine startup SSOT for this workstation; startup behavior is governed infrastructure and should stay hidden-by-default, reversible, backed up, and documented.
+
+### 2026-03-22 [agent: Codex][workspace-drift-guardrail-tokinvest]
+- Done: Created `/home/evo/workspace/_sandbox/README.md` as the lightweight intake rule surface, moved the loose root Tokinvest source folder into `/home/evo/workspace/_docs/brand_assets/tokinvest_dds/source_pack_2026-03-20/`, removed Windows `Zone.Identifier` sidecar noise from that promoted pack, and added README links to the Tokinvest brand asset and presentation surfaces so source and output are clearly connected.
+- Next: Put future ad-hoc source packs in `_sandbox/` during active work, and once they are worth keeping promote them into `_docs/`, `projects/`, `research_vault/`, or `/home/evo/_archive/` before they linger at workspace root.
+- Blocked: None.
+- Decisions: `projects/` remains the build and workstream surface, while reusable brand and source packs plus lightweight decks live under `_docs/`; `_sandbox/` is the temporary intake lane, not a second permanent root.
+
+### 2026-03-22 [agent: Codex][tech-radar-march-22-library-batch]
+- Done: Added ten durable repository notes under `/home/evo/workspace/DNA/ops/tech-radar-intake/` for the March 22 discovery batch, registered the new markdown files in conventions, added `Local Claude Code Runner (lcc)`, `stop-slop`, `NotebookLM Cinematic Video Overviews`, `MiroFish`, `Claude Content Brain System`, and `Ghostling / libghostty` to `TECH_RADAR.md`, and queued bounded follow-up trials for `lcc` and `stop-slop` in `DNA/INBOX.md`.
+- Next: Run the two new trial items first, then revisit the new `ASSESS` items only if a concrete racing, content, or terminal-UI use case appears.
+- Blocked: Several items in this batch come from Instagram-only or otherwise source-limited surfaces, so the repository notes preserve caveats and avoid overclaiming certainty.
+- Decisions: Keep duplicate or low-substance March 22 discoveries in the intake library only instead of inflating the live radar with every archive-grade item.
+
+### 2026-03-22 [agent: Codex][tech-radar-processor-rewrite-and-batch-2]
+- Done: Rewrote `/home/evo/workspace/DNA/ops/GEM_TECH_RADAR_PROCESSOR.md` to enforce mandatory full link pulls, repository-first evaluation, and the new fixed output order (`Title`, `Source`, `Human Review`, `Technical / Fit Review`, `Tech Radar Recommendation`); aligned the intake template to the same flow; added new March 22 notes for `Impeccable`, `Awesome Codex Subagents`, `Claude Code + Remotion`, `Google AI Studio 2.0`, and `Xiaomi MiMo-V2 Models`; added a short source-limited batch capture; backfilled the visible creator handles into the March 22 AI-creators note; updated `TECH_RADAR.md` with the new `TRIAL` and `ASSESS` rows; and queued the `Impeccable` and `Claude Code + Remotion` follow-up trials in `DNA/INBOX.md`.
+- Next: Use the rewritten processor prompt for the next live link batch and confirm the output consistently preserves actual extracted content, especially creator lists, source-limited reels, and linked follow-up resources.
+- Blocked: Some March 22 items still remain partially source-limited because the original materials depended on Instagram or gated Notion content rather than durable fully open docs.
+- Decisions: The radar processor now treats supplied links as intentional research signals that must be pulled and evaluated before any archive-grade judgment is made; trend tracking, optionality, and future pivots are first-class reasons to preserve an item.
+
+### 2026-03-23 [agent: Codex][startup-health-review-hardening]
+- Done: Audited the governed startup surface under `C:\evo\startup`, confirmed the `\EVO\Startup Health` task ran successfully on 2026-03-23 at 09:38 local time, verified the observed ~47-50% RAM baseline came from a resume/login session rather than a cold boot, and upgraded `C:\evo\startup\bin\Invoke-EvoStartupHealth.ps1` plus `C:\evo\startup\README.md` so the monitor now records session context (`cold_boot`, `resume`, `steady_state`), previous-snapshot memory delta, and top RAM-consuming process families and processes.
+- Next: Let the upgraded monitor capture the next real cold boot, then compare that snapshot to the 2026-03-23 resume snapshot before making any further startup cuts.
+- Blocked: Today's review cannot prove the cold-boot baseline because Windows reports the last full boot on 2026-03-20 at 12:47 local time and the current session resumed from sleep at 2026-03-23 09:37 local time.
+- Decisions: Startup monitoring on this machine should explain memory baseline, not just threshold breaches; boot-vs-resume context and top resident RAM consumers are part of the governed startup health output going forward.
+
+### 2026-03-23 [agent: Codex][startup-health-delta-noise-fix]
+- Done: Re-reviewed the live startup logs after the next real cold boot, confirmed the boot snapshot was healthy at 24.3% RAM and the later resume snapshot was healthy at 28.7% RAM, and tightened `C:\evo\startup\bin\Invoke-EvoStartupHealth.ps1` so the memory-delta warning now only fires for upward drift on matching session types instead of falsely warning when a clean cold boot follows a heavy interactive resume session.
+- Next: Keep the new cold-boot and resume samples as the baseline pair, then only investigate further if future cold boots climb materially above the March 23 boot baseline.
+- Blocked: None.
+- Decisions: Snapshot-to-snapshot delta is useful for drift detection, but only when the comparison is apples-to-apples; cross-context comparisons should stay informational, not warning-grade.
+
+### 2026-03-23 [agent: Codex][codex-peers-mcp-sandbox-trial]
+- Done: Read the required workspace context chain, reviewed `louislva/claude-peers-mcp`, confirmed the Claude-specific blocker is `claude/channel` push delivery plus the missing local Bun/Node runtime, built a Codex-compatible Python adaptation at `/home/evo/workspace/_sandbox/codex-peers-mcp/`, registered it in the Windows Codex config as the global `codex-peers` MCP server, and smoke-tested peer discovery plus queued messaging between two local server processes.
+- Next: Validate the UX in a fresh Codex desktop session, then decide whether to add a lightweight Codex rule or prompt habit for checking messages at collaboration boundaries.
+- Blocked: Codex does not expose the Claude development-channel push path used by the upstream repo, so inbound messages currently require explicit `check_messages` polling instead of instant session injection.
+- Decisions: Keep the Codex adaptation in `_sandbox/` as a reversible utility path, launch it through the Windows-side `C:\Users\Evo\.codex\config.toml` MCP registration via `wsl.exe`, and prefer a Python/std-lib implementation over installing Bun or Node globally for this trial.
+
+### 2026-03-23 [agent: Codex][codex-peers-collaboration-checkpoint]
+- Done: Added a new `collaboration_checkpoint` MCP tool plus stronger MCP initialization instructions in `/home/evo/workspace/_sandbox/codex-peers-mcp/server.py` so Codex has a single routine call that can update the session summary, fetch unread peer messages, and list nearby peers in one step; re-smoke-tested the flow between two local peer sessions.
+- Next: Restart active Codex sessions so they pick up the refreshed MCP tool list and instructions, then use `collaboration_checkpoint` as the default handoff and inbox-sync call.
+- Blocked: This still does not create true live push into an already-running Codex turn; the improvement is lower-friction polling, not transport-level notification support.
+- Decisions: Smoother Codex collaboration should come from a first-class checkpoint routine inside the MCP surface rather than from workspace-rule sprawl or hidden background automation.
+
+### 2026-04-03 [agent: Codex][agent-stack-scaffold]
+- Done: Ran `just check`, updated the bootstrap for the new operating-layer surface, scaffolded `/home/evo/workspace/_sandbox/agent-stack/` plus `/home/evo/workspace/_docs/agent-stack/`, added the `with-node20.sh` non-interactive Node launcher, and wrote the first governed docs for install notes, runbook, allowlist, role lenses, ticket flow, and budget rules.
+- Next: Verify the current official install steps, install OpenFang first, prove one Hand wake -> execute -> report, then install Paperclip, onboard Evolution Stables, set the hard daily budget cap, and connect OpenFang as the single executor.
+- Blocked: Non-interactive WSL shells still do not expose `node` or `pnpm` without loading `nvm`, so Node-based launches must go through the new wrapper until shell init is cleaned up.
+- Decisions: Paperclip + OpenFang starts as a workspace-side sidecar, not a product-repo surface; Paperclip is the orchestration layer, OpenFang is the only executor in v1.0, and CEO/CTO-style roles remain lenses or queues rather than separate runtimes.
+
+### 2026-04-03 [agent: Codex][agent-stack-install-pass]
+- Done: Installed the latest currently installable OpenFang Linux tarball (`v0.5.6` asset; binary reports `openfang 0.5.5`) into `/home/evo/workspace/_sandbox/agent-stack/openfang/bin/`, verified `openfang start` boots on `127.0.0.1:4200`, documented the current CLI quirk where `init --config` still writes to `~/.openfang`, and redirected that path as a symlink back into `/home/evo/workspace/_sandbox/agent-stack/openfang/state`. Also onboarded Paperclip into `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/` with local defaults, verified doctor checks passed, and confirmed the local UI responds on `127.0.0.1:3100`.
+- Next: Create the first Paperclip company for Evolution Stables, set the first conservative budget cap, configure a working OpenFang LLM provider, then prove one bounded ticket end-to-end with OpenFang as the only executor.
+- Blocked: The current OpenFang latest release (`v0.5.7`) has no published Linux binary assets, so the install had to fall back to the previous installable release. OpenFang also has no working LLM provider configured yet, and current Paperclip docs expose monthly budgets rather than a first-class daily cap.
+- Decisions: Keep `/home/evo/.openfang` as a documented symlink only, not a source-of-truth directory; keep Paperclip state isolated under `_sandbox/agent-stack/paperclip/data`; and treat daily spend control as an operator rule layered on top of Paperclip's current monthly budget model until a better native control is available.
+
+### 2026-04-03 [agent: Codex][agent-stack-openrouter-trial]
+- Done: Rewired the OpenFang sidecar default model to the trial OpenRouter path `openrouter/qwen/qwen3.6-plus-preview:free`, added `/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh` to load `/home/evo/.env` before running the sidecar binary, updated the runbook and install notes to reflect the trial-only model choice, and annotated the legacy `audit-openfang-bridge` Justfile target as a pre-sidecar bridge rather than current operating-layer truth.
+- Next: Add `OPENROUTER_API_KEY` to `/home/evo/.env`, verify OpenFang sees it through the new launcher, then prove the first bounded Hand run and Paperclip ticket handoff.
+- Blocked: `OPENROUTER_API_KEY` is not currently present in the shared `/home/evo/.env`, so the trial model is wired but not yet executable.
+- Decisions: Treat the OpenRouter Qwen preview model as a bootstrap trial only, not a locked long-term default; keep the old `audit-openfang-bridge` target dormant but documented until the new sidecar proves itself and a redirect or retirement decision can be made.
+
+### 2026-04-03 [agent: Codex][agent-stack-openrouter-trial-hardening]
+- Done: Tightened `openfang-trial.sh` so it still sources the shared `/home/evo/.env` but explicitly unsets other remote-provider keys afterward, preventing OpenFang from silently falling back to Anthropic or Groq when `OPENROUTER_API_KEY` is absent.
+- Next: Add the OpenRouter key to the shared env, then verify the sidecar stays on the intended OpenRouter route during the first bounded Hand run.
+- Blocked: Until `OPENROUTER_API_KEY` exists, the sidecar should remain intentionally blocked instead of quietly switching providers.
+- Decisions: Trial wiring should fail closed, not drift to another vendor because a different key happens to be present in the shared env.
+
+### 2026-04-03 [agent: Codex][agent-stack-openrouter-model-swap]
+- Done: Swapped the OpenFang sidecar trial model from the preview path `openrouter/qwen/qwen3.6-plus-preview:free` to the requested stable path `openrouter/qwen/qwen3.6-plus:free` and updated the sidecar docs to match.
+- Next: Add `OPENROUTER_API_KEY` to `/home/evo/.env`, then verify the first bounded Hand run against the new model ID.
+- Blocked: `OPENROUTER_API_KEY` is still missing, so the sidecar remains correctly blocked on provider auth.
+- Decisions: Prefer the non-preview `qwen/qwen3.6-plus:free` route over the preview variant for this bootstrap trial.
+
+### 2026-04-03 [agent: Codex][control-plane-vault-reconcile]
+- Done: Backed up `/home/evo/.env` and `/home/evo/.bashrc`, reconciled the legacy `~/.vault/*.env` files into the governed `/home/evo/.env` without exposing secret values, normalized the consolidated file back to Unix line endings, and replaced the live `.bashrc` vault shim with direct loading of `/home/evo/.env`. Verified interactive shells now see the expected keys and `just check` reports the central vault as healthy with `~17` keys.
+- Next: Leave `~/.vault/` dormant as a backup surface for now, then decide in a later cleanup pass whether to archive or remove it once there is confidence that no remaining manual workflows depend on it.
+- Blocked: None on the active env path; the remaining risk is only historical drift if someone manually starts sourcing `~/.vault/load.sh` again.
+- Decisions: `/home/evo/.env` is now the active control-plane secret SSOT in practice as well as policy, and interactive shell startup should load that file directly instead of the older multi-file `~/.vault` loader.
+
+### 2026-04-03 [agent: Codex][agent-stack-openrouter-live-proof]
+- Done: Verified `OPENROUTER_API_KEY` is now present in `/home/evo/.env`, confirmed the sidecar daemon reports `Provider: openrouter` with model `openrouter/qwen/qwen3.6-plus:free`, activated the `researcher` hand, and proved live model-backed execution by sending direct messages through the active hand agent path. Updated the runbook to use `status` plus `hand active` as the first smoke-test checks and documented that the stock researcher prompt needs explicit bounded instructions during proof runs.
+- Next: Tune or replace the stock researcher-hand prompt so bounded operational tasks return direct answers instead of clarification loops, then move on to the first Paperclip company setup and single-executor ticket handoff.
+- Blocked: The current hand proof is functionally live but not yet ergonomically clean; the stock `researcher` hand persona is overly chatty for strict operator smoke tests.
+- Decisions: Count the OpenRouter route and active-hand execution path as proven for bootstrap purposes, but do not treat the default hand prompt as production-ready without further tightening.
+
+### 2026-04-03 [agent: Codex][agent-stack-zero-budget-trial]
+- Done: Set the governed v1.0 trial budget policy to `0` in the agent-stack docs, explicitly limiting the stack to free-model routes only until the human raises the cap. Updated install notes so the first Paperclip company should be created with `budgetMonthlyCents = 0` to mirror the daily operator cap.
+- Next: Recover or relaunch the local Paperclip server, create the first company record, stamp the monthly company budget to `0` cents, then connect OpenFang as the only executor.
+- Blocked: The Paperclip app layer is not consistently answering right now, so the company-side zero-budget field has not yet been written into a live company object.
+- Decisions: Zero spend is now the active operating rule for this bootstrap phase; any route that could incur non-zero model cost stays disabled until the board seat explicitly changes the cap.
+
+### 2026-04-03 [agent: Codex][paperclip-detach-fix]
+- Done: Verified that OpenFang was healthy while Paperclip was dying after bind when launched from a transient `wsl.exe` shell, isolated the failure to Paperclip session detachment rather than Windows localhost forwarding, added `/home/evo/workspace/_sandbox/agent-stack/paperclip-trial.sh`, and updated the agent-stack runbook/install notes so Paperclip now starts reliably through `setsid` plus `with-node20.sh`.
+- Next: Use the new launcher for future restarts, then complete the first company-budget stamp and executor wiring inside Paperclip.
+- Blocked: Paperclip still has no company or executor integration proof yet; this fix restores service stability only.
+- Decisions: On this machine, Paperclip must be started as a detached session from the sidecar launcher surface rather than by plain `nohup` from a one-shot `wsl.exe` command.
+
+### 2026-04-03 [agent: Codex][paperclip-codex-crlf-shim-fix]
+- Done: Traced the Paperclip CEO failure `/usr/bin/env: 'bash\r': No such file or directory` to a CRLF-terminated Codex shim at `C:\Users\Evo\.codex\.sandbox-bin\codex`, updated `/home/evo/workspace/_sandbox/agent-stack/with-node20.sh` to generate and prefer a Linux-safe sidecar shim under `.sandbox-bin-linux/`, normalized the Windows-side shim to LF, and revalidated Paperclip on `127.0.0.1:3100`.
+- Next: Retry the failed CEO run and confirm the next Codex-backed task no longer dies before execution starts.
+- Blocked: The Paperclip UI still needs a human retry on the already-failed run item; this pass fixed the runtime path, not the historical failed record.
+- Decisions: Treat Windows-managed executable shims as untrusted for Linux execution unless they are normalized or wrapped by a workspace-side LF-safe shim.
+
+### 2026-04-03 [agent: Codex][paperclip-git-path-hardening]
+- Done: Confirmed the active FoundingEngineer Paperclip run is now launching Codex successfully, identified remaining non-blocking startup noise from `git` missing inside the Paperclip-launched PATH, and hardened `/home/evo/workspace/_sandbox/agent-stack/with-node20.sh` to generate a Linux-safe `git` shim alongside the existing `codex` shim while explicitly restoring standard Linux bin directories into PATH. Validated the wrapper with `with-node20.sh git --version`.
+- Next: Let the next fresh Paperclip Codex run confirm the `git ls-remote` startup warning is gone, then decide whether the remote plugin-sync `403` noise is worth suppressing separately.
+- Blocked: The currently running FoundingEngineer run started before the PATH hardening, so only subsequent runs will prove the warning is eliminated.
+- Decisions: Treat Paperclip-launched Codex sessions as sanitized runtimes that should explicitly expose required core binaries rather than assuming the ambient shell PATH will survive intact.
+
+### 2026-04-03 [agent: Codex][paperclip-founding-engineer-deliverable-split]
+- Done: Recovered the actual `EVO-2` through `EVO-6` issue definitions from Paperclip run logs, split the monolithic Founding Engineer hiring packet into discrete issue-aligned deliverables under the project instance, and turned `FOUNDING_ENGINEER_HIRING_PACKET.md` into an index that links each artifact directly.
+- Next: Mirror these files back into the live Paperclip issue comments or document surfaces if the board wants each ticket explicitly closed from the app layer instead of treating the filesystem outputs as the fulfillment surface.
+- Blocked: This session can write the project workspace directly, but it does not yet have a clean low-noise Paperclip issue API workflow in place for updating `EVO-2` through `EVO-6` from the terminal without pulling more runtime plumbing into scope.
+- Decisions: For this project instance, the fastest reliable delivery path is one file per staffed issue: scorecard, hiring brief, roadmap, backlog, and assessment rubric.
+
+### 2026-04-03 [agent: Codex][paperclip-founding-engineer-operator-pack]
+- Done: Added three operator-ready follow-on artifacts to the active Founding Engineer project bundle: `INTERVIEW_WORKSHEET.md` for live interview scoring, `CANDIDATE_ASSESSMENT_BRIEF.md` for the take-home task handoff, and `SOURCING_BRIEF.md` for candidate targeting and outreach filtering. Updated `FOUNDING_ENGINEER_HIRING_PACKET.md` so the packet now indexes both the issue-aligned deliverables and the execution-ready follow-ons, and registered the new markdown files in `DNA/ops/CONVENTIONS.md`.
+- Next: If the board wants to operationalize hiring immediately, mirror these three follow-on artifacts into the relevant Paperclip comments or next child issues so interview, assessment, and sourcing work can be tracked in-app instead of only on disk.
+- Blocked: There is still no clean Paperclip-side CLI workflow wired for low-noise issue comment or document updates from this terminal session, so the new artifacts currently exist as governed filesystem deliverables only.
+- Decisions: The fastest useful continuation after the core hiring packet is not more strategy prose; it is founder-usable execution material that closes the gap between “we have the brief” and “we can run the hiring process this week.”
+
+### 2026-04-03 [agent: Codex][paperclip-founding-engineer-runbook-and-outreach]
+- Done: Added `HIRING_PROCESS_RUNBOOK.md` to turn the packet into a usable weekly execution loop and `OUTREACH_TEMPLATES.md` to give the founder warm-intro, direct outbound, follow-up, assessment, and pass-note copy. Updated `FOUNDING_ENGINEER_HIRING_PACKET.md` to index both artifacts and registered them in `DNA/ops/CONVENTIONS.md`.
+- Next: If this work should move back into the app layer, mirror the runbook and templates into the relevant Paperclip issue comments or create a new follow-on hiring-ops issue for pipeline execution.
+- Blocked: The current terminal flow still does not have a clean low-noise Paperclip comment-write path, so the new hiring-ops surfaces remain filesystem deliverables for now.
+- Decisions: The next useful continuation after the operator pack is execution enablement: one runbook for the hiring loop and one reusable outbound-copy surface, rather than more abstract hiring strategy.
+
+### 2026-04-03 [agent: Codex][paperclip-founding-engineer-delivery-status]
+- Done: Added `DELIVERY_STATUS.md` to the active Founding Engineer project bundle as a single founder-facing closure surface covering shipped deliverables, usage order, immediate next actions, open blockers, and explicit decisions. Updated `FOUNDING_ENGINEER_HIRING_PACKET.md` to link it and registered the new markdown file in `DNA/ops/CONVENTIONS.md`.
+- Next: If the board wants app-layer parity, mirror the delivery status summary into the relevant Paperclip issue comments or use it as the source text for closing notes inside `EVO-2` through `EVO-6`.
+- Blocked: The same Paperclip writeback gap remains: there is still no clean low-noise terminal path here for syncing these closure notes directly into issue comments.
+- Decisions: This project instance now has a single filesystem-native handoff surface that satisfies the workspace requirement to end with Done, Next, Blocked, and Decisions without adding more planning overhead.
+
+### 2026-04-06 [agent: Codex][agent-stack-wsl-ollama-proof]
+- Done: Rebuilt the local Ollama path as a WSL-only sidecar under `/home/evo/workspace/_sandbox/agent-stack/ollama`, moved the model store to `/home/evo/workspace/models/ollama`, proved `qwen3:14b` on the local API at `127.0.0.1:11434`, copied the bundled `lib/ollama` runtime tree so CUDA backends were present, verified full GPU offload on the RTX 3060, and removed the stray Windows installer processes plus `C:\Users\Evo\Downloads\OllamaSetup.exe`.
+- Next: Re-cut OpenFang to the local Ollama route, scrub any persisted remote-provider or embedding state from the OpenFang sidecar, then prove one deterministic OpenFang prompt before reconnecting Paperclip.
+- Blocked: OpenFang still carries historical state risk from earlier remote-provider experiments, so the later cutover must fail closed and explicitly verify no remote embedding auto-detect remains.
+- Decisions: The sanctioned local inference truth for this stack is now WSL-only Ollama; Windows Ollama installers or runtime surfaces should stay absent, and binary-only manual installs are not sufficient because the sidecar also requires the bundled `lib/ollama` runtime tree for GPU support.
+
+### 2026-04-06 [agent: Codex][agent-stack-openfang-manual-routes]
+- Done: Re-checked WSL health after the earlier transient desktop error, confirmed Ubuntu is healthy again, added explicit OpenFang route configs for `local`, `openrouter`, and `groq`, and updated `openfang-trial.sh` so route selection is manual, visible, and rewrites the active `secrets.env` surface instead of inheriting hidden provider drift from the shared env.
+- Next: Start with `local` as the default safe route, prove one deterministic OpenFang prompt on that route against WSL Ollama, then choose and test the intended hosted route before reconnecting Paperclip.
+- Blocked: Paperclip executor reconnection and company budget setup are still pending, and the Telegram channel is currently disabled in practice because the route-managed secrets surface does not include `TELEGRAM_BOT_TOKEN`.
+- Decisions: Provider choice stays human-in-the-loop for now. `local` must remain isolated, hosted routes must be selected deliberately, and automatic fallback is deferred until the sidecar earns enough trust.
+
+### 2026-04-06 [agent: Codex][paperclip-founding-engineer-launch-kit]
+- Done: Extended the active Founding Engineer Paperclip project bundle with `HIRING_LAUNCH_KIT.md`, `CANDIDATE_PIPELINE_TEMPLATE.csv`, and `TARGET_LIST_TEMPLATE.csv` so the founder can move from strategy into immediate execution. Updated `FOUNDING_ENGINEER_HIRING_PACKET.md` and `DELIVERY_STATUS.md` to include the new launch assets, and registered the new markdown file in `DNA/ops/CONVENTIONS.md`.
+- Next: Use the launch kit to post the role, load the first 30 targets, send the first outbound batch, and only create new Paperclip issues if hiring execution needs to be tracked as separate in-app work.
+- Blocked: The Paperclip terminal writeback gap remains, so these execution assets are still filesystem-native rather than mirrored into issue comments or a synced ATS surface.
+- Decisions: The next useful increment for this Paperclip project is operational hiring infrastructure, not more planning docs; file-based trackers are the fastest honest path until app-side writeback is reliable.
+
+### 2026-04-06 [agent: Codex][paperclip-runtime-truth-audit]
+- Done: Verified the first Paperclip company (`Evolution Stables`) exists, confirmed `budgetMonthlyCents = 0`, checked the live agent roster, and found the current execution path still uses `adapterType: codex_local` for both `CEO` and `FoundingEngineer`. Updated the governed agent-stack docs so they no longer imply OpenFang is already the active Paperclip executor.
+- Next: Decide whether to migrate the company agents to an OpenFang-backed adapter path or keep OpenFang as a separate sidecar proof surface while Paperclip continues to dispatch directly to Codex.
+- Blocked: No validated Paperclip-side OpenFang adapter path has been proven in this workspace yet, and `wsl.exe` from this shell is intermittently failing, which makes restart-heavy cutover work noisy.
+- Decisions: Documentation must reflect runtime truth. Zero-budget company setup is complete; OpenFang executor integration is not.
+
+### 2026-04-06 [agent: Codex][paperclip-local-writeback-path]
+- Done: Proved the local Paperclip server on `127.0.0.1:3100` accepts direct issue reads in `local_trusted` mode, added `/home/evo/workspace/_sandbox/agent-stack/paperclip-issue-writeback.ps1` as a low-noise PowerShell wrapper for `issue-get`, `issue-comment`, and `issue-update`, used it to mirror a founder-facing delivery extension comment back into `EVO-1`, and updated the Founding Engineer handoff plus agent-stack runbook to reflect the now-working writeback path.
+- Next: Reuse the same wrapper for future issue close-outs and, if needed, extend it later for document sync instead of falling back to manual UI copy-paste.
+- Blocked: This writeback path is valid for the current localhost private instance only; if Paperclip exposure or auth mode changes, the wrapper must be revisited rather than assumed safe.
+- Decisions: For this sidecar phase, direct localhost HTTP calls are the honest terminal writeback surface for local-trusted Paperclip instances when WSL CLI execution is noisy.
+
+### 2026-04-06 [agent: Codex][marketplace-phased-execution-plan]
+- Done: Consolidated the Evolution Stables marketplace planning lineage from `v2.3`, `v2.4`, and `v2.5` into `/home/evo/workspace/_docs/agent-stack/MARKETPLACE_PHASED_EXECUTION_PLAN_2026-04-06.md`, preserving the full product scope while separating live sandbox truth, immediate Phase 0 work, later build phases, and parked target-state architecture. Updated the agent-stack README and registered the new markdown file in `DNA/ops/CONVENTIONS.md`.
+- Next: Use the phased execution plan alongside the Phase 0 readiness checklist to decide the exact active role set and the first bounded marketplace artifacts before creating more Paperclip agents or tickets.
+- Blocked: The Paperclip UI still exposes run logs and issue shells more clearly than final deliverables, so human review remains necessary to keep planning work from drifting into tooling archaeology.
+- Decisions: The marketplace planning surface should keep the full North Star visible, but execution decisions should now be made against phased steps rather than against a single blended strategy document.
+
+### 2026-04-06 [agent: Codex][phase0-paperclip-operator-pack]
+- Done: Converted the marketplace plan into an operator-ready Phase 0 Paperclip pack at `/home/evo/workspace/_docs/agent-stack/PHASE0_PAPERCLIP_OPERATOR_PACK_2026-04-06.md`, including the exact active role set (`CEO`, `ExecutionWorker`, `VerificationWorker`), loading order, reporting structure, first bounded ticket queue, and what to pause or park. Added companion instruction drafts for `CEO`, `ExecutionWorker`, and `VerificationWorker`, updated the agent-stack README, and registered all new markdown files in `DNA/ops/CONVENTIONS.md`.
+- Next: Load or align the Paperclip company to the approved minimum role set, pause `HeadHunter` unless still needed for role-definition work, then use the first bounded queue from the operator pack instead of continuing to invent roles inside the UI.
+- Blocked: This session can prepare the exact content and terminal-side support surfaces, but the Paperclip UI still requires human clicks for agent creation, pausing, renaming, and queue loading unless a broader local API workflow is explicitly added.
+- Decisions: Phase 0 should now be run from a three-role execution model rather than from the wider North Star org. Paperclip should execute bounded roles and tickets, not continue designing the operating system by itself.
+
+### 2026-04-07 [agent: Codex][wsl-link-handler]
+- Done: Added Windows-side startup-governed scripts at `C:\evo\startup\bin\Open-EvoWslLink.ps1` and `C:\evo\startup\bin\Install-EvoWslLinkProtocol.ps1`, registered the `evo-wsl://` custom protocol, and proved the handler can target `/home/evo/workspace/_docs/agent-stack/MARKETPLACE_PHASED_EXECUTION_PLAN_2026-04-06.md` through the VS Code WSL remote URI path instead of the broken blank-buffer handoff.
+- Next: Use `evo-wsl://open?path=/home/evo/workspace/...` as the reliable clickable route for workspace files until the native Codex desktop WSL file-link bug is fixed upstream.
+- Blocked: The built-in absolute file-link behavior in the current desktop path still misroutes WSL targets on Windows, so native `/home/...` click handling remains unreliable.
+- Decisions: Machine-level file-click behavior for WSL workspace paths is now managed through the startup source of truth under `C:\evo\startup`, not by ad hoc per-session path formatting.
+
 ## Context Chain
 ← inherits from: /home/evo/workspace/DNA/AGENTS.md
 → overrides by: none
 → live map: /home/evo/workspace/AI_SESSION_BOOTSTRAP.md
 → conventions: /home/evo/workspace/DNA/ops/CONVENTIONS.md
+
+### 2026-04-07 [agent: Codex][paperclip-founding-engineer-writeback-sync]
+- Done: Re-read the required workspace context chain, verified EVO-2 through EVO-6 are status done, posted delivery-extension comments to each issue via localhost Paperclip API (/api/issues/{id}/comments), and updated the project-level DELIVERY_STATUS.md to reflect the completed in-app writeback.
+- Next: If requested, post one parent-level closure comment on EVO-1 summarizing that all child issue deliverables plus operator follow-ons are now mirrored in-app and filesystem.
+- Blocked: The local PowerShell execution policy blocks direct execution of unsigned UNC-path scripts, so the wrapper script path was bypassed in favor of direct REST calls.
+- Decisions: For this local-trusted instance, direct localhost API calls are an acceptable execution fallback when script-signing policy blocks the wrapper invocation.

@@ -1,6 +1,6 @@
 # AI Session Bootstrap
 Version: v2.2.0
-Updated: 2026-03-19
+Updated: 2026-04-03
 Status: ACTIVE - STACK registry authority model applied
 
 ## Canonical Root
@@ -37,6 +37,8 @@ Status: ACTIVE - STACK registry authority model applied
 - Tech radar: `/home/evo/workspace/DNA/ops/TECH_RADAR.md` (consult on demand)
 - Gate script: `/home/evo/workspace/_scripts/evo-check.sh`
 - Task runner: `/home/evo/workspace/Justfile`
+- Agent-stack sandbox: `/home/evo/workspace/_sandbox/agent-stack`
+- Agent-stack docs: `/home/evo/workspace/_docs/agent-stack`
 
 ## Active Projects
 - Evolution_Platform: `/home/evo/workspace/projects/Evolution_Platform`
@@ -55,6 +57,7 @@ Status: ACTIVE - STACK registry authority model applied
 - Google Cloud routing through `evolution-engine`
 - State-trap mapping and repository seam planning
 - Archive-first cleanup of stale surfaces
+- Workspace-side Paperclip + OpenFang operating-layer scaffold under `_sandbox/agent-stack`
 
 ## Phase Rule
 No build starts until `just check` is GREEN.

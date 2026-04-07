@@ -1,13 +1,17 @@
 # EVO TECH RADAR
 
-> Personal research index. Consult on demand - not auto-loaded by agents.
-> Agent rule: check STACK.md first for locked/adopted tools. Use this file
-> when asked "have we looked at X?" or "find something that could solve Y."
+> Personal research decision board. Consult on demand - not auto-loaded by
+> agents.
+> Discovery notes live in `DNA/ops/tech-radar-intake/`.
+> Agent rule: check `STACK.md` first for locked or adopted tools.
+> Use this file when asked "is this for us?" after the discovery has already
+> been captured.
 >
-> Raw intake dumps -> DNA/ops/tech-radar-intake/YYYY-MM-DD_batch.md
-> Workflow: save link -> intake dump -> processor -> Codex prompt -> git commit
+> Workflow:
+> save link -> repository note -> wizard assessment -> human review ->
+> `TECH_RADAR.md` update -> git commit
 
-_Last updated: 2026-03-19_
+_Last updated: 2026-03-22_
 
 ---
 
@@ -34,20 +38,28 @@ _Last updated: 2026-03-19_
 | Magic Animator | Design / Animation | TRIAL | AI animation export flow for Figma or Canva assets; useful for fast UI or marketing motion prototypes. |
 | skills.sh | Agent Modularity | TRIAL | Installable procedural skills ecosystem. Promote from research to limited hands-on trial. |
 | claude-mem | Memory | TRIAL | Persistent Claude memory plugin with local storage and viewer; compare against the DNA + lessons flow. |
+| Impeccable | AI Coding / Frontend Design | TRIAL | Open-source Claude Code design skill with steering commands and anti-pattern guidance to improve AI-generated UI quality. |
+| Claude Code + Remotion | AI Coding / Animation & Video | TRIAL | Prompt-driven video editing workflow where Claude Code shapes Remotion components for subtitles, cuts, and layout. |
 | AionUi | Agent UI / Desktop | ARCHIVE | Local 24/7 cowork UI for multiple CLIs. Now overlaps too closely with AlphaClaw; steal only the unattended scheduling idea. |
 | SuperClaude Framework | Claude Enhancer | ARCHIVE | Large slash-command and persona layer. Covered well enough by Claude Code Hooks plus DNA; steal only the best commands and MCP setup ideas. |
 | promptfoo | LLM Evaluation & Red Teaming | TRIAL | Open-source CLI for prompt/model/RAG evals, assertions, side-by-side comparison, CI integration, and automated red-teaming. |
 | gists.sh | GitHub Gist Viewer | TRIAL | URL swap that prettifies GitHub Gists with better typography, tabs, and markdown rendering. Zero install. |
 | Pi (pi.dev) | Terminal Coding Agent | TRIAL | Minimal TUI coding harness with multi-model support, markdown context loading, and extension hooks. |
 | OpenCode | Open-Source AI Coding Agent | TRIAL | Reopened as a bounded trial for low-cost execution loops, subagents, and broad provider support. Treat as worker-path research, not stack adoption. |
+| Local Claude Code Runner (lcc) | Local LLM Integration | TRIAL | Bash shim that runs Claude Code against Anthropic-compatible local servers such as llama.cpp, Ollama, or LM Studio. Privacy and cost win if local quality holds up. |
+| stop-slop | LLM Output Quality | TRIAL | Markdown skill and reference set for removing common AI prose tells and scoring output quality. Strong companion to promptfoo and writing-heavy Claude output. |
 | Nano Banana 2 Prompt Libraries | Prompt Engineering / Image Gen | ASSESS | Curated photoreal prompts + JSON/Python dev formats from GitHub/Google. Programmatic image gen potential. |
 | BaudBot | Team Coding Agent | ASSESS | Self-hosted persistent coding agent with Slack UI and branch-to-PR automation. Interesting for future team scaling, not current solo fit. |
 | OpenClaw Builds | AI Agents / Orchestration | ASSESS | Example OpenClaw build patterns worth scanning for future worker orchestration ideas. |
 | NVIDIA Nemotron 3 Super | Local LLM / OpenClaw Brain | TRIAL | 120B total, 12B active open model with strong agentic fit. NVIDIA advertises up to 1M context, but the current Ollama listing shows 256K for the local path. |
 | Claude Social Manager | AI Content / Marketing | ASSESS | Claude-driven social audit workflow. Useful only if marketing review becomes a real recurring task. |
+| Claude Content Brain System | Content Automation | ASSESS | Claude-driven audience and competitor analysis prompt pattern. Likely reproducible with the current stack, but wait for a stronger repo or a direct racing use case. |
+| 48 AI Creators to Follow 2026 | AI Creator / Discovery Feed | ASSESS | Curated creator list from @manthanpatel. Not a tool by itself, but worth preserving for trend tracking and future discovery passes. |
+| Awesome Codex Subagents | AI Coding / Agent Modularity | ASSESS | Large Codex-focused subagent library that could still inform future OpenCode or modular-agent experiments even in a Claude-primary setup. |
 | AI Design MCPs | Design / MCP | ASSESS | Design-focused MCP collection worth checking against current shadcn or Tailwind workflow needs. |
 | Perplexity Design Gen | AI Design | ASSESS | Fast design-generator idea surface; keep parked behind the current Google-first preference. |
 | OpenShell | Agent Security / Runtime | ASSESS | Reported NVIDIA sandbox runtime for safer agent execution. Promising, but wait for durable upstream docs or repo before any trial. |
+| Ghostling / libghostty | Terminal Emulator | ASSESS | Minimal libghostty demo terminal. Interesting for custom agent terminal UI work, but not a daily-driver need. |
 | PicoClaw | Agent Runtime | ASSESS | Ultra-light local agent runtime with broad provider support; interesting for worker experiments but too early to challenge OpenClaw. |
 | OpenClaw Core Runtime | Agent Runtime | ASSESS | Full runtime - advanced path only |
 | 21st.dev | Design | ASSESS | npm for design engineers, largest shadcn/ui marketplace |
@@ -55,8 +67,12 @@ _Last updated: 2026-03-19_
 | 1code (21st-dev) | Orchestration | ASSESS | Orchestration layer for Claude Code + Codex |
 | Gemini Embedding 2 | Embeddings | ASSESS | Multimodal unified embedding - text/image/video/audio/docs |
 | Google Workspace Studio | Automation | ASSESS | No-code Gemini agents in Workspace - overlaps with n8n |
+| Google AI Studio 2.0 | AI Coding / Full-Stack Prototyping | ASSESS | Browser-native Google full-stack builder with Firebase, payments, multiplayer, and code export. Keep as a fast-prototyping benchmark and option drawer entry. |
 | Google Antigravity | Agent IDE | ASSESS | Parallel agents + UI gen - overlaps with current stack |
+| NotebookLM Cinematic Video Overviews | AI Content Generation | ASSESS | Reported NotebookLM feature that turns notes into narrated animated videos. Interesting presentation aid, but premium-gated and overlapping existing NotebookLM interest. |
 | NotebookLM MCP Server | Memory | ASSESS | Plug-and-play agent memory - overlaps with DNA system |
+| MiroFish | Simulation / Agentic Forecasting | ASSESS | Multi-agent forecasting concept with possible long-range scenario value, but no near-term fit for racing ops or the current stack. |
+| Xiaomi MiMo-V2 Models | Local / Low-Cost LLMs | ASSESS | Reported low-cost coding, multimodal, and TTS model family. Preserve as a future routing and cost-benchmark option if access and quality hold up. |
 | Handoff Documents ("Reheat" Workflow) | Session Memory | ARCHIVE | Already implemented via DNA chain / AI_SESSION_BOOTSTRAP.md. Steal: enforce explicit end-of-session update ritual. |
 | Claude Skills (Markdown Workflows) | Session Memory / Config | ARCHIVE | Persistent markdown rules auto-applied. Duplicate of our global/project `CLAUDE.md` hierarchy. Steal: limit 5-10 non-overlapping items guideline. |
 | Obsidian + Claude Second Brain | Knowledge Memory | ARCHIVE | External graph for Claude context. Covered by DNA chain + git. |
@@ -91,11 +107,22 @@ Before moving to Trial or Adopt:
 
 ---
 
+## Status Meanings
+
+- `ADOPT` - approved and in use
+- `TRIAL` - worth a bounded hands-on test now
+- `ASSESS` - watch, revisit later, or gather more proof
+- `ARCHIVE` - not for us, duplicate, tutorial-only, or too weak to act on
+
+---
+
 ## How to Add New Discoveries
 
-1. Save raw notes to `DNA/ops/tech-radar-intake/YYYY-MM-DD_batch.md` or a single-tool intake file.
-2. Feed the raw dump to the processor documented in `DNA/ops/GEM_TECH_RADAR_PROCESSOR.md`.
-3. Apply the resulting Codex prompt to update the table and any related governance files.
+1. Save the raw link, notes, or screenshots to `DNA/ops/tech-radar-intake/`.
+2. Run the processor documented in `DNA/ops/GEM_TECH_RADAR_PROCESSOR.md`.
+3. Keep or update the durable repository note in `tech-radar-intake/`.
+4. Review the separate wizard recommendation.
+5. Update this table only after a human agrees with the fit verdict.
 
 Raw intake can be messy: transcript, README paste, rough notes, or just a URL plus one sentence.
 
@@ -106,7 +133,7 @@ Raw intake can be messy: transcript, README paste, rough notes, or just a URL pl
 - **Monthly** - review Trial items, promote or reject?
 - **Quarterly** - review Adopt items, still best choice?
 
-_Last updated: 2026-03-19 | Next review: 2026-03-26_
+_Last updated: 2026-03-22 | Next review: 2026-03-26_
 
 ## Context Chain
 <- inherits from: /home/evo/workspace/DNA/AGENTS.md

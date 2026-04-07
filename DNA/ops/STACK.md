@@ -7,7 +7,7 @@
 > Evaluation queue -> DNA/ops/TECH_RADAR.md (consult on demand, not auto-loaded)
 > Decision rationale -> DNA/ops/DECISION_LOG.md
 
-Last updated: 2026-03-19
+Last updated: 2026-04-06
 
 ---
 
@@ -31,6 +31,8 @@ Last updated: 2026-03-19
 | Aider | Diff-first editing workflow when it is the best fit. |
 | OpenRouter / Groq APIs | Low-cost utility inference, not the default daily agent surface. |
 | Jules | Future GitHub-native async PR automation path; keep optional, not a daily driver. |
+| codex-peers MCP | Local-only Codex peer discovery and queued session messaging via a Windows-side Codex MCP registration that launches the Python broker/server from `/home/evo/workspace/_sandbox/codex-peers-mcp/`. Manual `check_messages` receive flow; no Claude-style push channels. |
+| Paperclip + OpenFang sidecar | Workspace-side operating-layer trial under `/home/evo/workspace/_sandbox/agent-stack/`. Paperclip is the ticket and approval surface, OpenFang is the single executor, and the sanctioned local inference runtime is WSL-local Ollama under `_sandbox/agent-stack/ollama/` with models under `/home/evo/workspace/models/ollama`. |
 
 ### Retired From Live Wrapper Surface
 | Tool | Status |
@@ -154,5 +156,5 @@ Fresh Ubuntu install. Clean slate.
 1. Nothing installed globally unless logged here
 2. No global pip installs — project venvs only
 3. No global npm installs except AI toolchain
-4. Run just syscheck before every session
+4. Run just check before every session
 5. Monthly vhdx compaction via Optimize-VHD

@@ -18,6 +18,144 @@
 
 ---
 
+## 2026-04-03: Run Paperclip + OpenFang As A Workspace-Side Operating Layer
+
+### Decision
+Implement the first Paperclip + OpenFang stack as a workspace-side operating-layer sidecar under `/home/evo/workspace/_sandbox/agent-stack`, with Paperclip as the orchestration and ticket layer and OpenFang as the single executor.
+
+### Context
+- The operator wants to move ahead now with Paperclip + OpenFang and explicitly skip the tech-radar step for this decision.
+- Anthropic was a reference in the brief, not a hard dependency for this build.
+- v1.0 should keep the human in the board seat instead of spawning separate CEO, CTO, or other autonomous runtimes.
+- The workspace rules require new tooling to have a clear structural home plus written governance before it starts expanding.
+- The machine currently exposes `node` and `pnpm` in interactive shells only, because `nvm` is not loaded for non-interactive shell startup.
+
+### Decision Details
+- Keep the sidecar under:
+  - `/home/evo/workspace/_sandbox/agent-stack/openfang/`
+  - `/home/evo/workspace/_sandbox/agent-stack/paperclip/`
+  - `/home/evo/workspace/_docs/agent-stack/`
+- Use `/home/evo/workspace/_sandbox/agent-stack/with-node20.sh` for any non-interactive Paperclip or Node-based launch so `nvm` and Node 20 are loaded deterministically.
+- Install in this order:
+  - OpenFang first
+  - Paperclip second
+  - executor connection and end-to-end ticket proof third
+- Treat CEO, CTO, and similar roles as Paperclip lenses, queues, or reporting surfaces only.
+- Keep write access bounded to explicit workspace allowlists and one or two narrow workstreams until the sidecar proves itself.
+- Do not promote launchers into `/home/evo/workspace/_scripts/` until the trial is stable and worth operationalizing.
+
+### Impact
+- Keeps the operating layer out of product repos and out of `/home/evo`, which preserves the workspace/control-plane split.
+- Fixes the immediate non-interactive Node risk without depending on a broader shell-init rewrite first.
+- Makes the early autonomy model intentionally narrow: one executor, one orchestration surface, strong path bounds, and explicit human approval.
+
+### Related Files
+- `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md`
+- `/home/evo/workspace/DNA/ops/STACK.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+- `/home/evo/workspace/_sandbox/agent-stack/README.md`
+- `/home/evo/workspace/_sandbox/agent-stack/with-node20.sh`
+- `/home/evo/workspace/_docs/agent-stack/README.md`
+- `/home/evo/workspace/_docs/agent-stack/INSTALL_NOTES.md`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+- `/home/evo/workspace/_docs/agent-stack/ALLOWLIST_POLICY.md`
+- `/home/evo/workspace/_docs/agent-stack/ROLE_LENSES.md`
+- `/home/evo/workspace/_docs/agent-stack/TICKET_FLOW.md`
+- `/home/evo/workspace/_docs/agent-stack/BUDGET_RULES.md`
+
+---
+
+## 2026-03-23: Run Peer Messaging For Codex As A Sandbox Utility, Not A Claude-Channel Clone
+
+### Decision
+Adapt the `claude-peers-mcp` idea for Codex as a local sandbox utility with the
+same broker plus MCP tool model, while explicitly dropping the Claude-specific
+channel-push behavior that Codex does not expose.
+
+### Context
+- The operator wanted the core "peer sessions can find each other and message
+  each other" workflow available in Codex.
+- The referenced upstream repo targets Claude Code and depends on the
+  `claude/channel` development-channel path for instant inbound delivery.
+- This workstation does not currently have `bun`, `node`, or `npm` available in
+  WSL or Windows, so the TypeScript repo could not be run as-is even before the
+  Claude-channel gap was considered.
+- The workspace rules require every added tool to have a home in the structure
+  and a written governance trail.
+
+### Decision Details
+- Keep the trial implementation under
+  `/home/evo/workspace/_sandbox/codex-peers-mcp/`.
+- Implement the Codex path in Python with no global package installs:
+  - `broker.py` runs a localhost SQLite-backed peer registry and message queue
+  - `server.py` exposes MCP tools for `list_peers`, `send_message`,
+    `set_summary`, and `check_messages`
+- Register the MCP server in the Windows-side Codex config at
+  `C:\Users\Evo\.codex\config.toml` using `wsl.exe`, because that is the actual
+  Codex desktop config surface on this machine.
+- Treat `check_messages` as the receive path. Do not pretend Codex has the same
+  push-notification semantics as Claude development channels.
+
+### Impact
+- Codex sessions can now coordinate across terminals on this machine without
+  adding Bun or Node to the live toolchain.
+- The peer-messaging feature stays reversible and isolated in `_sandbox/`
+  instead of becoming hidden control-plane drift.
+- Expectations stay honest: the useful part of the design works, but the
+  Claude-only instant push layer is intentionally not claimed for Codex.
+
+### Related Files
+- `/home/evo/workspace/_sandbox/codex-peers-mcp/broker.py`
+- `/home/evo/workspace/_sandbox/codex-peers-mcp/server.py`
+- `/home/evo/workspace/DNA/ops/STACK.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+- `C:\Users\Evo\.codex\config.toml`
+
+---
+
+## 2026-03-22: Separate Tech Radar Library Notes From Fit Decisions
+
+### Decision
+Treat `DNA/ops/tech-radar-intake/` as the repository-first discovery library
+and keep `DNA/ops/TECH_RADAR.md` as the separate fit-decision board.
+
+### Context
+- The operator wants every interesting discovery saved as a readable note, not
+  only the items that already look like a fit.
+- The previous intake docs leaned too hard toward "raw dump first" and the
+  processor file was still only a stub.
+- Historical intake files already showed two different behaviors: rough
+  captures and richer mini-reviews. The workflow needed one explicit contract.
+
+### Decision Details
+- Every interesting item should be able to become a durable repository note
+  with source links, plain-English explanation, human review, takeaways, and
+  revisit steps.
+- The processor must always separate:
+  - repository note
+  - radar wizard recommendation
+- A weak fit or duplicate outcome does not cancel the repository note.
+- `TECH_RADAR.md` remains the concise human-reviewed decision surface using
+  `ADOPT`, `TRIAL`, `ASSESS`, and `ARCHIVE`.
+- `STACK.md` remains the authority for the current live stack and overrides any
+  older radar note when fit is being assessed.
+
+### Impact
+- Better long-term memory: the repo becomes a useful library of things that
+  caught attention, not just a shortlist of likely winners.
+- Cleaner human review: "what is this?" and "is this for us?" are no longer
+  mixed together in the same step.
+- A Grok or Gem front-line project can now produce durable notes without
+  overreaching into final adoption decisions.
+
+### Related Files
+- `DNA/ops/GEM_TECH_RADAR_PROCESSOR.md`
+- `DNA/ops/TECH_RADAR.md`
+- `DNA/ops/tech-radar-intake/README.md`
+- `DNA/ops/tech-radar-intake/TEMPLATE.md`
+
+---
+
 ## 2026-03-19: Slim Live Agent Surface And Reaffirm Central Vault
 
 ### Decision
@@ -1449,3 +1587,180 @@ The curated mirror already has a documented purpose: a text-first operating surf
 - `/home/evo/workspace/_scripts/sync-analysis-mirror-git.sh`
 - `/home/evo/workspace/_scripts/sync-workspace-full-git.sh`
 - `/home/evo/workspace/Justfile`
+
+---
+
+## 2026-04-06: WSL-Only Ollama Is The Local Inference Runtime For Agent Stack
+
+### Decision
+
+Adopt WSL-local Ollama as the only sanctioned local inference runtime for the
+agent-stack sidecar and keep Windows Ollama out of the operating surface.
+
+### Context
+
+The earlier local-model failures were not primarily model-quality or Ollama
+problems. They came from a split architecture: OpenFang in WSL, Ollama on
+Windows, and drift across WSL-to-Windows networking, firewall, installer, and
+filesystem boundaries. The explicit target for this sidecar is one runtime
+truth inside WSL:
+
+- Paperclip in WSL
+- OpenFang in WSL
+- Ollama in WSL
+- models in WSL at `/home/evo/workspace/models/ollama`
+
+During the clean reinstall, the manual sidecar install initially copied only the
+Ollama binary. That allowed the daemon to start, but it silently fell back to
+CPU-only inference because the bundled GPU runtime libraries were missing from
+the sidecar install path.
+
+### Decision Details
+
+**Implementation:**
+- Keep the Ollama binary at:
+  `/home/evo/workspace/_sandbox/agent-stack/ollama/bin/ollama`
+- Keep the bundled runtime libraries at:
+  `/home/evo/workspace/_sandbox/agent-stack/ollama/lib/ollama`
+- Keep the model store at:
+  `/home/evo/workspace/models/ollama`
+- Keep the local daemon bind at:
+  `127.0.0.1:11434`
+- Use `/home/evo/workspace/_logs/agent-stack/ollama-serve.log` as the governed
+  runtime log surface
+- Keep `qwen3:14b` as the proven initial local model
+- Treat GPU validation as part of install completeness, not as an optional
+  afterthought
+- Remove or avoid Windows Ollama installer or runtime surfaces so the machine
+  cannot drift back into a mixed-boundary setup
+
+**Rejected Alternatives:**
+- Reject: Reintroduce Windows Ollama and rely on WSL-to-Windows localhost or
+  NAT plumbing.
+- Reject: Treat a binary-only manual Ollama install as complete. Without the
+  bundled `lib/ollama` runtime tree, the daemon can run while CUDA support is
+  silently missing.
+- Reject: Reconnect OpenFang before the local Ollama route is proven with both
+  a deterministic API response and verified GPU offload.
+
+### Impact
+
+- The local inference path is now co-located inside WSL and much less likely to
+  drift across Windows or mounted-drive boundaries.
+- Model storage now stays inside the governed WSL workspace path rather than on
+  `/mnt/c` or `/mnt/s`.
+- Later OpenFang work can focus on one clean local provider contract instead of
+  debugging Windows installer or network side effects.
+
+### Related Files
+
+- `/home/evo/workspace/_sandbox/agent-stack/ollama-trial.sh`
+- `/home/evo/workspace/_docs/agent-stack/INSTALL_NOTES.md`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+- `/home/evo/workspace/_sandbox/agent-stack/README.md`
+- `/home/evo/workspace/DNA/ops/STACK.md`
+
+---
+
+## 2026-04-06: OpenFang Provider Routing Stays Manual Until The Sidecar Earns Automation
+
+### Decision
+
+Run OpenFang with explicit human-selected provider routes instead of hidden
+provider auto-detect or automatic fallback chains.
+
+### Context
+
+- The sidecar now has three realistic execution lanes under consideration:
+  WSL-local Ollama, OpenRouter, and Groq.
+- The operator wants local to be a real option, but not the only option.
+- Free-tier hosted routes are useful as manual backups when another hosted
+  provider hits rate limits.
+- The main risk is not hosted providers existing; it is silent provider drift.
+  Earlier OpenFang state auto-detected Groq embeddings from persisted secrets
+  even when the launcher was intended to stay local-only.
+- The operator explicitly prefers a manual, human-in-the-loop build until the
+  sidecar proves itself trustworthy enough for automation.
+
+### Decision Details
+
+- OpenFang route selection is now manual through:
+  - `local`
+  - `openrouter`
+  - `groq`
+- The launcher prints the active route and config on `route show` and `status`.
+- Route selection rewrites the active `secrets.env` so only the chosen provider
+  key remains available to OpenFang.
+- `local` must never silently fall through to a hosted route.
+- OpenRouter and Groq are allowed as explicit hosted options, not accidental
+  bleed-through from the shared environment.
+- Automatic hosted fallback is deferred until the system is proven under manual
+  control first.
+
+### Impact
+
+- Provider behavior becomes easier to reason about and debug.
+- Hosted free-tier backups remain available without compromising the integrity
+  of the local route.
+- Paperclip can later inherit the route the human selected, rather than making
+  provider decisions implicitly.
+
+### Related Files
+
+- `/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh`
+- `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/local.toml`
+- `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/openrouter.toml`
+- `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/groq.toml`
+- `/home/evo/workspace/_docs/agent-stack/INSTALL_NOTES.md`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+
+---
+
+## 2026-04-06: Use The Localhost Paperclip API For Sidecar Writeback In Local-Trusted Mode
+
+### Decision
+
+Use direct localhost HTTP calls to the Paperclip server as the default terminal
+writeback path for this sidecar while the instance stays in `local_trusted`
+mode.
+
+### Context
+
+- The Founding Engineer project bundle had already shipped on disk, but the
+  sidecar still lacked a low-noise way to sync closure notes back into issue
+  comments from this desktop shell.
+- The packaged Paperclip CLI already supports `issue get`, `issue comment`, and
+  `issue update`, but `wsl.exe` remains intermittently unstable from this shell,
+  which makes WSL-native CLI execution noisy and restart-heavy.
+- The local server is private on `127.0.0.1:3100`, and the current instance
+  proved that issue reads succeed directly against the HTTP API in
+  `deploymentMode: local_trusted`.
+
+### Decision Details
+
+- Add `/home/evo/workspace/_sandbox/agent-stack/paperclip-issue-writeback.ps1`
+  as the governed wrapper for:
+  - `issue-get`
+  - `issue-comment`
+  - `issue-update`
+- Keep the wrapper intentionally narrow and local-only.
+- Treat this as valid only for private localhost instances in
+  `local_trusted` mode.
+- If Paperclip later moves to a different exposure or auth model, do not reuse
+  this path without revalidating authentication requirements first.
+
+### Impact
+
+- Resolves the previous Founding Engineer blocker around Paperclip issue
+  comment writeback.
+- Provides a reusable terminal path for future delivery notes and close-out
+  updates without relying on the UI or unstable WSL CLI invocation.
+- Keeps the writeback seam honest and explicit instead of pretending the
+  current shell environment is healthier than it is.
+
+### Related Files
+
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip-issue-writeback.ps1`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+- `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/DELIVERY_STATUS.md`

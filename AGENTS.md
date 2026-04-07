@@ -29,6 +29,7 @@ Workspace-level rules for `/home/evo/workspace`.
 12. `DNA/ops/STACK.md` is the live adopted and active tool registry; do not suggest alternatives to locked tools there unless `STACK.md` and `DECISION_LOG.md` are updated together.
 13. Google ecosystem tools should default to `evolution-engine` and prefer ADC over raw API keys.
 14. Archive-first is preferred when stale or duplicate surfaces add drag.
+15. Custom Windows and WSL startup automation must live under `C:\evo\startup` as the single source of truth; do not add ad-hoc Scheduled Tasks, desktop batch files, or Startup-folder shortcuts without updating that surface and its backups.
 
 ## Target Structure
 
@@ -45,10 +46,12 @@ Workspace-level rules for `/home/evo/workspace`.
 ## Guardrails
 
 - Do not treat `/home/evo/` as source of truth for active workspace content.
+- Do not leave keep-worthy or recurring work parked at workspace root; promote it to `_docs/`, `projects/`, `research_vault/`, `_sandbox/`, or `/home/evo/_archive/`.
 - Use `_locks/` for folder-level ownership during merge execution.
 - Keep deferred material isolated until explicitly re-scoped.
 - Keep local JSON and file fallbacks in place until repository seams are tested.
 - Treat direct dynamic file reads and writes as state traps to be mapped before cloud migration.
+- Treat machine startup behavior as governed infrastructure: hidden by default, reversible, backed up, and documented in `C:\evo\startup`.
 
 ## Active Notes
 

@@ -196,6 +196,8 @@ audit-claude-meta date='':
 audit-partners-claude date='':
     @/home/evo/workspace/_scripts/evo-audit-claude-meta.sh {{date}}
 
+# Legacy pre-sidecar OpenFang bridge. Keep until the new agent-stack trial
+# proves itself, then redirect or retire it.
 audit-openfang-bridge date='':
     @/home/evo/workspace/_scripts/evo-openfang-audit-bridge.sh {{date}}
 
