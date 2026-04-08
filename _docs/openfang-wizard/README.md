@@ -47,4 +47,14 @@ Ask the evolution-workspace Hand:
 - Runtime Hand configs: `~/.openfang/hands/`
 - Versioned Hand templates: `~/workspace/_docs/openfang-wizard/hands/evolution-workspace/`
 - This wizard: `~/workspace/_docs/openfang-wizard/`
+
+## Repeatable audit
+
+Run the workspace audit wrapper to verify OpenFang workspace governance and runtime separation:
+
+```bash
+cd ~/workspace && ./_docs/openfang-wizard/run-openfang-audit.sh
+```
+
+This script checks tracked wizard files, hand activation, agent status, and OpenFang runtime presence.
 EOF
