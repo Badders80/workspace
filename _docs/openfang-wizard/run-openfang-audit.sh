@@ -20,18 +20,24 @@ git check-ignore -v _docs/openfang-wizard || true
 
 echo
 
-echo "4) OpenFang hand status:"
-openfang hand active
+echo "4) OpenFang daemon status:"
+openfang status || true
 
 echo
 
-echo "5) OpenFang audit-workspace hand info:"
-openfang hand info audit-workspace
+echo "5) OpenFang hand status:"
+openfang hand active || true
 
 echo
 
-echo "6) OpenFang agent list:"
-openfang agent list
+echo "6) OpenFang audit-workspace hand info:"
+openfang hand info audit-workspace || true
+
+echo
+
+echo "7) OpenFang agent list:"
+openfang agent list || true
+
 
 echo
 

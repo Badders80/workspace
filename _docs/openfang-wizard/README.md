@@ -57,4 +57,14 @@ cd ~/workspace && ./_docs/openfang-wizard/run-openfang-audit.sh
 ```
 
 This script checks tracked wizard files, hand activation, agent status, and OpenFang runtime presence.
+
+## Daily scheduled audit
+
+A daily cron job has been added to run this audit at 07:00 local time and append output to:
+
+```bash
+~/workspace/_docs/openfang-wizard/run-openfang-audit.log
+```
+
+If you want a different schedule, update the crontab entry with `crontab -e`.
 EOF
