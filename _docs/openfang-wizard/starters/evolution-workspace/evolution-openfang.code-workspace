@@ -1,0 +1,10 @@
+{
+  "folders": [
+    { "name": "workspace (DNA + projects)", "path": "." },
+    { "name": "openfang-wizard", "path": "_docs/openfang-wizard" },
+    { "name": "openfang config", "path": "../.openfang" }
+  ],
+  "settings": {
+    "explorer.sortOrder": "type"
+  }
+}

@@ -1,0 +1,41 @@
+[hand]
+name = "evolution-workspace"
+description = "Read-only knowledge assistant for Evolution Stables workspace. Answers questions about DNA, brand, decisions, research_vault and projects."
+version = "1.0.0"
+
+[model]
+provider = "ollama"
+model = "qwen3.5:latest"
+
+[schedule]
+cron = "0 19 * * *"
+enabled = true
+
+[memory]
+enabled = true
+knowledge_graph = true
+compaction = "daily"
+vector_search = true
+
+[tools]
+file_read = true
+file_write = false
+web_search = false
+shell_exec = false
+browser = false
+
+[workspace]
+allowed_paths = [
+  "/home/evo/workspace",
+  "/home/evo/workspace/DNA",
+  "/home/evo/workspace/research_vault",
+  "/home/evo/workspace/_docs",
+  "/home/evo/workspace/projects"
+]
+
+[guardrails]
+never_write = true
+never_modify = true
+never_delete = true
+log_all_actions = true
+strict_read_only = true
