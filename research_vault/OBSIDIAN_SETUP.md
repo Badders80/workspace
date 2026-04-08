@@ -23,7 +23,8 @@ Windows Obsidian is using the local mirror because direct file watching on the W
 
 ## Intended Use
 
-- Obsidian is the hub and SSOT for this research layer.
+- `research_vault/` is the tracked canonical source for this research layer.
+- Obsidian is the human-facing sidecar over that tracked content.
 - This vault is a tracked sidecar, not DNA.
 - Use this vault for capture, normalization, tagging, and review.
 - Promote upward only after human review.
@@ -39,6 +40,12 @@ Windows Obsidian is using the local mirror because direct file watching on the W
 
 - Before opening or after workspace-side changes: `just research-vault-pull`
 - After making edits in Obsidian that you want back in the workspace: `just research-vault-push`
+
+## Working Rule
+
+- The tracked workspace copy at `/home/evo/workspace/research_vault` remains the citation and governance authority.
+- The Windows mirror at `C:\Users\Evo\Research_Vault` is an operating convenience for Obsidian, not a second source of truth.
+- OpenFang and any future semantic retrieval helpers should cite tracked files directly rather than runtime memory or mirror-only state.
 
 ## Context Chain
 <- inherits from: /home/evo/workspace/AGENTS.md

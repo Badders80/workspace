@@ -39,6 +39,7 @@
 - `/home/evo/workspace/DNA/INBOX.md`
 - `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
 - `/home/evo/workspace/DNA/ops/STACK.md`
+- `/home/evo/workspace/DNA/ops/memory-system-adoption.md`
 - `/home/evo/workspace/DNA/ops/DECISION_LOG.md`
 - `/home/evo/workspace/DNA/ops/TECH_RADAR.md`
 - `/home/evo/workspace/DNA/ops/GEM_TECH_RADAR_PROCESSOR.md`

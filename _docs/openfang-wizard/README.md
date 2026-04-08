@@ -9,7 +9,7 @@ wizard
 
 Everything (workspace + wizard + config):
 ```
-cd ~/workspace && code evolution-openfang.code-workspace
+cd ~/workspace && code _docs/openfang-wizard/starters/evolution-workspace/evolution-openfang.code-workspace
 ```
 
 ## Key commands
@@ -32,21 +32,51 @@ Ask the evolution-workspace Hand:
 - "List the active projects and their current status"
 - "What does AGENTS.md say about [topic]?"
 
+## Current operating model
+
+We currently use three bounded OpenFang roles:
+
+- `evolution-workspace` — read-only retrieval from tracked workspace files.
+- `audit-workspace` — governance sentinel. It verifies workspace alignment, tracked docs, and runtime separation.
+- `build-workspace` — process manager. It plans tasks, sequences work, and produces exact commands for human approval.
+
+The process hand does not execute commands automatically; it manages the process and defers compliance checks to the audit hand.
+
+Use `evolution-workspace` for citation-backed lookup, `build-workspace` for planning, and `audit-workspace` for setup verification.
+
 ## Model reference
 
 | Task | Model | Why |
 |------|-------|-----|
 | Default / daily queries | qwen3.5:latest (Ollama) | Free, local, private |
-| Heavy reasoning / compliance | claude-sonnet-4 (Anthropic) | Best quality, use sparingly |
-| Fast/cheap bulk tasks | openrouter free tier | Fallback only |
+| Spot-check audit / sanity review | gemma4:latest (Ollama) | Optional local second opinion when needed |
+| Provider fallback path | OpenRouter / OpenAI / Google | Runtime fallbacks only, not the default execution path |
 
 ## File locations
 
 - OpenFang runtime config: `~/.openfang/config.toml`
 - OpenFang data store: `~/.openfang/data`
 - Runtime Hand configs: `~/.openfang/hands/`
-- Versioned Hand templates: `~/workspace/_docs/openfang-wizard/hands/evolution-workspace/`
+- Versioned Hand templates: `~/workspace/_docs/openfang-wizard/hands/`
+- Starter workspace file: `~/workspace/_docs/openfang-wizard/starters/evolution-workspace/evolution-openfang.code-workspace`
 - This wizard: `~/workspace/_docs/openfang-wizard/`
+- Note: `~/.openfang` is symlinked to `/home/evo/workspace/_sandbox/agent-stack/openfang/state` in this environment.
+
+## Retrieval helper
+
+`qmd` is the preferred helper path for local semantic markdown lookup when that capability is needed.
+
+Use it as a bounded helper over:
+
+- `research_vault/` first
+- selected high-signal docs in `DNA/`
+
+Guardrails:
+
+- tracked workspace files remain canonical
+- runtime OpenFang memory is not the citation authority
+- `qmd` is an auxiliary lookup layer, not canonical storage
+- LightRAG and RAG-Anything remain future-evaluation paths only
 
 ## Repeatable audit
 
@@ -67,4 +97,3 @@ A daily cron job has been added to run this audit at 07:00 local time and append
 ```
 
 If you want a different schedule, update the crontab entry with `crontab -e`.
-EOF

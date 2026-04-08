@@ -45,8 +45,16 @@ Important: folders inside `projects/` are separate git repos. This `workspace` r
 - [AGENTS.md](AGENTS.md) - workspace-level rules
 - [DNA/ops/CONVENTIONS.md](DNA/ops/CONVENTIONS.md) - conventions and registry authority
 - [DNA/ops/STACK.md](DNA/ops/STACK.md) - active tool registry
+- [DNA/ops/memory-system-adoption.md](DNA/ops/memory-system-adoption.md) - current memory-layer operating model
 - [DNA/ops/TRANSITION.md](DNA/ops/TRANSITION.md) - append-only handoff log
 - [DNA/ops/DECISION_LOG.md](DNA/ops/DECISION_LOG.md) - architectural history and current path
+
+## Memory Workflow
+
+- `DNA/` and `research_vault/` are the tracked canonical memory surfaces.
+- Obsidian is the human-facing sidecar over `research_vault/`.
+- OpenFang is the bounded retrieval and workflow layer around tracked files.
+- `qmd` is the documented helper path for local semantic markdown lookup when installed, not canonical storage.
 
 ## Working Rules
 

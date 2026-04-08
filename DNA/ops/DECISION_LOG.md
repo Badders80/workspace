@@ -65,6 +65,44 @@ Implement the first Paperclip + OpenFang stack as a workspace-side operating-lay
 
 ---
 
+## 2026-04-08: Treat Tracked Workspace Files As Canonical Memory And Keep OpenFang Bounded
+
+### Decision
+Adopt a layered local memory model where `DNA/` and `research_vault/` remain the tracked canonical memory surfaces, Obsidian remains the human-facing sidecar, OpenFang remains the bounded retrieval and workflow layer, and `qmd` is documented as the preferred local semantic helper rather than a new source of truth.
+
+### Context
+- The active OpenFang workflow already runs locally on `qwen3.5:latest` and the operator wants to stabilize that route before adding more moving parts.
+- `research_vault/OBSIDIAN_SETUP.md` still described Obsidian as SSOT for the research layer, which conflicts with the workspace-first governance model.
+- The current OpenFang hands are useful when kept narrow, but direct agent responses can still be weak or ungrounded, so tracked-file and runtime-config checks must stay the first validation path.
+- The operator wants optional local second-opinion capability without turning the daily workflow into a permanent multi-model pipeline.
+
+### Decision Details
+- Keep canonical truth in tracked workspace files:
+  - `DNA/`
+  - `research_vault/`
+- Keep Obsidian as the human-facing sidecar over `research_vault/`, with explicit sync into the tracked workspace copy.
+- Keep OpenFang bounded to:
+  - `evolution-workspace` for read-only retrieval
+  - `build-workspace` for planning and exact command recommendation
+  - `audit-workspace` for governance and runtime-separation checks
+- Keep `qwen3.5:latest` as the default local OpenFang execution model.
+- Treat `gemma4:latest` as a spot-check auditor only, not an always-on second-pass gate.
+- Treat `qmd` as an auxiliary semantic markdown lookup helper and not as canonical storage or citation authority.
+- Keep LightRAG and RAG-Anything deferred until a real retrieval-quality or multimodal need is proven and governed.
+
+### Impact
+- Clarifies the memory hierarchy so the workspace, not the mirror or runtime state, remains authoritative.
+- Keeps the current OpenFang setup useful without overstating its reliability as the first source of truth.
+- Gives the operator a lightweight local audit path with `gemma4:latest` without adding unnecessary complexity to daily execution.
+
+### Related Files
+- `/home/evo/workspace/DNA/ops/memory-system-adoption.md`
+- `/home/evo/workspace/research_vault/OBSIDIAN_SETUP.md`
+- `/home/evo/workspace/_docs/openfang-wizard/README.md`
+- `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
+
+---
+
 ## 2026-03-23: Run Peer Messaging For Codex As A Sandbox Utility, Not A Claude-Channel Clone
 
 ### Decision
