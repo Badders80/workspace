@@ -1,0 +1,42 @@
+[hand]
+id = "audit-workspace"
+name = "audit-workspace"
+category = "productivity"
+description = "Read-only workspace audit assistant for OpenFang and EVO-STATION governance build checks."
+version = "1.0.0"
+
+agent = { name = "assistant", provider = "ollama", model = "qwen3.5:latest", description = "Audit assistant for workspace build, governance, and OpenFang integration.", system_prompt = "You are a read-only audit assistant. Review the workspace structure, tracked wizard templates, and OpenFang runtime separation. Cite files and state whether the setup matches governance rules." }
+
+[schedule]
+cron = "0 0 * * *"
+enabled = false
+
+[memory]
+enabled = true
+knowledge_graph = true
+compaction = "daily"
+vector_search = true
+
+[tools]
+file_read = true
+file_write = false
+web_search = false
+shell_exec = false
+browser = false
+
+[workspace]
+allowed_paths = [
+  "/home/evo/workspace",
+  "/home/evo/workspace/DNA",
+  "/home/evo/workspace/_docs",
+  "/home/evo/workspace/_docs/openfang-wizard",
+  "/home/evo/workspace/research_vault",
+  "/home/evo/workspace/projects",
+]
+
+[guardrails]
+never_write = true
+never_modify = true
+never_delete = true
+log_all_actions = true
+strict_read_only = true
