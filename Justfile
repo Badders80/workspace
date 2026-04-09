@@ -23,6 +23,10 @@ status:
     @echo "═══════════════════════════════════════════════════════════"
     @evo backlog | head -30
 
+# Launch Hermes from the workspace root so it loads the AGENTS.md chain
+hermes:
+    bash /home/evo/workspace/_scripts/hermesc.sh
+
 # ═══════════════════════════════════════════════════════════
 # Vault Management
 # ═══════════════════════════════════════════════════════════

@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racing Weekly 101 - Track Conditions</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #ffffff;
+      --ink: #000000;
+      --muted: #4d4d4d;
+      --soft: #f5f2ec;
+      --gold: #d4a964;
+      --line: rgba(0, 0, 0, 0.12);
+      --shadow: 0 22px 64px rgba(0, 0, 0, 0.10);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #ece8e1;
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+    }
+
+    .deck {
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    .slide {
+      width: min(100%, 1080px);
+      aspect-ratio: 1 / 1;
+      margin: 0 auto 28px;
+      background: var(--paper);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: var(--shadow);
+      padding: 72px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--gold), rgba(212, 169, 100, 0));
+    }
+
+    .slide-inner {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .topbar,
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .eyebrow,
+    .slide-no,
+    .footer-note {
+      font-family: 'Geist Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .mark {
+      font-family: 'Geist Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .hero,
+    .body-block {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .kicker {
+      font-family: 'Geist Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      font-size: clamp(70px, 7vw, 110px);
+      max-width: 8ch;
+    }
+
+    h2 {
+      font-size: clamp(50px, 5vw, 74px);
+      max-width: 10ch;
+    }
+
+    .subhead {
+      font-size: 28px;
+      line-height: 1.35;
+      color: var(--muted);
+      max-width: 24ch;
+    }
+
+    .lede {
+      font-size: 34px;
+      line-height: 1.22;
+      max-width: 20ch;
+      color: var(--ink);
+    }
+
+    .rule {
+      width: 110px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .scale-grid,
+    .point-grid,
+    .ground-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .scale-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .point-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .ground-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      min-height: 200px;
+      padding: 24px 24px 22px;
+      background: linear-gradient(180deg, rgba(212, 169, 100, 0.10), rgba(255, 255, 255, 0));
+      border-top: 2px solid var(--gold);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card .label {
+      font-family: 'Geist Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1;
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .statement {
+      padding: 26px 28px;
+      background: var(--soft);
+      border-left: 4px solid var(--gold);
+      font-size: 34px;
+      line-height: 1.22;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 16px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .bullet-list li {
+      padding-left: 24px;
+      position: relative;
+      font-size: 27px;
+      line-height: 1.35;
+      color: var(--ink);
+    }
+
+    .bullet-list li::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      transform: translateY(-50%);
+    }
+
+    .caption-panel {
+      display: grid;
+      gap: 18px;
+      padding: 28px 30px;
+      background: linear-gradient(180deg, rgba(212, 169, 100, 0.10), rgba(255, 255, 255, 0));
+      border-top: 2px solid var(--gold);
+    }
+
+    .caption-panel p {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.5;
+      color: var(--ink);
+      white-space: pre-line;
+    }
+
+    .hashtags {
+      color: var(--muted);
+      font-size: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .deck {
+        max-width: none;
+        padding: 0;
+      }
+
+      .slide {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        box-shadow: none;
+        border: none;
+      }
+
+      @page {
+        size: square;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="eyebrow">Racing Weekly 101</div>
+          <div class="mark">Evolution Stables</div>
+        </div>
+
+        <div class="hero">
+          <div class="kicker">Track Conditions</div>
+          <h1>What Does a Good 4 Really Mean?</h1>
+          <div class="rule"></div>
+          <p class="subhead">A simple guide to NZ track ratings and why the ground matters on race day.</p>
+        </div>
+
+        <div class="footer">
+          <div class="footer-note">Simple guide for new racing fans</div>
+          <div class="slide-no">01</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="eyebrow">Track Conditions</div>
+          <div class="mark">The Scale</div>
+        </div>
+
+        <div class="body-block">
+          <h2>NZ uses a 10-point scale.</h2>
+          <div class="scale-grid">
+            <article class="card">
+              <div class="label">Firm</div>
+              <h3>1-2</h3>
+              <p>Firmer and faster ground.</p>
+            </article>
+            <article class="card">
+              <div class="label">Good</div>
+              <h3>3-4</h3>
+              <p>Usually considered ideal racing ground.</p>
+            </article>
+            <article class="card">
+              <div class="label">Soft</div>
+              <h3>5-7</h3>
+              <p>More give in the surface.</p>
+            </article>
+            <article class="card">
+              <div class="label">Heavy</div>
+              <h3>8-10</h3>
+              <p>Wetter, more testing conditions.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="footer-note">Clear infographic slide</div>
+          <div class="slide-no">02</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="eyebrow">How To Read It</div>
+          <div class="mark">Quick Decode</div>
+        </div>
+
+        <div class="stack">
+          <h2>Small number. Big clue.</h2>
+          <div class="statement">Lower number = firmer, faster track</div>
+          <div class="statement">Higher number = softer, wetter track</div>
+        </div>
+
+        <div class="footer">
+          <div class="footer-note">Should read in under two seconds</div>
+          <div class="slide-no">03</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="eyebrow">Why It Matters</div>
+          <div class="mark">Race Day Impact</div>
+        </div>
+
+        <div class="body-block">
+          <h2>Track conditions can shape the whole race.</h2>
+          <div class="point-grid">
+            <article class="card">
+              <div class="label">Times</div>
+              <p>Firmer tracks usually lead to faster times.</p>
+            </article>
+            <article class="card">
+              <div class="label">Tactics</div>
+              <p>Jockeys and trainers may change plans depending on the surface.</p>
+            </article>
+            <article class="card">
+              <div class="label">Performance</div>
+              <p>Some horses improve sharply when the ground gets softer.</p>
+            </article>
+            <article class="card">
+              <div class="label">Edge</div>
+              <p>The right conditions can give one runner a clear advantage.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="footer-note">Keep this practical and easy to scan</div>
+          <div class="slide-no">04</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="eyebrow">Horse Types</div>
+          <div class="mark">Not The Same Ground</div>
+        </div>
+
+        <div class="body-block">
+          <h2>Not every horse likes the same surface.</h2>
+          <div class="ground-grid">
+            <article class="card">
+              <div class="label">Firm Footing</div>
+              <p>Some horses travel more smoothly when the ground is firmer and faster.</p>
+            </article>
+            <article class="card">
+              <div class="label">Soft Ground</div>
+              <p>Others improve when the track gets wetter and more testing.</p>
+            </article>
+          </div>
+          <p class="lede">That is why trainers, owners, and punters all keep an eye on the rating before race day.</p>
+        </div>
+
+        <div class="footer">
+          <div class="footer-note">More editorial than infographic</div>
+          <div class="slide-no">05</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="eyebrow">Quick Tip</div>
+          <div class="mark">Old Terms</div>
+        </div>
+
+        <div class="stack">
+          <h2>Old term <span style="color: var(--gold);">Dead 4</span> is now <span style="color: var(--gold);">Good 4</span>.</h2>
+          <p class="lede">If you see older racing form using words like Fast, Dead, or Slow, that is the old language.</p>
+          <div class="rule"></div>
+          <p class="lede">Got a racing term you want explained next week?</p>
+        </div>
+
+        <div class="footer">
+          <div class="footer-note">Close slide with CTA</div>
+          <div class="slide-no">06</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="slide-inner">
+        <div class="topbar">
+          <div class="eyebrow">Caption</div>
+          <div class="mark">Posting Copy</div>
+        </div>
+
+        <div class="caption-panel">
+          <h2>Social Caption</h2>
+          <p>What does <strong>Good 4</strong> actually mean?
+
+In NZ racing, track conditions are rated on a 10-point scale:
+Firm 1-2, Good 3-4, Soft 5-7, Heavy 8-10.
+
+Lower number = firmer, faster ground.
+Higher number = softer, wetter ground.
+
+That matters because some horses are much better on certain surfaces, and conditions can change how a race unfolds.
+
+Small number, big clue.
+
+Got a racing term you want explained next week? Tell us below.</p>
+          <div class="hashtags">#RacingWeekly101 #EvolutionStables #NZRacing</div>
+        </div>
+
+        <div class="footer">
+          <div class="footer-note">Appendix slide for PDF review or manual copy</div>
+          <div class="slide-no">07</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

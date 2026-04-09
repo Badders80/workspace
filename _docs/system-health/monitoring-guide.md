@@ -114,3 +114,9 @@ If you see high memory usage:
    ```cmd
    wsl --shutdown
    ```
+
+## Context Chain
+<- inherits from: /home/evo/workspace/AGENTS.md
+-> overrides by: none
+-> live map: /home/evo/workspace/AI_SESSION_BOOTSTRAP.md
+-> conventions: /home/evo/workspace/DNA/ops/CONVENTIONS.md

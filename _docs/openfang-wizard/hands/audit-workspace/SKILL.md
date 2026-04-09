@@ -13,6 +13,7 @@ Audit the current OpenFang integration, wizard placement, and workspace governan
 
 ## Audit tasks
 - Confirm whether `_docs/openfang-wizard` is the tracked location for wizard templates.
+- Confirm that `build-workspace` is installed and available as the process manager.
 - Confirm that runtime OpenFang files remain in `~/.openfang/` and are not mixed into the tracked repo.
 - Confirm that the current OpenFang model strategy is local Ollama `qwen3.5:latest` with fallbacks, as defined in `~/.openfang/config.toml`.
 - Confirm whether `evolution-openfang.code-workspace` lives in the tracked starter folder.

@@ -1,10 +1,16 @@
 # Google Vertex AI Setup - COMPLETION GUIDE
 
+Status: retained reference
+
+- Not canonical
+- Support note only
+- Review against the current workspace Google rules before use
+
 ## Quick Finish (Run This)
 
 ```bash
 # One command to finish everything
-~/_scripts/finish-vertex-setup.sh
+/home/evo/workspace/_scripts/finish-vertex-setup.sh
 ```
 
 This script will:
@@ -50,7 +56,7 @@ gcloud services enable aiplatform.googleapis.com
 ```
 
 ### Step 5: Update .env
-Edit `~/.env` and replace the placeholders:
+Edit `/home/evo/.env` and replace the placeholders:
 
 ```bash
 # Replace these:
@@ -118,3 +124,9 @@ gcloud config list
 | Vertex AI API | Pending |
 | .env configured | Partial (template ready) |
 | Claude Code ready | Pending |
+
+## Context Chain
+<- inherits from: /home/evo/workspace/AGENTS.md
+-> overrides by: none
+-> live map: /home/evo/workspace/AI_SESSION_BOOTSTRAP.md
+-> conventions: /home/evo/workspace/DNA/ops/CONVENTIONS.md

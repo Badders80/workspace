@@ -34,15 +34,16 @@ Ask the evolution-workspace Hand:
 
 ## Current operating model
 
-We currently use three bounded OpenFang roles:
+We currently use four bounded OpenFang roles:
 
 - `evolution-workspace` — read-only retrieval from tracked workspace files.
 - `audit-workspace` — governance sentinel. It verifies workspace alignment, tracked docs, and runtime separation.
 - `build-workspace` — process manager. It plans tasks, sequences work, and produces exact commands for human approval.
+- `production-studio` — content packager. It turns approved source material into short manual-ready production packs such as heading, subheading, caption, and 4 to 8 square slides.
 
 The process hand does not execute commands automatically; it manages the process and defers compliance checks to the audit hand.
 
-Use `evolution-workspace` for citation-backed lookup, `build-workspace` for planning, and `audit-workspace` for setup verification.
+Use `evolution-workspace` for citation-backed lookup, `build-workspace` for planning, `audit-workspace` for setup verification, and `production-studio` for manual-ready content packaging.
 
 ## Model reference
 

@@ -181,9 +181,9 @@ These are usable as canonical root docs:
 
 Most likely archive-first candidates:
 
-- `/home/evo/workspace/_docs/AGENTS_STUB.md`
+- `/home/evo/workspace/_docs/AGENTS_STUB.md` -> archived 2026-04-09 to `/home/evo/_archive/docs-legacy/2026-04-09/AGENTS_STUB.md`
 - `/home/evo/workspace/_docs/MERGE_PLAN_2026-03-10.md`
-- `/home/evo/workspace/_docs/EVOLUTION_MASTER_CONTEXT.md`
+- `/home/evo/workspace/_docs/EVOLUTION_MASTER_CONTEXT.md` -> archived 2026-04-09 to `/home/evo/_archive/docs-legacy/2026-04-09/EVOLUTION_MASTER_CONTEXT.md`
 - `/home/evo/workspace/_docs/HOLISTIC_EVO_AUDIT_20260301_220928.md`
 
 5. `MANIFEST.md` under-declares the current project surface.
@@ -293,7 +293,7 @@ This currently behaves more like an asset/library surface than an active runtime
 
 Evidence chain:
 
-- `GOOGLE_FIRST_STRATEGY.md` describes Vertex/ADC direction.
+- `_docs/google/GOOGLE_FIRST_STRATEGY.md` describes Vertex/ADC direction.
 - `setup-google-services.sh` is broken.
 - root shell does not source env reliably.
 - `.gemini/settings.json` is set to API-key auth.
@@ -338,9 +338,9 @@ Existing programmatic capability surface:
 
 Archive-first candidates that are likely causing more confusion than value:
 
-1. `/home/evo/workspace/_docs/AGENTS_STUB.md`
+1. `/home/evo/workspace/_docs/AGENTS_STUB.md` -> archived 2026-04-09 to `/home/evo/_archive/docs-legacy/2026-04-09/AGENTS_STUB.md`
 2. `/home/evo/workspace/_docs/MERGE_PLAN_2026-03-10.md`
-3. `/home/evo/workspace/_docs/EVOLUTION_MASTER_CONTEXT.md`
+3. `/home/evo/workspace/_docs/EVOLUTION_MASTER_CONTEXT.md` -> archived 2026-04-09 to `/home/evo/_archive/docs-legacy/2026-04-09/EVOLUTION_MASTER_CONTEXT.md`
 4. `/home/evo/workspace/_docs/HOLISTIC_EVO_AUDIT_20260301_220928.md`
 5. `/home/evo/workspace/projects/Evolution_Platform/seo-baseline/`
 

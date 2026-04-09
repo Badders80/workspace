@@ -690,3 +690,105 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Next: If requested, post one parent-level closure comment on EVO-1 summarizing that all child issue deliverables plus operator follow-ons are now mirrored in-app and filesystem.
 - Blocked: The local PowerShell execution policy blocks direct execution of unsigned UNC-path scripts, so the wrapper script path was bypassed in favor of direct REST calls.
 - Decisions: For this local-trusted instance, direct localhost API calls are an acceptable execution fallback when script-signing policy blocks the wrapper invocation.
+
+### 2026-04-08 [agent: Codex][marketplace-v0-sprint-close]
+- Done: Re-read the required workspace context chain, confirmed `just check` is GREEN, republished the SSOT marketplace payload into both `projects/SSOT_Build/data/published/marketplace-v0.json` and `projects/Evolution_Platform/src/data/marketplace-listings.generated.json`, hardened `projects/SSOT_Build/scripts/publish-marketplace-v0.mjs` so the actual generated image set plus `silhouette.svg` are copied into the platform output, verified `npm run build` passes in both `SSOT_Build` and `Evolution_Platform`, and smoke-checked `/marketplace`, `/marketplace/first-gear`, and `/mystable` locally on `127.0.0.1:3001`.
+- Next: If the operator wants broader publishing hygiene, add a lightweight documented release step so marketplace payload publish is always run intentionally before staging or deployment.
+- Blocked: Founder-visible manual ops capture still depends on the configured `GOOGLE_SHEETS_WEB_APP_URL` path in `Evolution_Platform`; this session verified the app path and build health, not a live write into the external sheet.
+- Decisions: Treat the generated marketplace JSON as the deployable platform input and keep SSOT as the authoring surface; the SSOT publisher must carry fallback assets so new live listings do not silently ship with broken hero images.
+
+### 2026-04-08 [agent: Codex][marketplace-manual-ops-inbox]
+- Done: Hardened `projects/Evolution_Platform/src/app/api/interest/route.ts` so marketplace submissions are validated server-side against the live generated listing payload, issue a submission reference, save into a founder-visible local manual ops inbox, and use Google Sheets as an optional mirror rather than a hard dependency for the marketplace path. Added the noindex founder route at `projects/Evolution_Platform/src/app/marketplace/manual-ops/`, surfaced submission references and delivery warnings in the investor form, added an empty-state on the marketplace index, updated the local env/readme/gitignore support for the inbox path, reran `npm run build` for `Evolution_Platform`, reran `just check`, and smoke-tested `/marketplace`, `/marketplace/first-gear`, `/marketplace/manual-ops`, a valid marketplace POST, and a tampered marketplace POST locally with `GOOGLE_SHEETS_WEB_APP_URL` disabled.
+- Next: If this flow is promoted beyond v0.0, decide whether the manual ops inbox should remain local-file based or move to a more durable governed store while keeping the current route contract stable.
+- Blocked: This session proved the local inbox path and validation guardrails, but it did not execute a live mirrored write into the external Google Sheets web app.
+- Decisions: For marketplace v0.0, founder-visible manual ops capture is now local-first inside `Evolution_Platform` with Google Sheets treated as a mirror when configured; generic non-marketplace lead capture remains fail-closed when the Google Sheets endpoint is absent.
+
+### 2026-04-08 [agent: Codex][marketplace-live-vs-staging-split]
+- Done: Restored the pre-sprint public `Marketplace` and `MyStable` experiences inside `Evolution_Platform` as the default `live` surface, moved the new listing/detail/manual-ops workflow behind the env-controlled `MARKETPLACE_RELEASE_STAGE=staging` gate, blocked `/marketplace/[slug]`, `/marketplace/manual-ops`, and marketplace application POSTs when the app is running in `live` mode, updated metadata and README/env docs accordingly, and verified `npm run build` passes in both default `live` mode and explicit `staging` mode.
+- Next: Set the deployment env explicitly per target so production stays on `MARKETPLACE_RELEASE_STAGE=live` and the review environment runs `MARKETPLACE_RELEASE_STAGE=staging`.
+- Blocked: None in repo; the remaining work is deployment-side env assignment and whatever branch or host naming the operator wants for staging.
+- Decisions: Treat the pre-existing public experience as the production-safe default and use env-gated staging to preview the new marketplace workflow until it is explicitly approved for promotion.
+
+### 2026-04-08 [agent: Codex][racing-weekly-101-starter-pack]
+- Done: Added the first tracked `Racing Weekly 101` starter docs under `/home/evo/workspace/_docs/openfang-wizard/`: a simple topic backlog note and a short reusable Fang prompt. Locked the first two weekly topics to `Track Conditions / Track Ratings` and `Barrier Draw`, and registered both new markdown files in `DNA/ops/CONVENTIONS.md`.
+- Next: Use the new prompt to draft the first short-form `Track Conditions / Track Ratings` issue, then move that topic into `Done` once the first weekly piece is approved and shipped.
+- Blocked: None for the manual v1 workflow; reminders, queue automation, and Telegram handling remain intentionally deferred.
+- Decisions: `Racing Weekly 101` starts as a manual, human-triggered workflow. Markdown under `_docs/openfang-wizard/` is the control surface, not `docx`, bots, or scheduled automation.
+
+### 2026-04-08 [agent: Codex][racing-weekly-101-track-conditions-mvp]
+- Done: Created the first full `Racing Weekly 101` MVP at `/home/evo/workspace/_docs/openfang-wizard/racing-weekly-101-track-conditions-2026-04-08.md`, covering the `Track Conditions / Track Ratings` topic with a short-form social-ready pack: hook, explanation, why-it-matters section, caption, short email version, five carousel slides, simple visual direction, and a structured JSON block for future reuse.
+- Next: Review the wording for final brand voice, manually lay out the carousel in Canva, and if the piece is posted, move `Track Conditions / Track Ratings` into `Done` in the topic backlog while keeping `Barrier Draw` as the next queued topic.
+- Blocked: None; this MVP is intentionally manual and does not depend on the HTML generator, reminders, or automation.
+- Decisions: The first live `Racing Weekly 101` issue should stay concise and generic, using the approved fact set without introducing unsupported horse-specific examples.
+
+### 2026-04-08 [agent: Codex][production-studio-hand-v0]
+- Done: Added a new tracked `production-studio` hand template under `/home/evo/workspace/_docs/openfang-wizard/hands/production-studio/`, positioned it as a read-only v0.0 packaging assistant for manual-ready content outputs, updated the wizard README to include it in the current operating model, mirrored the hand into `~/.openfang/hands/production-studio/`, and installed it into the runtime. The new hand takes its styling lead from the existing `Evolution_Platform` investor update surfaces and defaults to producing a heading, subheading, caption, 4 to 8 square slides, and simple visual direction notes.
+- Next: Use the existing `Racing Weekly 101` track-conditions pack as the first real production-studio test input, then tighten the output structure based on what is actually useful in Canva and manual publishing.
+- Blocked: `openfang hand info production-studio` resolves correctly after install, but `openfang hand list` did not show the new hand in this shell, which looks like a local CLI listing quirk rather than a missing install.
+- Decisions: The production studio starts narrow and packaging-focused rather than trying to become a full publishing system. Existing investor update styling in `Evolution_Platform` is the reference baseline for v0.0.
+
+### 2026-04-08 [agent: Codex][production-studio-track-conditions-pack]
+- Done: Used the new `production-studio` pattern against the approved `Racing Weekly 101` track-conditions source and created the first manual-ready square-slide pack at `/home/evo/workspace/_docs/openfang-wizard/racing-weekly-101-track-conditions-production-pack-2026-04-08.md`. The pack includes a heading, subheading, caption, six `1:1` carousel slides, investor-update-led visual direction, and Canva build notes.
+- Next: Build the carousel from this pack in Canva, note what was missing or awkward during layout, and use those lessons to refine the `production-studio` hand before the next topic.
+- Blocked: None for v0.0; the pack is complete enough for manual production and intentionally does not depend on downstream automation.
+- Decisions: The first production-studio output stays concise, square-slide-first, and copy-led. The investor update system in `Evolution_Platform` remains the styling reference, but the output shape is adapted for social education rather than investor email.
+
+### 2026-04-08 [agent: Codex][production-studio-track-conditions-html-deck]
+- Done: Converted the track-conditions production pack into a slide-style HTML deck at `/home/evo/workspace/_docs/openfang-wizard/racing-weekly-101-track-conditions-slides-2026-04-08.html`, using a square-slide, PDF-friendly layout with black/white/gold styling and investor-update-inspired typography hierarchy.
+- Next: Open the HTML locally, review the slide rhythm in a browser, and export it to PDF if the layout feels right. If needed, tighten any slide that feels too wordy once seen in the real rendered format.
+- Blocked: The local browser-preview automation path did not cooperate with the `file://` target in this shell, so the deck was verified structurally on disk rather than through an automated visual pass.
+- Decisions: The first HTML deck stays self-contained and presentation-first, giving the production workflow a PDF-ready review artifact before any Canva-specific adaptation.
+
+### 2026-04-08 [agent: Codex][track-conditions-report-output]
+- Done: Added a cleaner report-style presentation output under `/home/evo/workspace/_docs/presentations/racing_weekly_101_track_conditions_report_2026-04-08/`, including a folder README and an `index.html` handoff page. The new report reframes the artifact around the purpose of the week's content, two short explanatory sections, and a proposed carousel structure rather than a full slide deck.
+- Next: Use this report-style output as the review artifact, and only move into Canva or a more visual slide layout once the report framing and proposed carousel bullets feel right.
+- Blocked: None; the report-style output is self-contained and ready for browser viewing or PDF export.
+- Decisions: Working inputs and production packs stay in `_docs/openfang-wizard/`, while polished presentation-style review outputs now live in `_docs/presentations/` as a separate surface.
+
+### 2026-04-08 [agent: Codex][presentations-aggregator-folders]
+- Done: Reorganized `_docs/presentations/` into general aggregator folders so outputs can accumulate by stream rather than as one-off sibling folders. Created `/home/evo/workspace/_docs/presentations/racing_weekly_101/` and `/home/evo/workspace/_docs/presentations/tokinvest/`, moved the existing Racing Weekly 101 report and Tokinvest owner deck into those homes, added aggregator READMEs, updated presentation references, and refined the Racing Weekly 101 report HTML to feel more premium.
+- Next: Add future polished outputs under the relevant aggregator folder, keeping `_docs/openfang-wizard/` for working material and `_docs/presentations/` for review-ready artifacts.
+- Blocked: None; the new structure is in place and ready to extend.
+- Decisions: Aggregator folders are now the preferred pattern under `_docs/presentations/`. Use stream-level homes such as `racing_weekly_101/` and `tokinvest/`, then dated subfolders beneath them for each output.
+
+### 2026-04-08 [agent: Codex][openfang-openrouter-qwen36-plus-paid-smoke]
+- Done: Switched the governed OpenFang OpenRouter route onto paid `qwen/qwen3.6-plus`, confirmed the daemon boots cleanly on `openrouter/qwen/qwen3.6-plus`, and ran a bounded smoke set against the provider: one exact-response ping plus four review-style prompts focused on today's Evolution marketplace work. The useful audit targets were the `live` vs `staging` release split, the marketplace interest validation route, workflow fit against Sprint `v0.0`, and the highest-value missing tests. With OpenRouter reasoning disabled (`reasoning: { effort: "none", exclude: true }`), all prompts completed cleanly, total spend stayed low, and no rate-limit behavior was hit during the test window. Restarted the daemon afterward to clear a transient crashed assistant process and re-verified all four default agents running on the paid route.
+- Next: Treat paid `qwen/qwen3.6-plus` as a deliberate hosted review and audit lane, keep prompts narrow and evidence-led, and prefer the reasoning-disabled shape for day-to-day bounded checks unless a slower deep-think pass is explicitly needed.
+- Blocked: Large code-dump prompts with reasoning enabled were too slow to be a practical default review pattern and can exceed a 60-second curl window.
+- Decisions: OpenFang's governed OpenRouter route now targets paid `qwen/qwen3.6-plus` instead of the deprecated `:free` variant. Local providers remain the daily default; paid OpenRouter is the bounded second-pass reviewer.
+
+### 2026-04-08 [agent: Codex][openfang-route-surface-qwen-nemotron]
+- Done: Extended the governed OpenFang launcher so route selection can target explicit model-named hosted lanes: `openrouter-qwen` for paid `qwen/qwen3.6-plus` and `openrouter-nemotron` for free `nvidia/nemotron-3-super-120b-a12b:free`, while keeping legacy `openrouter` as a backward-compatible alias to the paid Qwen lane. Added dedicated route files for both hosted models, updated the sidecar runbook with the new commands and route intent, booted OpenFang successfully on the Nemotron free route, and then restored the active runtime to `local` with a clean `ollama/qwen3.5:latest` boot so the daily default is safe again.
+- Next: Use `openrouter-qwen` for bounded second-pass review, `openrouter-nemotron` as the free backup reviewer, and keep `local` as the first-choice route for regular daily work.
+- Blocked: Nemotron free is callable and boots cleanly, but it did not obey an exact-response micro-prompt precisely, so it should be treated as a review lane rather than a precision control surface.
+- Decisions: Route names should describe model intent, not just provider. `local` remains the active default route after hosted smoke tests complete.
+
+### 2026-04-08 [agent: Codex][openfang-route-surface-glm]
+- Done: Added `openrouter-glm` as a first-class hosted OpenFang route for paid `z-ai/glm-5.1`, updated the launcher usage surface and runbook to include it, booted OpenFang successfully on `openrouter/z-ai/glm-5.1`, and verified a direct OpenRouter API call returns `200` through the current provider path. Restored the active runtime to `local` afterward and re-booted cleanly on `ollama/qwen3.5:latest`.
+- Next: Use `openrouter-glm` as an experimental paid coding and review lane when you want to A/B it directly against `openrouter-qwen`.
+- Blocked: The direct exact-response micro-prompt returned `200` but no text content body, so `GLM-5.1` is wired and reachable, though it still needs a more realistic bounded prompt test before trusting it as a precision control surface.
+- Decisions: `GLM-5.1` is now part of the governed hosted route set, but it remains experimental rather than replacing the proven paid Qwen lane.
+
+### 2026-04-08 [agent: Codex][local-specialist-models-deepseek-granite]
+- Done: Pulled `deepseek-coder-v2:16b` and `granite4:7b-a1b-h` into the local Ollama store, confirmed both appear in `ollama list`, and added governed OpenFang route aliases `local-debug` and `local-audit` to target them without replacing the default `local` route. Updated the sidecar runbook to document the new local specialist lanes. Smoke-tested both models directly through the local Ollama API: Granite returned `AUDIT_OK` quickly, and DeepSeek returned `DEBUG_OK` after a slower first load consistent with a larger 16B local model on the RTX 3060 12GB setup.
+- Next: Use `local-debug` when `qwen3.5` is looping on logic tracing, and use `local-audit` for stricter low-fluff review or compliance-style checks.
+- Blocked: No blocker on installation; only the expected tradeoff that DeepSeek has noticeably slower first-token/load behavior than Granite and the smaller daily-default local models.
+- Decisions: Skip a local Mistral long-context addition for now. Keep the local specialist expansion focused on one debugger lane and one audit lane that fit the current GPU comfortably.
+
+### 2026-04-09 [agent: Codex][paperclip-retirement-hermes-reserve]
+- Done: Updated the live bootstrap, stack registry, tech radar, and `agent-stack` docs so they no longer treat Paperclip as an active surface, added `/home/evo/workspace/DNA/roles/README.md` as the reserved home for future Hermes-facing role definitions, archived about `660M` of Paperclip runtime and pinned-runtime footprint plus the Paperclip operator docs, launchers, temp helpers, duplicate `_sandbox/openfang-wizard/` surface, and Paperclip-era OpenFang/Gemini runtime traces into `/home/evo/_archive/agent-stack/2026-04-09/`, and cleaned the live Node wrapper plus Gemini sandbox project map so the active sidecar no longer routes or remembers Paperclip.
+- Next: Run a dedicated Hermes onboarding pass to define workspace context loading, role/profile boundaries, and the Hermes -> DNA -> OpenFang handoff contract.
+- Blocked: Hermes itself remains intentionally uninstalled and unadopted in this pass.
+- Decisions: Paperclip is retired from the live workspace surface. OpenFang + Ollama remain the active bounded sidecar, and Hermes is the designated next personal layer once the onboarding pass is approved.
+
+### 2026-04-09 [agent: Codex][hermes-onboarding-pass-v1]
+- Done: Installed Hermes into `/home/evo/.hermes/hermes-agent` with a user-space Python environment, added `/home/evo/.hermes/config.yaml` for local Ollama `qwen3.5:latest`, added `/home/evo/.hermes/SOUL.md` as the durable personality layer, created `/home/evo/.local/bin/hermes` plus the workspace launcher `/home/evo/workspace/_scripts/hermesc.sh`, added `just hermes`, created the tracked runbook at `/home/evo/workspace/_docs/hermes/README.md`, and updated the live bootstrap, stack, tech radar, roles reserve, and agent-stack docs so Hermes is active as the personal layer while OpenFang remains the bounded execution surface.
+- Next: Use Hermes on real workspace tasks, decide whether hosted provider switching is worth enabling after some local-first usage, and define the first stable Hermes profile only once repeated work patterns are obvious.
+- Blocked: Browser-heavy Hermes tooling is not fully provisioned because Playwright system dependencies requested sudo during install. The chat and terminal path is active; browser tooling remains deferred.
+- Decisions: Hermes is now the live personal assistant layer. Launch it from the workspace root, keep DNA canonical, and require explicit human approval before handing work into OpenFang.
+
+### 2026-04-09 [agent: Codex][docs-root-legacy-cleanup-google-grouping]
+- Done: Created `/home/evo/_archive/docs-legacy/2026-04-09/` with a `MANIFEST.md`, grouped the surviving Google support notes under `/home/evo/workspace/_docs/google/`, updated their paths and context metadata, and rewired the active merge, audit, Hermes review, and conventions surfaces so they no longer assume the old loose root-level layout.
+- Next: Decide later whether `_docs/MERGE_PLAN_2026-03-10.md` also graduates out of the active root into a dedicated merge-history or legacy surface once it is no longer a working reference.
+- Blocked: None in repo; this pass was structural only.
+- Decisions: Legacy root docs that compete with the live bootstrap should move out of the active workspace surface, while still-useful Google notes can stay in the workspace when they are clearly grouped and marked non-canonical.

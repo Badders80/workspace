@@ -7,7 +7,7 @@
 > Evaluation queue -> DNA/ops/TECH_RADAR.md (consult on demand, not auto-loaded)
 > Decision rationale -> DNA/ops/DECISION_LOG.md
 
-Last updated: 2026-04-06
+Last updated: 2026-04-09
 
 ---
 
@@ -17,6 +17,7 @@ Last updated: 2026-04-06
 | Tool | Role |
 |------|------|
 | Codex CLI | Primary workspace agent for overview, planning, review, and execution inside the canonical workspace. |
+| Hermes Agent | Active personal front door for drafting, iteration, memory, and human-approved handoff into OpenFang. Launch from the workspace root so the existing `AGENTS.md` chain loads. |
 | Claude (browser/chat) | Human-in-the-loop advisor for planning, writing, and review, usually against `workspace_full` or pasted context. Not a required local wrapper. |
 
 ### Capability-Specific
@@ -32,7 +33,7 @@ Last updated: 2026-04-06
 | OpenRouter / Groq APIs | Low-cost utility inference, not the default daily agent surface. |
 | Jules | Future GitHub-native async PR automation path; keep optional, not a daily driver. |
 | codex-peers MCP | Local-only Codex peer discovery and queued session messaging via a Windows-side Codex MCP registration that launches the Python broker/server from `/home/evo/workspace/_sandbox/codex-peers-mcp/`. Manual `check_messages` receive flow; no Claude-style push channels. |
-| Paperclip + OpenFang sidecar | Workspace-side operating-layer trial under `/home/evo/workspace/_sandbox/agent-stack/`. Paperclip is the ticket and approval surface, OpenFang is the single executor, and the sanctioned local inference runtime is WSL-local Ollama under `_sandbox/agent-stack/ollama/` with models under `/home/evo/workspace/models/ollama`. |
+| OpenFang + Ollama sidecar | Workspace-side bounded agent surface under `/home/evo/workspace/_sandbox/agent-stack/` with tracked hand templates under `/home/evo/workspace/_docs/openfang-wizard/`. OpenFang is the live retrieval, planning, audit, and packaging layer; WSL-local Ollama is the default local runtime; hosted review lanes stay explicit manual route selections. |
 
 ### Retired From Live Wrapper Surface
 | Tool | Status |
@@ -42,6 +43,10 @@ Last updated: 2026-04-06
 
 The DNA file chain remains model-agnostic. The preferred workflow above reflects
 current operator practice, not a hard lock on future experimentation.
+
+Paperclip is retired from the live workspace surface as of 2026-04-09. Hermes
+Agent (Nous Research) is now adopted as the personal assistant layer, while
+OpenFang remains the bounded execution surface.
 
 ---
 

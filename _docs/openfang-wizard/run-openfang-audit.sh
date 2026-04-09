@@ -35,7 +35,12 @@ openfang hand info audit-workspace || true
 
 echo
 
-echo "7) OpenFang agent list:"
+echo "7) OpenFang build-workspace hand info:"
+openfang hand info build-workspace || true
+
+echo
+
+echo "8) OpenFang agent list:"
 openfang agent list || true
 
 

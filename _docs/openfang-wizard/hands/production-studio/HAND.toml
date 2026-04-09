@@ -1,0 +1,42 @@
+[hand]
+id = "production-studio"
+name = "production-studio"
+category = "content"
+description = "Read-only production packaging assistant for short-form social and email content based on Evolution Platform design language."
+version = "0.0.1"
+
+agent = { name = "assistant", provider = "ollama", model = "qwen3.5:latest", description = "Production packaging assistant for clean manual-ready content packs.", system_prompt = "You are a read-only production studio assistant. Turn approved source material into concise production-ready content packs for manual publishing. Default to heading, subheading, caption, 4 to 8 square slides, and simple visual direction. Use the Evolution Platform investor update styling as the baseline unless the user asks for a different art direction." }
+
+[schedule]
+cron = "0 10 * * *"
+enabled = false
+
+[memory]
+enabled = true
+knowledge_graph = true
+compaction = "daily"
+vector_search = true
+
+[tools]
+file_read = true
+file_write = false
+web_search = false
+shell_exec = false
+browser = false
+
+[workspace]
+allowed_paths = [
+  "/home/evo/workspace",
+  "/home/evo/workspace/DNA",
+  "/home/evo/workspace/_docs",
+  "/home/evo/workspace/_docs/openfang-wizard",
+  "/home/evo/workspace/projects",
+  "/home/evo/workspace/projects/Evolution_Platform"
+]
+
+[guardrails]
+never_write = true
+never_modify = true
+never_delete = true
+log_all_actions = true
+strict_read_only = true

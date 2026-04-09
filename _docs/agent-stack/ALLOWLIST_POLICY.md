@@ -1,11 +1,12 @@
 # Allowlist Policy
 
-Updated: 2026-04-03
+Updated: 2026-04-09
 
 ## Principle
 
-OpenFang starts with the smallest practical write scope. Until the sidecar is
-proven, explicit allowlists beat convenience.
+OpenFang and any future Hermes-approved execution path start with the smallest
+practical write scope. Until the sidecar proves itself further, explicit
+allowlists beat convenience.
 
 ## Default Write Surface
 
@@ -13,10 +14,12 @@ Allow write access by default only to:
 
 - `/home/evo/workspace/_sandbox/agent-stack/`
 - `/home/evo/workspace/_docs/agent-stack/`
+- `/home/evo/workspace/_docs/openfang-wizard/`
+- `/home/evo/workspace/_docs/presentations/`
 
 ## Bounded Expansion Candidates
 
-Only add these after explicit approval on a ticket-by-ticket basis:
+Only add these after explicit human approval for the specific run:
 
 - `/home/evo/workspace/research_vault/04_Reviews/`
 - `/home/evo/workspace/research_vault/05_Reports/`
@@ -36,11 +39,12 @@ Only add these after explicit approval on a ticket-by-ticket basis:
 ## Rules
 
 - No broad write access across all repos in v1.0.
-- Every ticket must name its allowed output path before execution starts.
+- Every run must name its allowed output path before execution starts.
 - Any request outside the current allowlist must stop and return for human
   approval.
 - Read scope can be wider than write scope, but secrets and control-plane files
   remain off-limits.
+- The Paperclip archive is a read-only historical surface, not a live runtime.
 
 ## Context Chain
 <- inherits from: /home/evo/workspace/AGENTS.md

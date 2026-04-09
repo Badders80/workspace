@@ -11,7 +11,7 @@
 > save link -> repository note -> wizard assessment -> human review ->
 > `TECH_RADAR.md` update -> git commit
 
-_Last updated: 2026-03-22_
+_Last updated: 2026-04-09_
 
 ---
 
@@ -27,7 +27,8 @@ _Last updated: 2026-03-22_
 | n8n AI Workflows | Automation | TRIAL | Docker running, testing Claude workflow integration |
 | NotebookLM for Prompt Creation | Prompt Eng | TRIAL | Testing vs current prompt method |
 | tasks/lessons.md Rulebook | Agent Memory | TRIAL | Correction logging -> permanent rules read at session start. Prevents repeat mistakes. |
-| Paperclip AI Agent Framework | Multi-Agent Orchestration | ASSESS | Open-source agent teams with roles, budgets, and goals. Interesting, but heavier and less urgent than the current OpenClaw ops and memory trials. |
+| Hermes Agent (Nous Research) | Personal Assistant / Skills / Memory | ADOPT | Active personal layer as of 2026-04-09. Launch from the workspace root, keep DNA canonical, keep OpenFang bounded, and require human approval for any Hermes -> Fang handoff. |
+| Paperclip AI Agent Framework | Multi-Agent Orchestration | ARCHIVE | Retired from the live workspace surface on 2026-04-09 after the trial proved heavier than the current Hermes + DNA + OpenFang direction. Historical material now lives in the Paperclip retirement archive batch. |
 | Lossless Claw | Memory / OpenClaw Plugin | TRIAL | Local DB lossless message storage + condensation. 25:1 ratio, exact recall. Never forget. |
 | Claude Three-Tier Memory Hierarchy | Claude Config / Memory | TRIAL | Global/project/auto tiers + modular rules/skills/agents. Token-aware, gitignored auto. |
 | Claude Code Hooks | AI Orchestration / Session Safety | TRIAL | Event-driven Claude Code hooks for deletion guards, alerts, and optional research automation. |
@@ -133,7 +134,7 @@ Raw intake can be messy: transcript, README paste, rough notes, or just a URL pl
 - **Monthly** - review Trial items, promote or reject?
 - **Quarterly** - review Adopt items, still best choice?
 
-_Last updated: 2026-03-22 | Next review: 2026-03-26_
+_Last updated: 2026-04-09 | Next review: 2026-04-16_
 
 ## Context Chain
 <- inherits from: /home/evo/workspace/DNA/AGENTS.md

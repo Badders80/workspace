@@ -18,6 +18,123 @@
 
 ---
 
+## 2026-04-09: Integrate Hermes As The Personal Assistant Layer Above DNA And OpenFang
+
+### Decision
+Adopt Hermes Agent into the live workspace as the personal assistant layer,
+keep its runtime and durable identity in `/home/evo/.hermes`, launch it from
+the workspace root so it reads the existing `AGENTS.md` chain, and keep
+OpenFang as the bounded execution layer beneath it.
+
+### Context
+- The Paperclip retirement pass cleared the live surface so Hermes could be
+  introduced without a mixed operating model.
+- The workspace already had a clean boundary model: Hermes for evolving work,
+  DNA for canonical truth, and OpenFang for bounded execution.
+- Local Ollama is already installed and exposes `qwen3.5:latest`, which is
+  sufficient for a local-first first-pass Hermes integration.
+- The control-plane rules already allow global tool config and launch behavior
+  under `/home/evo/`, which makes `/home/evo/.hermes` a clean runtime home.
+- The workspace needed a real launcher and docs path so Hermes would join the
+  existing ecosystem instead of becoming another ad-hoc wrapper.
+
+### Decision Details
+- Install Hermes under `/home/evo/.hermes/hermes-agent` with its runtime home
+  at `/home/evo/.hermes/`.
+- Use `/home/evo/.hermes/config.yaml` with local Ollama
+  `qwen3.5:latest` at `http://localhost:11434/v1` as the default model route.
+- Add a durable global `SOUL.md` under `/home/evo/.hermes/` for personality
+  only; keep repo-specific rules in the existing `AGENTS.md` chain.
+- Add `/home/evo/workspace/_scripts/hermesc.sh` and `just hermes` so the
+  preferred launch path starts in `/home/evo/workspace` and loads the current
+  workspace context naturally.
+- Keep secrets in `/home/evo/.env`; do not duplicate them into
+  `/home/evo/.hermes/.env`.
+- Keep the handoff boundary explicit:
+  - Hermes may suggest a Fang handoff
+  - the human decides whether Fang is brought in
+  - DNA remains canonical
+  - OpenFang remains bounded
+
+### Impact
+- Hermes is now usable as the live personal layer without changing OpenFang's
+  execution responsibilities.
+- The workspace now has a clean launcher, runbook, and runtime home for Hermes
+  that align with existing workspace law.
+- The integration stays light: no automatic webhooks, no duplicate secret file,
+  no project-local `.hermes.md`, and no auto-routing into Fang.
+
+### Related Files
+- `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md`
+- `/home/evo/workspace/DNA/ops/STACK.md`
+- `/home/evo/workspace/DNA/ops/TECH_RADAR.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+- `/home/evo/workspace/_docs/hermes/README.md`
+- `/home/evo/workspace/_scripts/hermesc.sh`
+- `/home/evo/workspace/Justfile`
+- `/home/evo/.hermes/config.yaml`
+- `/home/evo/.hermes/SOUL.md`
+
+---
+
+## 2026-04-09: Retire Paperclip From The Live Workspace Surface And Reserve Hermes As The Next Personal Layer
+
+### Decision
+Retire Paperclip from the live workspace surface, archive its docs and runtime
+outside the canonical workspace, keep OpenFang + Ollama as the active bounded
+sidecar, and reserve Hermes Agent as the designated next personal-assistant
+layer after a dedicated onboarding pass.
+
+### Context
+- The Paperclip trial created useful learnings, but it also left a heavier
+  operator surface than the current workspace needs.
+- Live build, script, project, and OpenFang wizard paths do not depend on
+  Paperclip anymore, which makes retirement low-risk.
+- The workspace already has a cleaner model available: tracked DNA and wizard
+  docs for stabilization, OpenFang for bounded execution, and a future Hermes
+  layer for personal assistance and skill growth.
+- Introducing Hermes on top of an unresolved Paperclip surface would create a
+  mixed operating model and more drift.
+- Workspace law prefers archive-first cleanup with append-only history instead
+  of destructive erasure.
+
+### Decision Details
+- Archive the live Paperclip runtime, launchers, temp helpers, and Paperclip-only
+  operator docs into `/home/evo/_archive/agent-stack/2026-04-09/`.
+- Remove Paperclip from `AI_SESSION_BOOTSTRAP.md`, `STACK.md`, and the active
+  `agent-stack` docs so the live surface tells one truthful story.
+- Keep historical Paperclip decisions and transition entries intact; supersede
+  them with this retirement entry rather than rewriting them.
+- Keep OpenFang + Ollama as the live workspace-side retrieval, planning, audit,
+  and packaging surface.
+- Reserve Hermes Agent as the next personal-assistant layer for exploration,
+  memory, role or profile refinement, and skill development, but do not adopt
+  it into the live stack until a dedicated onboarding pass is approved.
+- Reserve `DNA/roles/` as the governed home for future Hermes-facing staff or
+  role definitions.
+
+### Impact
+- Removes an inactive orchestration layer from the live workspace surface and
+  reduces cognitive overhead.
+- Reclaims about `660M` of active-sidecar Paperclip footprint while preserving
+  historical material in a searchable archive batch.
+- Clarifies the intended long-term workflow:
+  - Hermes for exploration and personal assistance
+  - DNA for stabilization and governed memory
+  - OpenFang for bounded durable execution
+
+### Related Files
+- `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md`
+- `/home/evo/workspace/DNA/ops/STACK.md`
+- `/home/evo/workspace/DNA/ops/TECH_RADAR.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+- `/home/evo/workspace/_docs/agent-stack/README.md`
+- `/home/evo/workspace/_sandbox/agent-stack/README.md`
+- `/home/evo/workspace/DNA/roles/README.md`
+- `/home/evo/_archive/agent-stack/2026-04-09/`
+
+---
+
 ## 2026-04-03: Run Paperclip + OpenFang As A Workspace-Side Operating Layer
 
 ### Decision
@@ -62,6 +179,87 @@ Implement the first Paperclip + OpenFang stack as a workspace-side operating-lay
 - `/home/evo/workspace/_docs/agent-stack/ROLE_LENSES.md`
 - `/home/evo/workspace/_docs/agent-stack/TICKET_FLOW.md`
 - `/home/evo/workspace/_docs/agent-stack/BUDGET_RULES.md`
+
+---
+
+## 2026-04-08: Capture Marketplace v0.0 Manual Ops In A Local Inbox With Optional Google Sheets Mirror
+
+### Decision
+For the Evolution Stables marketplace v0.0 flow, capture marketplace application and reservation requests into a local founder-visible inbox inside `Evolution_Platform`, and treat `GOOGLE_SHEETS_WEB_APP_URL` as an optional mirror rather than a hard dependency for marketplace submissions.
+
+### Context
+- The marketplace listing index, detail pages, and application flow were already in place, but the capture path still failed closed whenever the Google Sheets endpoint was missing.
+- Sprint v0.0 needs founder-visible manual ops capture, but it explicitly defers real payment, KYC, and the full investor dashboard.
+- The workspace rules already allow local JSON and file fallbacks to remain in place until repository seams are tested.
+- A pure Google Sheets dependency left the marketplace flow too brittle for local proof, preview validation, and controlled operator testing.
+
+### Decision Details
+- Keep marketplace submission capture inside `projects/Evolution_Platform/src/app/api/interest/route.ts`.
+- Validate marketplace requests server-side against the live generated listing payload before accepting them:
+  - listing slug and campaign match
+  - horse and lease metadata match
+  - stake size respects the live min/max and unit step
+  - units and reservation amount match the live listing economics
+- Generate a submission reference for each accepted marketplace request.
+- Save accepted marketplace requests to a local JSON inbox readable by a founder-facing noindex route:
+  - route: `/marketplace/manual-ops`
+  - path override: `MARKETPLACE_MANUAL_OPS_PATH`
+- Use Google Sheets as an optional mirror when `GOOGLE_SHEETS_WEB_APP_URL` is configured.
+- Keep generic non-marketplace lead capture fail-closed when the Google Sheets endpoint is absent.
+
+### Impact
+- The marketplace v0.0 workflow now remains operational for bounded local and preview testing even without the external sheet mirror.
+- Founder-visible manual ops capture now exists inside the product repo rather than only in an external dependency.
+- The request contract is stricter and harder to tamper with, which reduces manual triage noise for the founder.
+
+### Related Files
+- `/home/evo/workspace/projects/Evolution_Platform/src/app/api/interest/route.ts`
+- `/home/evo/workspace/projects/Evolution_Platform/src/app/marketplace/manual-ops/page.tsx`
+- `/home/evo/workspace/projects/Evolution_Platform/src/lib/marketplace-manual-ops.ts`
+- `/home/evo/workspace/projects/Evolution_Platform/src/components/marketplace/StakeApplicationForm.tsx`
+- `/home/evo/workspace/projects/Evolution_Platform/.env.example`
+
+---
+
+## 2026-04-08: Gate The New Marketplace Workflow Behind A Release Stage
+
+### Decision
+Keep the pre-sprint public `Marketplace` and `MyStable` views as the default live experience, and expose the new marketplace listing, detail, application, and founder manual-ops workflow only when `MARKETPLACE_RELEASE_STAGE=staging`.
+
+### Context
+- The operator wants a clean separation between what the public can see now and what is still being reviewed.
+- The new marketplace work is solid, but it should not automatically replace the public-facing experience before explicit approval.
+- The repo already contains both the older public placeholder views and the newer working marketplace flow, so the cleanest immediate separation is an environment-gated release stage rather than a destructive rollback.
+
+### Decision Details
+- Add `MARKETPLACE_RELEASE_STAGE` with two supported values:
+  - `live`
+  - `staging`
+- Default to `live` when the env var is absent.
+- In `live`:
+  - show the restored pre-sprint public `Marketplace` page
+  - show the restored pre-sprint public `MyStable` page
+  - return `404` for `/marketplace/[slug]`
+  - return `404` for `/marketplace/manual-ops`
+  - reject marketplace application POSTs
+- In `staging`:
+  - show the new marketplace listing index
+  - allow listing detail pages
+  - allow the manual application flow
+  - allow the founder manual-ops inbox
+
+### Impact
+- Production can stay calm and familiar while the new flow is reviewed privately.
+- The same codebase can support both the old public experience and the new staging workflow without risky branch-only drift.
+- Promotion later becomes an explicit environment or deployment decision instead of an accidental side effect of ongoing work.
+
+### Related Files
+- `/home/evo/workspace/projects/Evolution_Platform/src/lib/marketplace-release-stage.ts`
+- `/home/evo/workspace/projects/Evolution_Platform/src/app/marketplace/page.tsx`
+- `/home/evo/workspace/projects/Evolution_Platform/src/app/marketplace/[slug]/page.tsx`
+- `/home/evo/workspace/projects/Evolution_Platform/src/app/marketplace/manual-ops/page.tsx`
+- `/home/evo/workspace/projects/Evolution_Platform/src/app/mystable/page.tsx`
+- `/home/evo/workspace/projects/Evolution_Platform/.env.example`
 
 ---
 
@@ -1802,3 +2000,128 @@ mode.
 - `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
 - `/home/evo/workspace/DNA/ops/TRANSITION.md`
 - `/home/evo/workspace/_sandbox/agent-stack/paperclip/data/instances/default/projects/ae8c8728-8be8-4883-8bc2-00b107862fa7/75640575-3cc3-4717-b405-fe84ebfca20c/_default/DELIVERY_STATUS.md`
+
+## 2026-04-08 - OpenFang OpenRouter Qwen 3.6 Plus Paid Review Lane
+
+### Context
+
+- The prior governed OpenRouter route in OpenFang targeted `qwen/qwen3.6-plus:free`, but the provider now returns a deprecation error for that model path.
+- The workspace already had more than `$10` of OpenRouter credits available, and the team wanted to validate whether hosted Qwen was worth keeping as a bounded second-pass reviewer for planning and audit work.
+- Today's Evolution marketplace work provided a realistic audit target: the `live` vs `staging` release split, the manual application route, the founder manual-ops capture path, and the missing-test surface.
+
+### Decision Details
+
+- Retarget `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/openrouter.toml` to paid `qwen/qwen3.6-plus`.
+- Keep `local` as the daily default route, but allow the active OpenFang route to be switched to `openrouter` when we want stronger hosted review or audit passes.
+- When calling the paid model for bounded review work, disable reasoning in the request shape with:
+  - `reasoning: { effort: "none", exclude: true }`
+- Treat narrow, evidence-led prompts as the preferred operating pattern. Avoid large raw code dumps with reasoning enabled as a normal workflow.
+
+### Impact
+
+- Restores the OpenRouter path to a working state after the `:free` deprecation.
+- Keeps hosted Qwen available as a governed reviewer without turning it into the background default.
+- Produces a practical usage rule that controls latency and spend while still getting useful answers from the paid model.
+
+### Related Files
+
+- `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/openrouter.toml`
+- `/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-08 - OpenFang Hosted Route Naming and Nemotron Backup Lane
+
+### Context
+
+- The launcher previously exposed hosted routing mainly as `openrouter`, which described the provider but not the actual review lane in use.
+- We wanted the operating model to stay simple: `local` for daily work, paid Qwen for stronger hosted review, and a free hosted backup that can be switched on deliberately.
+- Live checks showed `nvidia/nemotron-3-super-120b-a12b:free` was currently callable and stable enough to use as a backup reviewer through OpenRouter.
+
+### Decision Details
+
+- Add explicit hosted route names to `/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh`:
+  - `openrouter-qwen`
+  - `openrouter-nemotron`
+- Keep `openrouter` as a backward-compatible alias for the paid Qwen lane.
+- Add dedicated route files:
+  - `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/openrouter-qwen.toml`
+  - `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/openrouter-nemotron.toml`
+- Return the active route to `local` after hosted smoke tests complete.
+
+### Impact
+
+- Makes hosted route choice easier to understand and less error-prone during manual switching.
+- Preserves the paid Qwen review lane without forcing it to remain the everyday default.
+- Adds a governed free backup reviewer without pretending it is as reliable or precise as the paid lane or Codex.
+
+### Related Files
+
+- `/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh`
+- `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/openrouter-qwen.toml`
+- `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/openrouter-nemotron.toml`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-08 - OpenFang GLM Hosted Experimental Lane
+
+### Context
+
+- `z-ai/glm-5.1` looked like the strongest next paid comparison candidate to test against the existing paid Qwen review lane.
+- The route surface had already been made model-specific for hosted OpenRouter lanes, so adding GLM cleanly fit the same operating pattern.
+- We wanted GLM available for deliberate A/B use without changing the daily default away from local Ollama.
+
+### Decision Details
+
+- Add `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/openrouter-glm.toml` targeting `z-ai/glm-5.1`.
+- Extend `/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh` to accept `openrouter-glm` as a first-class route name.
+- Update the sidecar runbook so the GLM lane is visible alongside Qwen and Nemotron.
+- Keep GLM classified as experimental until it has passed a few realistic bounded review prompts cleanly.
+
+### Impact
+
+- Makes GLM available as a governed hosted option without requiring ad hoc route edits.
+- Preserves the clean operating split:
+  - `local` for daily work
+  - `openrouter-qwen` for the proven paid review lane
+  - `openrouter-nemotron` for the free backup lane
+  - `openrouter-glm` for experimental paid comparison work
+
+### Related Files
+
+- `/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh`
+- `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/openrouter-glm.toml`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-08 - Local Specialist Model Lanes for Debug and Audit
+
+### Context
+
+- The local stack already had a solid daily default in `qwen3.5:latest` plus `gemma4:latest`, but there was still room for one stronger local debugger lane and one stricter local audit lane.
+- The actual Ollama-fit models for this machine were `deepseek-coder-v2:16b` and `granite4:7b-a1b-h`; the earlier suggestion set included some model names or sizes that were not the right current Ollama targets.
+- The machine has ample disk headroom, and the RTX 3060 12GB can support both additions as specialist tools even though the 16B debugger lane is slower to load.
+
+### Decision Details
+
+- Pull and retain:
+  - `deepseek-coder-v2:16b`
+  - `granite4:7b-a1b-h`
+- Add governed OpenFang local route aliases:
+  - `local-debug` -> `deepseek-coder-v2:16b`
+  - `local-audit` -> `granite4:7b-a1b-h`
+- Keep `local` on `qwen3.5:latest` as the daily default route.
+- Do not add a local Mistral long-context lane at this stage.
+
+### Impact
+
+- Gives the local stack a clearer specialist split without replacing the proven day-to-day model.
+- Makes debugger and auditor usage deliberate instead of depending on ad hoc `ollama run` memory.
+- Keeps the route system readable and consistent with the hosted-lane naming pattern.
+
+### Related Files
+
+- `/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh`
+- `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/local-debug.toml`
+- `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/local-audit.toml`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`

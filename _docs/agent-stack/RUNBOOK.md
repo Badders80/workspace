@@ -1,6 +1,6 @@
 # Runbook
 
-Updated: 2026-04-06
+Updated: 2026-04-09
 
 ## Startup Order
 
@@ -22,14 +22,28 @@ Updated: 2026-04-06
 
 ```bash
 /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route local
+/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route local-debug
+/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route local-audit
 ```
 
 Alternative hosted routes:
 
 ```bash
-/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route openrouter
+/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route openrouter-qwen
+/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route openrouter-nemotron
+/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route openrouter-glm
 /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route groq
 ```
+
+Route notes:
+
+- `local`: daily default on this machine (`ollama/qwen3.5:latest`)
+- `local-debug`: local debugger lane (`ollama/deepseek-coder-v2:16b`)
+- `local-audit`: local audit lane (`ollama/granite4:7b-a1b-h`)
+- `openrouter-qwen`: paid `qwen/qwen3.6-plus` review lane
+- `openrouter-nemotron`: free `nvidia/nemotron-3-super-120b-a12b:free` backup review lane
+- `openrouter-glm`: paid `z-ai/glm-5.1` experimental coding or review lane
+- `groq`: hosted fallback lane
 
 6. After the route is selected, start OpenFang from the sidecar launcher:
 
@@ -37,16 +51,12 @@ Alternative hosted routes:
 /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh start
 ```
 
-7. Start Paperclip through the trial launcher:
+7. Verify the daemon and active hands:
 
 ```bash
-/home/evo/workspace/_sandbox/agent-stack/paperclip-trial.sh start
+/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh status
+/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh hand active
 ```
-
-8. Confirm OpenFang is the only registered executor before opening live work.
-   Current runtime truth: this is not yet true. The live Paperclip company
-   agents still execute via `codex_local`, so OpenFang checks below validate
-   the sidecar only, not the Paperclip dispatch path.
 
 ## Ollama-Only Smoke Tests
 
@@ -96,110 +106,67 @@ grep -E 'CUDA0|offloaded 41/41 layers to GPU' /home/evo/workspace/_logs/agent-st
 /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh status
 ```
 
-3. Verify one bounded Hand is active:
+3. Verify one bounded hand is active:
 
 ```bash
 /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh hand active
 ```
 
-4. Verify OpenFang can complete one bounded task and report back.
-Use an explicit direct prompt. The stock `researcher` hand tends to ask
-clarifying questions if the test instruction is vague.
+4. Verify OpenFang can complete one bounded task and report back. Use an
+explicit direct prompt; vague instructions still invite unnecessary clarifying
+questions.
 
-5. Treat the above as OpenFang-only proof unless the Paperclip agent adapter has
-   been explicitly migrated away from `codex_local`.
-6. Verify Paperclip can create one ticket, dispatch it, and log the result.
-7. Verify no write attempt lands outside the current allowlist.
+5. Verify no write attempt lands outside the current allowlist.
 
 ## Daily Operating Rules
 
-- No work runs outside the ticket system.
-- No separate autonomous role runtimes in v1.0.
+- No hidden route switching between local and hosted providers.
 - Keep only one or two bounded workstreams active at a time.
-- Stop immediately on budget cap, allowlist breach, or unclear task authority.
-
-## Paperclip Writeback
-
-Use the local API wrapper when you need low-noise ticket updates from this
-desktop shell:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File `
-  "\\wsl.localhost\Ubuntu\home\evo\workspace\_sandbox\agent-stack\paperclip-issue-writeback.ps1" `
-  -Action issue-get `
-  -Issue EVO-1
-```
-
-Add a comment:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File `
-  "\\wsl.localhost\Ubuntu\home\evo\workspace\_sandbox\agent-stack\paperclip-issue-writeback.ps1" `
-  -Action issue-comment `
-  -Issue EVO-1 `
-  -Body "Delivery note"
-```
-
-Update an issue and attach a comment in one call:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File `
-  "\\wsl.localhost\Ubuntu\home\evo\workspace\_sandbox\agent-stack\paperclip-issue-writeback.ps1" `
-  -Action issue-update `
-  -Issue EVO-1 `
-  -Status done `
-  -Body "Close-out note"
-```
-
-This path is only valid while the instance stays on `deploymentMode:
-local_trusted` and the server is private on localhost. If Paperclip moves to a
-different auth or exposure mode, do not assume these unauthenticated local
-calls remain valid.
+- Stop immediately on budget ambiguity, allowlist breach, or unclear task authority.
+- Paperclip is retired from the live surface. Do not route new work through a
+  Paperclip-style ticket layer in this stack.
 
 ## Shutdown
 
-1. Stop Paperclip.
+1. Stop OpenFang:
 
 ```bash
-/home/evo/workspace/_sandbox/agent-stack/paperclip-trial.sh stop
+/home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh stop
 ```
 
-2. Stop OpenFang.
-3. Stop Ollama.
-4. Capture outcomes, blockers, and next steps in the governed docs if the
+2. Stop Ollama:
+
+```bash
+/home/evo/workspace/_sandbox/agent-stack/ollama-trial.sh stop
+```
+
+3. Capture outcomes, blockers, and next steps in the governed docs if the
    operating model changed.
 
 ## Notes
 
 Exact install and start commands should be verified against the current official
-docs at install time. This runbook captures the operating sequence and guardrails,
-not a frozen vendor command reference.
+docs at install time. This runbook captures the operating sequence and
+guardrails, not a frozen vendor command reference.
 
 OpenFang currently expects `~/.openfang`; on this machine that path remains a
 documented symlink back into the workspace sidecar.
 
-OpenFang route choice is manual by design in this phase. `local`, `openrouter`,
-and `groq` are explicit human choices; there is no automatic hosted fallback.
-
-As of 2026-04-06, the first live Paperclip company exists and is budgeted at
-`0`, but its agents still use the `codex_local` adapter. Do not read OpenFang
-health alone as proof that Paperclip has been migrated to OpenFang execution.
+OpenFang route choice is manual by design in this phase. `local`,
+`local-debug`, `local-audit`, `openrouter-qwen`, `openrouter-nemotron`,
+`openrouter-glm`, and `groq` are explicit human choices; there is no automatic
+fallback between them.
 
 The WSL-local Ollama install depends on both the sidecar binary and the bundled
 runtime library tree under `ollama/lib/ollama`. If a future reinstall copies
 only the binary, Ollama can boot but silently fall back to CPU-only inference.
 
-The `researcher` hand heartbeat loop is hourly by default on this machine, so a
-manual bounded message is the fastest smoke-test path after activation.
+Historical Paperclip launchers, writeback helpers, and operator docs were
+archived on 2026-04-09 to `/home/evo/_archive/agent-stack/2026-04-09/`.
 
-Paperclip needs a stronger detach than plain `nohup` when started from a short
-`wsl.exe` shell on this machine. `paperclip-trial.sh` uses `setsid` plus the
-Node 20 wrapper so the service survives after the launching shell exits.
-
-If a Paperclip run fails with `/usr/bin/env: 'bash\r': No such file or
-directory`, restart Paperclip after confirming the sidecar wrapper is the active
-launch path. That error indicates a CRLF shell shim was executed instead of the
-Linux-safe `codex` shim generated by `with-node20.sh`.
+`_docs/openfang-wizard/` is the tracked source of truth for wizard files and
+hands. The older `_sandbox/openfang-wizard/` duplicate surface was retired in
+the same cleanup pass.
 
 If Ollama stops using the GPU after a reinstall, check
 `/home/evo/workspace/_logs/agent-stack/ollama-serve.log` first. The expected

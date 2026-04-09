@@ -1,11 +1,13 @@
 # Agent Stack
 
-Status: workspace-side operating layer with WSL-local Ollama now proven;
-OpenFang and Paperclip cutover still pending refresh.
+Status: OpenFang + Ollama are the active workspace-side bounded agent stack.
+Hermes is now active as the personal layer outside this surface. Paperclip was
+retired from the live surface on 2026-04-09 and archived to
+`/home/evo/_archive/agent-stack/2026-04-09/`.
 
 ## Scope
 
-This doc set governs the v1.0 agent-stack trial under:
+This doc set governs the active agent-stack surface under:
 
 - `/home/evo/workspace/_sandbox/agent-stack/`
 - `/home/evo/workspace/_docs/agent-stack/`
@@ -16,45 +18,43 @@ It does not move the operating layer into a product repo and it does not treat
 ## Core Model
 
 - Human stays in the board seat.
-- Paperclip is the orchestration, queue, approval, and reporting surface.
-- OpenFang is the single executor.
-- CEO, CTO, and similar roles are lenses, not separate autonomous runtimes.
+- `DNA/` and `_docs/openfang-wizard/` are the tracked control surfaces.
+- OpenFang is the bounded runtime for retrieval, planning, audit, and
+  packaging hands.
+- WSL-local Ollama is the default local inference path.
+- Hosted review lanes stay explicit manual route selections.
+- Hermes is the human-facing personal layer and may suggest Fang handoff, but
+  it does not replace the bounded OpenFang runtime described here.
 
 ## Docs In This Surface
 
-- `INSTALL_NOTES.md` - machine readiness, install order, and known caveats
+- `INSTALL_NOTES.md` - machine readiness, route model, and known caveats
 - `RUNBOOK.md` - startup, smoke-test, and shutdown flow
-- `PHASE0_MARKETPLACE_READINESS_CHECKLIST_2026-04-06.md` - go/no-go checklist for the first bounded marketplace proof inside Paperclip
-- `MARKETPLACE_PHASED_EXECUTION_PLAN_2026-04-06.md` - full-scope marketplace plan broken into ordered phases, gates, and parked work
-- `PHASE0_PAPERCLIP_OPERATOR_PACK_2026-04-06.md` - exact Phase 0 active role set, loading order, and first ticket queue for Paperclip
-- `CEO_PHASE0_INSTRUCTIONS_2026-04-06.md` - CEO instruction draft for the sandbox company
-- `EXECUTION_WORKER_INSTRUCTIONS_2026-04-06.md` - ExecutionWorker instruction draft for the sandbox company
-- `VERIFICATION_WORKER_INSTRUCTIONS_2026-04-06.md` - VerificationWorker instruction draft for the sandbox company
-- `ALLOWLIST_POLICY.md` - initial path boundaries and write restrictions
-- `ROLE_LENSES.md` - role semantics for v1.0
-- `TICKET_FLOW.md` - how work moves from ticket to execution to logging
-- `BUDGET_RULES.md` - budget ceilings and stop conditions
+- `ALLOWLIST_POLICY.md` - current write boundaries and no-write zones
+- `ROLE_LENSES.md` - active OpenFang hand roles plus reserved future profiles
+- `TICKET_FLOW.md` - current human -> DNA -> OpenFang handoff flow
+- `BUDGET_RULES.md` - local-first spending and hosted-route controls
 
 ## Current Status
 
-- `just check` is green.
-- The sidecar folders and Node 20 wrapper exist.
+- `just check` was green at the start of the Paperclip retirement pass.
 - Ollama is installed locally under `_sandbox/agent-stack/ollama/bin/` with
   bundled runtime libraries under `_sandbox/agent-stack/ollama/lib/ollama/`.
 - The sanctioned local model store is `/home/evo/workspace/models/ollama`.
 - `qwen3:14b` is pulled locally and verified through the direct Ollama API.
-- Ollama GPU offload is verified on the WSL-side RTX 3060 path.
-- OpenFang is installed locally under `_sandbox/agent-stack/openfang/bin/` and
-  its daemon boot was verified on `127.0.0.1:4200`.
-- OpenFang is intentionally paused at the local-runtime boundary until its
-  persisted provider state is scrubbed and it is re-cut over to the local
-  Ollama route.
-- Paperclip is onboarded under `_sandbox/agent-stack/paperclip/data/` and its
-  local UI was verified on `127.0.0.1:3100`.
-- The active operator budget cap for this trial is `0`, which means free-model
-  routes only until the cap is explicitly raised.
-- The remaining blockers are the OpenFang local-route cutover plus the first
-  company record and executor connection inside Paperclip.
+- OpenFang is installed locally under `_sandbox/agent-stack/openfang/bin/`.
+- The tracked control surface for hands and templates is
+  `/home/evo/workspace/_docs/openfang-wizard/`.
+- The active local default hand route is `ollama/qwen3.5:latest`.
+- The local specialist lanes are `local-debug` on
+  `ollama/deepseek-coder-v2:16b` and `local-audit` on
+  `ollama/granite4:7b-a1b-h`.
+- Hosted review lanes remain available only through explicit manual route
+  selection: `openrouter-qwen`, `openrouter-nemotron`, `openrouter-glm`, and
+  `groq`.
+- The retired Paperclip runtime, launchers, operator pack, and duplicate
+  `_sandbox/openfang-wizard/` surface now live in
+  `/home/evo/_archive/agent-stack/2026-04-09/`.
 
 ## Context Chain
 <- inherits from: /home/evo/workspace/AGENTS.md

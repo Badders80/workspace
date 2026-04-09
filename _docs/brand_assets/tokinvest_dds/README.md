@@ -9,7 +9,7 @@ Keep here:
 
 Key links:
 - source pack: `/home/evo/workspace/_docs/brand_assets/tokinvest_dds/source_pack_2026-03-20/`
-- derived deck: `/home/evo/workspace/_docs/presentations/tokinvest_dds_owner_minimalist_2026-03-20/`
+- derived deck: `/home/evo/workspace/_docs/presentations/tokinvest/owner_dds_minimalist_2026-03-20/`
 
 Rule:
 - reusable Tokinvest and DDS assets live here

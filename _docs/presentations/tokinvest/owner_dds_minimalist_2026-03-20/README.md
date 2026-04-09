@@ -12,7 +12,7 @@ Outputs:
 - `canva_handoff.txt` for Canva or PowerPoint rebuild work
 
 Rule:
-- final presentation outputs live under `_docs/presentations/`
+- Tokinvest presentation outputs now live under `_docs/presentations/tokinvest/`
 - keep raw source material in the brand asset home unless it is deck-specific working media
 
 ## Context Chain

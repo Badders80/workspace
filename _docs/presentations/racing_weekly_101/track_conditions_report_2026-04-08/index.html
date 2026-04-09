@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racing Weekly 101 Report - Track Conditions</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #ffffff;
+      --paper-soft: #fbfaf7;
+      --ink: #050505;
+      --muted: #5a5a5a;
+      --soft: #f6f3ee;
+      --gold: #d4a964;
+      --gold-soft: rgba(212, 169, 100, 0.12);
+      --line: rgba(0, 0, 0, 0.10);
+      --shadow: 0 22px 70px rgba(0, 0, 0, 0.09);
+      --max: 1040px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(212, 169, 100, 0.12), transparent 30%),
+        linear-gradient(180deg, #f1ede7, #e8e2d9);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.55;
+    }
+
+    .page {
+      max-width: var(--max);
+      margin: 40px auto;
+      background: var(--paper);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--gold), rgba(212, 169, 100, 0));
+    }
+
+    .page-inner {
+      padding: 64px 72px 72px;
+    }
+
+    .topbar,
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .eyebrow,
+    .small-label {
+      font-family: 'Geist Sans', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .brand {
+      font-family: 'Geist Sans', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .hero {
+      padding: 56px 0 42px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 18px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 169, 100, 0.18), rgba(212, 169, 100, 0));
+      pointer-events: none;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+    }
+
+    h1,
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 500;
+      line-height: 0.98;
+    }
+
+    h1 {
+      font-size: clamp(58px, 6vw, 92px);
+      max-width: 10ch;
+    }
+
+    h2 {
+      font-size: clamp(28px, 3vw, 42px);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-family: 'Geist Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .subhead {
+      margin-top: 18px;
+      max-width: 30ch;
+      font-size: 25px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .rule {
+      width: 110px;
+      height: 2px;
+      background: var(--gold);
+      margin: 26px 0 0;
+    }
+
+    .section {
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .lead {
+      font-size: 23px;
+      line-height: 1.5;
+      color: var(--ink);
+      max-width: 48ch;
+    }
+
+    p {
+      margin: 0 0 18px;
+      font-size: 19px;
+      color: var(--ink);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .callout {
+      margin-top: 18px;
+      padding: 26px 28px;
+      background: linear-gradient(180deg, var(--gold-soft), rgba(255, 255, 255, 0));
+      border-left: 4px solid var(--gold);
+      box-shadow: inset 0 0 0 1px rgba(212, 169, 100, 0.12);
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.35;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .bullet-list li::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--gold);
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      transform: translateY(-50%);
+    }
+
+    .carousel-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .carousel-item {
+      padding: 22px 24px;
+      background: linear-gradient(180deg, rgba(212, 169, 100, 0.10), rgba(255, 255, 255, 0));
+      border-top: 2px solid var(--gold);
+      box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+    }
+
+    .carousel-item .meta {
+      font-family: 'Geist Sans', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .carousel-item h4 {
+      margin: 0 0 8px;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .carousel-item p {
+      margin: 0;
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .purpose-panel {
+      display: grid;
+      gap: 18px;
+      padding: 24px 28px;
+      background: linear-gradient(180deg, rgba(5, 5, 5, 0.02), rgba(212, 169, 100, 0.06));
+      border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .purpose-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+        border: none;
+        max-width: none;
+      }
+
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <div class="page-inner">
+      <header class="topbar">
+        <div class="eyebrow">Racing Weekly 101</div>
+        <div class="brand">Evolution Stables</div>
+      </header>
+
+      <section class="hero">
+        <div class="small-label">Weekly Education Report</div>
+        <h1>What Does a Good 4 Really Mean?</h1>
+        <p class="subhead">The purpose of this week's content is to educate owners and new racing followers about NZ track conditions and why the rating matters before race day.</p>
+        <div class="rule"></div>
+      </section>
+
+      <section class="section">
+        <h2>Overview</h2>
+        <div class="purpose-panel">
+          <p class="lead">Track conditions look simple on paper, but that small number beside the race meeting can tell you a lot about how a race may unfold. In New Zealand, tracks are rated on a 10-point scale, from firmer and faster surfaces through to wetter, more testing ground.</p>
+          <p class="muted">For a beginner or owner learning the game, this matters because different surfaces can influence race times, tactics, and which horses are likely to perform best on the day. A horse that feels comfortable on a firm track may not be nearly as effective when the ground is softer and more tiring.</p>
+        </div>
+        <div class="callout">
+          <p>Lower number = firmer, faster track. Higher number = softer, wetter track.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Key Points To Teach</h2>
+        <ul class="bullet-list">
+          <li>New Zealand uses a 10-point track-rating scale aligned with Australia.</li>
+          <li><strong>Firm 1-2</strong> means a firmer, faster surface.</li>
+          <li><strong>Good 3-4</strong> is generally considered ideal racing ground.</li>
+          <li><strong>Soft 5-7</strong> means there is more give in the surface.</li>
+          <li><strong>Heavy 8-10</strong> means wetter, more testing conditions.</li>
+          <li>Track managers assess the surface with a penetrometer plus visual inspection.</li>
+          <li>Older terms like <strong>Fast</strong>, <strong>Dead</strong>, and <strong>Slow</strong> were replaced. The old <strong>Dead 4</strong> is now <strong>Good 4</strong>.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Why This Matters For Owners</h2>
+        <p>Owners do not need to become track experts overnight, but understanding the rating helps them make more sense of race-day commentary. It explains why the same horse can look sharp one week and much less effective the next, even when the distance or class has not changed dramatically.</p>
+        <p>It also gives context around strategy. Softer tracks can make races more testing late, while firmer tracks often suit speed and rhythm. That is why trainers, jockeys, and form students all pay attention to the ground before a horse steps out.</p>
+      </section>
+
+      <section class="section">
+        <h2>Proposed Carousel Structure</h2>
+        <div class="carousel-grid">
+          <section class="carousel-item">
+            <div class="meta">Slide 1</div>
+            <h4>Racing Weekly 101</h4>
+            <p>What does a Good 4 really mean?</p>
+          </section>
+          <section class="carousel-item">
+            <div class="meta">Slide 2</div>
+            <h4>The Track Scale</h4>
+            <p>NZ uses a 10-point scale: Firm 1-2, Good 3-4, Soft 5-7, Heavy 8-10.</p>
+          </section>
+          <section class="carousel-item">
+            <div class="meta">Slide 3</div>
+            <h4>How To Read It</h4>
+            <p>Lower number means firmer, faster ground. Higher number means softer, wetter ground.</p>
+          </section>
+          <section class="carousel-item">
+            <div class="meta">Slide 4</div>
+            <h4>Why It Matters</h4>
+            <p>Track conditions can affect race times, tactics, horse performance, and who has the edge.</p>
+          </section>
+          <section class="carousel-item">
+            <div class="meta">Slide 5</div>
+            <h4>Not Every Horse Likes The Same Ground</h4>
+            <p>Some horses prefer firm footing, while others improve when the track gets softer and more testing.</p>
+          </section>
+          <section class="carousel-item">
+            <div class="meta">Slide 6</div>
+            <h4>Quick Tip</h4>
+            <p>Old term Dead 4 is now Good 4. Close with a CTA asking what term to explain next week.</p>
+          </section>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Recommended Use</h2>
+        <ul class="bullet-list">
+          <li>Use this report as the review artifact before building the final social asset.</li>
+          <li>Export this page to PDF if you want a clean handoff or sign-off version.</li>
+          <li>Use the proposed carousel section as the build guide for Canva.</li>
+        </ul>
+      </section>
+
+      <footer class="footer">
+        <div class="small-label">Production Studio v0.0</div>
+        <div class="small-label">Track Conditions MVP</div>
+      </footer>
+    </div>
+  </article>
+</body>
+</html>

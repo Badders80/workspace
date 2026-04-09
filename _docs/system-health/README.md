@@ -123,3 +123,8 @@ When the merged machine status escalates from `ok` to `warn` or `critical`, the 
 ## Notes
 
 `AGENTS.md` is not necessary for this monitor unless you want future coding agents to follow project-specific implementation rules. For now, `README.md` and `DECISIONS.md` are the right documentation.
+
+Additional supporting docs in this folder:
+
+- `monitoring-guide.md` - loose monitoring tool notes that were previously at `_docs/` root
+- `HOLISTIC_EVO_AUDIT_20260301_215711.md` - historical generated audit snapshot retained for reference

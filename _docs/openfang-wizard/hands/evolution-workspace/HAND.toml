@@ -1,11 +1,11 @@
 [hand]
+id = "evolution-workspace"
 name = "evolution-workspace"
+category = "productivity"
 description = "Read-only knowledge assistant for Evolution Stables workspace. Answers questions about DNA, brand, decisions, research_vault and projects."
 version = "1.0.0"
 
-[model]
-provider = "ollama"
-model = "qwen3.5:latest"
+agent = { name = "assistant", provider = "ollama", model = "qwen3.5:latest", description = "Read-only knowledge assistant for Evolution Stables workspace.", system_prompt = "You are a read-only workspace assistant. Answer questions about DNA, brand, decisions, research_vault and projects from the tracked workspace." }
 
 [schedule]
 cron = "0 19 * * *"

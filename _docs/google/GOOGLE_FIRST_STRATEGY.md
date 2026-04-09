@@ -1,5 +1,11 @@
 # Google-First Tooling Strategy
 
+Status: retained reference
+
+- Not canonical
+- Support note only
+- Live Google policy now lives in the workspace AGENTS and DNA chain
+
 Two-stage implementation for Google Cloud SDK and service integrations.
 
 ## Overview
@@ -17,7 +23,7 @@ Standardizing on Google Cloud infrastructure for:
 Installs Google Cloud SDK (gcloud CLI).
 
 ```bash
-~/_scripts/install-gcloud.sh
+/home/evo/workspace/_scripts/install-gcloud.sh
 ```
 
 **What it does:**
@@ -36,7 +42,7 @@ Installs Google Cloud SDK (gcloud CLI).
 Configures individual services to use Google backends.
 
 ```bash
-~/_scripts/setup-google-services.sh
+/home/evo/workspace/_scripts/setup-google-services.sh
 ```
 
 **What it does:**
@@ -77,7 +83,7 @@ gcloud auth list
 
 ## Environment Variables
 
-Added to `~/.env`:
+Added to `/home/evo/.env`:
 
 ```bash
 GOOGLE_CLOUD_PROJECT=<project-id>
@@ -136,3 +142,9 @@ gcloud config set project YOUR_PROJECT_ID
 export $(grep -v '^#' ~/.env | xargs)
 claude
 ```
+
+## Context Chain
+<- inherits from: /home/evo/workspace/AGENTS.md
+-> overrides by: none
+-> live map: /home/evo/workspace/AI_SESSION_BOOTSTRAP.md
+-> conventions: /home/evo/workspace/DNA/ops/CONVENTIONS.md

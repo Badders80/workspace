@@ -140,8 +140,12 @@ Exit criteria:
 - Do not preserve the one-way env mirror policy after `/home/evo` becomes canonical again.
 - Do not migrate vendor/external infra into the core workspace without a separate contract-led plan.
 
+Historical note: the legacy merge-era `AGENTS_STUB.md` referenced by this plan
+was archived on 2026-04-09 to
+`/home/evo/_archive/docs-legacy/2026-04-09/AGENTS_STUB.md`.
+
 ## Context Chain
-← inherits from: /home/evo/_docs/AGENTS_STUB.md
+← inherits from: /home/evo/_archive/docs-legacy/2026-04-09/AGENTS_STUB.md
 → overrides by: none
 → live map: /home/evo/AI_SESSION_BOOTSTRAP.md
 → conventions: /home/evo/DNA/ops/CONVENTIONS.md

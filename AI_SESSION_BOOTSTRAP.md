@@ -1,7 +1,7 @@
 # AI Session Bootstrap
-Version: v2.2.0
-Updated: 2026-04-03
-Status: ACTIVE - STACK registry authority model applied
+Version: v2.3.0
+Updated: 2026-04-09
+Status: ACTIVE - Hermes personal layer live, OpenFang bounded sidecar live, Paperclip retired
 
 ## Canonical Root
 `/home/evo/workspace`
@@ -37,8 +37,13 @@ Status: ACTIVE - STACK registry authority model applied
 - Tech radar: `/home/evo/workspace/DNA/ops/TECH_RADAR.md` (consult on demand)
 - Gate script: `/home/evo/workspace/_scripts/evo-check.sh`
 - Task runner: `/home/evo/workspace/Justfile`
+- Hermes launcher: `/home/evo/workspace/_scripts/hermesc.sh`
+- Hermes runbook: `/home/evo/workspace/_docs/hermes/README.md`
+- Hermes home: `/home/evo/.hermes`
+- OpenFang wizard docs: `/home/evo/workspace/_docs/openfang-wizard`
 - Agent-stack sandbox: `/home/evo/workspace/_sandbox/agent-stack`
 - Agent-stack docs: `/home/evo/workspace/_docs/agent-stack`
+- Future role reserve: `/home/evo/workspace/DNA/roles/README.md`
 
 ## Active Projects
 - Evolution_Platform: `/home/evo/workspace/projects/Evolution_Platform`
@@ -57,7 +62,23 @@ Status: ACTIVE - STACK registry authority model applied
 - Google Cloud routing through `evolution-engine`
 - State-trap mapping and repository seam planning
 - Archive-first cleanup of stale surfaces
-- Workspace-side Paperclip + OpenFang operating-layer scaffold under `_sandbox/agent-stack`
+- Hermes personal-layer onboarding with workspace-root launch and local Ollama
+  default
+- OpenFang bounded planning, retrieval, and packaging surfaces under `_docs/openfang-wizard/` and `_sandbox/agent-stack/`
+- Paperclip retired from the live workspace surface on 2026-04-09
+- Hermes -> DNA -> OpenFang handoff discipline with human approval at the
+  boundary
+
+## Current Active Agent Surface
+
+- Active now: Hermes as the personal assistant layer with runtime and durable
+  personality under `/home/evo/.hermes`, launched from the workspace root via
+  `_scripts/hermesc.sh` so it reads the existing `AGENTS.md` chain
+- Active now: OpenFang with WSL-local Ollama under `_sandbox/agent-stack/` and
+  tracked hand templates under `_docs/openfang-wizard/`
+- Boundary: Hermes may suggest a Fang handoff; the human decides when Fang is
+  brought in
+- Retired: Paperclip from the live workspace surface as of 2026-04-09
 
 ## Phase Rule
 No build starts until `just check` is GREEN.
