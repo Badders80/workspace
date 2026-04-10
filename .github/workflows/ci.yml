@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Verify required workspace files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          required_files=(
+            "AGENTS.md"
+            "AI_SESSION_BOOTSTRAP.md"
+            "DNA/AGENTS.md"
+            "DNA/ops/CONVENTIONS.md"
+            "DNA/ops/STACK.md"
+            "DNA/ops/TRANSITION.md"
+            "DNA/INBOX.md"
+            "DNA/ops/DECISION_LOG.md"
+            "Justfile"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [[ ! -f "$file" ]]; then
+              echo "Missing required file: $file" >&2
+              exit 1
+            fi
+          done
+
+      - name: Validate shell script syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mapfile -t shell_files < <(git ls-files '*.sh')
+
+          if [[ "${#shell_files[@]}" -eq 0 ]]; then
+            echo "No tracked shell scripts found."
+            exit 0
+          fi
+
+          for file in "${shell_files[@]}"; do
+            echo "Checking $file"
+            bash -n "$file"
+          done
