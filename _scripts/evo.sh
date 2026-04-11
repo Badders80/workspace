@@ -15,6 +15,7 @@ Commands:
   gemini        Launch Gemini with workspace context
   claude        Launch Claude with workspace context
   aider         Launch Aider with workspace context
+  aider-or      Launch Aider on OpenRouter with workspace context
   codex         Launch Codex
   backlog       Show the active inbox/deferred queue
   transition    Show the transition log
@@ -86,6 +87,10 @@ case "${1:-help}" in
   aider)
     shift
     exec /home/evo/workspace/_scripts/aidere.sh "$@"
+    ;;
+  aider-or)
+    shift
+    exec /home/evo/workspace/_scripts/aidere-openrouter.sh "$@"
     ;;
   codex)
     shift

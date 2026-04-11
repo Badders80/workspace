@@ -30,6 +30,7 @@ Workspace-level rules for `/home/evo/workspace`.
 13. Google ecosystem tools should default to `evolution-engine` and prefer ADC over raw API keys.
 14. Archive-first is preferred when stale or duplicate surfaces add drag.
 15. Custom Windows and WSL startup automation must live under `C:\evo\startup` as the single source of truth; do not add ad-hoc Scheduled Tasks, desktop batch files, or Startup-folder shortcuts without updating that surface and its backups.
+16. Workspace internal operating surfaces use `caveman lite`: drop filler, keep grammar, stay direct. Keep `DNA/` and external-facing content in normal prose.
 
 ## Target Structure
 

@@ -18,6 +18,598 @@
 
 ---
 
+## 2026-04-11: Adopt `orchestration/` As The Governed Coordination Layer
+
+### Decision
+Adopt `/home/evo/workspace/orchestration/` as the managed coordination layer
+between immutable `DNA/` and executable `projects/`. Use it for management
+state, tickets, role contracts, and domain memory while keeping OpenFang as the
+bounded hands layer.
+
+### Context
+- The workspace already had strong governance in `DNA/` and active execution
+  surfaces in `projects/`, but it lacked one explicit middle layer for
+  top-down management, domain memory, and structured delegation.
+- The desired operating model is hierarchical and file-based:
+  CEO -> General Manager -> Product Managers -> Fang hands.
+- Existing governance explicitly forbids hidden autonomous routing and treats
+  lenses as prompt or role surfaces rather than separate always-on runtimes.
+- `SSOT` and `Evolution_Platform` are the only truly active management lanes at
+  this stage; `Studio` and `Content` should exist as light lanes, not as equal
+  active-build lines yet.
+
+### Decision Details
+- Add `orchestration/` with three core sub-surfaces:
+  - `roles/` for General Manager, PM, and Fang operating contracts
+  - `streams/` for per-domain `STATE`, `MEMORY_LOG`, and `ROADMAP`
+  - `tickets/` for bounded work packets and handoff tracking
+- Treat PM and Fang files as lenses, prompts, and operating contracts only.
+- Keep `DNA/` read-only from below:
+  - PMs and Fang may raise issues or propose changes
+  - only governance-approved paths may change `DNA/`
+- Keep the current `_docs/agent-stack/TICKET_FLOW.md` handoff rules in force.
+- Allow concise internal operating language, including a `caveman lite` style,
+  for orchestration surfaces, while keeping governance and external-facing text
+  in normal professional prose.
+
+### Impact
+- Creates a durable middle layer for memory, ticketing, and delegation without
+  introducing a competing runtime model.
+- Gives `SSOT` and `Platform` persistent PM surfaces that can retain context
+  across sessions through tracked files.
+- Keeps governance stable by preserving `DNA/` authority and the existing Fang
+  boundary.
+
+### Related Files
+- `/home/evo/workspace/orchestration/README.md`
+- `/home/evo/workspace/orchestration/roles/GENERAL_MANAGER.md`
+- `/home/evo/workspace/orchestration/roles/PM_SSOT.md`
+- `/home/evo/workspace/orchestration/roles/PM_PLATFORM.md`
+- `/home/evo/workspace/orchestration/roles/FANG_EXECUTION.md`
+- `/home/evo/workspace/_docs/agent-stack/TICKET_FLOW.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+---
+
+## 2026-04-11: Adopt `caveman lite` As The Internal Operating Style
+
+### Decision
+Use `caveman lite` as the default style for workspace internal operating surfaces. Keep it direct, grammar-safe, and low-filler. Keep `DNA/`, legal/compliance content, and external-facing content in normal prose.
+
+### Context
+- The workspace asked for a concise, direct communication style that keeps the management layers clear without turning governance into slop or slang.
+- The new orchestration layer and Fang hand contracts benefit from short, readable operating notes and ticket text.
+- The rule should apply to internal management and execution surfaces, not to canonical governance or public output.
+
+### Decision Details
+- Apply `caveman lite` to:
+  - orchestration role contracts
+  - stream state and memory logs
+  - tickets and handoff notes
+  - internal workspace coordination docs
+- Do not apply it to:
+  - `DNA/`
+  - legal/compliance text
+  - external-facing content
+
+### Impact
+- Keeps internal communication compact and direct.
+- Reduces filler in the management layer without degrading governance quality.
+- Gives the orchestration layer a consistent voice across roles and tickets.
+
+### Related Files
+- `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md`
+- `/home/evo/workspace/AGENTS.md`
+- `/home/evo/workspace/DNA/agents/AI_CONTEXT.md`
+- `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
+
+---
+
+## 2026-04-10: Standardize Local Claude Code Launch On Ollama Gemma 4
+
+### Decision
+Use a dedicated local launcher for Claude Code on this machine. Interactive
+sessions should launch through `ollama launch claude --model gemma4:e4b`, while
+non-interactive or piped workflows should fall back to the direct
+Anthropic-compatible local bridge at `http://localhost:11434` with `--bare`.
+
+### Context
+- The user clarified that the earlier carousel script was only a temporary test
+  to prove local Ollama connectivity and was not the real workflow goal.
+- On 2026-04-10, the interactive supported integration was verified locally:
+  `ollama launch claude --model gemma4:e4b` opened Claude Code `v2.1.97` and
+  showed `gemma4:e4b` in the header.
+- The direct bridge was also verified for non-interactive use:
+  `ANTHROPIC_BASE_URL=http://localhost:11434 ... claude --bare --print --model gemma4:e4b`
+  returned a correct `OK` response.
+- The `/v1` base URL failed on this machine for Claude Code with local Gemma,
+  and the prior `.bashrc` setup relied on a brittle self-shadowing alias plus
+  globally exported Anthropic env vars.
+
+### Decision Details
+- Add `/home/evo/workspace/_scripts/claude-local.sh` as the single launcher
+  surface for local Gemma-backed Claude Code.
+- Route behavior by mode:
+  - interactive TTY use -> `ollama launch claude`
+  - `--print` or piped input -> direct local bridge with `--bare`
+- Default the model to `gemma4:e4b`, while still allowing explicit `--model`
+  overrides.
+- Remove global `ANTHROPIC_*` exports from `/home/evo/.bashrc`.
+- Replace the old alias with:
+  - `claude` -> local launcher
+  - `claude-native` -> raw installed Claude Code binary
+- Update the workspace `claudec.sh` helper to delegate through the same local
+  launcher so the tracked wrapper surface stays aligned.
+
+### Impact
+- Makes the local Claude Code path reproducible without depending on fragile
+  shell alias expansion behavior.
+- Preserves a supported interactive launch path and a reliable non-interactive
+  fallback in one place.
+- Keeps the raw Claude binary reachable for future cloud or alternate-provider
+  use without requiring uninstall or path surgery.
+
+### Related Files
+- `/home/evo/workspace/_scripts/claude-local.sh`
+- `/home/evo/workspace/_scripts/claudec.sh`
+- `/home/evo/.bashrc`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+---
+
+## 2026-04-10: Formalize Local Claude Lane Roles For Fast, Debug, And Audit
+
+### Decision
+Keep local Claude as a multi-lane surface rather than one undifferentiated
+model choice. Standardize distinct local roles for fast triage, debugger, and
+audit work so the cheapest local path is used first and the heavier lanes are
+deliberate escalations.
+
+### Context
+- The workspace already had governed OpenFang local routes for daily, debug,
+  and audit behavior.
+- Local Claude on Ollama is now working cleanly, so the same role split can be
+  mirrored at the Claude launcher layer for direct operator use.
+- The user explicitly wants local models to become a reusable asset across the
+  current agent stack instead of a one-off novelty path.
+
+### Decision Details
+- Keep `claude` on `gemma4:e4b` as the default local generalist lane.
+- Add shell shortcuts and matching `just` targets:
+  - `claude-fast` -> `qwen3.5:latest`
+  - `claude-debug` -> `deepseek-coder-v2:16b`
+  - `claude-audit` -> `granite4:7b-a1b-h`
+  - `claude-yolo` -> `claude-yolo`
+- Mirror the same role split for OpenFang startup helpers:
+  - `fang-local`
+  - `fang-debug`
+  - `fang-audit`
+- Treat these as operator presets, not automatic routing. The human still
+  chooses the lane.
+
+### Impact
+- Makes local compute useful as a repeatable operating surface rather than a
+  one-model experiment.
+- Reduces needless use of heavier local or paid models when a small fast lane
+  is enough.
+- Gives the current stack a cleaner path to parallel work: executor, debugger,
+  and auditor can now be launched intentionally with existing tools.
+
+### Related Files
+- `/home/evo/.bashrc`
+- `/home/evo/workspace/Justfile`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-10: Use A Stage-Gated Single-Writer Orchestration Model For The Marketplace Build
+
+### Decision
+Run the Evolution Stables marketplace build through a stage-gated managed
+delivery model: one human board seat, one default writer, and several explicit
+local or bounded review lanes. Keep `SSOT_Build` as canonical truth, keep
+`Evolution_Platform` as the consuming experience layer, and defer provider
+lock-in until the seams are proven by real manual use.
+
+### Context
+- The user clarified the desired mental model:
+  - `SSOT_Build` owns canonical horse, lease, and offering data
+  - new horse records are created there
+  - generated docs are downloaded and stored locally during v0.0
+  - `Evolution_Platform` owns presentation, investor flow, and later
+    transaction handling
+- The current workspace stack already has a governed split between Codex,
+  Hermes, local Claude lanes, and bounded OpenFang hands.
+- The current handoff rules do not allow silent autonomous routing or multiple
+  competing executors to mutate the same live build surface.
+- The marketplace brief still needs fast prototyping and partner flexibility,
+  so it is safer to lock boundaries, presets, and handoffs now instead of
+  prematurely locking Supabase, Firestore, Stripe, Wise, or other providers as
+  hard architecture.
+
+### Decision Details
+- Create a project-specific orchestration blueprint under the live agent-stack
+  doc surface.
+- Standardize the stage order for this build:
+  - contract lock
+  - SSOT live knowledge hub
+  - publish surface
+  - marketplace experience MVP
+  - manual transaction ops
+  - provider seams
+  - hardening and release
+- Keep Codex as the default implementation writer and integrator.
+- Use Hermes for brief shaping and decision framing.
+- Use local Claude lanes and OpenFang hands as read-only or bounded planning
+  and review lanes, not as parallel competing code writers.
+- Keep experiments and route tests inside `_sandbox` until they are explicitly
+  promoted.
+
+### Impact
+- Gives the marketplace build a repeatable operating model that matches the
+  current stack instead of fighting it.
+- Preserves speed by allowing parallel scouting and review without creating
+  conflicting ownership over the same files.
+- Keeps vendor choice reversible while the real knowledge, publish, and manual
+  transaction seams are still being proven.
+
+### Related Files
+- `/home/evo/workspace/_docs/agent-stack/EVOLUTION_STABLES_MARKETPLACE_ORCHESTRATION_2026-04-10.md`
+- `/home/evo/workspace/_docs/agent-stack/README.md`
+- `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-10: Run Marketplace v0.0 On A Local-First Publish Flow With 3 Release Stages
+
+### Decision
+For marketplace v0.0, keep `SSOT_Build` on a local-first authoring and publish
+flow, keep `Evolution_Platform` as the consumer of published marketplace
+payloads, and standardize release control to `working_on`, `pending`, and
+`production`. Founder and operator surfaces must be fail-closed and protected by
+Google auth plus an explicit allowlist.
+
+### Context
+- The previous active surfaces mixed a local-first seed workflow with older
+  Firestore and proxy-middleware assumptions that were no longer true in the
+  live code path.
+- The user confirmed the goal is not a marketplace rebuild, but a staged
+  evolution of the existing marketplace routes and publish flow.
+- The old two-state `live|staging` gate was too coarse and made it too easy for
+  unfinished work to behave like production or fall back to misleading legacy
+  content.
+- The founder manual-ops inbox exposed applicant PII behind only a stage flag,
+  which was not an acceptable protection model.
+
+### Decision Details
+- `SSOT_Build` remains the canonical listing authoring surface.
+- Marketplace listing truth is published from `SSOT_Build` into
+  `Evolution_Platform`; Platform does not author canonical listing data.
+- Local or lightweight Google Sheets operator workflows are allowed around the
+  process, but they do not replace the canonical SSOT publish boundary.
+- Release stages are now:
+  - `working_on` -> no real public marketplace exposure
+  - `pending` -> real marketplace review flow behind gated operator access
+  - `production` -> approved public-safe marketplace behavior
+- Founder and operator routes require:
+  - dedicated enable flag
+  - Google auth enabled
+  - explicit email allowlist
+- `MyStable` remains a truthful holding surface until authenticated member
+  workflows are ready.
+
+### Impact
+- Marketplace work now fails closed by default.
+- The live code path matches the intended operator model more closely.
+- Review and production release discipline no longer depends on a single coarse
+  staging flag.
+- Founder PII is no longer exposed by release-stage visibility alone.
+
+### Related Files
+- `/home/evo/workspace/projects/SSOT_Build/README.md`
+- `/home/evo/workspace/projects/Evolution_Platform/src/lib/marketplace-release-stage.ts`
+- `/home/evo/workspace/projects/Evolution_Platform/src/lib/auth.ts`
+- `/home/evo/workspace/projects/Evolution_Platform/src/app/marketplace/manual-ops/page.tsx`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-10: Keep Listing Attachment Inside The Horse SSOT Record
+
+### Decision
+Keep marketplace listing state and lightweight listing enrichment attached to
+the horse record inside `SSOT_Build`, rather than creating a separate listing
+truth system. Add lightweight `performance_summary` and bounded `listing`
+subtrees as horse-attached schema extensions.
+
+### Context
+- The horse page in `SSOT_Build` already acts as the operational center for
+  identity, commercial terms, documents, and publish status.
+- The user clarified that the marketplace-facing listing should remain attached
+  to the horse SSOT in the same way the current commercial and publish state
+  already is.
+- A separate listing truth system would create unnecessary drift between horse
+  identity/commercial truth and marketplace-facing readiness.
+- At the same time, marketplace-facing convenience fields must not be allowed
+  to overwrite canonical horse or lease data silently.
+
+### Decision Details
+- Keep canonical horse identity and commercial terms as the primary truth.
+- Add an optional `performance_summary` subtree for TLDR racing context plus
+  source reference, not a full race-history archive.
+- Add an optional `listing` subtree for horse-attached marketplace state and
+  summary fields.
+- Keep the change additive and backward-compatible first:
+  - existing flat horse fields remain the active runtime path
+  - nested subtrees are introduced without forcing immediate UI or consumer
+    rewrites
+- Defer any `Evolution_Platform` payload changes until the producer-side
+  contract is ready.
+
+### Impact
+- Keeps the listing model anchored to the horse SSOT instead of creating a
+  shadow enrichment system.
+- Gives the document wizard and future publish contract a structured home for
+  lightweight performance summary and listing-facing fields.
+- Reduces the risk that marketplace copy or readiness fields accidentally
+  redefine canonical commercial truth.
+
+### Related Files
+- `/home/evo/workspace/projects/SSOT_Build/App.tsx`
+- `/home/evo/workspace/projects/SSOT_Build/src/lib/ssot/ssot-read-repository.ts`
+- `/home/evo/workspace/projects/SSOT_Build/intake/v0.1/seed.json`
+- `/home/evo/workspace/projects/SSOT_Build/docs/contracts/MARKETPLACE_LISTING_SCHEMA_DRAFT_2026-04-10.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-10: Publish Marketplace Artifacts From SSOT First And Mirror Platform Explicitly
+
+### Decision
+Harden the marketplace publish flow from the producer side first. `SSOT_Build`
+should always emit its own local published artifacts, including the draft
+producer-side contract, and should mirror the legacy payload into
+`Evolution_Platform` only when explicitly requested.
+
+### Context
+- The user asked to keep focusing on `SSOT_Build` and avoid touching Platform
+  while the producer-side schema and listing attachment model are still being
+  locked.
+- The existing publish script wrote directly into `Evolution_Platform` as part
+  of the default path, which blurred the producer/consumer boundary during a
+  contract-design phase.
+- The new horse-attached `listing` and `performance_summary` fields need a
+  versioned producer-side output before any consumer lane depends on them.
+
+### Decision Details
+- `npm run publish:marketplace` now publishes SSOT-owned artifacts only:
+  - legacy payload: `data/published/marketplace-v0.json`
+  - producer-side contract draft:
+    `data/published/marketplace-contract-draft.v0.json`
+- `npm run publish:marketplace:platform` is the explicit mirror path for the
+  current legacy Platform payload and image copy.
+- The draft contract output may expose unresolved metadata drift; that is a
+  feature of the hardening phase, not a failure of the contract work.
+
+### Impact
+- Clarifies the producer/consumer seam.
+- Lets SSOT evolve its contract without silently mutating Platform artifacts by
+  default.
+- Creates a stable output to test and review before consumer integration.
+
+### Related Files
+- `/home/evo/workspace/projects/SSOT_Build/scripts/publish-marketplace-v0.mjs`
+- `/home/evo/workspace/projects/SSOT_Build/package.json`
+- `/home/evo/workspace/projects/SSOT_Build/data/published/marketplace-contract-draft.v0.json`
+- `/home/evo/workspace/projects/SSOT_Build/README.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-10: Treat NZTR Rules Of Racing Effective 6 April 2026 As The Legal Ground For NZ SSOT Work
+
+### Decision
+For New Zealand horses and marketplace-listing work inside `SSOT_Build`, treat
+the NZTR Rules of Racing PDF effective from 6 April 2026 as the governing legal
+ground reference. Add an observer-only legal-officer role inside the SSOT
+vertical to watch that legal ground and related disclosure references.
+
+### Context
+- The user explicitly identified the April 2026 NZTR Rules of Racing PDF as the
+  governing document for the current build.
+- The in-app New Zealand compliance surface was still pointing at an older PDF.
+- The SSOT lane now holds more of the listing and document-grounding work, so
+  it benefits from a named legal-reference observer without creating a second
+  decision owner.
+
+### Decision Details
+- Update the in-app New Zealand compliance surface to point to the April 2026
+  PDF.
+- Treat that document as the primary legal-ground reference for New Zealand
+  horse and listing work.
+- Add a legal-officer role under the SSOT vertical with these boundaries:
+  - observer-only by default
+  - may be asked to review legal-ground drift, disclosure-reference drift, or
+    conflict
+  - escalated only by the CEO, the overall manager, or the SSOT line manager
+  - does not independently redefine canonical truth, product scope, or consumer
+    behavior
+
+### Impact
+- Aligns the live compliance page with the intended governing document.
+- Makes the legal grounding of the SSOT build explicit.
+- Adds a named review lane for future legal-reference questions without
+  confusing ownership of the canonical data model.
+
+### Related Files
+- `/home/evo/workspace/projects/SSOT_Build/src/routes/ReferenceRoute.tsx`
+- `/home/evo/workspace/projects/SSOT_Build/README.md`
+- `/home/evo/workspace/projects/SSOT_Build/docs/contracts/CURRENT_DATA_CONTRACT_2026-03-13.md`
+- `/home/evo/workspace/projects/SSOT_Build/docs/contracts/MARKETPLACE_LISTING_SCHEMA_DRAFT_2026-04-10.md`
+- `/home/evo/workspace/projects/README.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-09: Deliver Investor Update Assets From Evolution_Platform Public Paths
+
+### Decision
+For investor updates, keep `Evolution_Content` as the canonical asset store,
+but require any asset referenced by update HTML to have a delivery copy in
+`Evolution_Platform/public/...`. Use `Evolution_Studio` as the explicit publish
+step that promotes approved canonical assets into those public delivery paths.
+
+### Context
+- The new content model already separated canonical storage from public
+  publishing, but the first Prudentia example still mixed direct public assets
+  and temporary external-host links.
+- Update HTML files under `public/updates/` are static public outputs, so they
+  can only load assets that are actually reachable from the live site or another
+  approved public host.
+- The operator wants to stop repeating the Canva-upload-to-get-a-link loop for
+  images and instead use the existing website repo as the predictable delivery
+  surface.
+- Google Drive is already acceptable as an assets-only convenience surface, but
+  not a strong final URL layer for stable investor update delivery.
+
+### Decision Details
+- `Evolution_Content/drop/` remains the only raw intake surface for new update
+  assets.
+- Manual metadata tagging is the v0.0 classification method.
+- `Evolution_Studio` must record a publish packet whenever a canonical asset is
+  promoted for HTML use.
+- Standardize public delivery paths:
+  - images: `public/images/updates/<horse>/<update-slug>/...`
+  - videos: `public/videos/updates/<horse>/<update-slug>/...`
+- Investor update HTML may point at:
+  - existing general public assets already in Platform
+  - promoted update-specific delivery copies under those public update paths
+- Investor update HTML must not point at:
+  - `Evolution_Content` filesystem paths
+  - local machine paths
+  - Google Drive share links as the final delivery URL
+
+### Impact
+- Makes the website repo the consistent delivery layer for investor update
+  assets.
+- Preserves `Evolution_Content` as the source of truth without forcing the HTML
+  to know about canonical storage paths.
+- Turns Studio publish into a real operational step instead of an informal copy
+  action.
+
+### Related Files
+- `/home/evo/workspace/projects/Evolution_Content/workflows/ASSET_INTAKE_AND_PROMOTION_V0.md`
+- `/home/evo/workspace/projects/Evolution_Studio/publish-queue/prudentia-te-rapa-investor-update-2026-04-12.json`
+- `/home/evo/workspace/projects/Evolution_Content/updates/prudentia/2026-04-12-te-rapa-investor-update.json`
+- `/home/evo/workspace/projects/Evolution_Platform/public/updates/Prudentia-TeRapa-12Apr2026.html`
+- `/home/evo/workspace/projects/Evolution_Platform/public/updates/Prudentia-TeRapa-Gmail-12Apr2026.html`
+
+---
+
+## 2026-04-09: Establish Evolution_Studio As The Manual Production Workbench For Content v0.0
+
+### Decision
+Establish `Evolution_Studio` as a real project surface now, but keep it as a
+manual production workbench for v0.0 rather than a full app. It becomes the
+place where content is built, shaped, reviewed, and prepared for publishing,
+while `Evolution_Content` remains the canonical approved content and media
+repository.
+
+### Context
+- The four-surface content model had already defined `Evolution_Studio` as the
+  workflow boundary, but it still existed only as a deferred concept.
+- The operator wants a real production area for making content now, without
+  overbuilding a dashboard before the workflow has proven itself.
+- `Evolution_Content` already now holds intake, canonical asset paths, and
+  metadata truth for approved items, which makes it the wrong place for active
+  drafting and packaging work.
+- OpenFang `production-studio` is already framed as a packaging role, which
+  fits naturally inside the Studio workflow boundary.
+
+### Decision Details
+- Create `projects/Evolution_Studio` as the active internal production workbench
+  surface.
+- Keep the first structure manual and file-first:
+  `intake/`, `briefs/`, `drafts/`, `packages/`, `review/`, `approved/`, and
+  `publish-queue/`.
+- Use `Evolution_Studio` for:
+  - brief intake
+  - SSOT fact pulls
+  - draft generation
+  - packaging
+  - review and approval handling
+  - publish handoff toward `Evolution_Platform`
+- Keep `Evolution_Content` focused on approved asset and metadata truth rather
+  than active production-state work.
+- Defer any full application UI, database-backed workflow engine, or dashboard
+  rebuild until repeated use proves what the real operating surface needs.
+
+### Impact
+- Gives the content system a true making surface immediately without collapsing
+  workflow and repository responsibilities into one folder.
+- Reduces pressure to rename `Evolution_Content`, because the distinction now
+  becomes clearer in practice:
+  Studio makes, Content stores canonically, Platform publishes.
+- Keeps the v0.0 build small and reversible while still creating a usable
+  operational boundary for real content work.
+
+### Related Files
+- `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md`
+- `/home/evo/workspace/MANIFEST.md`
+- `/home/evo/workspace/DNA/INBOX.md`
+- `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+- `/home/evo/workspace/projects/Evolution_Studio/README.md`
+- `/home/evo/workspace/projects/Evolution_Studio/ARCHITECTURE.md`
+
+---
+
+## 2026-04-09: Adopt A Four-Surface Content Operating Model With Evolution_Content As The Canonical Library
+
+### Decision
+Adopt a four-surface content operating model where `SSOT_Build` remains the
+factual source of truth, `Evolution_Studio` is the internal workflow boundary,
+`Evolution_Content` is the canonical approved content and media repository, and
+`Evolution_Platform` remains the public publishing surface. Fold OpenFang's
+`production-studio` into that model as a packaging role, not as a
+source-of-truth store.
+
+### Context
+- The workspace governance already named `Evolution_Content` as an active
+  project surface, but the actual folder had drifted out of the working tree.
+- The live Prudentia Te Rapa update already existed in
+  `Evolution_Platform/public/updates/`, which made it a practical first
+  end-to-end proof item for the new content pattern.
+- `Evolution_Studio` is still explicitly deferred in the workspace docs, so v0.0
+  needed a manual and documented workflow boundary rather than a full app
+  build.
+- OpenFang `production-studio` was already positioned as a bounded packaging
+  role, which fit the new model without making it a canonical storage surface.
+
+### Decision Details
+- Re-establish `projects/Evolution_Content` with a minimal governed structure:
+  `drop/`, `media/`, `updates/`, `catalog/`, `templates/`, and `workflows/`.
+- Keep the metadata model file-first for v0.0 using
+  `catalog/content-index.ndjson`.
+- Treat `drop/` as the raw intake surface and `media/` as the canonical asset
+  library after classification.
+- Keep website and email copy in `Evolution_Platform/public/updates/` for now,
+  but store the approved asset path and metadata linkages in `Evolution_Content`.
+- Define `Evolution_Studio` as the later owner of brief intake, SSOT fact pull,
+  drafting, packaging, review, approval, publish actions, and search across
+  `Evolution_Content`, without building the dashboard yet.
+- Use Prudentia as the first v0.0 item to prove the pattern end to end.
+
+### Impact
+- Realigns the repo with the documented active-project model by restoring the
+  missing `Evolution_Content` surface.
+- Creates a canonical home for approved content assets and searchable metadata
+  without forcing a premature app or database build.
+- Clarifies that public delivery is not the long-term content truth, while still
+  allowing the current website update surfaces to keep shipping during v0.0.
+
+### Related Files
+- `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md`
+- `/home/evo/workspace/MANIFEST.md`
+- `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+- `/home/evo/workspace/projects/Evolution_Content/README.md`
+- `/home/evo/workspace/projects/Evolution_Content/ARCHITECTURE.md`
+- `/home/evo/workspace/projects/Evolution_Content/catalog/content-index.ndjson`
+- `/home/evo/workspace/projects/Evolution_Content/updates/prudentia/2026-04-12-te-rapa-investor-update.json`
+
+---
+
 ## 2026-04-09: Integrate Hermes As The Personal Assistant Layer Above DNA And OpenFang
 
 ### Decision
@@ -2125,3 +2717,305 @@ mode.
 - `/home/evo/workspace/_sandbox/agent-stack/openfang/state/routes/local-audit.toml`
 - `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
 - `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-10: Make Local Claude Launcher Capability-Aware For Ollama Models
+
+### Decision
+Stop assuming every local Ollama model can use Claude Code tools. The launcher
+must inspect model capabilities, auto-disable Claude Code tools for models that
+do not advertise `tools`, and stop forcing `--bare` for tool-capable local
+lanes because that breaks the local audit path.
+
+### Context
+
+- `deepseek-coder-v2:16b` was failing immediately in Claude Code with:
+  `does not support tools`.
+- `ollama show deepseek-coder-v2:16b` reports only `completion` and `insert`.
+- `ollama show granite4:7b-a1b-h` reports `tools`, and the raw
+  Anthropic-compatible `/v1/messages` bridge returns valid `tool_use` blocks
+  for it.
+- The existing launcher forced a split path:
+  - interactive -> `ollama launch claude`
+  - non-interactive -> direct bridge with forced `--bare`
+- In local testing, forcing `--bare` on tool-capable local lanes degraded
+  Claude Code behavior for tool-driven prompts, while the direct bridge worked
+  for normal prompt/response.
+
+### Decision Details
+
+- Use the direct Anthropic-compatible local bridge as the default Claude local
+  launcher path.
+- Add Ollama capability probing inside
+  `/home/evo/workspace/_scripts/claude-local.sh`.
+- Add wrapper-only local-model discovery so Claude can launch from the real
+  `ollama list` inventory even though Claude Code's built-in `/model` picker
+  does not enumerate all custom local models.
+- If the selected model does not advertise `tools` and the caller has not
+  explicitly overridden tool flags, auto-launch Claude Code with `--tools ""`.
+- Only auto-add `--bare` for chat-only local lanes or when explicitly forced by
+  env.
+- Allow wrapper scripts to pass an explicit `--add-dir` surface via
+  `CLAUDE_LOCAL_ADD_DIR` so chat-only local lanes can still load nearby
+  `CLAUDE.md` context when needed.
+
+### Impact
+
+- `deepseek-coder-v2:16b` now launches reliably in a chat-only Claude Code
+  mode instead of failing on startup.
+- `granite4:7b-a1b-h` remains the preferred local Claude audit lane because it
+  advertises tool support.
+- The local launcher can now show the real Ollama inventory on demand via
+  `--pick-model` or `--list-local-models`, instead of relying on Claude Code's
+  limited built-in custom-model picker.
+- The launcher behavior now matches the actual capabilities reported by the
+  local runtime instead of assuming Claude-grade tool use on every local model.
+
+### Related Files
+
+- `/home/evo/workspace/_scripts/claude-local.sh`
+- `/home/evo/workspace/_scripts/claude-marketplace-sandbox.sh`
+- `/home/evo/workspace/_sandbox/claude-marketplace/START_HERE.txt`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-10: Make `claude` Open The Local Model Picker By Default
+
+### Decision
+Change the plain `claude` shell alias from a fixed `gemma4:e4b` launcher to a
+picker-first launcher that opens the real local Ollama model menu by default.
+Keep the specialist aliases (`claude-fast`, `claude-debug`, `claude-audit`,
+`claude-yolo`) as fixed shortcuts.
+
+### Context
+
+- The local wrapper can now enumerate the real `ollama list` inventory with
+  `--pick-model`.
+- Claude Code's built-in `/model` picker still does not expose the full local
+  custom-model inventory.
+- The operator explicitly asked for the default `claude` entrypoint to display
+  all local models instead of silently choosing one default lane.
+
+### Decision Details
+
+- Update `/home/evo/.bashrc`:
+  - `claude` -> `bash /home/evo/workspace/_scripts/claude-local.sh --pick-model`
+- Keep these fixed one-shot shortcuts unchanged:
+  - `claude-fast`
+  - `claude-debug`
+  - `claude-audit`
+  - `claude-yolo`
+- Update the runbook so the documented meaning of `claude` matches the shell.
+
+### Impact
+
+- The default `claude` command now shows the full installed local model list
+  before launch.
+- Fast access to pinned local lanes is preserved through the specialist alias
+  set.
+- The shell behavior now matches the operator's intent better than the earlier
+  fixed-Gemma default.
+
+### Related Files
+
+- `/home/evo/.bashrc`
+- `/home/evo/workspace/_scripts/claude-local.sh`
+- `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-11: Prefer A Codex-First WSL VS Code Baseline
+
+### Decision
+
+Stabilize the machine around a Codex-first VS Code workflow by simplifying WSL
+networking, moving heavier swap behavior to `S:`, and removing competing
+chat-assistant extensions from the WSL remote host.
+
+### Context
+
+- The 2026-04-11 timeout loop investigation found repeated WSL instability and
+  reconnect behavior that outlived the Gemini cleanup.
+- Earlier WSL exthost logs showed both `openai.chatgpt` and
+  `github.copilot-chat` throwing `PendingMigrationError`, with Copilot Chat
+  being removable while Codex still needed to remain available.
+- `networkingMode=mirrored` added unnecessary networking complexity for a local
+  Codex-on-WSL workflow.
+- The prior `6GB` swap ceiling was too tight for a machine that also runs local
+  Node-based agents and model-adjacent tooling.
+- Storage policy already says heavier mutable runtime surfaces should prefer
+  `S:`.
+
+### Decision Details
+
+- Update `C:\Users\Evo\.wslconfig` to:
+  - remove mirrored networking
+  - keep `memory=12GB`
+  - increase `swap` to `12GB`
+  - set `swapFile=S:\WSL\swap.vhdx`
+- Keep `autoMemoryReclaim=gradual`
+- Keep `processors=8`
+- Keep the Codex-providing `openai.chatgpt` extension
+- Remove competing AI/chat assistants from the live VS Code surface:
+  - `github.copilot-chat`
+  - `codeium.codeium`
+  - stale WSL `google.gemini-cli-vscode-ide-companion`
+- Prune stale Windows WSL Remote server builds and old VS Code / WSL server
+  logs as routine resettable state
+
+### Impact
+
+- WSL now starts with `12GB` swap and places that heavier backing file on `S:`
+  instead of leaving it implicit on the OS drive.
+- The WSL remote extension host is materially narrower and no longer carries
+  Copilot Chat or the stale Gemini companion.
+- The current Codex workflow remains available while the main competing chat
+  surfaces have been removed.
+- The machine has a clearer operating baseline for future audits: if the
+  reconnect loop returns, the remaining suspects are WSL itself, Codex, or
+  local workload pressure rather than extension sprawl.
+
+### Related Files
+
+- `C:\Users\Evo\.wslconfig`
+- `/home/evo/workspace/_docs/system-health/WSL_VSCODE_LINE_IN_THE_SAND_2026-04-11.md`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-11: Keep Hermes Workspace As A Sandbox Tool Surface, Not A Project
+
+### Decision
+
+Keep the Hermes Workspace UI clone as a workspace-side tooling repo under
+`/home/evo/workspace/_sandbox/hermes-workspace` rather than treating it as an
+Evolution product surface under `projects/` or leaving it loose at the
+workspace root.
+
+### Context
+
+- The live workspace map already treats Hermes as an adopted personal-layer
+  tool, not as canonical product truth.
+- `projects/` is explicitly reserved for the four active Evolution build
+  surfaces.
+- The Hermes Workspace UI is an external repo with its own Git history,
+  dependency tree, and build output.
+- The user explicitly wanted Hermes treated the same way the workspace treats
+  OpenFang: as a sidecar/tooling surface rather than a product project.
+
+### Decision Details
+
+- Move the local Hermes Workspace clone from the workspace root into
+  `_sandbox/hermes-workspace`.
+- Keep Hermes runtime identity and launch control where they already belong:
+  - `/home/evo/.hermes` for runtime and personality
+  - `/home/evo/workspace/_scripts/` for launchers
+  - `/home/evo/workspace/_docs/hermes/` for governed docs
+- Keep the UI optional and local-first.
+- If the local clone is later removed, re-acquisition stays a normal external
+  `git clone` workflow from the upstream repo rather than a reason to promote
+  Hermes into `projects/`.
+
+### Impact
+
+- Removes root-level drift from the workspace.
+- Keeps `projects/` aligned to the Evolution product surfaces only.
+- Makes Hermes Workspace behave like the kind of sidecar/tooling surface the
+  repo already uses `_sandbox/` for.
+
+### Related Files
+
+- `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md`
+- `/home/evo/workspace/_docs/hermes/README.md`
+- `/home/evo/workspace/_scripts/hermes-ui.sh`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
+
+## 2026-04-11: Keep Ollama Live In WSL And Archive The Broader S Catalog
+
+### Decision
+
+Keep `/home/evo/workspace/models/ollama` as the live sanctioned local Ollama
+model store and convert the broader Windows-side `S:` catalog into an explicit
+cold archive rather than leaving two apparently-live stores in circulation.
+
+### Context
+
+- The active agent-stack and workspace docs already point the local runtime at
+  `/home/evo/workspace/models/ollama`.
+- The live WSL store held the active `qwen3:14b` runtime subset.
+- `S:\Models\Ollama\models` held a broader catalog with overlapping blobs,
+  including the same `qwen3:14b` artifacts, which created storage duplication
+  and operational ambiguity.
+- No live Windows Ollama process or service was using `S:\Models\Ollama`
+  during this reconciliation pass.
+
+### Decision Details
+
+- Keep the live runtime at `/home/evo/workspace/models/ollama`
+- Rename `S:\Models\Ollama\models` to
+  `S:\Models\Ollama\archive_catalog_2026-04-11`
+- Add `S:\Models\Ollama\README.txt` to mark the `S:` surface as non-live and
+  point operators back to the WSL canonical store
+- Leave the archived `S:` catalog in place for now as a reversible cold archive
+  rather than deleting model blobs immediately
+
+### Impact
+
+- The machine now has one clearly live Ollama store
+- The broader `S:` catalog no longer masquerades as an active runtime path
+- The split is reversible if a future Windows-native Ollama workflow is
+  intentionally adopted, but it is no longer ambiguous by default
+
+### Related Files
+
+- `/home/evo/workspace/models/ollama`
+- `S:\Models\Ollama\archive_catalog_2026-04-11`
+- `S:\Models\Ollama\README.txt`
+- `/home/evo/workspace/_docs/system-health/WSL_VSCODE_LINE_IN_THE_SAND_2026-04-11.md`
+
+## 2026-04-11: Use Aider On OpenRouter As The Terminal Backup Lane
+
+### Decision
+
+Install and keep a terminal-first Aider backup lane on OpenRouter for the
+periods when Codex credit is exhausted, instead of adding another heavyweight
+VS Code assistant extension.
+
+### Context
+
+- The machine was just stabilized by reducing competing VS Code assistant
+  surfaces.
+- The workspace already had an `aidere` wrapper concept and Aider is already
+  listed in the active tool registry as an optional utility lane.
+- `/home/evo/.env` already carries `OPENROUTER_API_KEY`, so the backup lane can
+  reuse the shared credential surface without introducing a new secret path.
+- The local sanctioned Ollama store exists, but the currently live local model
+  set is better treated as a lighter fallback than the primary backup for
+  serious coding sessions.
+
+### Decision Details
+
+- Install `aider` locally via the official isolated installer into
+  `/home/evo/.local/bin`
+- Keep `/home/evo/workspace/_scripts/aidere.sh` as the generic workspace-context
+  Aider launcher
+- Add `/home/evo/workspace/_scripts/aidere-openrouter.sh` with default model
+  `openrouter/deepseek/deepseek-v3.2`
+- Expose that lane through:
+  - `evo aider-or`
+  - `aider-or`
+  - `aidere`
+- Keep local Ollama as a secondary option rather than the main backup lane
+
+### Impact
+
+- The workspace now has a low-friction Codex fallback that does not depend on a
+  new VS Code extension
+- OpenRouter becomes the practical cheap/fast backup path for coding tasks
+- The machine keeps one heavy editor assistant surface instead of reintroducing
+  extension sprawl
+
+### Related Files
+
+- `/home/evo/workspace/_scripts/aidere.sh`
+- `/home/evo/workspace/_scripts/aidere-openrouter.sh`
+- `/home/evo/workspace/_scripts/evo.sh`
+- `/home/evo/.bashrc`
+- `/home/evo/.local/bin/aidere`
+- `/home/evo/.local/bin/aider-or`

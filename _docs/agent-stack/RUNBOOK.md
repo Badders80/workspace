@@ -45,6 +45,54 @@ Route notes:
 - `openrouter-glm`: paid `z-ai/glm-5.1` experimental coding or review lane
 - `groq`: hosted fallback lane
 
+## Local Claude Lane Shortcuts
+
+- `claude`: open the local model picker backed by the real `ollama list`
+- `claude-fast`: fast local triage lane on `qwen3.5:latest`
+- `claude-debug`: heavier local debugger lane on `deepseek-coder-v2:16b`
+- `claude-audit`: stricter local audit lane on `granite4:7b-a1b-h`
+- `claude-yolo`: aggressive draft lane on `claude-yolo`
+
+These shell aliases live in `/home/evo/.bashrc`.
+
+Local-model notes:
+
+- `deepseek-coder-v2:16b` does not advertise Ollama tool support, so the
+  launcher now auto-disables Claude Code tools for that lane. Use it for
+  chat-first coding or reasoning, not for repo audits that need `Read`,
+  `Bash`, or `Edit`.
+- `granite4:7b-a1b-h` does advertise tool support and remains the preferred
+  local audit lane.
+- The local launcher now uses the direct Anthropic-compatible bridge by
+  default and only forces `--bare` automatically for chat-only local lanes.
+- Claude Code's built-in `/model` picker does not enumerate every local Ollama
+  model. Use the wrapper picker when you want the real local model list:
+
+```bash
+bash /home/evo/workspace/_scripts/claude-local.sh --pick-model
+bash /home/evo/workspace/_scripts/claude-local.sh --list-local-models
+```
+
+The wrapper picker adds short lane hints beside the main local models, for
+example `audit, tools`, `debug, chat-only`, `fast, triage`, and `yolo, draft`.
+
+Just targets mirror the same roles:
+
+```bash
+just claude-fast
+just claude-debug
+just claude-audit
+```
+
+OpenFang lane helpers are also available:
+
+```bash
+just fang-local
+just fang-debug
+just fang-audit
+just fang-status
+```
+
 6. After the route is selected, start OpenFang from the sidecar launcher:
 
 ```bash

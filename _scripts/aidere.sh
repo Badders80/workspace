@@ -2,10 +2,11 @@
 set -euo pipefail
 
 source /home/evo/workspace/_scripts/agent-context.sh
+export PATH="$HOME/.local/bin:$PATH"
 
 if ! command -v aider >/dev/null 2>&1; then
   echo "Error: aider command not found"
-  echo "Install: pip install aider-chat"
+  echo "Install: curl -fsSL https://aider.chat/install.sh | sh"
   exit 1
 fi
 

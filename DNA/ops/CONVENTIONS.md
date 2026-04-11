@@ -28,11 +28,40 @@
 - `/home/evo/workspace/DNA/ops/TECH_RADAR.md` is a consult-on-demand research journal and is not part of the default agent entry chain.
 - `/home/evo/workspace/DNA/ops/tech-radar-intake/` is the repository-first discovery library for items that caught attention before any final fit decision.
 
+## Communication Style
+
+- Workspace internal operating surfaces use `caveman lite`: drop filler, keep grammar, stay direct.
+- Keep `DNA/`, legal/compliance content, and external-facing content in normal prose.
+
 ## Registered Markdown Files
 
 - `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md`
 - `/home/evo/workspace/AGENTS.md`
 - `/home/evo/workspace/MANIFEST.md`
+- `/home/evo/workspace/orchestration/README.md`
+- `/home/evo/workspace/orchestration/roles/GENERAL_MANAGER.md`
+- `/home/evo/workspace/orchestration/roles/PM_TEMPLATE.md`
+- `/home/evo/workspace/orchestration/roles/PM_SSOT.md`
+- `/home/evo/workspace/orchestration/roles/PM_PLATFORM.md`
+- `/home/evo/workspace/orchestration/roles/PM_STUDIO.md`
+- `/home/evo/workspace/orchestration/roles/PM_CONTENT.md`
+- `/home/evo/workspace/orchestration/roles/FANG_EXECUTION.md`
+- `/home/evo/workspace/orchestration/roles/FANG_VERIFICATION.md`
+- `/home/evo/workspace/orchestration/tickets/_TICKET_TEMPLATE.md`
+- `/home/evo/workspace/orchestration/tickets/done/2026-04-11_ssot_orchestration_dry_run.md`
+- `/home/evo/workspace/orchestration/tickets/done/2026-04-11_platform_orchestration_dry_run.md`
+- `/home/evo/workspace/orchestration/streams/ssot/STATE.md`
+- `/home/evo/workspace/orchestration/streams/ssot/MEMORY_LOG.md`
+- `/home/evo/workspace/orchestration/streams/ssot/ROADMAP.md`
+- `/home/evo/workspace/orchestration/streams/platform/STATE.md`
+- `/home/evo/workspace/orchestration/streams/platform/MEMORY_LOG.md`
+- `/home/evo/workspace/orchestration/streams/platform/ROADMAP.md`
+- `/home/evo/workspace/orchestration/streams/studio/STATE.md`
+- `/home/evo/workspace/orchestration/streams/studio/MEMORY_LOG.md`
+- `/home/evo/workspace/orchestration/streams/studio/ROADMAP.md`
+- `/home/evo/workspace/orchestration/streams/content/STATE.md`
+- `/home/evo/workspace/orchestration/streams/content/MEMORY_LOG.md`
+- `/home/evo/workspace/orchestration/streams/content/ROADMAP.md`
 - `/home/evo/workspace/DNA/AGENTS.md`
 - `/home/evo/workspace/DNA/agents/AI_CONTEXT.md`
 - `/home/evo/workspace/DNA/agents/MEMORY_PROTOCOL.md`
@@ -95,6 +124,10 @@
 - `/home/evo/workspace/research_vault/_templates/Normalized Note.md`
 - `/home/evo/workspace/research_vault/_templates/Review Report.md`
 - `/home/evo/workspace/_sandbox/README.md`
+- `/home/evo/workspace/_sandbox/design-sources/Stitch_design_prototyping_source.md`
+- `/home/evo/workspace/_sandbox/design-sources/Designer_MCP_design_toolbox_source.md`
+- `/home/evo/workspace/_sandbox/research-sources/GDELT_research_source.md`
+- `/home/evo/workspace/_sandbox/claude-marketplace/CLAUDE.md`
 - `/home/evo/workspace/_sandbox/agent-stack/README.md`
 - `/home/evo/workspace/projects/Evolution_Content/assets/library/README.md`
 - `/home/evo/workspace/_docs/MERGE_PLAN_2026-03-10.md`
@@ -109,6 +142,11 @@
 - `/home/evo/workspace/_docs/agent-stack/ALLOWLIST_POLICY.md`
 - `/home/evo/workspace/_docs/agent-stack/ROLE_LENSES.md`
 - `/home/evo/workspace/_docs/agent-stack/TICKET_FLOW.md`
+- `/home/evo/workspace/_docs/agent-stack/EVOLUTION_STABLES_MARKETPLACE_ORCHESTRATION_2026-04-10.md`
+- `/home/evo/workspace/_docs/agent-stack/MARKETPLACE_PM_PORTAL.md`
+- `/home/evo/workspace/_docs/agent-stack/PROJECTS_BLOCKER_AUDIT_2026-04-10.md`
+- `/home/evo/workspace/_docs/agent-stack/EVOLUTION_PLATFORM_MARKETPLACE_BUILD_PLAN_2026-04-10.md`
+- `/home/evo/workspace/_docs/agent-stack/EVOLUTION_PLATFORM_SSOT_LINKUP_MEETING_2026-04-10.md`
 - `/home/evo/workspace/_docs/agent-stack/BUDGET_RULES.md`
 - `/home/evo/workspace/_docs/hermes/README.md`
 - `/home/evo/workspace/_docs/hermes/boundary-review-brief.md`
@@ -116,6 +154,7 @@
 - `/home/evo/workspace/_docs/brand_assets/tokinvest_dds/README.md`
 - `/home/evo/workspace/_docs/system-health/monitoring-guide.md`
 - `/home/evo/workspace/_docs/system-health/HOLISTIC_EVO_AUDIT_20260301_215711.md`
+- `/home/evo/workspace/_docs/system-health/WSL_VSCODE_LINE_IN_THE_SAND_2026-04-11.md`
 - `/home/evo/workspace/_docs/openfang-wizard/racing-weekly-101-topics.md`
 - `/home/evo/workspace/_docs/openfang-wizard/racing-weekly-101-prompt.md`
 - `/home/evo/workspace/_docs/openfang-wizard/racing-weekly-101-track-conditions-2026-04-08.md`
@@ -125,8 +164,18 @@
 - `/home/evo/workspace/_docs/presentations/racing_weekly_101/track_conditions_report_2026-04-08/README.md`
 - `/home/evo/workspace/_docs/presentations/tokinvest/README.md`
 - `/home/evo/workspace/_docs/presentations/tokinvest/owner_dds_minimalist_2026-03-20/README.md`
+- `/home/evo/workspace/projects/Evolution_Content/README.md`
+- `/home/evo/workspace/projects/Evolution_Content/ARCHITECTURE.md`
+- `/home/evo/workspace/projects/Evolution_Content/workflows/ASSET_INTAKE_AND_PROMOTION_V0.md`
+- `/home/evo/workspace/projects/Evolution_Studio/README.md`
+- `/home/evo/workspace/projects/Evolution_Studio/ARCHITECTURE.md`
+- `/home/evo/workspace/projects/Evolution_Studio/briefs/prudentia-te-rapa-investor-update-2026-04-12.md`
+- `/home/evo/workspace/projects/Evolution_Studio/review/prudentia-te-rapa-investor-update-2026-04-12.md`
+- `/home/evo/workspace/projects/Evolution_Studio/packages/prudentia-te-rapa-investor-update-2026-04-12/README.md`
 - `/home/evo/workspace/projects/SSOT_Build/docs/contracts/CURRENT_DATA_CONTRACT_2026-03-13.md`
+- `/home/evo/workspace/projects/SSOT_Build/docs/contracts/MARKETPLACE_LISTING_SCHEMA_DRAFT_2026-04-10.md`
 - `/home/evo/workspace/projects/SSOT_Build/docs/contracts/FIRESTORE_WRITE_MAP_2026-03-13.md`
+- `/home/evo/workspace/projects/SSOT_Build/intake/ad_hoc/documents/content_dump/README.md`
 
 ## Archive Convention
 

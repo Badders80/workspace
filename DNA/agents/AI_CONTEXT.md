@@ -14,19 +14,22 @@ Quick loader for any AI assistant entering the active workspace.
 1. `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md`
 2. `/home/evo/workspace/AGENTS.md`
 3. `/home/evo/workspace/DNA/AGENTS.md`
-4. `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
-5. `/home/evo/workspace/DNA/ops/STACK.md`
-6. `/home/evo/workspace/DNA/ops/TRANSITION.md`
-7. `/home/evo/workspace/DNA/INBOX.md`
-8. `/home/evo/workspace/DNA/ops/DECISION_LOG.md`
+4. `/home/evo/workspace/orchestration/README.md`
+5. `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
+6. `/home/evo/workspace/DNA/ops/STACK.md`
+7. `/home/evo/workspace/DNA/ops/TRANSITION.md`
+8. `/home/evo/workspace/DNA/INBOX.md`
+9. `/home/evo/workspace/DNA/ops/DECISION_LOG.md`
 
 Read those files before answering questions about project state.
 Consult `/home/evo/workspace/DNA/ops/TECH_RADAR.md` on demand only when checking prior tool research or evaluation notes.
 
 ## Current Platform Snapshot
 
-- Active repos: `Evolution_Platform`, `SSOT_Build`, `Evolution_Content`
-- Deferred rebuilds: `Evolution_Studio`, `Evolution_Intelligence`
+- Active repos: `Evolution_Platform`, `SSOT_Build`, `Evolution_Content`, `Evolution_Studio`
+- Primary active management lanes: `SSOT`, `Platform`
+- Reserved or light lanes: `Studio`, `Content`
+- Deferred rebuilds: `Evolution_Intelligence`
 - Archived out of active surface: `Evolution_Platform/seo-baseline`, `Evolution_Marketplace`
 
 ## Working Rules
@@ -37,9 +40,14 @@ Consult `/home/evo/workspace/DNA/ops/TECH_RADAR.md` on demand only when checking
 4. Prefer GCP ADC or service-account auth over raw Google API keys.
 5. Do not remove local JSON or file fallbacks until repository seams are tested.
 6. Treat direct local reads or writes for dynamic state as state traps.
+7. `orchestration/` is the governed coordination surface for tickets, role contracts, stream state, and domain memory.
+8. `orchestration/` does not replace `DNA/` and does not authorize autonomous parallel runtimes by itself.
+9. OpenFang remains the bounded hands layer under the existing handoff rules.
+10. Workspace internal operating surfaces use `caveman lite`: drop filler, keep grammar, stay direct. Keep `DNA/` and external-facing content in normal prose.
 
 ## Current Focus
 
+- Governed orchestration rollout for SSOT and Platform
 - Root control-plane cleanup and launcher alignment
 - Stale DNA rewrite and path-drift removal
 - Gemini and Google auth routing through GCP conventions

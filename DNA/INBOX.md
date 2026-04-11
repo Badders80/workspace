@@ -26,7 +26,9 @@ Deferred workspace items and active cleanup queue.
 
 ## Deferred Workstreams
 
-- [ ] Evolution_Studio - contract-first rebuild. Define API surface, align status enums, and fix workspace boundaries before feature work.
+- [ ] Evolution_Studio app rebuild - define API surface, align status enums, and
+  turn the new manual studio workbench into a real application only after the
+  v0.0 workflow proves itself.
 - [ ] Evolution_Intelligence - module-contract rebuild. Remove placeholders, define adapters, and keep only callable or testable modules.
 - [ ] Vendor or external infrastructure - excluded from merge core and requires separate contract-led scoping before reintegration.
 

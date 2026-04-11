@@ -78,3 +78,4 @@
 /DNA/vault/*
 !/DNA/vault/env.template
 !/DNA/vault/env.schema
+.aider*

@@ -17,7 +17,7 @@ Last updated: 2026-04-09
 | Tool | Role |
 |------|------|
 | Codex CLI | Primary workspace agent for overview, planning, review, and execution inside the canonical workspace. |
-| Hermes Agent | Active personal front door for drafting, iteration, memory, and human-approved handoff into OpenFang. Launch from the workspace root so the existing `AGENTS.md` chain loads. |
+| Hermes Agent | Active personal front door for drafting, iteration, memory, and human-approved handoff into OpenFang. Launch from the workspace root so the existing `AGENTS.md` chain loads. Optional Hermes Workspace UI repo lives under `_sandbox/hermes-workspace`, not `projects/`. |
 | Claude (browser/chat) | Human-in-the-loop advisor for planning, writing, and review, usually against `workspace_full` or pasted context. Not a required local wrapper. |
 
 ### Capability-Specific
@@ -83,6 +83,14 @@ OpenFang remains the bounded execution surface.
 | Firestore | Active — primary cloud DB | evolution-engine project, australia-southeast1, Native mode. |
 | Google Vertex AI | Active | ADC via evolution-engine. Default Google execution path. Raw API key path for diagnostics only. |
 | Supabase | Transitioning out | Being superseded by Firestore. Do not build new integrations against it. |
+
+Marketplace v0.0 exception:
+- The current Evolution marketplace path is local-first and publish-first.
+- `SSOT_Build` authors canonical listing truth and publishes payloads for
+  `Evolution_Platform`.
+- Lightweight Google Sheets operator workflows are allowed around that flow,
+  but new marketplace work should not be built against Firestore or Supabase
+  unless the marketplace boundary is re-scoped again.
 
 ---
 

@@ -25,6 +25,7 @@ It does not move the operating layer into a product repo and it does not treat
 - Hosted review lanes stay explicit manual route selections.
 - Hermes is the human-facing personal layer and may suggest Fang handoff, but
   it does not replace the bounded OpenFang runtime described here.
+- Internal operating surfaces use `caveman lite`: drop filler, keep grammar, stay direct.
 
 ## Docs In This Surface
 
@@ -33,6 +34,8 @@ It does not move the operating layer into a product repo and it does not treat
 - `ALLOWLIST_POLICY.md` - current write boundaries and no-write zones
 - `ROLE_LENSES.md` - active OpenFang hand roles plus reserved future profiles
 - `TICKET_FLOW.md` - current human -> DNA -> OpenFang handoff flow
+- `EVOLUTION_STABLES_MARKETPLACE_ORCHESTRATION_2026-04-10.md` - stage-gated
+  managed delivery model for the horse syndication marketplace build
 - `BUDGET_RULES.md` - local-first spending and hosted-route controls
 
 ## Current Status

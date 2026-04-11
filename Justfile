@@ -27,6 +27,24 @@ status:
 hermes:
     bash /home/evo/workspace/_scripts/hermesc.sh
 
+# Launch the Hermes API gateway for local UI clients
+hermes-gateway:
+    bash /home/evo/workspace/_scripts/hermes-gateway.sh
+
+# Launch the Hermes Workspace UI pointed at the local Hermes gateway
+hermes-ui:
+    bash /home/evo/workspace/_scripts/hermes-ui.sh
+
+# Launch local Claude lanes
+claude-fast:
+    CLAUDE_LOCAL_MODEL=qwen3.5:latest bash /home/evo/workspace/_scripts/claude-local.sh
+
+claude-debug:
+    CLAUDE_LOCAL_MODEL=deepseek-coder-v2:16b bash /home/evo/workspace/_scripts/claude-local.sh
+
+claude-audit:
+    CLAUDE_LOCAL_MODEL=granite4:7b-a1b-h bash /home/evo/workspace/_scripts/claude-local.sh
+
 # ═══════════════════════════════════════════════════════════
 # Vault Management
 # ═══════════════════════════════════════════════════════════
@@ -204,6 +222,25 @@ audit-partners-claude date='':
 # proves itself, then redirect or retire it.
 audit-openfang-bridge date='':
     @/home/evo/workspace/_scripts/evo-openfang-audit-bridge.sh {{date}}
+
+fang-local:
+    /home/evo/workspace/_sandbox/agent-stack/ollama-trial.sh start
+    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route local
+    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh start
+
+fang-debug:
+    /home/evo/workspace/_sandbox/agent-stack/ollama-trial.sh start
+    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route local-debug
+    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh start
+
+fang-audit:
+    /home/evo/workspace/_sandbox/agent-stack/ollama-trial.sh start
+    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route local-audit
+    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh start
+
+fang-status:
+    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh status
+    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh hand active
 
 # ═══════════════════════════════════════════════════════════
 # Analysis Mirror

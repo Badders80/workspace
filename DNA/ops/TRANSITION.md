@@ -8,6 +8,60 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 
 ## Daily Log
 
+### 2026-04-11 [agent: Codex][governed-orchestration-layer-bootstrap]
+- Done: Added `/home/evo/workspace/orchestration/` as the governed coordination layer between immutable `DNA/` and executable `projects/`, updated the bootstrap and AI context load chain to include the new surface, scaffolded General Manager and Product Manager role contracts plus Fang execution and verification contracts, created domain stream memory files for `ssot`, `platform`, `studio`, and `content`, and seeded dry-run validation tickets for SSOT and Platform.
+- Next: Use `SSOT` and `Platform` as the first real active PM lanes, keep `Studio` and `Content` light until activated, and refine ticket patterns only after a few real bounded Fang handoffs prove the shape.
+- Blocked: None in structure. The next validation step is operational discipline: keep stream files current and avoid letting PM contracts drift into autonomous-runtime assumptions.
+- Decisions: `orchestration/` is now the governed coordination surface for management state, tickets, role contracts, and domain memory. It does not replace `DNA/`, it does not authorize autonomous parallel runtimes by itself, and OpenFang remains the bounded hands layer under the existing handoff flow.
+
+### 2026-04-11 [agent: Codex][caveman-lite-workspace-style]
+- Done: Adopted `caveman lite` as the default internal operating style for workspace management and execution surfaces, and registered that style rule in the bootstrap, AI context, conventions, orchestration, and agent-stack docs.
+- Next: Keep using concise internal prose in tickets, stream notes, and role contracts while leaving `DNA/` and external-facing content in normal prose.
+- Blocked: None.
+- Decisions: `caveman lite` applies to internal operating surfaces only. It is a style rule, not a governance replacement.
+
+### 2026-04-11 [agent: Codex][hermes-workspace-rehome-to-sandbox]
+- Done: Re-homed the external Hermes Workspace UI clone from the workspace root to `/home/evo/workspace/_sandbox/hermes-workspace`, updated the Hermes launcher and workspace maps to point at the new location, and clarified in the sandbox and Hermes docs that the UI is an optional local-first tooling surface rather than a `projects/` product repo.
+- Next: Use `just hermes-ui` from the updated path for future local UI sessions, and decide later whether the clone should remain installed permanently or be removed and re-cloned on demand.
+- Blocked: Runtime verification depends on the local Hermes gateway runtime and UI dependencies remaining installed; those were not rebuilt in this structural pass.
+- Decisions: Hermes stays adopted and active, but its UI repo now follows the same sidecar/tooling posture as OpenFang instead of living loose at the workspace root.
+
+### 2026-04-10 [agent: Codex][ssot-marketplace-schema-draft]
+- Done: Drafted the first producer-side marketplace listing contract at `/home/evo/workspace/projects/SSOT_Build/docs/contracts/MARKETPLACE_LISTING_SCHEMA_DRAFT_2026-04-10.md`, linked it from the `SSOT_Build` README, and updated `projects/README.md` to make the overall-manager -> line-manager -> auditor operating model explicit alongside the existing handoff rules.
+- Next: Turn the draft schema into concrete `SSOT_Build` record changes for horse listing attachment, lightweight performance summary, and document-wizard inputs without touching `Evolution_Platform` yet.
+- Blocked: The draft is still a governance and contract artifact only; the live seed shape, UI state, and publish scripts have not been updated to match it yet.
+- Decisions: The marketplace listing stays attached to the horse SSOT as a bounded listing attachment layer inside `SSOT_Build`, rather than moving into a separate enrichment system.
+
+### 2026-04-10 [agent: Codex][evolution-platform-ssot-linkup-meeting]
+- Done: Reviewed the live `SSOT_Build` producer outputs against the live `Evolution_Platform` marketplace consumer and wrote `/home/evo/workspace/_docs/agent-stack/EVOLUTION_PLATFORM_SSOT_LINKUP_MEETING_2026-04-10.md` as the shared readiness note. Registered the new meeting document in `DNA/ops/CONVENTIONS.md`. Confirmed that the current legacy Platform mirror matches the latest SSOT legacy payload except for `generatedAt`, while also confirming that Platform still ignores the richer draft contract, per-listing release eligibility, inventory, performance-summary, and document-reference surfaces.
+- Next: Take one cross-project seam slice next: tighten the producer contract shape, remove local-path leakage, define one stable listing identity rule, and add a Platform adapter plus parity checks before more marketplace UI widening.
+- Blocked: Producer and consumer still disagree on what makes a listing truly live. The legacy payload can surface `publishStatus: live` while the draft contract still shows `releaseStageEligibility.production = false` and horse-attached listing state remains local-first.
+- Decisions: No new architecture lock was taken in this meeting. The clear recommendation is to prioritize the governed SSOT -> Platform contract seam over additional presentation work.
+
+### 2026-04-10 [agent: Codex][ssot-horse-listing-shape-phase-1]
+- Done: Added the first live-compatible horse-attached schema extension in `SSOT_Build` by making `performance_summary` and `listing` optional subtrees on the horse record types in `App.tsx` and `src/lib/ssot/ssot-read-repository.ts`, then seeded both existing horse records with the new structure in `intake/v0.1/seed.json`. Updated the `SSOT_Build` README to explain the new lightweight attachments and verified `npm run build`.
+- Next: Start using the new horse-attached `listing` and `performance_summary` structure in the UI and document-wizard field mapping, then decide which parts remain local-only versus becoming required for publish.
+- Blocked: The new fields are typed and seeded, but the current UI and publish script still largely ignore them. Platform integration remains intentionally untouched.
+- Decisions: The first implementation step is additive and backward-compatible: keep the existing flat horse fields as the active runtime path while introducing nested horse-attached schema extensions for the future contract.
+
+### 2026-04-10 [agent: Codex][ssot-horse-page-and-publish-contract-phase-2]
+- Done: Rendered the new horse-attached `performance_summary` and `listing` fields on the horse page in `SSOT_Build`, hardened the publish flow so `npm run publish:marketplace` now emits SSOT-owned artifacts first, added a new versioned producer-side contract output at `/home/evo/workspace/projects/SSOT_Build/data/published/marketplace-contract-draft.v0.json`, and made Platform mirroring explicit through `npm run publish:marketplace:platform`. Also created `/home/evo/workspace/projects/SSOT_Build/intake/ad_hoc/documents/content_dump/` as the temporary historical-doc intake surface.
+- Next: Clean the old absolute document paths now exposed clearly in the new contract output, then map the horse-attached listing and performance fields into the document-wizard workstream.
+- Blocked: The new contract output still reveals historical filesystem-path drift in existing document metadata, and the Platform consumer still intentionally ignores the new contract artifact until its own lane is ready.
+- Decisions: SSOT publish now hardens from the producer side first. Platform mirroring is no longer implicit; it must be requested deliberately.
+
+### 2026-04-10 [agent: Codex][ssot-legal-ground-and-officer]
+- Done: Updated the SSOT New Zealand compliance surface to point at the NZTR Rules of Racing PDF effective from 6 April 2026, documented that reference as the legal ground for New Zealand horse and listing work, and added an observer-only legal-officer role to the SSOT vertical across the shared project map and SSOT docs.
+- Next: Use the legal-officer lane only when legal-ground drift, disclosure ambiguity, or governing-reference conflicts need a bounded review.
+- Blocked: The legal-officer role is governance only for now; no separate implementation lane or automation path is wired to it.
+- Decisions: The legal officer is seen but not heard by default: observer-only, escalated by the CEO, overall manager, or SSOT line manager only.
+
+### 2026-04-10 [agent: Codex][hermes-workspace-ui-local-launch]
+- Done: Verified the workspace gate with `just check`, confirmed the local `hermes-workspace` repo and dependencies were already present, proved the Hermes API server comes up on `127.0.0.1:8642` when launched with `API_SERVER_ENABLED=true`, and smoke-tested Hermes Workspace locally on `http://localhost:3000` against that backend.
+- Next: Use the new `just hermes-gateway` and `just hermes-ui` launchers for local-first Hermes UI use, then decide later whether the UI deserves governed always-on startup under `C:\evo\startup`.
+- Blocked: `tailscale` is not currently installed in this WSL environment, so private phone access is documented but cannot be verified from this shell yet.
+- Decisions: Hermes Workspace is now a documented optional private UI surface for Hermes in the canonical workspace; keep it local-first and Tailscale-first, not publicly exposed.
+
 ### 2026-03-10 [agent: Codex][phase-1-governance-reroot]
 - Done: Wrote `/home/evo/AI_SESSION_BOOTSTRAP.md` and `/home/evo/AGENTS.md` with `/home/evo` as canonical root.
 - Next: Complete Phase 2 skeleton and destination mapping before any file moves begin.
@@ -238,6 +292,54 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Decisions: Treat marketplace readiness as a bounded Phase 0 operating question, not a reason to widen workspace tooling or prematurely implement the full North Star architecture.
 - Done: Created `/home/evo/workspace/_scripts/sync-workspace-full-git.sh` as a repeatable broad snapshot export for `workspace_full`, added `just workspace-full` and `just workspace-full-apply`, and set the default exclusions to nested `.git/` directories, secret-shaped files, media assets (`mp3/mp4/jpg/jpeg/png/gif/webp/svg/mov/wav`), and files above the GitHub-safe size threshold.
 - Next: Re-run the workspace-full script whenever a fresh broad agent-facing snapshot is needed, and only widen the exclusions if GitHub rejects a new class of file or the repo becomes too heavy for the intended investigation workflow.
+
+### 2026-04-10 [agent: Codex][marketplace-pm-portal-and-projects-audit]
+- Done: Created the governed marketplace operator control surface at `/home/evo/workspace/_docs/agent-stack/MARKETPLACE_PM_PORTAL.md`, wrote the first start-readiness audit at `/home/evo/workspace/_docs/agent-stack/PROJECTS_BLOCKER_AUDIT_2026-04-10.md`, and registered both files in conventions.
+- Next: Run the Stage 0 `SSOT_Build` backend-drift audit that classifies all Firebase, Firestore, and Supabase references into `remove`, `replace`, `rename`, or `historical`, then update governance if the Sheets-first direction is confirmed.
+- Blocked: `SSOT_Build` still carries active Firestore and older Supabase migration drift in docs, helper code, and backlog notes, which is not a hard kickoff blocker but is the first clean-start blocker for the new marketplace direction.
+- Decisions: Use the tracked PM portal markdown file as the operator memory and resume surface for the marketplace workstream; keep VS Code as the v0.0 cockpit instead of introducing a new PM dashboard before the workflow is proven.
+
+### 2026-04-10 [agent: Codex][marketplace-delegated-blocker-audit-deepened]
+- Done: Delegated zero-cost local audit lanes across `SSOT_Build`, `Evolution_Platform`, and the broader `/projects` surface, then verified the biggest findings directly: `SSOT_Build` still depends on dead Vite middleware seams, `Evolution_Platform` exposes the founder manual-ops inbox without auth while rendering applicant PII, `projects/README.md` is a misleading operator map, `npm test` fails in `Evolution_Platform`, and tracked `Geist*.woff2` files are actually HTML documents.
+- Next: Convert the verified findings into the Stage 0 remediation backlog, starting with the `SSOT_Build` backend-drift classification pass, the founder inbox protection decision, and the `projects/README.md` cleanup.
+- Blocked: A clean marketplace kickoff still depends on fixing misleading control and runtime surfaces before broader implementation builds on the wrong assumptions.
+- Decisions: The PM portal now uses a status-board structure (`Urgent`, `Working On`, `Next Up`, `Watchlist`) so future status requests can be answered reliably from repo memory.
+
+### 2026-04-10 [agent: Codex][marketplace-operator-map-and-ssot-alignment]
+
+### 2026-04-10 [agent: Codex][evolution-platform-marketplace-build-plan]
+- Done: Read the current marketplace governance chain, audited the live `Evolution_Platform` marketplace and `MyStable` surfaces, used parallel worker lanes to identify contract and flow gaps, and wrote `/home/evo/workspace/_docs/agent-stack/EVOLUTION_PLATFORM_MARKETPLACE_BUILD_PLAN_2026-04-10.md` to capture the worker model, sandbox options, internal template reuse plan, missing information, and mandatory guardrails for marketplace expansion.
+- Next: Draft the proposed `listing` + `application` + `dashboard` contract split in the sandbox first, then promote the approved version into governed docs before building the first authenticated `MyStable` shell.
+- Blocked: Real dashboard and purchase flows are still blocked by missing application/order/holding contracts, missing inventory truth, and the current manual-ops JSON state trap.
+- Decisions: Prefer a reuse-first, sandbox-first path for the next marketplace slice; expand the experience with a truthful authenticated dashboard shell before attempting any real checkout or holdings automation.
+
+### 2026-04-10 [agent: Codex][marketplace-provider-and-access-clarity]
+- Done: Updated the marketplace build brief and PM portal to reflect the clarified direction: the marketplace page itself is not the blocker, `Sumsub` is the preferred KYC seam, `Swipe`, `Wise`, and bank transfer are the preferred payment rails, `SSOT_Build` owns canonical listing truth while Google Sheets may enrich marketing copy, and the next architecture pass must explicitly separate public, authenticated-user, and operator-only surfaces.
+- Next: Draft the missing contract layer for inventory, application, KYC case, payment record, allocation, and dashboard state before activating any real-money flow.
+- Blocked: The project still lacks a durable system of record and explicit per-user access model for application status, documents, payments, and holdings.
+- Decisions: Treat provider choices as seams rather than systems of record, and keep Google Sheets out of canonical offering, inventory, allocation, and legal truth.
+
+### 2026-04-10 [agent: Codex][projects-line-manager-model]
+- Done: Updated `/home/evo/workspace/projects/README.md` with a concrete product / line manager model for `SSOT_Build`, `Evolution_Platform`, `Evolution_Content`, and `Evolution_Studio`, including authority boundaries, anti-slippage rules, a handoff contract, and the recommended split while parallel chats are active. Updated the marketplace PM portal so the shared operator memory reflects the same coordination model.
+- Next: Use the shared ownership map while the parallel `SSOT_Build` chat continues, and escalate only when a contract, release-stage rule, or truth boundary changes.
+- Blocked: Parallel work will still drift if downstream assumptions are changed without updating the shared docs in the same session.
+- Decisions: Prevent slippage by assigning one effective manager per project surface, and treat cross-project slices as lead-surface decisions with explicit downstream impacts rather than informal shared ownership.
+
+### 2026-04-10 [agent: Codex][manager-handshake-matrix]
+- Done: Tightened the project coordination model so it now includes an explicit producer/consumer handshake, especially for `SSOT_Build -> Evolution_Platform`: what gets handed over, what format is expected, what the receiving lane may assume, and what should happen when a contract is incomplete. Mirrored the same producer/consumer expectations into the marketplace build brief.
+- Next: Use the handshake matrix when the parallel `SSOT_Build` chat defines the publish contract so `Evolution_Platform` can build against an agreed intake surface instead of inferred assumptions.
+- Blocked: The exact minimum published payload fields still need to be finalized in the SSOT contract work.
+- Decisions: Treat cross-project engagement as an explicit contract between producing and consuming managers, not just a loose ownership boundary.
+- Done: Rewrote `/home/evo/workspace/projects/README.md` into a reliable operator map, removed the live Firestore repository path and helper files from `SSOT_Build`, rewrote `SSOT_Build/README.md` and the active contract surfaces around the local-first publish model, and validated the result with a successful `npm run build` in `projects/SSOT_Build`.
+- Next: Resolve the remaining dead middleware seam in `SSOT_Build`, clean stale absolute paths from canonical seed metadata, and then move to the `Evolution_Platform` founder inbox hardening work using the prepared review guidance.
+- Blocked: The founder manual-ops inbox in `Evolution_Platform` is still unsafe for broader staging use until a fail-closed access rule is added.
+- Decisions: Treat older Supabase and Firestore references that remain only in historical audits and architecture notes as archive-context debt, not as live implementation direction.
+
+### 2026-04-10 [agent: Codex][marketplace-stage-0-1-implementation]
+- Done: Implemented the Stage 0-1 marketplace plan in code. `SSOT_Build` no longer depends on live proxy middleware at runtime, stale canonical seed paths were moved to workspace-native paths, `Evolution_Platform` now uses `working_on|pending|production` release stages, founder manual-ops access is fail-closed behind a dedicated env gate plus Google-auth allowlist, the old fake live fallback behavior was removed from active marketplace and MyStable routes, and the broken pseudo-test was replaced with a real release-stage test suite.
+- Next: Verify the pending-stage gated review flow end-to-end with real env settings and operator accounts, then begin the authenticated dashboard shell on top of the new release and access primitives.
+- Blocked: Real gated review validation still depends on runtime env configuration for Google auth and operator allowlist values.
+- Decisions: Default `MARKETPLACE_RELEASE_STAGE` to `working_on` so marketplace work fails closed by default instead of surfacing prematurely, and keep the existing marketplace implementation as the live base rather than rebuilding it from scratch.
 - Blocked: The broad snapshot still intentionally keeps local installs and generated code when they fit, so repo weight can grow quickly even with media and oversized files excluded.
 - Decisions: Keep `Badders80/workspace` as the curated analysis mirror and use `Badders80/workspace_full` for the widest practical GitHub-safe workspace export.
 
@@ -792,3 +894,105 @@ Append-only merge and workspace-consolidation handoff log for the `/home/evo/wor
 - Next: Decide later whether `_docs/MERGE_PLAN_2026-03-10.md` also graduates out of the active root into a dedicated merge-history or legacy surface once it is no longer a working reference.
 - Blocked: None in repo; this pass was structural only.
 - Decisions: Legacy root docs that compete with the live bootstrap should move out of the active workspace surface, while still-useful Google notes can stay in the workspace when they are clearly grouped and marked non-canonical.
+
+### 2026-04-09 [agent: Codex][prudentia-te-rapa-investor-update-pack]
+- Done: Reviewed the existing `Evolution_Platform` investor-update surfaces, verified the current Prudentia field details against the live horse profile/current-fields pages plus the user-supplied field sheet, created two ready-to-use pre-race investor update assets at `/home/evo/workspace/projects/Evolution_Platform/public/updates/Prudentia-TeRapa-12Apr2026.html` and `/home/evo/workspace/projects/Evolution_Platform/public/updates/Prudentia-TeRapa-Gmail-12Apr2026.html`, and checked the live Hermes/OpenFang boundary docs for workflow fit.
+- Next: Review the draft against any late rider confirmation, scratchings, or track-condition movement before sending, and decide whether this should become a repeatable race-week update pattern for Prudentia and similar investor communications.
+- Blocked: Local media inspection stayed shallow because `ffmpeg` and `ffprobe` are not installed in this shell, so the supplied Prism video was treated as linked supporting material rather than frame-reviewed source.
+- Decisions: For this workflow, Hermes is a strong fit for drafting and iteration, while bounded packaging can later move into OpenFang `production-studio` once the format becomes repeatable enough to standardize.
+
+### 2026-04-09 [agent: Codex][evolution-content-prudentia-v0]
+- Done: Re-established `/home/evo/workspace/projects/Evolution_Content/` as a real workspace surface, added the governed `drop/`, `media/`, `updates/`, `catalog/`, `templates/`, and `workflows/` structure, moved the loose Prudentia MP4 intake and its Windows sidecar out of the `projects/` root, classified the clip into a canonical horse media path, created the first Prudentia content record plus file-first catalog entry, and aligned bootstrap, manifest, conventions, and decision-log surfaces to the four-surface content model.
+- Next: Decide whether the next pass should start storing copy snapshots directly inside `Evolution_Content/updates/` or continue linking back to `Evolution_Platform` until the first `Evolution_Studio` workflow pass is ready.
+- Blocked: Media inspection is still lightweight because `ffmpeg` and `ffprobe` are not installed in this shell, so the first asset is cataloged by file path and context rather than richer extracted technical metadata.
+- Decisions: `Evolution_Content` now holds approved asset and metadata truth for v0.0, while `Evolution_Studio` remains a documented and manual workflow boundary rather than a live application surface.
+
+### 2026-04-09 [agent: Codex][evolution-studio-v0-workbench]
+- Done: Created `/home/evo/workspace/projects/Evolution_Studio/` as a real workspace project surface, added the first manual production lanes (`intake/`, `briefs/`, `drafts/`, `packages/`, `review/`, `approved/`, and `publish-queue/`), linked the project to the shared `/home/evo/.env`, and updated bootstrap, manifest, inbox, conventions, and decision-log surfaces so Studio is now the active internal making boundary for content v0.0.
+- Next: Move the first live working item into `Evolution_Studio` by creating a Prudentia production packet that links SSOT facts, current draft copy, package outputs, review notes, and final publish destinations across Content and Platform.
+- Blocked: The Studio surface is intentionally manual and file-first for now; no UI, API, or automation layer has been added yet.
+- Decisions: `Evolution_Studio` is active as the production workbench now, while the future dashboard or app rebuild remains deferred until the workflow shape is proven.
+
+### 2026-04-09 [agent: Codex][prudentia-studio-work-item-seed]
+- Done: Seeded the first real `Evolution_Studio` work item for the Prudentia Te Rapa investor update, created a project-local Studio `.venv` for bounded video review instead of adding global tooling, extracted timed stills plus a contact sheet from the canonical MP4, promoted one selected still into both `Evolution_Content` and the `Evolution_Platform` public image surface, updated the Te Rapa web and Gmail HTML outputs to use the selected still as the hero image, and linked the Studio package back into the Prudentia content record metadata.
+- Next: If a verified trainer quote or spoken audio line is supplied later, add it as a second-pass enhancement to the Studio package and then promote it into the public copy only once it is confirmed.
+- Blocked: The clip contains an audio track, but there is no local speech-to-text tool in the current shell, so no trainer quote was extracted or added from the video.
+- Decisions: Use the video as a visual proof asset now, and avoid inventing commentary that is not directly supported by the reviewed footage.
+
+### 2026-04-09 [agent: Codex][update-asset-delivery-model-v0]
+- Done: Implemented the v0.0 update asset path model so raw files enter through `Evolution_Content/drop/`, canonical assets stay under `Evolution_Content/media/`, Studio records the explicit publish step, and any HTML-required delivery assets now live under standardized `Evolution_Platform/public/images/updates/<horse>/<update-slug>/...` and `public/videos/updates/<horse>/<update-slug>/...` paths. Updated the Prudentia Te Rapa example to use Platform-hosted image and video URLs instead of the prior external video link.
+- Next: Backfill the same delivery-path pattern into older update items as they are next touched, and decide later whether a small helper script should automate only the copy-and-record step without removing manual approval.
+- Blocked: Google Drive is still only a convenience holding surface in this model; no Drive-based final delivery path has been wired or approved.
+- Decisions: For investor updates, Platform public paths are the final asset-delivery contract. Content remains canonical; Studio owns the promotion step.
+
+### 2026-04-10 [agent: Codex][claude-local-gemma4-launcher]
+- Done: Removed the mistaken carousel-specific tester from the tracked workspace path, added `/home/evo/workspace/_scripts/claude-local.sh` as the dedicated local Claude launcher, updated `/home/evo/.bashrc` so `claude` now routes through that launcher instead of a brittle self-shadowing alias with globally exported Anthropic env vars, and aligned `/home/evo/workspace/_scripts/claudec.sh` to use the same local launcher surface. Verified the two real working paths on this machine: interactive `ollama launch claude --model gemma4:e4b`, and non-interactive `claude --bare --print` through `http://localhost:11434`.
+- Next: Open a fresh interactive shell so the new alias takes effect everywhere, then use `claude` as the default local Gemma launcher and keep `claude-native` available when the raw binary is needed.
+- Blocked: The local bridge is still model-sensitive, so prompt quality and tool behavior can vary more than with hosted Claude models even when the transport path is now clean.
+- Decisions: The actual goal was local Claude Code on Gemma 4, not carousel generation. On this machine, the supported `ollama launch` path is the default interactive route, and the root URL `http://localhost:11434` is the correct direct fallback for print or piped workflows.
+
+### 2026-04-10 [agent: Codex][local-claude-lane-shortcuts]
+- Done: Added shell shortcuts in `/home/evo/.bashrc` for `claude-fast`, `claude-debug`, `claude-audit`, and `claude-yolo`, all routed through the same local Claude launcher with explicit model overrides. Added matching `just` targets plus `fang-local`, `fang-debug`, `fang-audit`, and `fang-status` helpers so the existing OpenFang local routes are easy to bring up as bounded parallel lanes. Updated the live agent-stack runbook to document the local Claude role split and the new helper commands.
+- Next: Use these as the default task presets: fast triage first, debugger when implementation gets sticky, auditor before trusting important output, and OpenFang lanes only when a bounded parallel reviewer or planner is actually useful.
+- Blocked: These helpers make parallel lanes easier to launch, but they do not create true automatic interrupt-driven supervision by themselves; with the current stack, background teams still need explicit checking, polling, or a later watcher layer.
+- Decisions: Local Claude is now treated as a role-based lane surface instead of a single generic model. Preset selection stays human-controlled rather than automatic.
+
+### 2026-04-10 [agent: Codex][evolution-stables-marketplace-orchestration-blueprint]
+- Done: Wrote `/home/evo/workspace/_docs/agent-stack/EVOLUTION_STABLES_MARKETPLACE_ORCHESTRATION_2026-04-10.md` to formalize the managed delivery model for the marketplace build. The blueprint locks the current mental model: `SSOT_Build` as canonical horse, lease, and offering truth; `Evolution_Platform` as the consuming experience layer; assets referenced by metadata; provider seams deferred until proven. It also defines the stage map, active agent roles, preset environments, handoff rules, and current touch boundaries in line with the live Hermes/OpenFang/Codex stack. Updated the agent-stack README, conventions registry, and decision log to register the new operating surface.
+- Next: Use the new blueprint to drive the first real marketplace stage packet, starting with Stage 0 contract lock and the Stage 1 SSOT knowledge-hub hardening pass.
+- Blocked: The blueprint deliberately does not authorize parallel autonomous code-writing teams; the current stack still treats sidecars as bounded read-only or planning lanes unless governance changes later.
+- Decisions: The marketplace build now has a governed stage-gated orchestration model. One writer remains the default, while local Claude lanes and OpenFang hands provide bounded parallel scouting, debugging, and audit support.
+
+### 2026-04-10 [agent: Codex][claude-marketplace-sandbox-guardrails]
+- Done: Created `/home/evo/workspace/_sandbox/claude-marketplace/` as a dedicated local-Claude scratch surface with subfolders for `notes/`, `drafts/`, `sql/`, `exports/`, and `artifacts/`. Added `/home/evo/workspace/_sandbox/claude-marketplace/CLAUDE.md` to keep Claude write access confined to that folder and to stop it from inventing workspace-level memory files or touching governed repo surfaces. Added `/home/evo/workspace/_sandbox/claude-marketplace/START_HERE.txt` with bounded prompt patterns, and added `/home/evo/workspace/_scripts/claude-marketplace-sandbox.sh` so Claude can always be launched from the correct folder with the fast local `qwen3.5:latest` lane by default.
+- Next: Use the sandbox launcher for local-Claude exploration and planning work, then promote only approved artifacts into the governed workspace surfaces.
+- Blocked: This guardrail setup reduces accidental drift, but Claude can still make bad suggestions if prompts are vague; the remaining safety comes from keeping it in the sandbox and treating live repos as read-only until promotion is approved.
+- Decisions: Local Claude now has an explicit scratchpad surface for marketplace work. The safe default is sandbox-first exploration with no automatic writes to `projects/`, `DNA/`, or `_docs/`.
+
+### 2026-04-10 [agent: Codex][claude-local-capability-aware-launcher]
+- Done: Reproduced the local Claude failures against `deepseek-coder-v2:16b` and `granite4:7b-a1b-h`, confirmed via `ollama show` that DeepSeek does not advertise `tools` while Granite does, and updated `/home/evo/workspace/_scripts/claude-local.sh` so it now probes model capabilities, auto-disables Claude Code tools for non-tool-capable local models, stops forcing `--bare` on tool-capable local lanes, and accepts wrapper-provided `CLAUDE_LOCAL_ADD_DIR` context. Updated the marketplace sandbox launcher, sandbox start notes, runbook, and decision log to match the new behavior.
+- Next: Smoke-test the launcher from a fresh shell with `claude-debug` and `claude-audit`, then decide later whether a stricter read-only local audit preset should be added for Claude Code itself.
+- Blocked: Local open-model tool use still varies in quality versus hosted Claude. `deepseek-coder-v2:16b` is now stable only in chat-only mode, and even tool-capable local models remain weaker or less reliable than hosted Claude for deep multi-step audits.
+- Decisions: Match launcher behavior to Ollama-reported model capability instead of forcing one local Claude path for every model. Treat `granite4:7b-a1b-h` as the local audit lane and `deepseek-coder-v2:16b` as a chat-first debugger lane, not a full Claude Code tool runner.
+
+### 2026-04-10 [agent: Codex][claude-local-model-picker]
+- Done: Added wrapper-level local model discovery to `/home/evo/workspace/_scripts/claude-local.sh` with `--list-local-models` and `--pick-model`, backed by the real `ollama list` inventory. Updated the marketplace sandbox start notes, runbook, and decision log so operators can select from all installed local models even though Claude Code's built-in `/model` picker only shows a limited custom-model surface.
+- Next: If the picker becomes a daily habit, decide later whether the `claude` shell alias should default to `--pick-model` or whether that should stay an explicit opt-in.
+- Blocked: The built-in Claude Code `/model` UI itself still cannot be expanded by the wrapper; the full local inventory is available through the launcher, not inside the native Claude picker.
+- Decisions: Keep all-model discovery at the launcher layer and treat Claude Code's built-in `/model` picker as a narrow upstream UI that we cannot fully control.
+
+### 2026-04-10 [agent: Codex][claude-alias-picker-default]
+- Done: Updated `/home/evo/.bashrc` so the plain `claude` alias now launches `/home/evo/workspace/_scripts/claude-local.sh --pick-model` by default, while leaving `claude-fast`, `claude-debug`, `claude-audit`, and `claude-yolo` as pinned lane shortcuts. Updated the runbook and decision log so the documented behavior matches the shell.
+- Next: Open a fresh shell or `source /home/evo/.bashrc` before relying on the new default alias in the current terminal.
+- Blocked: Existing shells keep the old alias until they are reloaded.
+- Decisions: The default `claude` entrypoint should prioritize model choice visibility over a silent fixed-model launch. Fixed aliases remain available when speed matters more than selection.
+
+### 2026-04-10 [agent: Codex][claude-picker-role-labels]
+- Done: Added short role labels to the wrapper-level local Claude picker in `/home/evo/workspace/_scripts/claude-local.sh` so the most useful local lanes are visible at selection time: `granite4:7b-a1b-h` now shows `audit, tools`, `deepseek-coder-v2:16b` shows `debug, chat-only`, `qwen3.5:latest` shows `fast, triage`, `gemma4:e4b` shows `balanced, general`, and `claude-yolo:latest` shows `yolo, draft`. Updated the runbook to mention the new picker hints.
+- Next: Adjust the label wording later if real usage suggests better names for any lane.
+- Blocked: The plain `--list-local-models` command remains intentionally raw and unlabelled so it stays script-friendly.
+- Decisions: Keep the role hints inside the interactive picker only, and keep them short enough that the menu stays scannable.
+
+### 2026-04-11 [agent: Codex][wsl-vscode-line-in-the-sand]
+- Done: Audited the live VS Code timeout issue end-to-end, confirmed the main fault line was WSL instability rather than Gemini, backed up and hardened `C:\Users\Evo\.wslconfig` by removing mirrored networking, increasing swap to `12GB`, and moving the swap file to `S:\WSL\swap.vhdx`, removed non-Codex AI extension residue (`github.copilot-chat`, `codeium.codeium`, stale WSL Gemini companion), pruned stale Windows WSL Remote server builds and old VS Code / WSL server logs, restarted WSL, and verified a fresh `code .` launch from `/home/evo/workspace` with a materially cleaner WSL exthost startup. Documented the new baseline in `/home/evo/workspace/_docs/system-health/WSL_VSCODE_LINE_IN_THE_SAND_2026-04-11.md`.
+- Next: Optionally prune or archive the heaviest low-value WSL caches later, but leave `_sandbox/agent-stack` alone unless it starts causing real pressure.
+- Blocked: None for the Ollama split. The active runtime remained in WSL, and the broader `S:` catalog was converted into an explicit cold archive.
+- Decisions: For this machine, the Codex-first VS Code baseline now means NAT-style WSL networking, `S:`-backed WSL swap, and no competing chat-assistant extensions in the remote WSL extension host unless they are explicitly re-approved.
+
+### 2026-04-11 [agent: Codex][ollama-store-reconciliation]
+- Done: Mapped the live Ollama references, confirmed the sanctioned runtime is still `/home/evo/workspace/models/ollama`, proved that the WSL store is the active `qwen3:14b` subset, confirmed the larger `S:\Models\Ollama\models` catalog was not the live runtime, and converted that Windows-side catalog into an explicit cold archive by renaming it to `S:\Models\Ollama\archive_catalog_2026-04-11`. Added `S:\Models\Ollama\README.txt` so the folder no longer reads like a live runtime surface.
+- Next: If the archived catalog is never needed, decide later whether to prune it after a comfortable soak period; until then it remains a reversible cold archive on `S:`.
+- Blocked: None.
+- Decisions: The line is now clear: WSL owns the live Ollama runtime store; `S:` may keep a cold archive, but it is no longer presented as an active parallel model path.
+
+### 2026-04-11 [agent: Codex][low-risk-cache-prune]
+- Done: Performed the approved low-risk cleanup pass without touching `_sandbox`, removed rebuildable WSL caches under `/home/evo/.cache`, removed npm cache surfaces under `/home/evo/.npm`, cleared stale WSL VS Code workspace-state directories, and pruned older Windows VS Code workspace-state entries while keeping the recent/current set. The cleanup reduced `/home/evo/.cache` from about `2.5G` to `80K`, `/home/evo/.npm` from about `1.9G` to `1.2M`, reduced WSL VS Code workspace state to one live directory, and reduced Windows VS Code workspace-state directories from `69` to `9`.
+- Next: Leave the machine to soak on the new baseline and only prune more if a specific surface starts regrowing unusually fast.
+- Blocked: None.
+- Decisions: Rebuildable caches and stale editor state are fair game for periodic cleanup; `_sandbox` remains a deliberate hold-all and is not part of this low-risk cleanup lane.
+
+### 2026-04-11 [agent: Codex][aider-openrouter-backup-lane]
+- Done: Installed `aider` locally via the official isolated installer into `/home/evo/.local/bin`, hardened `/home/evo/workspace/_scripts/aidere.sh` so it resolves `~/.local/bin` reliably, added `/home/evo/workspace/_scripts/aidere-openrouter.sh` as the OpenRouter-first backup lane using the shared `/home/evo/.env` `OPENROUTER_API_KEY`, updated `/home/evo/workspace/_scripts/evo.sh` to expose `evo aider-or`, and added convenience shims plus aliases for `aidere` and `aider-or`.
+- Next: Use `aider-or` or `evo aider-or` as the primary Codex-rate-limit fallback, and only lean on local Ollama models for lighter/cheaper tasks unless stronger local models are installed later.
+- Blocked: None. The fallback lane is installed and resolves the shared OpenRouter credential from `/home/evo/.env`.
+- Decisions: The preferred backup inside VS Code is terminal-first Aider on OpenRouter rather than adding another heavyweight editor chat extension surface.
