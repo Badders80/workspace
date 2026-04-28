@@ -1,0 +1,275 @@
+{
+  "profile": "Investor Update (IU)",
+  "version": "0.0",
+  "components": {
+    "heading": {
+      "font": "font-serif",
+      "size": "44px",
+      "lineHeight": "1.1",
+      "weight": "regular",
+      "marginBottom": "32px",
+      "color": "color-text-dark"
+    },
+    "subheading": {
+      "font": "font-serif",
+      "size": "28px",
+      "lineHeight": "1.2",
+      "weight": "regular",
+      "marginBottom": "16px",
+      "color": "color-text-dark"
+    },
+    "summary_block": {
+      "label": {
+        "font": "font-sans",
+        "size": "12px",
+        "weight": "bold",
+        "textTransform": "uppercase",
+        "letterSpacing": "iu-label",
+        "color": "color-text-dark"
+      },
+      "content": {
+        "font": "font-serif",
+        "size": "20px",
+        "weight": "regular",
+        "lineHeight": "1.4",
+        "color": "color-text-dark"
+      }
+    },
+    "body": {
+      "font": "font-sans",
+      "size": "15px",
+      "lineHeight": "1.75",
+      "weight": "regular",
+      "marginBottom": "2.5em",
+      "color": "#1a1a1a"
+    },
+    "quote": {
+      "background": "color-text-dark",
+      "borderLeft": "3px solid color-brand-primary",
+      "font": "font-serif",
+      "size": "22px",
+      "style": "italic",
+      "weight": "medium",
+      "color": "color-text-primary",
+      "padding": "32px 24px",
+      "margin": "0",
+      "borderRadius": "12px",
+      "quoteMark": {
+        "font": "font-serif",
+        "size": "32px",
+        "lineHeight": "0.8",
+        "verticalAlign": "top",
+        "marginRight": "4px",
+        "content": "\""
+      },
+      "caption": {
+        "font": "font-sans",
+        "size": "11px",
+        "style": "normal",
+        "color": "#999999",
+        "weight": "600",
+        "textTransform": "uppercase",
+        "letterSpacing": "1px",
+        "display": "block",
+        "content": "— {speaker}",
+        "prefix": "— "
+      }
+    },
+    "cta": {
+      "textAlign": "center",
+      "color": "color-brand-primary",
+      "textDecoration": "underline",
+      "font": "font-sans",
+      "size": "15px"
+    },
+    "header_branding": {
+      "logo": {
+        "src": "https://evolutionstables.nz/updates/Evolution-Stables-Logo-White.png",
+        "width": "270px",
+        "display": "block",
+        "height": "auto",
+        "alt": "Evolution Stables"
+      },
+      "tagline": {
+        "font": "font-sans",
+        "size": "12px",
+        "weight": "regular",
+        "letterSpacing": "3px",
+        "textTransform": "uppercase",
+        "color": "color-brand-primary",
+        "marginTop": "8px",
+        "content": "THE HOME OF DIGITAL-SYNDICATION"
+      },
+      "container": {
+        "backgroundColor": "color-text-dark",
+        "padding": "40px 24px 20px 24px",
+        "textAlign": "left"
+      }
+    },
+    "footer": {
+      "container": {
+        "position": "relative",
+        "width": "100%",
+        "background": "color-text-dark",
+        "color": "color-text-primary",
+        "padding": "56px 24px 60px",
+        "marginTop": "72px",
+        "display": "flex",
+        "flexDirection": "column",
+        "gap": "32px",
+        "textAlign": "center"
+      },
+      "hero": {
+        "headline": {
+          "font": "font-serif",
+          "size": "26px",
+          "weight": "regular",
+          "color": "color-text-primary",
+          "margin": "0 0 14px 0",
+          "content": "The Future of Ownership Has Arrived",
+          "highlight": {
+            "color": "color-brand-primary",
+            "content": "Ownership"
+          }
+        },
+        "subtext": {
+          "font": "font-sans",
+          "size": "10px",
+          "color": "#888",
+          "textTransform": "uppercase",
+          "letterSpacing": "1px",
+          "margin": "0 0 6px 0",
+          "content": "Digital-Syndication, by Evolution Stables, Powered By Tokinvest"
+        }
+      },
+      "bar": {
+        "display": "flex",
+        "justifyContent": "space-between",
+        "alignItems": "center",
+        "paddingTop": "26px"
+      },
+      "logo": {
+        "display": "flex",
+        "alignItems": "center",
+        "svg": {
+          "width": "16px",
+          "height": "16px",
+          "fill": "color-brand-primary"
+        }
+      },
+      "social": {
+        "display": "flex",
+        "gap": "12px",
+        "svg": {
+          "width": "16px",
+          "height": "16px",
+          "fill": "color-brand-primary"
+        },
+        "links": {
+          "linkedin": "https://www.linkedin.com/in/alex-baddeley/",
+          "x": "https://x.com/evostables",
+          "instagram": "https://instagram.com/evostables"
+        }
+      }
+    },
+    "signature": {
+      "container": {
+        "marginTop": "40px",
+        "borderTop": "1px solid #e0e0e0",
+        "paddingTop": "24px"
+      },
+      "image": {
+        "src": "https://evolutionstables.nz/updates/AB_Signiture.png",
+        "alt": "Alex Baddeley",
+        "maxWidth": "160px",
+        "height": "auto",
+        "display": "block",
+        "marginBottom": "8px"
+      },
+      "name": {
+        "font": "font-sans",
+        "size": "15px",
+        "weight": "600",
+        "color": "color-text-dark",
+        "margin": "4px 0",
+        "content": "Alex Baddeley"
+      },
+      "company": {
+        "font": "font-sans",
+        "size": "13px",
+        "weight": "400",
+        "color": "#666",
+        "margin": "4px 0",
+        "content": "Evolution Stables"
+      }
+    },
+    "buttons": {
+      "section_cta": {
+        "base": "inline-flex items-center justify-center gap-3 rounded-lg border px-6 py-3 text-sm font-medium uppercase tracking-[0.2em] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+        "border": "border-primary",
+        "text": "text-primary hover:text-primary-foreground",
+        "background": "bg-black hover:bg-primary",
+        "focus": "focus-visible:ring-primary focus-visible:ring-offset-background",
+        "arrow": "&rsaquo;",
+        "content": "Learn More"
+      }
+    },
+    "links": {
+      "cta": {
+        "textAlign": "center",
+        "color": "color-brand-primary",
+        "textDecoration": "underline",
+        "font": "font-sans",
+        "size": "15px",
+        "background": "transparent",
+        "hover": {
+          "color": "color-brand-primary-hover"
+        }
+      }
+    },
+    "popups": {
+      "email_capture": {
+        "states": {
+          "closed": {
+            "shape": "pill",
+            "background": "black",
+            "border": "white/[0.06]",
+            "text": {
+              "value": "Join the Evolution",
+              "style": "font-sans, 11px, uppercase, tracking-wide, white/70"
+            },
+            "effects": ["shimmer-animation", "hover-scale-105", "bottom-gold-glow"]
+          },
+          "open": {
+            "shape": "pill",
+            "background": "black",
+            "border": "white/10",
+            "input": {
+              "placeholder": "Enter your email",
+              "text": "white",
+              "placeholderColor": "white/40",
+              "background": "black"
+            },
+            "submitButton": {
+              "shape": "circle",
+              "background": "white/[0.06]",
+              "icon": "→",
+              "iconColor": "color-brand-primary",
+              "animation": "evo-pulse"
+            }
+          },
+          "success": {
+            "text": "Welcome to the Evolution.",
+            "style": "font-sans, 14px, neutral-400",
+            "background": "black"
+          }
+        },
+        "dataRequirements": {
+          "campaign": "string (ID for tracking)",
+          "placeholder": "string (Customizable text)",
+          "successText": "string (Customizable confirmation)"
+        }
+      }
+    }
+  }
+}

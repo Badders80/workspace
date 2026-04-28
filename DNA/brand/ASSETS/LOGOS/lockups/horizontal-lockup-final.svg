@@ -1,0 +1,26 @@
+<!-- Evolution Stables Horizontal Lockup - FINAL -->
+<!-- Combines Wordmark + Monogram with Institutional Minimalism precision -->
+<!-- Typography: Wordmark uses Inter Tight (not Instrument Serif) -->
+<!-- Spacing: 24px gap between elements (8px scale: spacing-6) -->
+<!-- Visual Weight: 60% monogram, 40% wordmark for optimal balance -->
+<svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background for visibility -->
+  <rect width="400" height="100" fill="none"/>
+  
+  <!-- Monogram Mark (left) -->
+  <g transform="translate(20,50)">
+    <!-- Use: EvolutionStables Mono-Gold.svg -->
+    <circle cx="0" cy="0" r="20" fill="#d4a964"/>
+    <text x="0" y="4" text-anchor="middle" fill="#09090b" font-family="Instrument Serif" font-size="16" font-weight="bold">ES</text>
+  </g>
+  
+  <!-- Wordmark (right) -->
+  <g transform="translate(64,50)">
+    <!-- Use: Evolution-Stables-Logo-White.svg -->
+    <!-- Typography: Inter Tight (Precision Body) - NOT Instrument Serif -->
+    <!-- Spacing: 24px gap from monogram (20px radius + 4px gap) -->
+    <text x="0" y="0" fill="#f5f5f5" font-family="Inter Tight" font-size="20" font-weight="600" letter-spacing="-0.05">
+      Evolution Stables
+    </text>
+  </g>
+</svg>

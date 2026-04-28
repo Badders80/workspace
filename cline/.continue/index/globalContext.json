@@ -1,0 +1,36 @@
+{
+  "selectedModelsByProfileId": {
+    "local": {
+      "chat": "deepseek-v4-pro-cloud",
+      "edit": "deepseek-v4-flash-cloud",
+      "apply": "deepseek-v4-flash-cloud",
+      "embed": "Transformers.js (Built-In)",
+      "autocomplete": null,
+      "rerank": null,
+      "summarize": null,
+      "subagent": null
+    }
+  },
+  "lastSelectedProfileForWorkspace": {
+    "file:///home/evo:::personal": "local",
+    "file:///home/evo/workspace:::personal": "local",
+    "file:///home/evo/workspace/projects/SSOT_Build:::personal": "local",
+    "file:///home/evo/workspace/tech-radar:::personal": "local",
+    "file:///home/evo/projects/Evolution_Content:::personal": "local",
+    "file:///home/evo/projects/SSOT_Build:::personal": "local",
+    "file:///home/evo/projects/Evolution_Platform:::personal": "local",
+    "file:///home/evo/projects/Evolution_Ops:::personal": "local",
+    "file:///home/evo/workspace/projects/Evolution_Token:::personal": "local"
+  },
+  "lastSelectedOrgIdForWorkspace": {
+    "file:///home/evo": "personal",
+    "file:///home/evo/workspace": "personal",
+    "file:///home/evo/workspace/projects/SSOT_Build": "personal",
+    "file:///home/evo/workspace/tech-radar": "personal",
+    "file:///home/evo/projects/Evolution_Content": "personal",
+    "file:///home/evo/projects/SSOT_Build": "personal",
+    "file:///home/evo/projects/Evolution_Platform": "personal",
+    "file:///home/evo/projects/Evolution_Ops": "personal",
+    "file:///home/evo/workspace/projects/Evolution_Token": "personal"
+  }
+}

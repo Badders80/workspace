@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+WIN_CODEX="/mnt/c/Users/Evo/.codex/.sandbox-bin/codex.exe"
+
+if [ ! -x "$WIN_CODEX" ]; then
+  echo "Windows Codex binary not found at $WIN_CODEX" >&2
+  exit 127
+fi
+
+exec "$WIN_CODEX" "$@"

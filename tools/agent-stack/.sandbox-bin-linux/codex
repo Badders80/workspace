@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+exec /mnt/c/Users/Evo/.codex/.sandbox-bin/codex.exe "$@"

@@ -1,0 +1,39 @@
+{
+  "shadow": {
+    "trading-window": {
+      "value": "0 30px 120px rgba(0,0,0,0.45)",
+      "description": "Deep elevated shadow for hero/trading window containers",
+      "source": "marketplace/page.tsx",
+      "tags": ["marketplace", "hero", "trading-window", "elevation"]
+    },
+    "card": {
+      "value": "0 24px 80px rgba(0,0,0,0.55)",
+      "description": "Card elevation shadow for BentoGrid modules",
+      "source": "components/layout/Bento.tsx",
+      "tags": ["card", "bento", "module", "elevation"]
+    },
+    "soft": {
+      "value": "0 1px 2px rgba(0,0,0,0.25), 0 2px 6px rgba(0,0,0,0.18)",
+      "description": "Subtle shadow for interactive surfaces",
+      "source": "styles/brand.css",
+      "tags": ["interactive", "button", "soft"]
+    },
+    "elevated": {
+      "value": "0 8px 24px rgba(0,0,0,0.35)",
+      "description": "Medium elevation for modals and active cards",
+      "source": "styles/brand.css",
+      "tags": ["modal", "active", "elevated"]
+    },
+    "dashboard": {
+      "value": "0 28px 120px rgba(0,0,0,0.55)",
+      "description": "Heavier shadow for dashboard containers (MyStable)",
+      "source": "mystable/page.tsx",
+      "tags": ["mystable", "dashboard", "elevation", "legacy"]
+    },
+      "value": "0 0 10px color-mix(in srgb, var(--evolution-gold) 30%, transparent)",
+      "description": "Gold glow effect for animated text",
+      "source": "styles/globals.css (gold-letter-wave)",
+      "tags": ["gold", "glow", "animation", "text"]
+    }
+  }
+}

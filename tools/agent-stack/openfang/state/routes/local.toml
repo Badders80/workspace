@@ -1,0 +1,14 @@
+api_listen = "127.0.0.1:4200"
+
+# Default route: Ollama cloud. If cloud is down, ask for direction — do not silently fallback.
+[default_model]
+provider = "ollama"
+model = "kimi-k2.6:cloud"
+base_url = "http://127.0.0.1:11434/v1"
+
+[memory]
+decay_rate = 0.03
+
+[channels.telegram]
+bot_token_env = "TELEGRAM_BOT_TOKEN"
+poll_interval_secs = 1

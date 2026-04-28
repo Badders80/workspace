@@ -1,0 +1,47 @@
+<!-- Evolution Stables LinkedIn Banner Template -->
+<!-- Recommended size: 1584 x 396 px -->
+<svg width="1584" height="396" viewBox="0 0 1584 396" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1584" height="396" fill="#09090b"/>
+  
+  <!-- Optional: Subtle pattern or texture -->
+  <!-- <rect width="1584" height="396" fill="url(#pattern)" opacity="0.05"/> -->
+  
+  <!-- Content Area -->
+  <g transform="translate(120,120)">
+    <!-- Monogram Mark -->
+    <g transform="translate(0,0)">
+      <!-- Use: EvolutionStables Mono-Gold.svg -->
+      <circle cx="0" cy="0" r="36" fill="#d4a964"/>
+      <text x="0" y="8" text-anchor="middle" fill="#09090b" font-family="Instrument Serif" font-size="28" font-weight="bold">ES</text>
+    </g>
+    
+    <!-- Brand Name -->
+    <g transform="translate(80,0)">
+      <!-- Use: Evolution-Stables-Logo-White.svg -->
+      <text x="0" y="0" fill="#f5f5f5" font-family="Instrument Serif" font-size="48" font-weight="bold" letter-spacing="-1">
+        Evolution Stables
+      </text>
+    </g>
+    
+    <!-- Tagline / Description -->
+    <g transform="translate(0,100)">
+      <text x="0" y="0" fill="#a1a1aa" font-family="Inter Tight" font-size="24" font-weight="400" max-width="800">
+        Digital Syndication Platform for Thoroughbred Ownership
+      </text>
+    </g>
+    
+    <!-- Call to Action -->
+    <g transform="translate(0,180)">
+      <!-- Button Background -->
+      <rect x="0" y="0" width="200" height="48" rx="4" fill="#d4a964"/>
+      <!-- Button Text -->
+      <text x="100" y="30" text-anchor="middle" fill="#09090b" font-family="Inter Tight" font-size="18" font-weight="600">
+        Learn More
+      </text>
+    </g>
+  </g>
+  
+  <!-- Optional: Bottom accent line -->
+  <rect x="0" y="380" width="1584" height="16" fill="#d4a964"/>
+</svg>

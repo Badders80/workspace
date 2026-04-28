@@ -1,0 +1,200 @@
+{
+  "profile": "MyStable",
+  "version": "1.0",
+  "description": "Design tokens for the Evolution Stables MyStable page. Extracted from the rolled-back animated mock dashboard. Tagged as legacy — these features are planned for replacement with live data.",
+  "source": "Evolution_Platform/src/app/mystable/page.tsx (rolled-back 2026-04-26)",
+  "tags": ["mystable", "legacy", "rolled-back", "mock-data", "2026-04-26"],
+  "status": "legacy",
+  "replacement-plan": "These components will be replaced with live data equivalents. Preserve the visual styling (colors, spacing, shadows, animations) when rebuilding.",
+  "components": {
+    "page-container": {
+      "description": "Root layout for MyStable page",
+      "tags": ["mystable", "page", "layout"],
+      "background": { "token": "color-background", "value": "#000000" },
+      "text": { "token": "color-text-primary", "value": "#ffffff" },
+      "padding-top": { "value": "6rem", "token": "pt-24" },
+      "padding-x": { "mobile": "1.5rem", "tablet": "2.5rem", "desktop": "3rem" },
+      "max-width": { "token": "page.max-width", "value": "80rem" }
+    },
+    "dashboard-container": {
+      "description": "Main dashboard wrapper with blur/Coming Soon animation",
+      "tags": ["mystable", "dashboard", "blur-animation", "coming-soon", "legacy"],
+      "status": "legacy",
+      "note": "This animated container will be replaced with live data dashboard. Preserve styling.",
+      "border-radius": { "value": "2rem", "token": "rounded-[32px]" },
+      "border": { "token": "border-light", "value": "1px solid rgba(255,255,255,0.08)" },
+      "background": { "token": "opacity-black-70", "value": "rgba(11,11,11,0.70)" },
+      "shadow": { "token": "shadow-card", "value": "0 28px 120px rgba(0,0,0,0.55)" },
+      "min-height": {
+        "default": { "value": "520px" },
+        "reduced": { "value": "400px" }
+      },
+      "animation": {
+        "blur-delay": { "token": "delay-mystable-blur", "value": "2200ms", "tags": ["legacy", "blur"] },
+        "coming-soon-delay": { "token": "delay-mystable-coming-soon", "value": "2800ms", "tags": ["legacy", "coming-soon"] },
+        "blur-duration": { "token": "duration-slow", "value": "700ms" },
+        "overlay-duration": { "token": "duration-slow", "value": "700ms" },
+        "scrim-active": { "token": "opacity-black-75", "value": "rgba(0,0,0,0.75)" },
+        "scrim-inactive": { "token": "opacity-black-20", "value": "rgba(0,0,0,0.20)" }
+      },
+      "coming-soon": {
+        "title": {
+          "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+          "size": { "value": "1.875rem", "token": "text-3xl" },
+          "weight": { "value": "500", "token": "font-medium" },
+          "tracking": { "value": "-0.01em", "token": "tracking-tight" },
+          "color": { "token": "opacity-white-80", "value": "rgba(255,255,255,0.80)" }
+        },
+        "description": {
+          "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+          "size": { "value": "0.875rem", "token": "text-sm" },
+          "color": { "token": "opacity-white-50", "value": "rgba(255,255,255,0.50)" },
+          "max-width": { "value": "36rem", "token": "max-w-xl" }
+        }
+      }
+    },
+    "portfolio-card": {
+      "description": "Individual horse stake card within the dashboard",
+      "tags": ["mystable", "card", "horse", "portfolio", "legacy"],
+      "status": "legacy",
+      "note": "Mock data card. Rebuild with live data but preserve visual styling.",
+      "container": {
+        "border-radius": { "value": "0.75rem", "token": "rounded-xl" },
+        "border": { "token": "border-faint", "value": "1px solid rgba(255,255,255,0.05)" },
+        "background": { "value": "#111111" },
+        "hover-border": { "token": "border-light", "value": "rgba(255,255,255,0.10)" },
+        "hover-background": { "value": "#151515" }
+      },
+      "title": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "1.125rem", "token": "text-lg" },
+        "weight": { "value": "500", "token": "font-medium" },
+        "tracking": { "value": "-0.01em", "token": "tracking-tight" },
+        "color": { "token": "color-text-primary", "value": "#ffffff" }
+      },
+      "status-badge": {
+        "racing": {
+          "background": { "value": "rgba(16,185,129,0.10)" },
+          "color": { "value": "#34d399", "token": "text-emerald-400" }
+        },
+        "training": {
+          "background": { "value": "rgba(59,130,246,0.10)" },
+          "color": { "value": "#60a5fa", "token": "text-blue-400" }
+        },
+        "font": { "value": "0.625rem", "token": "text-[10px]" },
+        "weight": { "value": "500", "token": "font-medium" },
+        "transform": { "value": "uppercase" },
+        "tracking": { "value": "0.05em", "token": "tracking-wider" }
+      },
+      "returns": {
+        "positive": { "token": "text-emerald-400", "value": "#34d399" },
+        "negative": { "token": "text-red-400", "value": "#f87171" },
+        "font": { "value": "1.125rem", "token": "text-lg" },
+        "weight": { "value": "500", "token": "font-medium" }
+      },
+      "stats-grid": {
+        "columns": { "value": "4" },
+        "gap": { "value": "1rem" },
+        "border-top": { "token": "border-faint", "value": "1px solid rgba(255,255,255,0.05)" },
+        "padding-top": { "value": "1rem" },
+        "label": {
+          "font": { "value": "0.625rem", "token": "text-[10px]" },
+          "transform": { "value": "uppercase" },
+          "tracking": { "value": "0.05em", "token": "tracking-wider" },
+          "color": { "token": "opacity-white-40", "value": "rgba(255,255,255,0.40)" }
+        },
+        "value": {
+          "font": { "value": "0.875rem", "token": "text-sm" },
+          "weight": { "value": "500", "token": "font-medium" },
+          "color": { "token": "color-text-primary", "value": "#ffffff" }
+        }
+      }
+    },
+    "stats-sidebar": {
+      "description": "Right sidebar with portfolio summary stats",
+      "tags": ["mystable", "sidebar", "stats", "legacy"],
+      "status": "legacy",
+      "note": "Mock data stats. Rebuild with live portfolio data.",
+      "container": {
+        "gap": { "value": "1rem" }
+      },
+      "stat-card": {
+        "border-radius": { "value": "0.75rem", "token": "rounded-xl" },
+        "border": { "token": "border-faint", "value": "1px solid rgba(255,255,255,0.05)" },
+        "background": { "value": "#111111" },
+        "padding": { "value": "1.5rem" }
+      },
+      "label": {
+        "font": { "value": "0.625rem", "token": "text-[10px]" },
+        "transform": { "value": "uppercase" },
+        "tracking": { "value": "0.05em", "token": "tracking-wider" },
+        "color": { "token": "opacity-white-40", "value": "rgba(255,255,255,0.40)" }
+      },
+      "value": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "1.875rem", "token": "text-3xl" },
+        "weight": { "value": "500", "token": "font-medium" },
+        "tracking": { "value": "-0.01em", "token": "tracking-tight" },
+        "color": { "token": "color-text-primary", "value": "#ffffff" }
+      },
+      "change": {
+        "positive": { "token": "text-emerald-400", "value": "#34d399" },
+        "font": { "value": "0.875rem", "token": "text-sm" }
+      }
+    },
+    "quick-actions": {
+      "description": "Quick links sidebar section",
+      "tags": ["mystable", "sidebar", "links", "legacy"],
+      "status": "legacy",
+      "container": {
+        "border-radius": { "value": "0.75rem", "token": "rounded-xl" },
+        "border": { "token": "border-faint", "value": "1px solid rgba(255,255,255,0.05)" },
+        "background": { "value": "#111111" },
+        "padding": { "value": "1.5rem" }
+      },
+      "title": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "0.75rem", "token": "text-xs" },
+        "weight": { "value": "500", "token": "font-medium" },
+        "tracking": { "value": "-0.01em", "token": "tracking-tight" },
+        "color": { "token": "color-text-primary", "value": "#ffffff" }
+      },
+      "link": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "0.875rem", "token": "text-sm" },
+        "color": { "token": "opacity-white-60", "value": "rgba(255,255,255,0.60)" },
+        "hover": { "token": "color-text-primary", "value": "#ffffff" }
+      }
+    },
+    "information-hub": {
+      "description": "Bottom section with hero image and insights",
+      "tags": ["mystable", "section", "image", "legacy"],
+      "status": "legacy",
+      "note": "May be retained or redesigned in live version.",
+      "container": {
+        "margin-top": { "value": "6rem" }
+      },
+      "image": {
+        "border-radius": { "value": "1.5rem", "token": "rounded-3xl" },
+        "height": { "default": "400px", "xl": "460px" },
+        "object-fit": { "value": "cover" }
+      },
+      "overlay": {
+        "gradient": { "token": "gradient-image-scrim", "value": "linear-gradient(to top, rgba(0,0,0,0.80), rgba(0,0,0,0.20), transparent)" },
+        "padding": { "value": "2rem" }
+      },
+      "title": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "1.5rem", "token": "text-2xl" },
+        "weight": { "value": "500", "token": "font-medium" },
+        "tracking": { "value": "-0.01em", "token": "tracking-tight" },
+        "color": { "token": "color-text-primary", "value": "#ffffff" }
+      },
+      "description": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "1rem", "token": "text-base" },
+        "color": { "token": "opacity-white-70", "value": "rgba(255,255,255,0.70)" }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+[hand]
+id = "wiki-keeper"
+name = "wiki-keeper"
+category = "productivity"
+description = "Write-enabled wiki maintainer for the Evolution Stables research vault. Ingests raw sources, creates wiki pages, and maintains the knowledge base. Write scope limited to research_vault/ only."
+version = "1.0.0"
+
+agent = { name = "assistant", provider = "ollama", model = "kimi-k2.6:cloud", description = "Wiki maintainer for research_vault. Creates and updates wiki pages, never overwrites existing pages.", system_prompt = "You are the wiki-keeper for the Evolution Stables research vault. Your job is to ingest raw sources and create new wiki pages. You NEVER overwrite existing wiki pages. You ALWAYS cite sources. You follow AGENT.md rules strictly." }
+
+[schedule]
+cron = "0 */6 * * *"
+enabled = false
+
+[memory]
+enabled = true
+knowledge_graph = true
+compaction = "daily"
+vector_search = true
+
+[tools]
+file_read = true
+file_write = true
+web_search = false
+shell_exec = true
+browser = false
+
+[workspace]
+allowed_paths = [
+  "/home/evo/workspace/research_vault"
+]
+
+[guardrails]
+never_write = false
+never_modify = true
+never_delete = true
+log_all_actions = true
+strict_read_only = false

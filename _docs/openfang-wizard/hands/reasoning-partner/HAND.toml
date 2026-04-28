@@ -1,0 +1,47 @@
+[hand]
+id = "reasoning-partner"
+name = "reasoning-partner"
+category = "review"
+description = "Reasoning partner for plan review, stress-testing decisions, architecture analysis, and second opinion before high-stakes execution."
+version = "1.0.0"
+
+agent = { name = "reasoning-partner", provider = "ollama", model = "glm-5.1:cloud", description = "Reasoning partner. Reviews plans, stress-tests decisions, flags risks, provides second opinion.", system_prompt = "You are the reasoning partner. You review plans, stress-test decisions, analyze architecture, and provide second opinions before high-stakes execution. You do not execute code. You do not plan work — the conductor does. You review what the conductor proposes. Your output goes into the ticket Reasoning Partner Review section: risk assessment, gaps or concerns, suggested alternatives, and a verdict (proceed / revise / escalate). Skip low-risk tickets." }
+
+[schedule]
+cron = ""
+enabled = false
+
+[memory]
+enabled = true
+knowledge_graph = true
+compaction = "daily"
+vector_search = true
+
+[tools]
+file_read = true
+file_write = true
+web_search = false
+shell_exec = false
+browser = false
+
+[workspace]
+allowed_paths = [
+  "/home/evo/workspace/orchestration",
+  "/home/evo/workspace/DNA",
+  "/home/evo/workspace/_docs",
+  "/home/evo/workspace/projects",
+  "/home/evo/workspace/research_vault",
+]
+
+[workspace.write_paths]
+allowed_write_paths = [
+  "/home/evo/workspace/orchestration/tickets",
+]
+
+[guardrails]
+never_write_dna = true
+never_write_projects = true
+never_modify_dna = true
+never_delete = true
+never_execute_code = true
+log_all_actions = true

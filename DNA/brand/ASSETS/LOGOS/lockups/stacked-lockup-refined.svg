@@ -1,0 +1,27 @@
+<!-- Evolution Stables Stacked Lockup - REFINED -->
+<!-- For narrow applications with narrow applications -->
+<!-- To produce final versions: Replace placeholder text with actual asset references -->
+<svg width="120" height="160" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background for visibility -->
+  <rect width="120" height="160" fill="none"/>
+  
+  <!-- Monogram Mark (top) -->
+  <g transform="translate(60,40)">
+    <!-- Use: EvolutionStables Mono-Gold.svg -->
+    <circle cx="0" cy="0" r="18" fill="#d4a964"/>
+    <text x="0" y="4" text-anchor="middle" fill="#09090b" font-family="Instrument Serif" font-size="14" font-weight="bold">ES</text>
+  </g>
+  
+  <!-- Wordmark (bottom) -->
+  <g transform="translate(60,110)">
+    <!-- Use: Evolution-Stables-Logo-White.svg -->
+    <!-- Typography: Inter Tight (Precision Body) - NOT Instrument Serif -->
+    <!-- Two-line treatment for better proportions -->
+    <text x="0" y="0" text-anchor="middle" fill="#f5f5f5" font-family="Inter Tight" font-size="12" font-weight="600" letter-spacing="-0.05">
+      Evolution
+    </text>
+    <text x="0" y="14" text-anchor="middle" fill="#f5f5f5" font-family="Inter Tight" font-size="12" font-weight="600" letter-spacing="-0.05">
+      Stables
+    </text>
+  </g>
+</svg>

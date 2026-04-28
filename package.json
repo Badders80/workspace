@@ -1,0 +1,7 @@
+{
+  "name": "evo-workspace",
+  "private": true,
+  "dependencies": {
+    "@_davideast/stitch-mcp": "^0.5.3"
+  }
+}

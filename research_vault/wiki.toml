@@ -1,0 +1,15 @@
+[ollama]
+url = "http://localhost:11434"
+
+[models]
+fast = "gemma4:e4b"
+heavy = "qwen2.5-coder:14b"
+
+[paths]
+raw = "raw"
+wiki = "wiki"
+state = "state.db"
+
+[pipeline]
+batch_size = 10
+quality_threshold = 0.6

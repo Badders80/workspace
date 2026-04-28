@@ -1,0 +1,73 @@
+<!-- Evolution Stables Twitter/X Post Template -->
+<!-- Recommended size: 1200 x 675 px (16:9 ratio) -->
+<svg width="1200" height="675" viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1200" height="675" fill="#09090b"/>
+  
+  <!-- Content Area -->
+  <g transform="translate(120,120)">
+    <!-- Left Side: Visual Element -->
+    <g transform="translate(0,0)">
+      <!-- Use: EvolutionStables Mono-Gold.svg (larger) -->
+      <circle cx="0" cy="0" r="60" fill="#d4a964"/>
+      <text x="0" y="12" text-anchor="middle" fill="#09090b" font-family="Instrument Serif" font-size="48" font-weight="bold">ES</text>
+    </g>
+    
+    <!-- Right Side: Text Content -->
+    <g transform="translate(180,0)">
+      <!-- Headline -->
+      <text x="0" y="0" fill="#f5f5f5" font-family="Instrument Serif" font-size="36" font-weight="bold">
+        The Future of Thoroughbred Ownership
+      </text>
+      
+      <!-- Subhead -->
+      <text x="0" y="60" fill="#a1a1aa" font-family="Inter Tight" font-size="24" font-weight="400" max-width="500">
+        Regulated digital syndication platform connecting investors with premium bloodstock opportunities
+      </text>
+      
+      <!-- Stats / Metrics -->
+      <g transform="translate(0,120)">
+        <text x="0" y="0" fill="#f5f5f5" font-family="Inter Tight" font-size="20" font-weight="600">
+          125+
+        </text>
+        <text x="40" y="0" fill="#a1a1aa" font-family="Inter Tight" font-size="16" font-weight="400">
+          Active Syndicates
+        </text>
+      </g>
+      
+      <g transform="translate(100,120)">
+        <text x="0" y="0" fill="#f5f5f5" font-family="Inter Tight" font-size="20" font-weight="600">
+          98.7%
+        </text>
+        <text x="40" y="0" fill="#a1a1aa" font-family="Inter Tight" font-size="16" font-weight="400">
+          Success Rate
+        </text>
+      </g>
+      
+      <g transform="translate(200,120)">
+        <text x="0" y="0" fill="#f5f5f5" font-family="Inter Tight" font-size="20" font-weight="600">
+          £45M+
+        </text>
+        <text x="40" y="0" fill="#a1a1aa" font-family="Inter Tight" font-size="16" font-weight="400">
+          Total Value Syndicated
+        </text>
+      </g>
+    </g>
+  </g>
+  
+  <!-- Footer: Brand Attribution -->
+  <g transform="translate(600,600)">
+    <!-- Monogram -->
+    <g transform="translate(0,0)">
+      <circle cx="0" cy="0" r="18" fill="#d4a964"/>
+      <text x="0" y="4" text-anchor="middle" fill="#09090b" font-family="Instrument Serif" font-size="14" font-weight="bold">ES</text>
+    </g>
+    
+    <!-- Brand Name -->
+    <g transform="translate(30,0)">
+      <text x="0" y="0" fill="#f5f5f5" font-family="Instrument Serif" font-size="18" font-weight="bold">
+        Evolution Stables
+      </text>
+    </g>
+  </g>
+</svg>

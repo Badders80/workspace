@@ -1,0 +1,123 @@
+{
+  "name": "Evolution Stables Design Tokens",
+  "version": "1.0.0",
+  "description": "Design tokens exported from DESIGN.md for developer handoff",
+  "colors": {
+    "background": {
+      "value": "#09090b",
+      "name": "Velvet Night",
+      "description": "Primary surface color"
+    },
+    "surface": {
+      "value": "#0a0a0a",
+      "name": "Elevated Surface",
+      "description": "Cards, modals, elevated surfaces"
+    },
+    "foreground": {
+      "value": "#f5f5f5",
+      "name": "Primary Text",
+      "description": "Primary text on dark backgrounds"
+    },
+    "muted": {
+      "value": "#a1a1aa",
+      "name": "Secondary Text",
+      "description": "Captions, secondary text, de-emphasized content"
+    },
+    "brand-gold": {
+      "value": "#d4a964",
+      "name": "Brand Gold",
+      "description": "The ONLY accent color - for CTAs, key metrics, interactive elements"
+    },
+    "border": {
+      "value": "rgba(255,255,255,0.06)",
+      "name": "Subtle Border",
+      "description": "Dividers, subtle separators"
+    }
+  },
+  "typography": {
+    "fontFamilies": {
+      "heritage": {
+        "value": "'Instrument Serif', serif",
+        "name": "Instrument Serif",
+        "usage": "H1, H2, hero statements - never for UI/body"
+      },
+      "precision": {
+        "value": "'Inter Tight', sans-serif",
+        "name": "Inter Tight",
+        "usage": "Body text, labels, UI elements, navigation"
+      },
+      "data": {
+        "value": "'Geist Mono', monospace",
+        "name": "Geist Mono",
+        "usage": "Code, data tables, odds, timestamps, metrics"
+      }
+    },
+    "fontWeights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "fontSizes": {
+      "xs": "0.75rem",
+      "sm": "0.875rem",
+      "base": "1rem",
+      "lg": "1.125rem",
+      "xl": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.75rem",
+      "4xl": "2.25rem",
+      "5xl": "2.75rem",
+      "6xl": "3.5rem"
+    },
+    "lineHeights": {
+      "none": 1,
+      "tight": 1.25,
+      "snug": 1.375,
+      "normal": 1.5,
+      "relaxed": 1.625,
+      "loose": 2
+    }
+  },
+  "shadows": {
+    "sm": "0 1px 2px rgba(0,0,0,0.05)",
+    "md": "0 4px 6px rgba(0,0,0,0.1)",
+    "lg": "0 10px 15px rgba(0,0,0,0.1)"
+  },
+  "radius": {
+    "sm": "4px",
+    "md": "6px",
+    "lg": "8px",
+    "xl": "12px"
+  },
+  "transitions": {
+    "fast": "150ms ease",
+    "normal": "250ms ease",
+    "slow": "350ms ease"
+  },
+  "usageGuidelines": {
+    "colorRules": [
+      "Background: Always use #09090b (Velvet Night) for primary surfaces",
+      "Surface: Use #0a0a0a for elevated components (cards, modals, dropdowns)",
+      "Foreground: Use #f5f5f5 for primary text on dark backgrounds",
+      "Muted: Use #a1a1aa for secondary text, captions, and de-emphasized content",
+      "Gold Accent: Use #d4a964 EXCLUSIVELY for CTAs, key metrics, interactive elements, and brand monograms",
+      "Never use gold accent for body text or large color blocks"
+    ],
+    "typographyRules": [
+      "Instrument Serif: Reserved for headings, hero statements, and brand expressions ONLY",
+      "Inter Tight: Used for ALL body text, UI elements, navigation, and labels",
+      "Geist Mono: Used exclusively for data presentation (odds, timestamps, metrics, code)",
+      "Never mix more than 2 font families in any single composition",
+      "Maintain consistent line heights: 1.4 for body, 1.2 for headings"
+    ],
+    "accessibility": {
+      "contrastRatios": {
+        "goldOnBackground": "7.2:1",
+        "goldOnSurface": "6.8:1",
+        "foregroundOnBackground": "15.6:1"
+      },
+      "minimumStandards": "WCAG AA for normal text (4.5:1), WCAG AAA for large text (3:1)"
+    }
+  }
+}

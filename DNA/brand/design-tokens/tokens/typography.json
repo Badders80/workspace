@@ -1,0 +1,44 @@
+{
+  "font": {
+    "family": {
+      "sans": { "value": "Arial, Helvetica, sans-serif", "description": "Web-safe sans for email compatibility" },
+      "serif": { "value": "Georgia, 'Times New Roman', serif", "description": "Web-safe serif for quotes and headings" }
+    },
+    "weight": {
+      "light": { "value": "300" },
+      "regular": { "value": "400" },
+      "medium": { "value": "500" },
+      "semi-bold": { "value": "600" },
+      "bold": { "value": "700" }
+    },
+    "letterSpacing": {
+      "tight": { "value": "-0.01em" },
+      "normal": { "value": "0" },
+      "wider": { "value": "0.05em", "description": "Wider tracking — stat labels, badges, metadata" },
+      "wide": { "value": "0.25em", "description": "Brand Signature Tracking" },
+      "iu-label": { "value": "1.5px" }
+    },
+    "web": {
+      "description": "Website-specific typography tokens. Extracted from Evolution_Platform.",
+      "tags": ["web", "website", "evolution-platform"],
+      "family": {
+        "sans": { "value": "'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", "description": "Primary web font — headings, body, UI" },
+        "mono": { "value": "'Geist Mono', ui-monospace, SFMono-Regular, 'Roboto Mono', monospace", "description": "Monospace — data, code, metrics" },
+        "serif": { "value": "'Playfair Display', Georgia, 'Times New Roman', serif", "description": "Serif — editorial, quotes, investor updates" }
+      },
+      "scale": {
+        "h1": { "size": "3.25rem", "lineHeight": "1.1", "letterSpacing": "0.02%", "weight": "300", "px": "52px" },
+        "h1-mobile": { "size": "2.625rem", "lineHeight": "1.1", "letterSpacing": "0.02%", "weight": "300", "px": "42px" },
+        "h2": { "size": "2rem", "lineHeight": "1.3", "letterSpacing": "0.01%", "weight": "400", "px": "32px" },
+        "h2-mobile": { "size": "1.625rem", "lineHeight": "1.3", "letterSpacing": "0.01%", "weight": "400", "px": "26px" },
+        "h3": { "size": "1.5rem", "lineHeight": "1.5", "letterSpacing": "0.01%", "weight": "600", "px": "24px" },
+        "h4": { "size": "1.25rem", "lineHeight": "1.5", "letterSpacing": "0.1em", "weight": "600", "px": "20px" },
+        "body-lg": { "size": "1.25rem", "lineHeight": "1.7", "letterSpacing": "0", "weight": "300", "px": "20px" },
+        "body": { "size": "1rem", "lineHeight": "1.7", "letterSpacing": "0", "weight": "400", "px": "16px" },
+        "body-sm": { "size": "0.875rem", "lineHeight": "1.4", "letterSpacing": "0", "weight": "400", "px": "14px" },
+        "label": { "size": "0.75rem", "lineHeight": "1.4", "letterSpacing": "0.25em", "weight": "500", "px": "12px" },
+        "subhead": { "size": "1rem", "lineHeight": "1.5", "letterSpacing": "0.1em", "weight": "500", "px": "16px" }
+      }
+    }
+  }
+}

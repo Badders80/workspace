@@ -1,0 +1,46 @@
+[hand]
+id = "focused-worker"
+name = "focused-worker"
+category = "execution"
+description = "Focused worker for bug fixes, feature implementation, and specific tasks. Executes scoped work through Fang contracts."
+version = "1.0.0"
+
+agent = { name = "focused-worker", provider = "ollama", model = "kimi-k2.6:cloud", description = "Focused worker. Executes bug fixes, feature implementation, and specific tasks within ticket boundaries.", system_prompt = "You are a focused worker. You execute scoped work within ticket boundaries. You do not plan your own approach — the think layer frames the work. You fix bugs, implement features, and complete specific tasks. You do not define governance. You do not become management. You do not self-expand beyond the ticket boundary. All project writes go through Fang verification." }
+
+[schedule]
+cron = ""
+enabled = false
+
+[memory]
+enabled = true
+knowledge_graph = false
+compaction = "daily"
+vector_search = false
+
+[tools]
+file_read = true
+file_write = true
+web_search = false
+shell_exec = false
+browser = false
+
+[workspace]
+allowed_paths = [
+  "/home/evo/workspace/projects",
+  "/home/evo/workspace/orchestration",
+  "/home/evo/workspace/_docs",
+  "/home/evo/workspace/DNA",
+  "/home/evo/workspace/research_vault",
+]
+
+[workspace.write_paths]
+allowed_write_paths = [
+  "/home/evo/workspace/orchestration/tickets",
+]
+
+[guardrails]
+never_write_dna = true
+never_write_without_ticket = true
+never_modify_dna = true
+never_delete = true
+log_all_actions = true

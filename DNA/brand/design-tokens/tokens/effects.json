@@ -1,0 +1,58 @@
+{
+  "effect": {
+    "blur": {
+      "light": { "value": "blur(1.5px)", "description": "Subtle blur for overlay transitions" },
+      "medium": { "value": "blur(10px)", "description": "Medium blur for unblur reveal animation" },
+      "none": { "value": "blur(0px)", "description": "No blur — clear state" }
+    },
+    "opacity": {
+      "white-5": { "value": "rgba(255,255,255,0.05)", "description": "Faint white — hover overlays, faint borders" },
+      "white-10": { "value": "rgba(255,255,255,0.10)", "description": "Subtle white — card borders, trading window border" },
+      "white-15": { "value": "rgba(255,255,255,0.15)", "description": "Light white — BentoCard borders" },
+      "white-20": { "value": "rgba(255,255,255,0.20)", "description": "Soft white — image scrim inactive" },
+      "white-40": { "value": "rgba(255,255,255,0.40)", "description": "Muted white — eyebrow labels, secondary text" },
+      "white-50": { "value": "rgba(255,255,255,0.50)", "description": "Mid white — captions, metadata" },
+      "white-60": { "value": "rgba(255,255,255,0.60)", "description": "Body text on dark — descriptions" },
+      "white-70": { "value": "rgba(255,255,255,0.70)", "description": "Strong white — card descriptions" },
+      "white-80": { "value": "rgba(255,255,255,0.80)", "description": "Near-white — Coming Soon text" },
+      "white-90": { "value": "rgba(255,255,255,0.90)", "description": "Almost white — headings" },
+      "black-20": { "value": "rgba(0,0,0,0.20)", "description": "Light black overlay — image scrim clear" },
+      "black-60": { "value": "rgba(0,0,0,0.60)", "description": "Medium black overlay — image scrim blurred" },
+      "black-75": { "value": "rgba(0,0,0,0.75)", "description": "Heavy black overlay — MyStable dark transition" },
+      "black-80": { "value": "rgba(0,0,0,0.80)", "description": "Deep black — gradient endpoints" }
+    },
+    "gradient": {
+      "trading-window": {
+        "value": "linear-gradient(to bottom right, rgba(255,255,255,0.03), transparent, rgba(0,0,0,0.80))",
+        "description": "Depth gradient for trading window container",
+        "source": "marketplace/page.tsx",
+        "tags": ["marketplace", "trading-window", "depth"]
+      },
+      "image-scrim": {
+        "value": "linear-gradient(to top, rgba(0,0,0,0.80), rgba(0,0,0,0.20), transparent)",
+        "description": "Bottom-to-top fade for image overlays",
+        "source": "marketplace/page.tsx",
+        "tags": ["image", "overlay", "scrim"]
+      },
+      "card-background": {
+        "value": "linear-gradient(to bottom right, rgba(255,255,255,0.04), transparent, rgba(0,0,0,0.80))",
+        "description": "Subtle depth for card surfaces",
+        "source": "components/layout/Bento.tsx",
+        "tags": ["card", "bento", "depth"]
+      },
+      "divider": {
+        "value": "linear-gradient(to right, transparent, rgba(255,255,255,0.10), transparent)",
+        "description": "Horizontal divider with fade",
+        "source": "components/site/Footer.tsx",
+        "tags": ["footer", "divider"]
+      }
+    },
+    "border": {
+      "faint": { "value": "1px solid rgba(255,255,255,0.05)", "description": "Very subtle border — outline overlays" },
+      "subtle": { "value": "1px solid rgba(255,255,255,0.06)", "description": "Subtle border — dividers, separators" },
+      "light": { "value": "1px solid rgba(255,255,255,0.08)", "description": "Light border — card borders, section dividers" },
+      "medium": { "value": "1px solid rgba(255,255,255,0.10)", "description": "Medium border — trading window, containers" },
+      "strong": { "value": "1px solid rgba(255,255,255,0.15)", "description": "Strong border — BentoCard borders" }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "profile": "Marketplace",
+  "version": "1.0",
+  "description": "Design tokens for the Evolution Stables Marketplace page. Extracted from the rolled-back animated mock dashboard.",
+  "source": "Evolution_Platform/src/app/marketplace/page.tsx",
+  "tags": ["marketplace", "live-page", "2026-04-26"],
+  "components": {
+    "page-container": {
+      "description": "Root layout for marketplace page",
+      "background": { "token": "color-background", "value": "#000000" },
+      "text": { "token": "color-text-primary", "value": "#ffffff" },
+      "padding-top": { "mobile": "8rem", "desktop": "10rem" },
+      "max-width": { "token": "page.max-width", "value": "80rem" },
+      "padding-x": { "mobile": "1.5rem", "tablet": "2.5rem", "desktop": "3rem" },
+      "padding-bottom": { "value": "6rem" },
+      "section-gap": { "value": "6rem" }
+    },
+    "section-header": {
+      "description": "Reusable header pattern for page sections",
+      "tags": ["reusable", "section", "header"],
+      "eyebrow": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "0.75rem", "token": "text-xs" },
+        "transform": { "value": "uppercase" },
+        "tracking": { "value": "0.28em" },
+        "color": { "token": "opacity-white-40", "value": "rgba(255,255,255,0.40)" }
+      },
+      "heading": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "marketplace": "2.25rem", "modules": "1.875rem", "token": "text-4xl / text-3xl" },
+        "weight": { "marketplace": "500", "modules": "600", "token": "font-medium / font-semibold" },
+        "tracking": { "value": "-0.01em", "token": "tracking-tight" },
+        "color": { "token": "color-text-primary", "value": "#ffffff" }
+      },
+      "description": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "1rem", "token": "text-base" },
+        "leading": { "value": "1.625", "token": "leading-relaxed" },
+        "color": { "token": "opacity-white-60", "value": "rgba(255,255,255,0.60)" }
+      }
+    },
+    "trading-window": {
+      "description": "Hero container for marketplace trading interface mockup",
+      "tags": ["hero", "trading-window", "mockup", "blur-animation"],
+      "layout": {
+        "grid-span": { "value": "lg:col-span-2", "description": "Takes 2/3 width on desktop" },
+        "min-height": { "value": "400px" }
+      },
+      "container": {
+        "border-radius": { "value": "1.5rem", "token": "rounded-3xl" },
+        "border": { "token": "border-medium", "value": "1px solid rgba(255,255,255,0.10)" },
+        "background": { "token": "gradient-trading-window", "value": "linear-gradient(to bottom right, rgba(255,255,255,0.03), transparent, rgba(0,0,0,0.80))" },
+        "shadow": { "token": "shadow-trading-window", "value": "0 30px 120px rgba(0,0,0,0.45)" }
+      },
+      "image": {
+        "object-fit": { "value": "cover" },
+        "object-position": { "value": "center" },
+        "blur-active": { "token": "blur-light", "value": "blur(1.5px)" },
+        "blur-inactive": { "token": "blur-none", "value": "blur(0px)" }
+      },
+      "overlay": {
+        "scrim-inactive": { "token": "opacity-black-20", "value": "rgba(0,0,0,0.20)" },
+        "scrim-active": { "token": "opacity-black-60", "value": "rgba(0,0,0,0.60)" },
+        "outline": { "token": "border-faint", "value": "1px solid rgba(255,255,255,0.05)" }
+      },
+      "coming-soon": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "1.5rem", "token": "text-2xl" },
+        "weight": { "value": "500", "token": "font-medium" },
+        "tracking": { "value": "-0.01em", "token": "tracking-tight" },
+        "color": { "token": "opacity-white-80", "value": "rgba(255,255,255,0.80)" }
+      },
+      "animation": {
+        "blur-delay": { "token": "delay-blur-start", "value": "1800ms" },
+        "coming-soon-delay": { "token": "delay-coming-soon", "value": "2600ms" },
+        "blur-duration": { "token": "duration-slow", "value": "700ms" },
+        "overlay-duration": { "token": "duration-slow", "value": "700ms" },
+        "opacity-duration": { "token": "duration-slow", "value": "700ms" },
+        "easing": { "token": "easing-default", "value": "ease-in-out" }
+      }
+    },
+    "bento-grid": {
+      "description": "Grid layout for module cards",
+      "tags": ["grid", "bento", "modules"],
+      "gap": { "mobile": "0.75rem", "desktop": "1rem" },
+      "columns": { "mobile": "1", "tablet": "1", "desktop": "3" },
+      "auto-rows": { "value": "auto" }
+    },
+    "module-card": {
+      "description": "Individual card within BentoGrid — feature/module showcase",
+      "tags": ["card", "bento", "module", "hover-lift"],
+      "container": {
+        "border-radius": { "value": "1.5rem", "token": "rounded-3xl" },
+        "border": { "token": "border-strong", "value": "1px solid rgba(255,255,255,0.15)" },
+        "background": { "token": "opacity-black-70", "value": "rgba(0,0,0,0.70)" },
+        "shadow": { "token": "shadow-card", "value": "0 24px 80px rgba(0,0,0,0.55)" }
+      },
+      "hover": {
+        "transform": { "value": "translateY(-4px)", "token": "hover:-translate-y-1" },
+        "duration": { "token": "duration-fast", "value": "300ms" },
+        "overlay": { "token": "opacity-white-5", "value": "rgba(255,255,255,0.05)" }
+      },
+      "icon": {
+        "size": { "value": "1.75rem", "token": "h-7 w-7" },
+        "color": { "token": "color-text-primary", "value": "#ffffff" },
+        "position": { "value": "absolute left-6 top-6" }
+      },
+      "content": {
+        "padding": { "value": "1.5rem" },
+        "padding-top": { "value": "6rem" }
+      },
+      "title": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "1.25rem", "token": "text-xl" },
+        "weight": { "value": "600", "token": "font-semibold" },
+        "color": { "token": "color-text-primary", "value": "#ffffff" }
+      },
+      "description": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "0.875rem", "token": "text-sm" },
+        "weight": { "value": "300", "token": "font-light" },
+        "leading": { "value": "1.625", "token": "leading-relaxed" },
+        "color": { "token": "opacity-white-70", "value": "rgba(255,255,255,0.70)" }
+      },
+      "cta": {
+        "font": { "token": "font-sans", "value": "Inter Tight / Geist Sans" },
+        "size": { "value": "0.75rem", "token": "text-xs" },
+        "weight": { "value": "600", "token": "font-semibold" },
+        "transform": { "value": "uppercase" },
+        "tracking": { "value": "0.3em" },
+        "color": { "token": "color-text-primary", "value": "#ffffff" },
+        "hover": { "token": "opacity-white-80", "value": "rgba(255,255,255,0.80)" },
+        "arrow-size": { "value": "1rem", "token": "h-4 w-4" }
+      },
+      "background": {
+        "default": { "token": "gradient-card-background", "value": "linear-gradient(to bottom right, rgba(255,255,255,0.04), transparent, rgba(0,0,0,0.80))" }
+      }
+    },
+    "layout-grid": {
+      "description": "Two-column layout for hero section (1/3 text, 2/3 visual)",
+      "tags": ["layout", "grid", "hero"],
+      "gap": { "value": "2rem" },
+      "columns": { "mobile": "1", "desktop": "3" },
+      "text-span": { "value": "lg:col-span-1" },
+      "visual-span": { "value": "lg:col-span-2" }
+    }
+  }
+}

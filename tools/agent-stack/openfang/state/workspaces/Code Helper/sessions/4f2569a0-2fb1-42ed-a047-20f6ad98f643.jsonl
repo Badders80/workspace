@@ -1,0 +1,6 @@
+{"timestamp":"2026-04-06T05:49:27.964258569+00:00","role":"user","content":"test"}
+{"timestamp":"2026-04-06T05:49:27.964258569+00:00","role":"assistant","content":"","tool_use":[{"id":"tzv6pscfc","input":{"content":"Hello World","path":"test.txt"},"name":"file_write","type":"tool_use"}]}
+{"timestamp":"2026-04-06T05:49:27.964258569+00:00","role":"user","content":"","tool_use":[{"content":"Successfully wrote 11 bytes to /home/evo/workspace/_sandbox/agent-stack/openfang/state/workspaces/Code Helper/test.txt","is_error":false,"tool_use_id":"tzv6pscfc","type":"tool_result"}]}
+{"timestamp":"2026-04-06T05:49:27.964258569+00:00","role":"assistant","content":"","tool_use":[{"id":"ebxgh55g3","input":{"path":"test.txt"},"name":"file_read","type":"tool_use"}]}
+{"timestamp":"2026-04-06T05:49:27.964258569+00:00","role":"user","content":"","tool_use":[{"content":"Hello World","is_error":false,"tool_use_id":"ebxgh55g3","type":"tool_result"}]}
+{"timestamp":"2026-04-06T05:49:27.964258569+00:00","role":"assistant","content":"The file \"test.txt\" was successfully written with the content \"Hello World\" and then read back. The contents of the file are \"Hello World\"."}

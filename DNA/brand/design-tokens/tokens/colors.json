@@ -1,0 +1,54 @@
+{
+  "color": {
+    "brand": {
+      "primary": { "value": "#d4a964", "description": "Evolution Gold" },
+      "primary-hover": { "value": "#e5bc7a" }
+    },
+    "text": {
+      "primary": { "value": "#ffffff", "description": "Pure White" },
+      "secondary": { "value": "#cccccc", "description": "Light Gray" },
+      "muted": { "value": "#999999", "description": "Mid Gray" },
+      "dark": { "value": "#000000", "description": "Pure Black" }
+    },
+    "surface": {
+      "black": { "value": "#000000" },
+      "white": { "value": "#ffffff" },
+      "gray-light": { "value": "#e8e8e8", "description": "Light Gray background for IU blocks" },
+      "white-low": { "value": "rgba(255, 255, 255, 0.06)" }
+    },
+    "web": {
+      "description": "Website-specific color tokens. Extracted from Evolution_Platform.",
+      "tags": ["web", "website", "evolution-platform"],
+      "opacity": {
+        "white-5": { "value": "rgba(255,255,255,0.05)", "description": "Faint — hover overlays, outlines" },
+        "white-10": { "value": "rgba(255,255,255,0.10)", "description": "Subtle — card borders, trading window" },
+        "white-15": { "value": "rgba(255,255,255,0.15)", "description": "Light — BentoCard borders" },
+        "white-20": { "value": "rgba(255,255,255,0.20)", "description": "Soft — image scrim clear" },
+        "white-40": { "value": "rgba(255,255,255,0.40)", "description": "Muted — eyebrow labels, secondary text" },
+        "white-50": { "value": "rgba(255,255,255,0.50)", "description": "Mid — captions, metadata" },
+        "white-60": { "value": "rgba(255,255,255,0.60)", "description": "Body — descriptions on dark" },
+        "white-70": { "value": "rgba(255,255,255,0.70)", "description": "Strong — card descriptions" },
+        "white-80": { "value": "rgba(255,255,255,0.80)", "description": "Near-white — Coming Soon text" },
+        "white-90": { "value": "rgba(255,255,255,0.90)", "description": "Almost white — headings" },
+        "black-20": { "value": "rgba(0,0,0,0.20)", "description": "Light overlay — scrim clear" },
+        "black-60": { "value": "rgba(0,0,0,0.60)", "description": "Medium overlay — scrim blurred" },
+        "black-70": { "value": "rgba(0,0,0,0.70)", "description": "Heavy — card backgrounds" },
+        "black-75": { "value": "rgba(0,0,0,0.75)", "description": "Deep overlay — MyStable transition" },
+        "black-80": { "value": "rgba(0,0,0,0.80)", "description": "Gradient endpoints" }
+      },
+      "status": {
+        "emerald": { "value": "#34d399", "description": "Positive — returns, racing status" },
+        "emerald-bg": { "value": "rgba(16,185,129,0.10)", "description": "Emerald background tint" },
+        "blue": { "value": "#60a5fa", "description": "Info — training status" },
+        "blue-bg": { "value": "rgba(59,130,246,0.10)", "description": "Blue background tint" },
+        "red": { "value": "#f87171", "description": "Negative — loss indicators" }
+      },
+      "surface": {
+        "background": { "value": "#000000", "description": "Velvet Night — primary surface" },
+        "surface": { "value": "#0a0a0a", "description": "Elevated — cards, modals" },
+        "surface-alt": { "value": "#111111", "description": "Card fill — portfolio cards" },
+        "surface-hover": { "value": "#151515", "description": "Card hover state" }
+      }
+    }
+  }
+}

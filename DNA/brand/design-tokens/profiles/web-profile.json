@@ -1,0 +1,107 @@
+{
+  "profile": "Website (Web)",
+  "version": "0.0",
+  "components": {
+    "cta-popup-web": {
+      "intent": "Lead Generation / Conversion",
+      "states": {
+        "closed": {
+          "shape": "pill",
+          "background": "white/[0.03]",
+          "border": "white/[0.06]",
+          "text": {
+            "value": "Join the Evolution",
+            "style": "font-sans, 11px, uppercase, tracking-wide, white/70"
+          },
+          "effects": ["shimmer-animation", "hover-scale-105", "bottom-gold-glow"]
+        },
+        "open": {
+          "shape": "pill",
+          "background": "white/[0.03]",
+          "border": "white/10",
+          "input": {
+            "placeholder": "Enter your email",
+            "text": "white",
+            "placeholderColor": "white/40"
+          },
+          "submitButton": {
+            "shape": "circle",
+            "background": "white/[0.06]",
+            "icon": "→",
+            "iconColor": "color-brand-primary",
+            "animation": "evo-pulse"
+          }
+        },
+        "success": {
+          "text": "Welcome to the Evolution.",
+          "style": "font-sans, 14px, neutral-400"
+        }
+      },
+      "dataRequirements": {
+        "campaign": "string (ID for tracking)",
+        "placeholder": "string (Customizable text)",
+        "successText": "string (Customizable confirmation)"
+      }
+    },
+    "button-web": {
+      "intent": "General Navigation / Action",
+      "style": {
+        "shape": "pill",
+        "background": "white/[0.03]",
+        "border": "white/[0.06]",
+        "text": "font-sans, 11px, uppercase, tracking-wide, white/70",
+        "hover": {
+          "background": "white/[0.06]",
+          "border": "white/[0.12]",
+          "text": "white",
+          "scale": "1.05"
+        },
+        "effects": ["shimmer-animation"]
+      },
+      "example": "Learn More About Tokinvest"
+    },
+    "footer-web": {
+      "intent": "Brand Closure & Legal",
+      "source": "Evolution_Platform/src/components/site/Footer.tsx",
+      "sections": {
+        "hero-tagline": {
+          "headline": {
+            "text": "The Future of Ownership",
+            "style": "font-display, 3xl-5xl, normal, white, tracking-tight"
+          },
+          "dynamic-text": {
+            "value": "Has Arrived",
+            "style": "font-display, 3xl-5xl, normal, white",
+            "effect": "typewriter"
+          },
+          "subtext": {
+            "text": "Digital-Syndication, by Evolution Stables, Powered By Tokinvest",
+            "style": "font-sans, sm-base, light, gray-400"
+          }
+        },
+        "divider": {
+          "style": "h-px, bg-gradient-to-r, from-transparent, via-white/10, to-transparent"
+        },
+        "bottom-bar": {
+          "legal-links": {
+            "style": "text-xs, font-extralight, white/60, hover-white"
+          },
+          "copyright": {
+            "style": "text-xs, font-extralight, white/60"
+          },
+          "social-icons": {
+            "style": "h-5, w-5, white/60, hover-white"
+          }
+        }
+      },
+      "background": "color-text-dark"
+    },
+    "cta-web": {
+      "shape": "pill",
+      "background": "white/[0.03]",
+      "border": "white/[0.06]",
+      "text": "font-sans, 11px, uppercase, tracking-wide",
+      "effects": ["shimmer", "scale-105"]
+    }
+  }
+}

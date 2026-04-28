@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-26T09:39:37.039Z",
+  "entries": {
+    "memory:memory/2026-04-26.md:1:4": {
+      "key": "memory:memory/2026-04-26.md:1:4",
+      "path": "memory/2026-04-26.md",
+      "startLine": 1,
+      "endLine": 4,
+      "source": "memory",
+      "snippet": "# Memory — 2026-04-26 > Daily notes. Auto-created by system health check.",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.44266963601112364,
+      "maxScore": 0.44266963601112364,
+      "firstRecalledAt": "2026-04-26T04:07:57.674Z",
+      "lastRecalledAt": "2026-04-26T04:07:57.674Z",
+      "queryHashes": [
+        "0e72268c472c"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "auto-created",
+        "auto",
+        "created",
+        "health",
+        "check"
+      ]
+    },
+    "memory:memory/2026-04-26.md:1:34": {
+      "key": "memory:memory/2026-04-26.md:1:34",
+      "path": "memory/2026-04-26.md",
+      "startLine": 1,
+      "endLine": 34,
+      "source": "memory",
+      "snippet": "# Memory — 2026-04-26 ## Spring Clean (Morning) - Deleted `_sandbox/agent-stack/` (4.8GB), `node_modules/` (1.1GB), 20+ retired scripts - Purged stale docs, fake `.evo/` memory system, orchestration streams - Total recovery: ~5.9GB ## Structural Rewrite (Morning) - Created `DNA/ops/HARDWARE.md` — machine specs documented - Rewrote `AI_SESSION_BOOTSTRAP.md` v2.6.0 — MEMORY.md ritual + OpenClaw+OpenFang bridge - Purged `CONVENTIONS.md` of 50+ stale references - Updated `AI_CONTEXT.md`, `MEMORY_PROTOCOL.md`, `ACTIVE.md` ## Ethereum Sepolia Decision (Afternoon) - **Confirmed:** Ethereum Sepolia is INTENTIONAL target chain for current phase - Removed \"wrong chain\" framing from all docs - Base",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4639174520969391,
+      "maxScore": 0.4639174520969391,
+      "firstRecalledAt": "2026-04-26T09:39:37.039Z",
+      "lastRecalledAt": "2026-04-26T09:39:37.039Z",
+      "queryHashes": [
+        "8b20a797fd75"
+      ],
+      "recallDays": [
+        "2026-04-26"
+      ],
+      "conceptTags": [
+        "sandbox/agent-stack",
+        "4.8gb",
+        "node-modules",
+        "1.1gb",
+        "5.9gb",
+        "dna/ops/hardware.md",
+        "ai-session-bootstrap.md",
+        "v2.6.0"
+      ]
+    }
+  }
+}

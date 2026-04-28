@@ -1,0 +1,125 @@
+[skill]
+name = "evolution-ops-gst"
+version = "0.1.0"
+description = "GST Wizard skill for Evolution_Ops. Extracts, parses, categorizes, and audits bank statement transactions for GST filing."
+author = "evo"
+license = "MIT"
+tags = ["gst", "ocr", "banking", "finance", "evolution-ops"]
+
+[runtime]
+type = "python"
+entry = "gst_wizard.py"
+
+[tools]
+provided = [
+    "extract_transactions",
+    "categorize_transactions",
+    "audit_gst_data",
+    "generate_gst_report",
+]
+
+[requirements]
+tools = ["python3", "ollama"]
+capabilities = ["filesystem", "network"]
+
+[source]
+type = "custom"
+
+[[commands]]
+name = "extract"
+description = "Extract transactions from PDF bank statements"
+usage = "python gst_wizard.py --mode extract --input-dir ../banking/raw/ --output-dir ../gst/processed/"
+
+[[commands]]
+name = "categorize"
+description = "Categorize extracted transactions using GST master patterns"
+usage = "python gst_wizard.py --mode categorize --master ../gst/raw/GST\ 2023-2026-Feb26-Mar26.xlsx"
+
+[[commands]]
+name = "full"
+description = "Run complete pipeline: extract → categorize → write"
+usage = "python gst_wizard.py --mode full --fy 2025_2026 --month 02"
+
+[[commands]]
+name = "audit"
+description = "Audit GST data quality using OpenFang agents"
+usage = "openfang hand run audit --ticket gst-audit-2026-02.md"
+
+prompt_context = '''
+# GST Wizard Skill
+
+You are the GST Wizard agent for Evolution_Ops. Your job is to automate the GST filing pipeline.
+
+## Pipeline Steps
+
+1. **Extract**: Use GLM-OCR (via Ollama) to read PDF bank statements
+2. **Parse**: Convert OCR text into structured transactions (date, payee, amount, currency)
+3. **Categorize**: Apply IN/MAYBE/OUT rules based on historical GST master patterns
+4. **Write**: Populate the working Excel file (`GST_Feb-Mar2026_Working.xlsx`)
+5. **Audit**: Delegate to OpenFang data-scientist/analyst agents for verification
+
+## Directory Structure
+
+```
+Evolution_Ops/
+├── banking/
+│   ├── raw/          ← PDF statements (input)
+│   ├── processed/    ← Categorized by FY
+│   └── data/         ← Extracted JSON/CSV
+├── gst/
+│   ├── raw/          ← Master Excel files
+│   ├── processed/    ← Working Excel files
+│   └── final/        ← Filed returns
+└── scripts/
+    └── gst_wizard.py ← This pipeline
+```
+
+## Account Codes
+
+- BNZ_Visa: BNZ Advantage Visa Classic
+- BNZ_Evo: BNZ YouMoney / Evo account
+- AMEX: American Express
+- HSBC_Plat: HSBC Platinum
+- HSBC_Master: HSBC Mastercard
+- Bus_First: Business First Transaction account
+
+## Categorization Rules
+
+### IN (Business Expenses)
+- Cloud services: Google Cloud, AWS, Azure, Supabase
+- Communications: Mercury NZ, One NZ, Vodafone, Spark
+- Rent: B & T Devonport
+- Insurance: AMI Insurance
+- Racing: Stephen Gray Racing, Race Images
+- Auto: Devonport Auto Centre, BP Connect, Gull
+- Office: Officemax, Bunnings, Noel Leeming
+- SaaS: Stripe, PayPal, Google Workspace
+
+### OUT (Personal/Non-Business)
+- Entertainment: Spotify, Netflix, Apple.com, Audible
+- Food: McDonalds, New World, Countdown
+- Social: Twitter, X Corp, Facebook
+- Retail: Hammer Hardware, The Warehouse
+
+### MAYBE (Needs Verification)
+- Marketplaces: AliExpress, Amazon, eBay
+- General retail: Paper Plus
+
+## Workflow
+
+When asked to process GST:
+1. Check `banking/raw/` for statements matching the requested FY/month
+2. Run extraction (OCR or fallback)
+3. Parse transactions
+4. Categorize using rules + GST master patterns
+5. Write to `gst/processed/GST_Feb-Mar2026_Working.xlsx`
+6. Report summary: total IN, MAYBE, OUT counts
+7. Flag any anomalies for human review
+
+## Safety Rules
+
+- Never edit originals in `banking/raw/`
+- Always write to `gst/processed/` first
+- Move to `gst/final/` only after human approval
+- Log all categorization decisions
+'''

@@ -1,0 +1,59 @@
+{
+  "motion": {
+    "duration": {
+      "fast": { "value": "300ms", "description": "Quick transitions — hover states, micro-interactions" },
+      "medium": { "value": "500ms", "description": "Standard transitions — opacity fades, transforms" },
+      "slow": { "value": "700ms", "description": "Deliberate transitions — blur, overlay, Coming Soon" },
+      "very-slow": { "value": "1000ms", "description": "Dramatic transitions — height changes, layout shifts" }
+    },
+    "delay": {
+      "blur-start": { "value": "1800ms", "description": "Time before trading window blur begins", "source": "marketplace/page.tsx", "tags": ["marketplace", "trading-window", "blur"] },
+      "coming-soon": { "value": "2600ms", "description": "Time before Coming Soon text appears", "source": "marketplace/page.tsx", "tags": ["marketplace", "coming-soon"] },
+      "mystable-blur": { "value": "2200ms", "description": "Time before MyStable dashboard blurs", "source": "mystable/page.tsx (rolled-back)", "tags": ["mystable", "blur", "legacy"] },
+      "mystable-coming-soon": { "value": "2800ms", "description": "Time before MyStable Coming Soon appears", "source": "mystable/page.tsx (rolled-back)", "tags": ["mystable", "coming-soon", "legacy"] }
+    },
+    "easing": {
+      "default": { "value": "ease-in-out", "description": "Standard easing — most transitions" },
+      "out": { "value": "ease-out", "description": "Decelerating easing — fade-ins, reveals" },
+      "decelerate": { "value": "cubic-bezier(0.4, 0, 0.2, 1)", "description": "Smooth deceleration — gold wave animation" }
+    },
+    "animation": {
+      "gold-wave": {
+        "name": "gold-letter-wave",
+        "duration": "8s",
+        "easing": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "iteration": "infinite",
+        "description": "Sequential gold highlight sweep across text",
+        "source": "styles/globals.css",
+        "tags": ["text", "gold", "highlight", "sequential"]
+      },
+      "shimmer": {
+        "name": "shimmer",
+        "duration": "8s",
+        "easing": "ease-in-out",
+        "iteration": "infinite",
+        "description": "Horizontal light sweep across surfaces",
+        "source": "tailwind.config.ts",
+        "tags": ["surface", "light", "sweep"]
+      },
+      "float": {
+        "name": "float",
+        "duration": "15s",
+        "easing": "ease-in-out",
+        "iteration": "infinite",
+        "description": "Gentle floating motion for decorative elements",
+        "source": "tailwind.config.ts",
+        "tags": ["decorative", "floating", "ambient"]
+      },
+      "tilt": {
+        "name": "tilt",
+        "duration": "10s",
+        "easing": "ease-in-out",
+        "iteration": "infinite",
+        "description": "Subtle rotation oscillation",
+        "source": "tailwind.config.ts",
+        "tags": ["decorative", "rotation", "ambient"]
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+[hand]
+id = "evolution-updates"
+name = "Evolution Update Generator"
+version = "1.0.0"
+description = "Generates branded HTML updates for the Evolution Platform."
+category = "automation"
+icon = "📊"
+
+[hand.agent]
+id = "evolution-architect"
+name = "Evolution Architect"
+description = "AI Agent specializing in HTML update generation."
+system_prompt = "prompt.md"
+provider = "ollama"
+model = "gemma4:31b-cloud"
+tools = ["file_read", "file_write", "web_fetch"]
+
+[[settings]]
+name = "updateType"
+type = "string"
+
+[[settings]]
+name = "brandStyle"
+type = "string"
+
+[[settings]]
+name = "heading"
+type = "string"
+
+[[settings]]
+name = "content"
+type = "string"

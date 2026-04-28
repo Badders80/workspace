@@ -1,0 +1,95 @@
+name: Evo Cloud Models
+version: 1.0.0
+schema: v1
+
+models:
+  - name: deepseek-v4-flash-cloud
+    provider: ollama
+    model: deepseek-v4-flash:cloud
+    apiBase: http://127.0.0.1:11434
+    capabilities:
+      - tool_use
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: deepseek-v4-flash-vision-cloud
+    provider: ollama
+    model: deepseek-v4-flash:cloud
+    apiBase: http://127.0.0.1:11434
+    capabilities:
+      - tool_use
+      - vision
+    roles:
+      - chat
+
+  - name: deepseek-v4-pro-cloud
+    provider: ollama
+    model: deepseek-v4-pro:cloud
+    apiBase: http://127.0.0.1:11434
+    capabilities:
+      - tool_use
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: glm-5.1-cloud
+    provider: ollama
+    model: glm-5.1:cloud
+    apiBase: http://127.0.0.1:11434
+    capabilities:
+      - tool_use
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: minimax-m2.7-cloud
+    provider: ollama
+    model: minimax-m2.7:cloud
+    apiBase: http://127.0.0.1:11434
+    capabilities:
+      - tool_use
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: gemma4-31b-cloud
+    provider: ollama
+    model: gemma4:31b-cloud
+    apiBase: http://127.0.0.1:11434
+    capabilities:
+      - tool_use
+    roles:
+      - chat
+      - edit
+      - apply
+
+defaultModel: deepseek-v4-flash-cloud
+
+tools:
+  policies:
+    edit_existing_file:
+      policy: automatic
+    create_new_file:
+      policy: automatic
+    read_file:
+      policy: automatic
+    run_terminal_command:
+      policy: ask
+
+context:
+  - provider: code
+  - provider: docs
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase
+  - path: /home/evo/workspace/memory/STATE.md
+    description: "Current workspace state — system health, project statuses, active focus."
+  - path: /home/evo/workspace/memory/BLOCKERS.md
+    description: "Active blockers with owners and resolution paths."

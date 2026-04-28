@@ -1,0 +1,83 @@
+/* Evolution Stables Design Tokens */
+/* Exported from DESIGN.md for developer handoff */
+
+/* Color Palette */
+:root {
+  /* Neutrals */
+  --color-background: #09090b; /* Velvet Night */
+  --color-surface: #0a0a0a; /* Elevated Surface */
+  --color-foreground: #f5f5f5; /* Primary Text */
+  --color-muted: #a1a1aa; /* Secondary Text */
+  
+  /* Accent */
+  --brand-gold: #d4a964; /* The ONLY Accent */
+  
+  /* Borders and Dividers */
+  --color-border: rgba(255,255,255,0.06); /* Subtle Dividers */
+  
+  /* Shadows (if needed) */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+}
+
+/* Typography Tokens */
+:root {
+  /* Font Families */
+  --font-heritage: 'Instrument Serif', serif;
+  --font-precision: 'Inter Tight', sans-serif;
+  --font-data: 'Geist Mono', monospace;
+  
+  /* Font Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  
+  /* Font Sizes */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.75rem; /* 28px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 2.75rem; /* 44px */
+  --text-6xl: 3.5rem; /* 56px */
+  
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+}
+
+/* Utility Classes (for frameworks like Tailwind) */
+.bg-background { background-color: var(--color-background); }
+.bg-surface { background-color: var(--color-surface); }
+.text-foreground { color: var(--color-foreground); }
+.text-muted { color: var(--color-muted); }
+.bg-brand-gold { background-color: var(--brand-gold); }
+.text-brand-gold { color: var(--brand-gold); }
+.border-border { border-color: var(--color-border); }
+
+/* Dark Mode Variables (if needed) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Colors are already optimized for dark mode */
+  }
+}

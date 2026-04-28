@@ -1,0 +1,46 @@
+[hand]
+id = "utility-worker"
+name = "utility-worker"
+category = "execution"
+description = "Utility worker for general tasks, formatting, supporting work, and fallback. Executes scoped work through Fang contracts."
+version = "1.0.0"
+
+agent = { name = "utility-worker", provider = "ollama", model = "kimi-k2.6:cloud", description = "Utility worker. Executes general tasks, formatting, supporting work, and fallback within ticket boundaries.", system_prompt = "You are a utility worker. You execute scoped work within ticket boundaries. You do not plan your own approach — the think layer frames the work. You handle general tasks, formatting, supporting work, and fallback. You do not define governance. You do not become management. You do not self-expand beyond the ticket boundary. All project writes go through Fang verification." }
+
+[schedule]
+cron = ""
+enabled = false
+
+[memory]
+enabled = true
+knowledge_graph = false
+compaction = "daily"
+vector_search = false
+
+[tools]
+file_read = true
+file_write = true
+web_search = false
+shell_exec = false
+browser = false
+
+[workspace]
+allowed_paths = [
+  "/home/evo/workspace/projects",
+  "/home/evo/workspace/orchestration",
+  "/home/evo/workspace/_docs",
+  "/home/evo/workspace/DNA",
+  "/home/evo/workspace/research_vault",
+]
+
+[workspace.write_paths]
+allowed_write_paths = [
+  "/home/evo/workspace/orchestration/tickets",
+]
+
+[guardrails]
+never_write_dna = true
+never_write_without_ticket = true
+never_modify_dna = true
+never_delete = true
+log_all_actions = true

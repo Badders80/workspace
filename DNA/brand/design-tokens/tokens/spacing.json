@@ -1,0 +1,58 @@
+{
+  "spacing": {
+    "unit": {
+      "value": "0.25rem",
+      "description": "Base spacing unit (4px)"
+    },
+    "scale": {
+      "1": { "value": "0.25rem", "px": "4px" },
+      "2": { "value": "0.5rem", "px": "8px" },
+      "3": { "value": "0.75rem", "px": "12px" },
+      "4": { "value": "1rem", "px": "16px" },
+      "5": { "value": "1.25rem", "px": "20px" },
+      "6": { "value": "1.5rem", "px": "24px" },
+      "8": { "value": "2rem", "px": "32px" },
+      "10": { "value": "2.5rem", "px": "40px" },
+      "12": { "value": "3rem", "px": "48px" },
+      "16": { "value": "4rem", "px": "64px" },
+      "20": { "value": "5rem", "px": "80px" },
+      "24": { "value": "6rem", "px": "96px" },
+      "28": { "value": "7rem", "px": "112px" },
+      "32": { "value": "8rem", "px": "128px" }
+    },
+    "page": {
+      "padding-x": {
+        "mobile": { "value": "1.5rem", "px": "24px", "description": "Page horizontal padding on mobile" },
+        "tablet": { "value": "2.5rem", "px": "40px", "description": "Page horizontal padding on tablet (md:)" },
+        "desktop": { "value": "3rem", "px": "48px", "description": "Page horizontal padding on desktop (lg:)" }
+      },
+      "padding-top": {
+        "mobile": { "value": "8rem", "px": "128px", "description": "Space below NavBar on mobile" },
+        "desktop": { "value": "10rem", "px": "160px", "description": "Space below NavBar on desktop (md:)" }
+      },
+      "padding-bottom": { "value": "6rem", "px": "96px", "description": "Page bottom breathing room" },
+      "max-width": { "value": "80rem", "px": "1280px", "description": "Content container max-width (max-w-7xl)" }
+    },
+    "section": {
+      "gap": { "value": "6rem", "px": "96px", "description": "Vertical rhythm between major sections" },
+      "inner-gap": { "value": "3rem", "px": "48px", "description": "Space within a section (space-y-12)" }
+    },
+    "card": {
+      "padding": { "value": "1.5rem", "px": "24px", "description": "Standard card padding" },
+      "padding-top-icon": { "value": "6rem", "px": "96px", "description": "Top padding when card has floating icon" }
+    },
+    "grid": {
+      "gap": { "value": "2rem", "px": "32px", "description": "Standard grid gap" },
+      "bento-gap": {
+        "mobile": { "value": "0.75rem", "px": "12px", "description": "Bento grid gap on mobile" },
+        "desktop": { "value": "1rem", "px": "16px", "description": "Bento grid gap on desktop" }
+      },
+      "dashboard": {
+        "description": "Dashboard layout — fluid main + fixed sidebar",
+        "main": { "value": "1fr", "description": "Fluid main content area" },
+        "sidebar": { "value": "320px", "description": "Fixed sidebar width (MyStable)" },
+        "gap": { "value": "2rem", "px": "32px", "description": "Gap between main and sidebar" }
+      }
+    }
+  }
+}

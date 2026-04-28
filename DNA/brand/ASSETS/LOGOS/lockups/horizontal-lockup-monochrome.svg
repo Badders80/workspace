@@ -1,0 +1,21 @@
+<!-- Evolution Stables Horizontal Lockup - Monochrome (for single color applications) -->
+<!-- Uses Black for maximum versatility -->
+<svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background for visibility -->
+  <rect width="400" height="100" fill="none"/>
+  
+  <!-- Monogram Mark (left) -->
+  <g transform="translate(20,50)">
+    <!-- Use: EvolutionStables Mono-Black.svg -->
+    <circle cx="0" cy="0" r="20" fill="#0a0a0a"/>
+    <text x="0" y="4" text-anchor="middle" fill="#f5f5f5" font-family="Instrument Serif" font-size="16" font-weight="bold">ES</text>
+  </g>
+  
+  <!-- Wordmark (right) -->
+  <g transform="translate(60,50)">
+    <!-- Use: Evolution-Stables-Logo-Black.svg -->
+    <text x="0" y="0" fill="#0a0a0a" font-family="Instrument Serif" font-size="24" font-weight="bold" letter-spacing="-0.5">
+      Evolution Stables
+    </text>
+  </g>
+</svg>
