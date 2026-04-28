@@ -12,7 +12,7 @@ from pathlib import Path
 WORKSPACE = Path("/home/evo/workspace")
 MEMORY_DIR = WORKSPACE / "memory"
 PROJECTS_DIR = WORKSPACE / "projects"
-DASHBOARD_PATH = WORKSPACE / "DASHBOARD.md"
+DASHBOARD_PATH = WORKSPACE / "_docs" / "DASHBOARD.md"
 
 # Map emoji / text statuses to board columns
 STATUS_META = {

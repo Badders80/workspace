@@ -1,7 +1,32 @@
 #!/bin/bash
 set -euo pipefail
 
-source /home/evo/workspace/_scripts/agent-context.sh
+# Inlined from agent-context.sh (deleted in f071871)
+WORKSPACE_ROOT="/home/evo/workspace"
+WORKSPACE_AI_BOOTSTRAP="$WORKSPACE_ROOT/AI_SESSION_BOOTSTRAP.md"
+WORKSPACE_AGENTS="$WORKSPACE_ROOT/AGENTS.md"
+WORKSPACE_DNA_AGENTS="$WORKSPACE_ROOT/DNA/AGENTS.md"
+WORKSPACE_AI_CONTEXT="$WORKSPACE_ROOT/DNA/agents/AI_CONTEXT.md"
+WORKSPACE_CONVENTIONS="$WORKSPACE_ROOT/DNA/ops/CONVENTIONS.md"
+WORKSPACE_STACK="$WORKSPACE_ROOT/DNA/ops/STACK.md"
+WORKSPACE_TRANSITION="$WORKSPACE_ROOT/DNA/ops/TRANSITION.md"
+WORKSPACE_INBOX="$WORKSPACE_ROOT/DNA/INBOX.md"
+WORKSPACE_DECISIONS="$WORKSPACE_ROOT/DNA/ops/DECISION_LOG.md"
+WORKSPACE_TECH_RADAR="$WORKSPACE_ROOT/DNA/ops/TECH_RADAR.md"
+WORKSPACE_MEMORY_PROTOCOL="$WORKSPACE_ROOT/DNA/agents/MEMORY_PROTOCOL.md"
+
+workspace_context_files() {
+  cat <<'EOF'
+/home/evo/workspace/AI_SESSION_BOOTSTRAP.md
+/home/evo/workspace/AGENTS.md
+/home/evo/workspace/DNA/AGENTS.md
+/home/evo/workspace/DNA/agents/AI_CONTEXT.md
+/home/evo/workspace/DNA/ops/CONVENTIONS.md
+/home/evo/workspace/DNA/ops/STACK.md
+/home/evo/workspace/DNA/ops/TRANSITION.md
+/home/evo/workspace/DNA/INBOX.md
+EOF
+}
 
 show_help() {
   cat <<'EOF'
@@ -12,19 +37,12 @@ Usage: evo [command]
 Commands:
   doctor        Run workspace sanity checks
   context       Show canonical workspace context files
-  gemini        Launch Gemini with workspace context
-  claude        Launch Claude with workspace context
-  aider         Launch Aider with workspace context
-  aider-or      Launch Aider on OpenRouter with workspace context
-  codex         Launch Codex
   backlog       Show the active inbox/deferred queue
   transition    Show the transition log
   decisions     Show the decision log
   memory        Show the memory protocol
   radar         Show the tech radar
   vault         Run vault helper
-  docker        Run docker helper
-  tldr          Run tool-tldr helper
   help          Show this help
 EOF
 }

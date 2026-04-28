@@ -10,6 +10,10 @@
 set -euo pipefail
 
 WORKSPACE="/home/evo/workspace"
+
+# Ensure _logs exists (evo-health.sh writes here)
+mkdir -p "$WORKSPACE/_logs"
+
 ACTIVE_FILE="$WORKSPACE/.cline-active"
 STATE_FILE="$WORKSPACE/memory/STATE.md"
 BLOCKERS_FILE="$WORKSPACE/memory/BLOCKERS.md"

@@ -59,61 +59,94 @@ just check
 -> DNA/ops/CONVENTIONS.md
 EOF
 
+# GAME_PLAN.md
+cat > "$PROJECT_DIR/GAME_PLAN.md" <<'EOF'
+# PROJECT_NAME — Game Plan
+
+**Status:** 🟡 Phase 1 — Initial scaffold
+**Branch:** main
+**Created:** DATE
+**Last Updated:** DATE
+
+---
+
+## How to Use This Document
+
+This is the single source of truth. If it's not in the Game Plan, it doesn't exist.
+Update this file via the same commit that introduces the change.
+
+---
+
+## Project Overview
+
+**Goal:** TBD
+**Scope:** TBD
+**Non-Goals:** TBD
+
+---
+
+## Architecture Decisions (Locked)
+
+| Decision | Choice | Rationale | Date | Owner |
+|----------|--------|-----------|------|-------|
+
+---
+
+## Phase Checklists
+
+### Phase 1: Foundation
+
+- [ ] **1.1** Description | Owner: TBD | Target: YYYY-MM-DD
+
+---
+
+## This Week
+
+| Item | Phase | Owner | Status |
+|------|-------|-------|--------|
+
+---
+
+## Blockers & Risks
+
+| Risk | Impact | Mitigation | Status | Owner |
+|------|--------|-----------|--------|-------|
+
+---
+
+## Change Log
+
+| Date | Commit | Change | Author |
+
+---
+
+## Related Documents
+
+- `MEMORY.md` — session scratchpad (what happened today)
+- `SESSION_LOG.md` — append-only session history
+- `README.md` — operator-facing overview
+EOF
+
 # MEMORY.md
 cat > "$PROJECT_DIR/MEMORY.md" <<'EOF'
 # PROJECT_NAME — Memory
 
-> Tool-agnostic project memory. Any agent or human can read/write.
+> Session scratchpad. What happened today. Not strategic.
+> Strategic context lives in GAME_PLAN.md.
 
-## Current State
+## This Session (DATE)
 
-- **Branch:** main
-- **Status:** Active — initial scaffold
-- **Environment:** TBD
+- What we did
+- What worked
+- What's stuck
 
-## Active Threads
+## Next Session
 
-| Thread | Status | Next Step | Owner |
-|--------|--------|-----------|-------|
-| Project initialization | 🟡 | Scaffold created | Human |
-
-## Blockers
-
-| Blocker | Severity | Resolution |
-|---------|----------|------------|
-| None | — | — |
-
-## Integration Points
-
-| System | Direction | Status |
-|--------|-----------|--------|
-| TBD | ← TBD | TBD |
-
-## Workspace Tools Available
-
-When building in this project, leverage the shared workspace infrastructure:
-
-| Tool | Location | Use For |
-|------|----------|---------|
-| Vision MCP | `tools/vision-mcp/` | Screenshots, OCR, UI review |
-| Codex Peers | `tools/codex-peers-mcp/` | Cross-session messaging |
-| OpenFang + Ollama | `tools/agent-stack/` | Bounded agent tasks |
-| UI/UX Pro Max | `DNA/skills/UI_UX_PRO_MAX.md` | Design intelligence |
-| shadcn/ui | Workspace registry | Component source (`npx shadcn`) |
-| Playwright | Workspace registry | Browser automation |
-
-Full active registry: `DNA/ops/STACK.md`
-
-## DNA References
-
-- `DNA/ops/CONVENTIONS.md` — workspace rules
-- `DNA/ops/STACK.md` — tool registry
+- What to pick up
 
 ## Context Chain
 
-<- workspace/MEMORY.md
-<- workspace/SESSION_LOG.md
--> Project README.md
+<- GAME_PLAN.md
 -> SESSION_LOG.md
 EOF
 
