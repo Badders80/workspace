@@ -17,6 +17,10 @@ check:
     bash /home/evo/workspace/_scripts/vault.sh check
     @test -f /home/evo/workspace/_scripts/evo-docker.sh && bash /home/evo/workspace/_scripts/evo-docker.sh status || echo "⚠️  Docker check skipped (evo-docker.sh not present)"
 
+# CI-safe health check (no local-only dependencies like vault or Docker)
+ci-check:
+    @bash /home/evo/workspace/_scripts/evo-ci-check.sh
+
 # Rebuild productivity dashboard from all project MEMORY.md files
 dash:
     @echo "📊 Rebuilding dashboard..."
@@ -337,61 +341,65 @@ optimize-memory:
     bash /home/evo/workspace/_scripts/memory-optimize.sh
 
 # ═══════════════════════════════════════════════════════════
-# Audit Helpers
+# OpenFang Agent Management
 # ═══════════════════════════════════════════════════════════
 
-audit-partners date='':
-    @/home/evo/workspace/_scripts/evo-audit-partners.sh {{date}}
+# Start OpenFang daemon
+fang-start:
+    @openfang start
 
-audit-claude-meta date='':
-    @/home/evo/workspace/_scripts/evo-audit-claude-meta.sh {{date}}
+# Stop OpenFang daemon
+fang-stop:
+    @openfang stop
 
-audit-partners-claude date='':
-    @/home/evo/workspace/_scripts/evo-audit-claude-meta.sh {{date}}
+# Show OpenFang status + active agents
+fang-status:
+    @openfang status
+    @echo ""
+    @echo "=== Active Hands ==="
+    @openfang hand list 2>/dev/null || echo "(no hands active)"
 
-# Legacy pre-sidecar OpenFang bridge. Keep until the new agent-stack trial
-# proves itself, then redirect or retire it.
-audit-openfang-bridge date='':
-    @/home/evo/workspace/_scripts/evo-openfang-audit-bridge.sh {{date}}
+# Spawn a conductor agent
+fang-conductor:
+    @openfang agent new conductor
 
+# Spawn a reasoning/analyst agent
+fang-reasoning:
+    @openfang agent new analyst
+
+# Spawn a primary assistant agent
+fang-primary:
+    @openfang agent new assistant
+
+# Spawn a visual agent
+fang-visual:
+    @openfang agent new --template visual
+
+# Spawn a creative/writer agent
+fang-creative:
+    @openfang agent new --template writer
+
+# List all running agents
+fang-agents:
+    @openfang agent list
+
+# Open the web dashboard
+fang-dashboard:
+    @openfang dashboard
+
+# Run OpenFang diagnostics
+fang-doctor:
+    @openfang doctor
+
+# Legacy route-based launch (uses openfang-trial.sh config system)
 fang-local:
-    /home/evo/workspace/tools/agent-stack/ollama-trial.sh start
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route local
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
+    @openfang agent new coder
 
 fang-debug:
-    /home/evo/workspace/tools/agent-stack/ollama-trial.sh start
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route local-debug
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
+    @openfang agent new --config /home/evo/workspace/tools/agent-stack/openfang/state/routes/local-debug.toml
 
 fang-audit:
-    /home/evo/workspace/tools/agent-stack/ollama-trial.sh start
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route local-audit
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
-
-fang-status:
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh status
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh hand active
-
-fang-conductor:
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route conductor
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
-
-fang-reasoning:
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route reasoning
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
-
-fang-primary:
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route primary
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
-
-fang-visual:
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route visual
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
-
-fang-creative:
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route creative
-    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
+    @openfang agent new --config /home/evo/workspace/tools/agent-stack/openfang/state/routes/local-audit.toml
 
 model-status:
     @echo "=== Active Model Stack ==="
