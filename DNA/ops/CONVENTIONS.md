@@ -75,9 +75,11 @@
 - `/home/evo/workspace/DNA/ops/HARDWARE.md`
 - `/home/evo/workspace/DNA/ops/memory-system-adoption.md`
 - `/home/evo/workspace/DNA/INBOX.md`
-- `/home/evo/workspace/DNA/skills/INDEX.md`
-- `/home/evo/workspace/DNA/skills/UI_UX_PRO_MAX.md`
-- `/home/evo/workspace/DNA/skills/registry/approved_sources.md`
+- `/home/evo/workspace/DNA/skills/frontend-design/SKILL.md`
+- `/home/evo/workspace/DNA/skills/video-production/SKILL.md`
+- `/home/evo/workspace/DNA/tool-registry/skills-index.md`
+- `/home/evo/workspace/DNA/tool-registry/approved_sources.md`
+- `/home/evo/workspace/DNA/tool-registry/starred_repo_registry.md`
 
 ### Projects (per-project MEMORY.md + SESSION_LOG.md)
 - `/home/evo/workspace/projects/Evolution_Token/MEMORY.md`
