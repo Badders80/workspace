@@ -2,6 +2,8 @@
 
 Use normalized notes to keep research comparable, searchable, and ready for review.
 
+> **Primary schema:** See [[AGENT]] for the vault's operating system, workflows, and provenance rules. This file defines frontmatter conventions only.
+
 ## Core Frontmatter
 
 ```yaml

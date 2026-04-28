@@ -18,6 +18,330 @@
 
 ---
 
+## 2026-04-24: Adopt Karpathy LLM Wiki Pattern for research_vault (v0.1)
+
+### Decision
+Restructure `research_vault/` to match the Karpathy LLM Wiki pattern with immutable pages and strict provenance. Replace the old `00_Inbox/` → `06_Promoted/` folder structure with `raw/` → `wiki/` → `index.md` → `log.md` → `AGENT.md`.
+
+| Decision | Choice | Rationale |
+|---|---|---|
+| Folder structure | Karpathy pattern | `raw/` (immutable sources) + `wiki/` (append-only AI pages) + `index.md` + `log.md` + `AGENT.md` (schema). Clear separation of concerns. |
+| Wiki mutation model | Immutable pages + strict provenance | AI never overwrites existing wiki pages. Every claim cites `raw/filename.md#Lstart-Lend`. Prevents silent drift and hallucination compounding. |
+| AI partner | GLM-5.1:cloud single hand | Operational simplicity. Conductor/worker orchestration stays untouched for project work. |
+| Write permissions | New `wiki-keeper` OpenFang hand | Write scope limited to `research_vault/` only. `never_delete = true`. All other hands remain `strict_read_only`. |
+| Search | `vault-search.py` (grep-based) | `qmd` deferred to v0.2 — cargo build pulled llama.cpp CUDA, too heavy for v0.1. Lightweight Python search sufficient for now. |
+| First ingest | Karpathy gist → DNA docs | Prove pipeline with pattern's own source, then bootstrap with existing workspace knowledge. |
+| Session rituals | Updated | `session-start.sh` shows vault status. `session-end.sh` prompts for `just vault-push`. |
+
+### Context
+The research vault existed as a well-structured but underutilized sidecar. The Karpathy gist (2026-04-24) provided the operational pattern: raw sources → AI-maintained wiki → index → log. The key insight: the tedious part of knowledge management is bookkeeping, and LLMs can absorb that cost. The critical guardrail: immutable pages prevent the "LLM reads its own prose, human wonders where truth went" problem.
+
+### Impact
+- `research_vault/` — restructured with `raw/`, `wiki/`, `index.md`, `log.md`, `AGENT.md`
+- `DNA/ops/STACK.md` — added wiki-keeper hand, vault-ingest, vault-lint, vault-search
+- `workspace/Justfile` — added `vault-ingest`, `vault-lint`, `vault-search`, `vault-status`, `vault-push`
+- `workspace/_scripts/` — added `vault-ingest.sh`, `vault-lint.py`, `vault-search.py`
+- `_docs/openfang-wizard/hands/wiki-keeper/` — new write-enabled hand
+- `session-start.sh` / `session-end.sh` — vault status and push reminders
+
+### Related Files
+- `/home/evo/workspace/research_vault/AGENT.md`
+- `/home/evo/workspace/research_vault/index.md`
+- `/home/evo/workspace/research_vault/log.md`
+- `/home/evo/workspace/_docs/openfang-wizard/hands/wiki-keeper/HAND.toml`
+- `/home/evo/workspace/_docs/openfang-wizard/hands/wiki-keeper/SKILL.md`
+
+---
+
+## 2026-04-23: Adopt caveman-commit and caveman-review Skills
+
+### Decision
+Adopt `caveman-commit` and `caveman-review` as workspace tools. These are the skill-based commands from the caveman ecosystem (juliusbrussee/caveman). Skip output compression (caveman full/ultra/lite auto-activation) — already handled by BRAND_SYSTEM §10A policy.
+
+| Decision | Choice | Rationale |
+|---|---|---|
+| caveman-commit | Adopt — `/caveman-commit` | Terse conventional commit messages, ≤50 char subject, why over what. Fits the orchestration + Fang hand surface. No dependency on plugin install — works as a prompt/skill pattern. |
+| caveman-review | Adopt — `/caveman-review` | One-line PR comments: `L42: 🔴 bug: user null. Add guard.`. Removes throat-clearing from code review output. |
+| Output compression (auto-activation) | Skip — already in BRAND_SYSTEM §10A | The actual caveman plugin (auto-activation, /caveman, mode switching) is not adopted as a core tool. The style is already encoded in policy. Marginal gain doesn't justify single-maintainer dependency risk and audit trail opacity. |
+| Input compression (caveman-compress) | Skip | Rewrites memory files so AI reads compressed versions. Makes human review of AI input impossible. Not appropriate for governance-critical workspace memory files. |
+
+### Context
+The workspace already has `caveman lite` style adopted (2026-04-11 decision) for internal operating surfaces. The actual caveman CLI/plugin from juliusbrussee/caveman was never installed as a tool. Evaluating whether to adopt it, two concerns were raised: output compression audit trail risk and single-maintainer dependency. The skill-based tools (commit, review) don't carry those concerns — they are pattern-based, not compression-based.
+
+### Impact
+- `DNA/ops/STACK.md` — caveman-commit and caveman-review added to Utility/Optional
+- `DNA/ops/DECISION_LOG.md` — this decision record
+- BRAND_SYSTEM §10A — no change; output compression already handled by policy
+
+### Related Files
+- `/home/evo/workspace/DNA/brand/BRAND_SYSTEM.md` §10A
+- `/home/evo/workspace/DNA/ops/CONVENTIONS.md` (caveman lite style already registered)
+
+---
+
+## 2026-04-14: Local Vision MCP — "Eyes for Any Model"
+
+### Decision
+Add a local vision MCP server that acts as shared "eyes" for all text-only Ollama models. Any agent that can call MCP tools gets vision capability through a single `analyze_image` tool call. Two-tier setup: quick eyes (e2b) for fast OCR, deep eyes (e4b) for full detail.
+
+| Decision | Choice | Rationale |
+|---|---|---|
+| Vision model (deep) | gemma4:e4b (9.6GB, Apache 2.0) | Smoke tested — exceptional OCR, layout, color, and pattern recognition. Fits RTX 3060. |
+| Vision model (quick) | gemma4:e2b (7.2GB, Apache 2.0) | Same architecture as e4b, ~2x faster for OCR-only tasks. |
+| Keep-alive | Permanent (-1) | GPU is dedicated; both models stay loaded for zero cold-start. |
+| Integration | MCP server in `.vscode/mcp.json` | Plug-and-play for VS Code Copilot. Any MCP client gets eyes. |
+| Server pattern | Raw JSON-RPC over stdio (matches codex-peers-mcp) | Zero dependencies beyond Python stdlib. No FastMCP/mcp SDK required. |
+| Architecture | "Eyes for any model" — model-agnostic bridge | glm-5.1, qwen3.5, deepseek, nemotron, kimi, minimax, gpt-oss all gain vision through one tool. |
+| Not selected | llava:7b, gemma3:4b | Outdated or too weak for "really good" quality. |
+| Not selected | gemma3:12b, qwen3-vl:8b | Not pulled for testing; gemma4:e4b already exceptional. |
+
+### Context
+Copilot (glm-5.1:cloud) cannot see images natively. User needs vision for UI review, OCR, and design analysis. All 9 active Ollama models are text-only. A shared vision bridge eliminates the need for each model to have native vision capability.
+
+### Performance (RTX 3060, models pre-loaded)
+
+| Tier | Model | Brief prompt | Full detail |
+|------|-------|-------------|-------------|
+| Quick | gemma4:e2b | ~14s | ~21s |
+| Deep | gemma4:e4b | ~25s | ~42s |
+
+### Impact
+- `_sandbox/vision-mcp/server.py` — new MCP server
+- `.vscode/mcp.json` — vision server registered
+- `DNA/ops/STACK.md` — vision MCP added to adopted tools
+- All 9 text-only Ollama models gain vision via `analyze_image`
+
+### Related Files
+- `/home/evo/workspace/_sandbox/vision-mcp/server.py`
+- `/home/evo/workspace/_sandbox/vision-mcp/README.md`
+- `/home/evo/workspace/.vscode/mcp.json`
+
+---
+
+## 2026-04-14: Anti-Loop Modelfile Wrappers for Ollama Cloud Models
+
+### Decision
+Create Modelfile wrappers with baked-in repetition suppression for Ollama cloud
+models (especially Nemotron-3-Super:cloud) to prevent degenerate output loops.
+
+| Decision | Choice | Rationale |
+|---|---|---|
+| repeat_penalty | 1.5 (aggressive) | Nemotron family prone to repetition collapse |
+| num_ctx | 131072 | 128K — half the 256K max; generous for reasoning, cuts loop runway by 50% |
+| num_predict | 8192 | Hard cap prevents runaway output |
+| Stop tokens | "Let me check if there are any existing examples of" etc. | Breaks the observed loop pattern |
+| System prompt | Anti-loop protocol with search budget + forced termination | Structural guardrail that works regardless of sampling params |
+
+### Context
+Nemotron-3-Super:cloud entered a degenerate repetition loop during a codebase
+exploration task, cycling through "Let me check if there are any existing
+examples of [X] components" for increasingly absurd categories (weather
+instruments, NFC readers, etc.) for hundreds of iterations. The model's
+training makes it prone to this; cloud inference defaults don't include
+sufficient repeat_penalty.
+
+### Impact
+- `models/ollama/Modelfile.nemotron-super-128k` — custom wrapped model
+- `models/ollama/Modelfile.anti-loop` — generic wrapper for any model
+- `DNA/agents/ANTI_LOOP_PROMPT.md` — reusable system prompt fragment
+- STACK.md updated to reference wrapped model
+
+### Related Files
+- `/home/evo/workspace/models/ollama/Modelfile.nemotron-super-128k`
+- `/home/evo/workspace/models/ollama/Modelfile.anti-loop`
+- `/home/evo/workspace/DNA/agents/ANTI_LOOP_PROMPT.md`
+
+---
+
+## 2026-04-13: Reconcile Brand Design System (DESIGN.md v1 → v2)
+
+### Decision
+Rewrite `DNA/brand/DESIGN.md` to match the actual codebase and incorporate
+Brand Kernel v0.3 concepts. Key decisions:
+
+| Decision | Choice | Rationale |
+|---|---|---|
+| Background color | `#09090b` (Velvet Night) | Softer than pure `#000000`, matches v0.3 concept |
+| Gold accent | `#d4a964` | Already canonical in codebase as `--evolution-gold` |
+| Typography | Instrument Serif + Inter Tight + Geist Mono | Stronger heritage+precision system per AB decision |
+| "Paddocks to Protocols" | Banned everywhere | Per INTELLIGENCE_SYSTEM.md, confirmed by AB |
+| Design philosophy | "Cinematic Fintech" / "Progressive Premium" | From v0.3 Brand Kernel |
+| Card components | Dark mode only (`#0a0a0a`) | Current light-mode cards contradict dark site |
+| Favicon | Replace generic geometric with horse mark | Current favicon unrelated to brand |
+
+### Context
+DESIGN.md v1 described a generic white-background SaaS product that contradicted
+the actual dark-mode + gold site in production. Brand Kernel v0.3 introduced
+"Cinematic Fintech", "Progressive Premium", "Velvet Night", motion direction,
+and voice modules not yet in DNA. Full audit of codebase (`brand.css`,
+`tailwind.config.ts`, component files, logo SVGs, image assets) revealed
+significant gaps between documentation and reality.
+
+### Impact
+- New `DESIGN_v2_REVIEW.md` created for AB review before canonical swap
+- Orchestration ticket raised: `2026-04-13_brand_design_reconcile`
+- Codebase changes (Card component, favicon, font imports, color variables)
+  deferred to follow-up ticket
+- Phases 2–5 (logo system, imagery, channels, motion) queued after Phase 1
+
+### Related Files
+- `/home/evo/workspace/DNA/brand/DESIGN_v2_REVIEW.md`
+- `/home/evo/workspace/DNA/brand/DESIGN.md` (current, to be replaced after review)
+- `/home/evo/workspace/orchestration/tickets/active/2026-04-13_brand_design_reconcile.md`
+
+---
+
+## 2026-04-13: Adopt Progressive Disclosure for Session Start + Defer claude-mem
+
+### Decision
+Adopt the progressive disclosure pattern (index → timeline → full) from
+claude-mem for `session-start.sh`. Defer claude-mem itself — overlaps with
+existing file-based memory, requires heavy runtime (Bun, SQLite, ChromaDB,
+worker service), and is AGPL-3.0 licensed.
+
+### Context
+Reviewed thedotmack/claude-mem (50k stars, v12.1.0). It solves persistent
+memory across sessions via lifecycle hooks, SQLite + ChromaDB storage, and
+AI-compressed summaries. Our workspace already has file-based memory
+(MEMORY_LOG.md, STATE.md, tickets) and VS Code Copilot's built-in memory.
+
+### Decision Details
+- **Adopt pattern**: Progressive disclosure (index → timeline → details) is
+  token-efficient and smart. Implemented as `--detail` flag on session-start.sh.
+  - `index` (default): compact one-liners per domain, ticket count, last memory
+  - `timeline`: adds recent memory entries, in-review/done tickets
+  - `full`: complete state files and memory logs (old behavior)
+- **Defer claude-mem**: Overlaps with existing memory system, adds heavy
+  runtime (Bun + SQLite + ChromaDB + port 37777 worker), AGPL-3.0 conflicts
+  with closed-source marketplace intent, and Claude Code primary doesn't align
+  with our Copilot + GLM-5.1 stack.
+- **Justfile updated**: `just session-start detail='index'` (default),
+  `just session-start detail='timeline'`, `just session-start detail='full'`
+
+### Impact
+- `session-start.sh` rewritten with 3-layer progressive disclosure
+- Justfile recipe updated with `detail` parameter
+- No new dependencies added
+- Token savings: index layer is ~15 lines vs old ~80 lines for session start
+
+### Related Files
+- `/home/evo/workspace/_scripts/session-start.sh`
+- `/home/evo/workspace/Justfile`
+
+---
+
+## 2026-04-13: Adopt External Tools for Agentic Flow
+
+### Decision
+Adopt GSD-2 execution pattern, UI/UX Pro Max design intelligence, Google Stitch
+design.md + MCP, 21st.dev component registry, and obsidian-llm-wiki for
+research_vault. Defer oh-my-claudecode, eigent, 21st.dev Magic MCP, and
+21st.dev Extension.
+
+### Context
+The think/do agentic model needs operational tooling to move from documentation
+pattern to operational system. External tools were evaluated against governance
+(local-first, bounded execution, STACK.md alignment).
+
+### Decision Details
+- GSD-2: Adopt execution pattern only (plan → execute → verify → ship), not
+  project management paradigm. Verify phase maps to Fang verification.
+- UI/UX Pro Max: Adopt for UI work, exclude CIP mockup generation (cloud-only).
+- Google Stitch: Adopt design.md contract (local-first, version-controllable)
+  + MCP integration (cloud for screen generation, optional). Auth through ADC.
+- 21st.dev: Adopt component registry only (install via `npx shadcn`). Magic MCP
+  and extension toolbar deferred.
+- obsidian-llm-wiki: Adopt for research_vault knowledge processing. Ollama-native,
+  zero cloud, Obsidian-compatible.
+- oh-my-claudecode: Deferred — conflicts with think/do architecture.
+- eigent: Deferred — conflicts with OpenFang execution surface.
+- Conductor hand: Does NOT write to DNA/ — human-only.
+- Worker writes: Go through Fang verification, not directly to projects/.
+
+### Impact
+- Adds 5 new OpenFang hands (conductor, heavy-worker, focused-worker,
+  utility-worker, reasoning-partner).
+- Adds 3 new scripts (ticket-route, session-start, session-end).
+- Adds GSD execution pattern to orchestration roles.
+- Adds DESIGN.md to DNA/brand/ for design system specification.
+- Adds wiki.toml to research_vault/ for knowledge processing.
+- Updates ALLOWLIST_POLICY.md with role-specific write paths.
+- Updates STACK.md with new tools and deferred tools.
+
+### Related Files
+- `/home/evo/workspace/orchestration/roles/GSD_EXECUTION_PATTERN.md`
+- `/home/evo/workspace/DNA/skills/UI_UX_PRO_MAX.md`
+- `/home/evo/workspace/DNA/brand/DESIGN.md`
+- `/home/evo/workspace/research_vault/wiki.toml`
+- `/home/evo/workspace/_docs/openfang-wizard/hands/conductor/`
+- `/home/evo/workspace/_docs/openfang-wizard/hands/heavy-worker/`
+- `/home/evo/workspace/_docs/openfang-wizard/hands/focused-worker/`
+- `/home/evo/workspace/_docs/openfang-wizard/hands/utility-worker/`
+- `/home/evo/workspace/_docs/openfang-wizard/hands/reasoning-partner/`
+- `/home/evo/workspace/_scripts/ticket-route.sh`
+- `/home/evo/workspace/_scripts/session-start.sh`
+- `/home/evo/workspace/_scripts/session-end.sh`
+
+---
+
+## 2026-04-13: Adopt Conductor-Worker / Think-Do Agentic Flow
+
+### Decision
+Adopt GLM-5.1:cloud as the primary conductor model for agentic orchestration,
+with Nemotron-3-Super:cloud as the reasoning partner and DeepSeek/Qwen as
+workers. Replace the previous single-agent execution model with a think/do
+architecture that uses the orchestration layer as the agent communication hub.
+Absorb the General Manager role into the conductor — no GM layer between
+conductor and PMs.
+
+### Context
+- The workspace has strong governance (DNA), coordination (orchestration), and
+  execution (projects) layers, but the agentic execution layer was
+  underperforming.
+- Codex CLI was listed as the primary workspace agent but empirical evidence
+  showed GLM-5.1:cloud produced noticeably better agentic results for planning,
+  tool use, and multi-step reasoning.
+- The orchestration layer already had role contracts, streams, and tickets but
+  lacked an explicit conductor-specialist model for model assignment.
+- Available cloud models have different strengths: DeepSeek-V3.1 for heavy
+  coding, Qwen3-Coder-Next for focused implementation, Nemotron-3-Super for
+  reasoning, Qwen3.5 for utility.
+- The General Manager role was redundant with the conductor — both route
+  priorities across domains and coordinate PMs.
+
+### Decision Details
+- GLM-5.1:cloud is the primary conductor for planning, decomposition,
+  delegation, verification, and synthesis.
+- Nemotron-3-Super:cloud is the reasoning partner for plan review and
+  stress-testing before high-stakes execution.
+- Workers (DeepSeek, Qwen3-Coder, Qwen3.5) execute scoped work — they do not
+  plan their own approach.
+- Think layer plans. Do layer executes. Workers don't plan.
+- Conductor absorbs the former General Manager role.
+- GENERAL_MANAGER.md removed from orchestration/roles/.
+- SPECIALIST_AGENTS.md replaced with WORKERS.md.
+- Ticket-based communication replaces ad-hoc agent invocation.
+- Human-in-the-loop graduation path is explicit: Phase 1 (manual approval)
+  through Phase 4 (full automation, future).
+- The orchestration layer is the agent communication hub.
+- Local models (Ollama) remain the default for routine work.
+- Hosted routes require explicit human opt-in per BUDGET_RULES.md.
+
+### Impact
+- Changes the primary agent interface from Codex CLI to GLM-5.1:cloud.
+- Removes the GM layer — conductor talks directly to PMs.
+- Adds CONDUCTOR.md and WORKERS.md role contracts to orchestration/roles/.
+- Updates STACK.md to reflect the think/do model.
+- Preserves all existing governance, write scope, and budget rules.
+
+### Related Files
+- `/home/evo/workspace/orchestration/_planning/AGENTIC_FLOW_LOCKIN_2026-04-13.md`
+- `/home/evo/workspace/orchestration/roles/CONDUCTOR.md`
+- `/home/evo/workspace/orchestration/roles/WORKERS.md`
+- `/home/evo/workspace/DNA/ops/STACK.md`
+
+---
+
 ## 2026-04-11: Adopt `orchestration/` As The Governed Coordination Layer
 
 ### Decision
@@ -48,6 +372,7 @@ bounded hands layer.
   - PMs and Fang may raise issues or propose changes
   - only governance-approved paths may change `DNA/`
 - Keep the current `_docs/agent-stack/TICKET_FLOW.md` handoff rules in force.
+  *(Retired 2026-04-26: replaced by MEMORY.md + SESSION_LOG.md)*
 - Allow concise internal operating language, including a `caveman lite` style,
   for orchestration surfaces, while keeping governance and external-facing text
   in normal professional prose.
@@ -62,11 +387,11 @@ bounded hands layer.
 
 ### Related Files
 - `/home/evo/workspace/orchestration/README.md`
-- `/home/evo/workspace/orchestration/roles/GENERAL_MANAGER.md`
+- `/home/evo/workspace/orchestration/roles/CONDUCTOR.md` (absorbs former GM role)
 - `/home/evo/workspace/orchestration/roles/PM_SSOT.md`
 - `/home/evo/workspace/orchestration/roles/PM_PLATFORM.md`
 - `/home/evo/workspace/orchestration/roles/FANG_EXECUTION.md`
-- `/home/evo/workspace/_docs/agent-stack/TICKET_FLOW.md`
+- `/home/evo/workspace/_docs/agent-stack/TICKET_FLOW.md` *(Retired 2026-04-26: replaced by MEMORY.md + SESSION_LOG.md)*
 - `/home/evo/workspace/DNA/ops/TRANSITION.md`
 
 ---
@@ -102,6 +427,68 @@ Use `caveman lite` as the default style for workspace internal operating surface
 - `/home/evo/workspace/AGENTS.md`
 - `/home/evo/workspace/DNA/agents/AI_CONTEXT.md`
 - `/home/evo/workspace/DNA/ops/CONVENTIONS.md`
+
+---
+
+## 2026-04-11: Lock Marketplace Public, MyStable Private, And Keep v0.0 Manual-Truthful
+
+### Decision
+Treat the Evolution marketplace as open information by default and treat
+`MyStable` as private by default. For v0.0, build the next Platform slice as a
+truthful manual-review-first shell rather than a speculative authenticated
+investment dashboard.
+
+### Context
+- The current Platform already has a real public marketplace and a real manual
+  interest or application capture flow.
+- `MyStable` is still only a holding page, while the legacy dashboard mockup
+  contains fake holdings, fake portfolio values, and performance language that
+  would mislead users if revived.
+- The user clarified the intended operating model:
+  - marketplace is open info
+  - MyStable is the private user surface
+  - purchase is gated and user-specific
+  - `Sumsub` will own KYC
+  - `Stripe`, `Wise`, and bank transfer will own payment rails
+  - auth and strict per-user filtering come later
+- The workspace already locks `n8n` as an active tool, but the next slice does
+  not need automation first. It needs honest boundaries and a truthful shell.
+
+### Decision Details
+- Run the next Platform work in this order:
+  1. route and copy truth pass
+  2. MyStable MVP shell
+  3. KYC journey map
+  4. payment journey map
+  5. transaction lifecycle map
+  6. hardening and cleanup
+- Keep the immediate implementation slice limited to:
+  - public/private copy truth
+  - truthful `MyStable` shell cards and placeholders
+  - static or local demo states only
+- Do not build yet:
+  - real auth wiring
+  - real per-user filtering
+  - provider integrations
+  - fake holdings, fake charts, or speculative backend logic
+- Defer `n8n` until the user-facing shell and state model are locked by real
+  manual use.
+
+### Impact
+- Gives the build a clean and honest next step instead of mixing public
+  marketing, private onboarding, and not-yet-real ownership states.
+- Prevents the v0.0 dashboard from implying live holdings or completed checkout
+  before the required auth, KYC, payment, and allocation seams exist.
+- Keeps future provider work reversible by locking the user-facing state model
+  before implementation details.
+
+### Related Files
+- `/home/evo/workspace/_docs/agent-stack/EVOLUTION_PLATFORM_MARKETPLACE_BUILD_PLAN_2026-04-10.md`
+- `/home/evo/workspace/_docs/agent-stack/EVOLUTION_PLATFORM_MYSTABLE_V0_EXECUTION_PLAN_2026-04-11.md`
+- `/home/evo/workspace/projects/Evolution_Platform/src/app/mystable/page.tsx`
+- `/home/evo/workspace/projects/Evolution_Platform/src/components/mystable/LegacyMyStablePage.tsx`
+- `/home/evo/workspace/projects/Evolution_Platform/src/components/marketplace/StakeApplicationForm.tsx`
+- `/home/evo/workspace/DNA/ops/TRANSITION.md`
 
 ---
 
@@ -769,7 +1156,7 @@ Implement the first Paperclip + OpenFang stack as a workspace-side operating-lay
 - `/home/evo/workspace/_docs/agent-stack/RUNBOOK.md`
 - `/home/evo/workspace/_docs/agent-stack/ALLOWLIST_POLICY.md`
 - `/home/evo/workspace/_docs/agent-stack/ROLE_LENSES.md`
-- `/home/evo/workspace/_docs/agent-stack/TICKET_FLOW.md`
+- `/home/evo/workspace/_docs/agent-stack/TICKET_FLOW.md` *(Retired 2026-04-26: replaced by MEMORY.md + SESSION_LOG.md)*
 - `/home/evo/workspace/_docs/agent-stack/BUDGET_RULES.md`
 
 ---

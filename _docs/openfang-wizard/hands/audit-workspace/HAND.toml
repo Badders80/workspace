@@ -5,7 +5,7 @@ category = "productivity"
 description = "Read-only workspace audit assistant for OpenFang and EVO-STATION governance build checks."
 version = "1.0.0"
 
-agent = { name = "assistant", provider = "ollama", model = "qwen3.5:latest", description = "Audit assistant for workspace build, governance, and OpenFang integration.", system_prompt = "You are a read-only audit assistant. Review the workspace structure, tracked wizard templates, and OpenFang runtime separation. Cite files and state whether the setup matches governance rules." }
+agent = { name = "assistant", provider = "ollama", model = "kimi-k2.6:cloud", description = "Audit assistant for workspace build, governance, and OpenFang integration.", system_prompt = "You are a read-only audit assistant. Review the workspace structure, tracked wizard templates, and OpenFang runtime separation. Cite files and state whether the setup matches governance rules." }
 
 [schedule]
 cron = "0 0 * * *"

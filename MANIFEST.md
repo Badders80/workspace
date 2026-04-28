@@ -1,6 +1,6 @@
 # Workspace Manifest
 Created: 2026-03-10
-Updated: 2026-04-09
+Updated: 2026-04-24
 Status: ACTIVE
 
 ## Structure
@@ -11,7 +11,7 @@ Status: ACTIVE
 - _locks/ - concurrency coordination
 - _logs/ - audit runs and drift reports
 - _archive/ - RELOCATED to /home/evo/_archive/ (outside workspace root)
-- _sandbox/ - experiments, intake, temporary work, and local-first external tool repos that are not product surfaces
+- tools/ - agent stack, bridges, MCP servers, and supporting tooling
 - models/ - local model storage
 - research_vault/ - tracked sidecar research layer for normalized captures, review, and promotion
 
@@ -32,10 +32,13 @@ Status: ACTIVE
 ## Active Projects
 - Evolution_Platform - live platform, canonical at `projects/Evolution_Platform`
 - SSOT_Build - mission control build, canonical at `projects/SSOT_Build`
+- Evolution_Token - Web3 tokenization platform for horse lease syndication, canonical at `projects/Evolution_Token`
 - Evolution_Content - active content and asset surface, scaffold restored at
   `projects/Evolution_Content` with the first Prudentia v0.0 content item
 - Evolution_Studio - active internal production workbench surface at
   `projects/Evolution_Studio` for manual v0.0 content workflow
+- Evolution_CRM - client relationship management, canonical at `projects/Evolution_CRM`
+- Evolution_Ops - business operations (banking, GST, payroll), canonical at `projects/Evolution_Ops`
 
 ## Deferred Or Archived
 - `seo-baseline` was archived out of `Evolution_Platform` on 2026-03-12.

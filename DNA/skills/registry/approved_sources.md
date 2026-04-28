@@ -105,6 +105,36 @@ These are the strongest repos to lean on first for your current stack.
 
 ---
 
+## 🎬 Video Production
+
+> **v0.1 — initial integration. [[HEAVIER: YES]] markers show what is not yet wired.**
+
+| Repository | What it does | When to use |
+|------------|--------------|-------------|
+| [digitalsamba/claude-code-video-toolkit](https://github.com/digitalsamba/claude-code-video-toolkit) | AI-native video production workspace for Claude Code. Skills, commands, templates, Python AI tools (voiceover, FLUX.2 image gen, SadTalker talking heads, ACE-Step music). Uses Remotion as the video engine. | Investor updates, race previews/recaps, new horse listings, brand storytelling as video output. |
+| [remotion-dev/remotion](https://github.com/remotion-dev/remotion) | React-based video rendering framework. Compositions, scenes, animations, transitions. | Core video engine for the toolkit. Also usable standalone for programmatic video. |
+
+### Workflow chain for v0.1
+
+```
+Studio brief → [video_production skill] → toolkit /video → Remotion project
+→ voiceover (Qwen3-TTS via Modal) → render → Evolution_Content/media/
+```
+
+### Activation triggers [[HEAVIER: YES]]
+
+| Trigger | What's not yet wired |
+|---------|----------------------|
+| Brief needs custom visual layouts | Stitch MCP (`@_davideast/stitch-mcp`) |
+| Brief needs animated React components | 21st.dev Magic MCP + Magic UI library |
+| Brief needs talking head presenter | Narrator PiP + SadTalker |
+| Platform walkthrough needed | `/record-demo` (Playwright) |
+| Multi-scene quality review needed | `/scene-review` (Remotion Studio) |
+
+See `skills/registry/video_production.md` for the full skill doc.
+
+---
+
 ## ⚡ Productivity & Development Philosophy
 
 ### Get Shit Done

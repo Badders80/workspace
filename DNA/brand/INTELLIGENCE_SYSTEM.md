@@ -1,22 +1,9 @@
 # Evolution Intelligence — Awareness Layer
 
-# HIERARCHY OF TRUTH (Non-Negotiable)
-In any conflict, apply rules in this strict order:
-1. BRAND_SYSTEM.md + INTELLIGENCE_SYSTEM.md (this layer)
-2. MEGA_BRAND_GUIDE.md (values & positioning only, archived)
-3. Archived pre-workspace brand source material (reference only)
-
-Last updated: 2026-03-01 | Version 2026.3
-
-Version: 2026.3
-Status: Canonical
-Last Updated: 2026-03-01
-Scope: Faceless content operations, social media, awareness-phase voice
-Hard Restriction: NO ownership mentions. NO Evolution Stables branding.
-                  NO Tokinvest/VARA references. Ever.
-
-Replaces:
-- pre-workspace EVOLUTION_INTELLIGENCE.md
+**Version:** 2026.4
+**Status:** Canonical
+**Scope:** Faceless content operations, social media, awareness-phase voice
+**Hard Restriction:** NO ownership mentions. NO Evolution Stables branding. NO Tokinvest/VARA references. Ever.
 
 Internal scope: This file defines the Awareness Layer of the Evolution Funnel.
 

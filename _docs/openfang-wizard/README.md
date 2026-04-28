@@ -61,7 +61,7 @@ Use `evolution-workspace` for citation-backed lookup, `build-workspace` for plan
 - Versioned Hand templates: `~/workspace/_docs/openfang-wizard/hands/`
 - Starter workspace file: `~/workspace/_docs/openfang-wizard/starters/evolution-workspace/evolution-openfang.code-workspace`
 - This wizard: `~/workspace/_docs/openfang-wizard/`
-- Note: `~/.openfang` is symlinked to `/home/evo/workspace/_sandbox/agent-stack/openfang/state` in this environment.
+- Note: `~/.openfang` is symlinked to `/home/evo/workspace/tools/agent-stack/openfang/state` in this environment.
 
 ## Retrieval helper
 

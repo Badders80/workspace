@@ -76,7 +76,7 @@ CONTEXT.md                              ← start here (this file)
                                                   └── DNA/ops/DECISION_LOG.md
 ```
 
-Consult `DNA/ops/TECH_RADAR.md` on demand when evaluating tools or checking prior research.
+Tool evaluation: use `DNA/ops/STACK.md` first. For new discoveries, capture in `DNA/ops/DECISION_LOG.md`.
 
 ---
 

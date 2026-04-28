@@ -59,4 +59,23 @@ Generated: 2026-02-28T07:42:27.183Z
 | [Badders80/Evolution-3.1](https://github.com/Badders80/Evolution-3.1) | Assess | General | 1 | 2026-02-26 | yes | Auto-added from GitHub stars sync; pending review. |
 | [Badders80/Evolution_Studio](https://github.com/Badders80/Evolution_Studio) | Assess | General | 1 | 2026-02-19 | yes | Auto-added from GitHub stars sync; pending review. |
 | [Badders80/Local_LLM](https://github.com/Badders80/Local_LLM) | Assess | LLM Infrastructure | 1 | 2026-02-19 | yes | Auto-added from GitHub stars sync; pending review. |
+| [digitalsamba/claude-code-video-toolkit](https://github.com/digitalsamba/claude-code-video-toolkit) | Adopt | video-production | 842 | 2026-04-16 | yes | v0.1 integration — AI-native video production workspace. Active: Remotion engine, product-demo template, Qwen3-TTS voiceover, FLUX.2 image gen, SadTalker, ACE-Step music. [[HEAVIER: YES]] for Stitch MCP, 21st.dev Magic, Narrator PiP, record-demo, scene-review. |
+| [remotion-dev/remotion](https://github.com/remotion-dev/remotion) | Adopt | video-production | — | 2026-04-16 | yes | Core video rendering framework used by the toolkit. React-based compositions, scenes, transitions. |
+| [juliusbrussee/caveman](https://github.com/juliusbrussee/caveman) | Adopt | style | — | 2026-04-28 | yes | Terse communication style. Concise commits, PRs, docs. |
+| [microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp) | Adopt | testing | — | 2026-04-28 | yes | Browser automation via MCP. Gives AI agents "vision" and interaction with live web pages. |
+| [shadcn-ui/ui](https://github.com/shadcn-ui/ui) | Adopt | components | — | 2026-04-28 | yes | Copy-paste, customizable UI component library. Foundational building blocks. |
+| [framer/motion](https://github.com/framer/motion) | Adopt | animation | — | 2026-04-28 | yes | Declarative animations and gestures. Pairs with shadcn for micro-interactions. |
+| [Manavarya09/design-extract](https://github.com/Manavarya09/design-extract) | Assess | design | — | 2026-04-28 | yes | Design extraction tool |
+| [calesthio/OpenMontage](https://github.com/calesthio/OpenMontage) | Assess | video | — | 2026-04-28 | yes | Video montage / editing |
+| [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) | Assess | design | — | 2026-04-28 | yes | Design system patterns |
+| [ultraworkers/claw-code](https://github.com/ultraworkers/claw-code) | Assess | agents | — | 2026-04-28 | yes | Agent coding workflow |
+| [punkpeye/awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers) | Assess | mcp | — | 2026-04-28 | yes | Curated MCP server list |
+| [Martian-Engineering/lossless-claw](https://github.com/Martian-Engineering/lossless-claw) | Assess | agents | — | 2026-04-28 | yes | Long-context agent tool |
+| [NVIDIA/NemoClaw](https://github.com/NVIDIA/NemoClaw) | Assess | agents | — | 2026-04-28 | yes | NVIDIA agent framework |
+| [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | Assess | style | — | 2026-04-28 | yes | Anti-slop writing rules |
+| [anthropics/skills](https://github.com/anthropics/skills) | Assess | skills | — | 2026-04-28 | yes | Official Anthropic skills |
+| [supermemoryai/openclaw-supermemory](https://github.com/supermemoryai/openclaw-supermemory) | Assess | memory | — | 2026-04-28 | yes | Supermemory integration |
+| [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents) | Assess | agents | — | 2026-04-28 | yes | Agency agent patterns |
+| [googleworkspace/cli](https://github.com/googleworkspace/cli) | Assess | google | — | 2026-04-28 | yes | Google Workspace CLI |
+| [garrytan/gstack](https://github.com/garrytan/gstack) | Assess | stack | — | 2026-04-28 | yes | Full-stack agent template |
 | [Badders80/Brand_Voice](https://github.com/Badders80/Brand_Voice) | Assess | General | 1 | 2026-02-19 | yes | Auto-added from GitHub stars sync; pending review. |

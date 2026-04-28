@@ -26,7 +26,7 @@ If you are opening this repo on mobile, these are the only files you usually nee
 - `projects/` - active project folders that live inside the workspace
 - `_scripts/` - workspace scripts, checks, launchers, and audit helpers
 - `_docs/` - planning docs, briefs, assets, and lightweight deliverables
-- `_sandbox/` - temporary work, experiments, and intake
+- `tools/` - agent stack, bridges, and supporting tooling
 - `research_vault/` - tracked sidecar research and normalized captures
 
 ## Active Projects

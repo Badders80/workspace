@@ -30,17 +30,21 @@ Read these files before giving project-state advice or suggesting changes:
 8. `/home/evo/workspace/DNA/INBOX.md`
 9. `/home/evo/workspace/DNA/ops/DECISION_LOG.md`
 
-Consult `/home/evo/workspace/DNA/ops/TECH_RADAR.md` only on demand.
+Consult `/home/evo/workspace/DNA/ops/DECISION_LOG.md` only on demand.
 
 ## Current Working Model
 
-- Primary workspace agent: `Codex CLI`
+- Primary conductor: `kimi-k2.6:cloud` (plans, decomposes, delegates, verifies)
+- Reasoning partner: `glm-5.1:cloud` (reviews plans, stress-tests decisions)
+- Visual/Creative: `gemma4:31b-cloud` (design, visual tasks, creative output)
+- Backup/Creative: `minimax-m2.7:cloud` (creative generation, fallback)
+- Secondary workspace agent: `Codex CLI` (overview, review, bounded execution)
 - Advisory or review surface: Claude browser/chat using `workspace_full` or
   pasted context
 - Capability-specific terminal agents: `Claude Code`, `Gemini CLI`
-- Utility surfaces: `Aider`, `OpenRouter` or `Groq` API paths, and `Jules`
-  when explicitly needed
+- Utility surfaces: `Aider`, and `Jules` when explicitly needed
 - Memory remains model-agnostic: every agent should follow the same DNA chain
+- See `orchestration/_planning/AGENTIC_FLOW_LOCKIN_2026-04-13.md` for full model
 
 ## Copy/Paste Starter
 
@@ -63,7 +67,7 @@ Treat /home/evo as control plane only.
 Prefer /home/evo/workspace paths over any older pre-workspace path.
 Prefer the live workspace DNA chain over any retired legacy reference.
 Use /home/evo/.env as the single shared vault contract.
-Consult /home/evo/workspace/DNA/ops/TECH_RADAR.md only on demand.
+Consult /home/evo/workspace/DNA/ops/DECISION_LOG.md only on demand.
 Summarize what you learned before continuing.
 ```
 

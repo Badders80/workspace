@@ -6,6 +6,7 @@
 /_locks/
 /_sandbox/
 /models/
+/.active_project
 
 # Research vault: keep shared structure and content, ignore per-user editor state
 /research_vault/.obsidian/workspace*.json
@@ -53,10 +54,15 @@
 **/Thumbs.db
 **/.idea/
 **/.windsurf/
+**/.vscode/
+**/.github/
 **/*:Zone.Identifier
 **/*.log
 **/tmp/
 **/temp/
+
+# Agent stack generated state
+/tools/agent-stack/gemini-state/
 
 # Large binary historical docs
 /_docs/Old_Bibles/

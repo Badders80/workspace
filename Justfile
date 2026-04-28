@@ -15,7 +15,14 @@ check:
     @echo "🔍 Running all checks..."
     bash /home/evo/workspace/_scripts/evo-check.sh
     bash /home/evo/workspace/_scripts/vault.sh check
-    bash /home/evo/workspace/_scripts/evo-docker.sh status
+    @test -f /home/evo/workspace/_scripts/evo-docker.sh && bash /home/evo/workspace/_scripts/evo-docker.sh status || echo "⚠️  Docker check skipped (evo-docker.sh not present)"
+
+# Rebuild productivity dashboard from all project MEMORY.md files
+dash:
+    @echo "📊 Rebuilding dashboard..."
+    python3 /home/evo/workspace/_scripts/build-dashboard.py
+    @echo ""
+    @echo "Dashboard ready: /home/evo/workspace/DASHBOARD.md"
 
 # Quick status - what's happening
 status:
@@ -82,6 +89,59 @@ stop-all:
     evo docker stop-all
 
 # ═══════════════════════════════════════════════════════════
+# OpenClaw Bridge
+# ═══════════════════════════════════════════════════════════
+
+# Start OpenClaw bridge (FastAPI HTTP wrapper for just/openfang)
+openclaw-start:
+    @echo "🚀 Starting OpenClaw Bridge..."
+    python3 /home/evo/workspace/tools/openclaw-bridge/main.py &
+    @sleep 2
+    @curl -s http://localhost:8080/health && echo "OpenClaw Bridge UP ✓" || echo "OpenClaw Bridge may need more time"
+
+# Stop OpenClaw bridge
+openclaw-stop:
+    @echo "🛑 Stopping OpenClaw Bridge..."
+    pkill -f "python3.*openclaw-bridge/main.py" 2>/dev/null || true
+    @echo "OpenClaw Bridge stopped ✓"
+
+# View OpenClaw bridge logs
+openclaw-logs:
+    @echo "=== Bridge Logs ==="
+    @tail -20 /tmp/openclaw-bridge.log
+
+# Check OpenClaw bridge status
+openclaw-status:
+    @curl -s http://localhost:8080/health && echo "OpenClaw Bridge is running ✓" || echo "OpenClaw Bridge is DOWN"
+
+# ═══════════════════════════════════════════════════════════
+# Project Memory (Per-Project Working Memory)
+# ═══════════════════════════════════════════════════════════
+
+# Focus on a project — declare intent and load memory
+# Usage: just focus ssot
+focus project:
+    bash /home/evo/workspace/_scripts/focus.sh "{{project}}"
+
+# Done with current project — save memory and clear focus
+# Usage: just done
+done:
+    bash /home/evo/workspace/_scripts/done.sh
+
+# Switch to a different project — save current, load new
+# Usage: just switch platform
+switch project:
+    bash /home/evo/workspace/_scripts/switch.sh "{{project}}"
+
+# Start a project session — resume where you left off
+project-start project:
+    bash /home/evo/workspace/_scripts/project-start.sh "{{project}}"
+
+# End a project session — update memory, move done tickets
+project-end project:
+    bash /home/evo/workspace/_scripts/project-end.sh "{{project}}"
+
+# ═══════════════════════════════════════════════════════════
 # DNA / Memory
 # ═══════════════════════════════════════════════════════════
 
@@ -112,6 +172,80 @@ research-vault-push:
 # Seed the research vault with the current website/profile source set
 research-seed:
     bash -lc 'python3 /home/evo/workspace/_scripts/seed_research_sources.py'
+
+# Ingest new raw notes into the wiki pipeline
+vault-wiki-ingest:
+    cd /home/evo/workspace/research_vault && olw ingest
+
+# Build the research vault wiki from raw notes
+vault-wiki:
+    cd /home/evo/workspace/research_vault && olw compile
+
+# Review wiki articles (interactive approve/reject)
+vault-wiki-review:
+    cd /home/evo/workspace/research_vault && olw review
+
+# ═══════════════════════════════════════════════════════════
+# Research Vault v0.1 (Karpathy LLM Wiki Pattern)
+# ═══════════════════════════════════════════════════════════
+
+# Ingest a raw source into the wiki
+vault-ingest source:
+    bash /home/evo/workspace/_scripts/vault-ingest.sh "{{source}}"
+
+# Lint the wiki for orphans, broken links, uncited claims
+vault-lint:
+    python3 /home/evo/workspace/_scripts/vault-lint.py
+
+# Search the vault (v0.1: grep-based; v0.2: qmd)
+vault-search query:
+    python3 /home/evo/workspace/_scripts/vault-search.py "{{query}}"
+
+# Query the wiki (AI synthesis)
+vault-query question:
+    @echo "=== Vault Query: {{question}} ==="
+    @echo ""
+    @echo "Searching vault..."
+    python3 /home/evo/workspace/_scripts/vault-search.py "{{question}}"
+    @echo ""
+    @echo "Copy the search results and ask your AI to synthesize an answer."
+    @echo "In v0.2, this will be fully automated via the wiki-keeper hand."
+
+# Show vault status
+vault-status:
+    @echo "=== Research Vault Status ==="
+    @echo ""
+    @echo "Raw sources:  $(find /home/evo/workspace/research_vault/raw -name '*.md' | wc -l)"
+    @echo "Wiki pages:   $(find /home/evo/workspace/research_vault/wiki -name '*.md' | wc -l)"
+    @echo ""
+    @echo "Last log entry:"
+    @tail -5 /home/evo/workspace/research_vault/log.md
+    @echo ""
+    @echo "Vault path: /home/evo/workspace/research_vault"
+
+# Push vault changes to Windows Obsidian mirror
+vault-push:
+    just research-vault-push
+
+# Session start — progressive disclosure (index|timeline|full)
+session-start detail='index':
+    bash /home/evo/workspace/_scripts/session-start.sh --detail={{detail}}
+
+# Session end — update memory logs and move completed tickets
+session-end summary='Session ended':
+    bash /home/evo/workspace/_scripts/session-end.sh "{{summary}}"
+
+# Route a ticket to the correct OpenFang hand
+ticket-route ticket:
+    bash /home/evo/workspace/_scripts/ticket-route.sh "{{ticket}}"
+
+# Check UI/UX ecosystem consistency
+ui-ux-check:
+    bash /home/evo/workspace/_scripts/check-ui-ux-consistency.sh
+
+# Add design basics components
+design-basics:
+    bash /home/evo/workspace/_scripts/add-design-basics.sh
 
 # Edit DNA
 dna:
@@ -182,7 +316,7 @@ backup:
         --exclude='.Trash' \
         --exclude='models' \
         --exclude='.cache' \
-        DNA projects _docs _locks _logs _sandbox _scripts AGENTS.md AI_SESSION_BOOTSTRAP.md Justfile MANIFEST.md 2>/dev/null
+        DNA projects _docs _locks _logs _scripts AGENTS.md AI_SESSION_BOOTSTRAP.md Justfile MANIFEST.md 2>/dev/null
     @echo "✅ Backup created in /home/evo/_archive/backups/auto/"
 
 # Full system check + update
@@ -209,9 +343,6 @@ optimize-memory:
 audit-partners date='':
     @/home/evo/workspace/_scripts/evo-audit-partners.sh {{date}}
 
-audit-groq-watchdog date='':
-    @/home/evo/workspace/_scripts/evo-groq-watchdog.sh {{date}}
-
 audit-claude-meta date='':
     @/home/evo/workspace/_scripts/evo-audit-claude-meta.sh {{date}}
 
@@ -224,23 +355,55 @@ audit-openfang-bridge date='':
     @/home/evo/workspace/_scripts/evo-openfang-audit-bridge.sh {{date}}
 
 fang-local:
-    /home/evo/workspace/_sandbox/agent-stack/ollama-trial.sh start
-    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route local
-    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh start
+    /home/evo/workspace/tools/agent-stack/ollama-trial.sh start
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route local
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
 
 fang-debug:
-    /home/evo/workspace/_sandbox/agent-stack/ollama-trial.sh start
-    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route local-debug
-    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh start
+    /home/evo/workspace/tools/agent-stack/ollama-trial.sh start
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route local-debug
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
 
 fang-audit:
-    /home/evo/workspace/_sandbox/agent-stack/ollama-trial.sh start
-    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh route local-audit
-    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh start
+    /home/evo/workspace/tools/agent-stack/ollama-trial.sh start
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route local-audit
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
 
 fang-status:
-    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh status
-    /home/evo/workspace/_sandbox/agent-stack/openfang-trial.sh hand active
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh status
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh hand active
+
+fang-conductor:
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route conductor
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
+
+fang-reasoning:
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route reasoning
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
+
+fang-primary:
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route primary
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
+
+fang-visual:
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route visual
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
+
+fang-creative:
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh route creative
+    /home/evo/workspace/tools/agent-stack/openfang-trial.sh start
+
+model-status:
+    @echo "=== Active Model Stack ==="
+    @echo ""
+    @echo "Conductor:    kimi-k2.6:cloud"
+    @echo "Reasoning:    glm-5.1:cloud"
+    @echo "Primary:      kimi-k2.6:cloud"
+    @echo "Visual:       gemma4:31b-cloud"
+    @echo "Creative:     minimax-m2.7:cloud"
+    @echo ""
+    @echo "=== OpenFang Routes ==="
+    @ls /home/evo/workspace/tools/agent-stack/openfang/state/routes/*.toml | xargs -I {} basename {} .toml
 
 # ═══════════════════════════════════════════════════════════
 # Analysis Mirror

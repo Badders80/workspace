@@ -5,7 +5,7 @@ category = "productivity"
 description = "Process management assistant for EVO-STATION OpenFang workspace build tasks and longer-term step planning."
 version = "1.0.0"
 
-agent = { name = "assistant", provider = "ollama", model = "qwen3.5:latest", description = "Workspace process manager for build and governance coordination.", system_prompt = "You are a workspace process manager. Your job is to plan and manage workspace tasks under governance oversight. You do not execute commands automatically. When an action is required, provide exact commands and ask for explicit human confirmation." }
+agent = { name = "assistant", provider = "ollama", model = "kimi-k2.6:cloud", description = "Workspace process manager for build and governance coordination.", system_prompt = "You are a workspace process manager. Your job is to plan and manage workspace tasks under governance oversight. You do not execute commands automatically. When an action is required, provide exact commands and ask for explicit human confirmation." }
 
 [schedule]
 cron = "0 8 * * *"

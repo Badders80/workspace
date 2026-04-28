@@ -17,9 +17,11 @@ Windows Obsidian is using the local mirror because direct file watching on the W
 ## First Notes To Open
 
 - [[HOME]]
-- [[00_Inbox/Capture Inbox]]
-- [[05_Reports/CEO Report - Latest]]
-- [[05_Reports/CTO Report - Latest]]
+- [[index]] — master catalog
+- [[AGENT]] — vault operating system
+- [[raw/inbox/Capture Inbox]]
+- [[wiki/reports/CEO Report - Latest]]
+- [[wiki/reports/CTO Report - Latest]]
 
 ## Intended Use
 
@@ -32,9 +34,13 @@ Windows Obsidian is using the local mirror because direct file watching on the W
 ## Suggested First Workflow
 
 1. Open [[HOME]] and pin it.
-2. Use [[00_Inbox/Capture Inbox]] for quick manual notes.
-3. Normalize important items with [[_templates/Normalized Note]].
-4. Review signal in [[05_Reports/CEO Report - Latest]] and [[05_Reports/CTO Report - Latest]].
+2. Read [[AGENT]] to understand the vault's operating system.
+3. Use [[raw/inbox/Capture Inbox]] for quick manual notes.
+4. Normalize important items with [[wiki/_templates/Normalized Note]].
+5. Review signal in [[wiki/reports/CEO Report - Latest]] and [[wiki/reports/CTO Report - Latest]].
+6. Ingest sources with `just vault-ingest raw/<source>`.
+7. Query the wiki with `just vault-query "your question"`.
+8. Lint the wiki with `just vault-lint`.
 
 ## Sync Workflow
 

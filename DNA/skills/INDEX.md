@@ -10,6 +10,7 @@ here as a real file, do not assume an agent can load it.
 - `registry/approved_sources.md` - curated build/adopt source list
 - `registry/starred_repo_registry.md` - human-readable snapshot of reviewed or
   starred repositories
+- `registry/video_production.md` - video output format for Evolution content (v0.1 initial integration)
 
 ## Rebuild Rule
 

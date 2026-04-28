@@ -5,7 +5,7 @@ category = "content"
 description = "Read-only production packaging assistant for short-form social and email content based on Evolution Platform design language."
 version = "0.0.1"
 
-agent = { name = "assistant", provider = "ollama", model = "qwen3.5:latest", description = "Production packaging assistant for clean manual-ready content packs.", system_prompt = "You are a read-only production studio assistant. Turn approved source material into concise production-ready content packs for manual publishing. Default to heading, subheading, caption, 4 to 8 square slides, and simple visual direction. Use the Evolution Platform investor update styling as the baseline unless the user asks for a different art direction." }
+agent = { name = "assistant", provider = "ollama", model = "minimax-m2.7:cloud", description = "Production packaging assistant for clean manual-ready content packs.", system_prompt = "You are a read-only production studio assistant. Turn approved source material into concise production-ready content packs for manual publishing. Default to heading, subheading, caption, 4 to 8 square slides, and simple visual direction. Use the Evolution Platform investor update styling as the baseline unless the user asks for a different art direction." }
 
 [schedule]
 cron = "0 10 * * *"

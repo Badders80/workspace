@@ -128,3 +128,31 @@ Additional supporting docs in this folder:
 
 - `monitoring-guide.md` - loose monitoring tool notes that were previously at `_docs/` root
 - `HOLISTIC_EVO_AUDIT_20260301_215711.md` - historical generated audit snapshot retained for reference
+
+
+## Scripts
+
+### check-session-log.sh
+
+Purpose: Ensure SESSION_LOG.md is not forgotten
+
+What it does:
+- Runs every 15 minutes via cron
+- Checks if SESSION_LOG.md was modified today
+- If stale (not updated since midnight): auto-appends a template entry
+- Also ensures memory/YYYY-MM-DD.md exists
+
+OpenClaw-agnostic: Pure bash, no gateway dependency. Works even if OpenClaw is down.
+
+Outputs:
+- session_log_fresh=true — log is current
+- session_log_stale=true — auto-appended new entry
+- Creates daily memory file if missing
+
+Recovery:
+- Human sees auto-appended entry and fills in the blanks
+- Or human runs just session-end manually
+- Agent sees auto-log entry and knows to update it
+
+Cron:
+*/15 * * * * /home/evo/workspace/_scripts/system-health/check-session-log.sh >> /home/evo/workspace/_logs/system-health/session-log-check.log 2>&1

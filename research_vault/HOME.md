@@ -4,32 +4,41 @@ This is the working home for the sidecar research layer.
 
 ## Core Surfaces
 
-- [[00_Inbox/Capture Inbox]]
+- [[index]] — master catalog of all wiki pages
+- [[log]] — append-only operation log
+- [[AGENT]] — the vault's operating system (brain's constitution)
+- [[raw/inbox/Capture Inbox]]
 - [[SCHEMA]]
 - [[OBSIDIAN_SETUP]]
-- [[04_Reviews/Review Queue]]
-- [[05_Reports/CEO Report - Latest]]
-- [[05_Reports/CTO Report - Latest]]
+- [[wiki/reviews/Review Queue]]
+- [[wiki/reports/CEO Report - Latest]]
+- [[wiki/reports/CTO Report - Latest]]
 
 ## Seeded Sources
 
-- [[01_Sources/tokinvest_capital/last-6-months]]
-- [[01_Sources/evolutionstables_website/last-6-months]]
-- [[01_Sources/tokinvest_cap_x/source-profile]]
-- [[01_Sources/evolutionstable_x/source-profile]]
-- [[01_Sources/alex-baddeley_linkedin/source-profile]]
-- [[01_Sources/evolution_linkedin_admin/source-profile]]
+- [[raw/sources/tokinvest_capital/last-6-months]]
+- [[raw/sources/evolutionstables_website/last-6-months]]
+- [[raw/sources/tokinvest_cap_x/source-profile]]
+- [[raw/sources/evolutionstable_x/source-profile]]
+- [[raw/sources/alex-baddeley_linkedin/source-profile]]
+- [[raw/sources/evolution_linkedin_admin/source-profile]]
 
-## Folder Map
+## Folder Map (Karpathy LLM Wiki Pattern)
 
-- `00_Inbox/` - fresh captures and imported notes waiting to be normalized or reviewed
-- `01_Sources/` - source notes for websites, socials, publications, newsletters, and selected email summaries
-- `02_Entities/` - people, companies, brands, projects, regulators, media outlets
-- `03_Topics/` - cross-cutting themes such as tokenization, investor relations, regulation, and competitors
-- `04_Reviews/` - role-based filters and review queues
-- `05_Reports/` - readable current reports
-- `06_Promoted/` - research outputs that were explicitly promoted upward
-- `_templates/` - note templates for manual capture, normalization, and reports
+- `raw/` — immutable source documents. AI reads, never modifies.
+  - `raw/inbox/` — fresh captures waiting to be ingested
+  - `raw/sources/` — curated source notes (websites, socials, publications)
+  - `raw/bootstrap/` — workspace docs used to seed the wiki
+- `wiki/` — AI-generated knowledge base. Append-only, never overwritten.
+  - `wiki/entities/` — people, companies, brands, projects, regulators
+  - `wiki/topics/` — cross-cutting themes (tokenization, regulation, competitors)
+  - `wiki/reviews/` — role-based filters and review queues
+  - `wiki/reports/` — readable current reports
+  - `wiki/promoted/` — research outputs promoted upward
+  - `wiki/_templates/` — note templates
+- `index.md` — master catalog of all wiki pages
+- `log.md` — append-only record of all ingest, query, and lint operations
+- `AGENT.md` — the vault's operating system (brain's constitution)
 
 ## Guardrails
 

@@ -32,6 +32,20 @@ Deferred workspace items and active cleanup queue.
 - [ ] Evolution_Intelligence - module-contract rebuild. Remove placeholders, define adapters, and keep only callable or testable modules.
 - [ ] Vendor or external infrastructure - excluded from merge core and requires separate contract-led scoping before reintegration.
 
+## Research Vault v0.2 Backlog
+
+- [ ] Install and configure `qmd` for semantic search (deferred from v0.1 — cargo build too heavy)
+- [ ] Automate `vault-ingest` via wiki-keeper hand (currently manual AI prompt)
+- [ ] Add contradiction detection to `vault-lint` (heuristic: same entity, conflicting claims)
+- [ ] Add confidence scoring validation to `vault-lint`
+- [ ] Bridge OpenFang runtime memory → tracked files (wiki-keeper learns → writes to wiki)
+- [ ] Cross-project graph queries (DNA → SSOT → Platform relationships)
+- [ ] Automated Obsidian sync cron/watcher
+- [ ] Activate `obsidian-llm-wiki` (`olw`) for full wiki compilation
+- [ ] Multi-model wiki-keeping (reasoning partner for audit, audit worker for verification)
+- [ ] Populate `/memories/` scopes (user, session, repo)
+- [ ] DNA memory rituals (orchestration stream `MEMORY_LOG.md` discipline)
+
 ## Archived Reactivation Candidates
 
 - [ ] `seo-baseline` - archived legacy SEO surface. Only reactivate by explicit re-scope from `/home/evo/workspace/_archive/projects/2026-03-12/Evolution_Platform/seo-baseline`.
@@ -64,6 +78,17 @@ Deferred workspace items and active cleanup queue.
 - [ ] Trial Lossless Claw - create `trial/lossless-claw`, install under `gateways/openclaw/`, run a long-context dry run, and log recall or compression behavior
 - [ ] Merge three-tier Claude setup - review the Google Doc, add a modular `.claude/rules/` dir pattern, define an auto `MEMORY.md` trigger, and update templates with token-cap and negative-rules guidance
 
+## Brand System Workstream - 2026-04-13
+
+- [ ] AB review DESIGN_v2_REVIEW.md → approve or request changes
+- [ ] Swap DESIGN.md with approved v2 content
+- [ ] Phase 1 follow-up: update codebase (Card component dark mode, favicon, font imports, color variables `#000000` → `#09090b`)
+- [ ] Font decision: v0.3 Brand Kernel specifies Instrument Serif + Inter Tight + Geist Mono, but Audi Type Digital v4.04 (variable font, Latin subset, web-ready .woff2) is already in `/public/fonts/` unused. Need to decide: adopt Instrument Serif + Inter Tight (as per v0.3), use Audi Type (already available), or another option. This blocks the font import changes in the codebase ticket.
+- [ ] Phase 2: LOGO_SYSTEM.md (logo usage rules, social avatar spec, watermark system)
+- [ ] Phase 3: IMAGERY_DIRECTION.md (photography style guide, shot list, prohibited imagery)
+- [ ] Phase 4: CHANNEL_DESIGN.md (website page patterns, social templates, email, investor deck)
+- [ ] Phase 5: MOTION_SYSTEM.md (micro-interactions, page transitions, data-viz animation, video post-production)
+
 ## Tech Radar Backlog - 2026-03-17
 
 - [ ] Trial Claude Code Hooks - prototype a minimal safe hook set, dry-run it in a bounded Claude workflow, and keep any workspace-specific logic outside destructive paths
@@ -83,13 +108,13 @@ Deferred workspace items and active cleanup queue.
 - [ ] Trial NVIDIA Nemotron 3 Super - `git checkout -b trial/nemotron-super && cd /home/evo/workspace/gateways/openclaw/` then pull the local Ollama model, treat the first pass as `256K` context unless proven otherwise, and test one full research or coding loop
 - [ ] Trial OpenClaw + Scrapling - install the Scrapling path only inside `gateways/openclaw/`, test one bounded research scrape, and log reliability versus the current approach
 - [ ] Steal autoresearch loop - add the overnight metrics-driven optimization prompt to the existing `Claude Code Hooks` trial rather than creating a separate tool path
-- [ ] Trial promptfoo - `npm install -g promptfoo && promptfoo init`, add Gemini or OpenRouter providers plus a small DNA-chain eval suite, run `promptfoo eval`, and log sample results to `DNA/ops/tech-radar-intake/2026-03-17_promptfoo_test.md`
+- [ ] Trial promptfoo - `npm install -g promptfoo && promptfoo init`, add Gemini providers plus a small DNA-chain eval suite, run `promptfoo eval`, and log sample results to `DNA/ops/tech-radar-intake/2026-03-17_promptfoo_test.md`
 - [ ] Adopt gists.sh habit - prefer the `gists.sh` domain when sharing gists, test one sample gist view, and log the example to `DNA/ops/tech-radar-intake/2026-03-17_gistssh_test.md`
 - [ ] Trial Pi agent - `npm install -g @mariozechner/pi-coding-agent`, load `/home/evo/workspace/DNA/AGENTS.md` as context, test one simple task, and log the session sample to `DNA/ops/tech-radar-intake/2026-03-17_pi_test.md`
 - [ ] Trial OpenCode - install it in a bounded test path, load `/home/evo/workspace/AI_SESSION_BOOTSTRAP.md` as context, test one small execution task, and log the session sample to `DNA/ops/tech-radar-intake/2026-03-17_opencode_test.md`
 - [ ] Harden Obsidian research sidecar - keep Obsidian as the local-first hub for the sidecar research layer, define what syncs in or out of the workspace, and prevent research notes from becoming a shadow source of truth over DNA
-- [x] Reduce `evo-audit-partners.sh` to the preferred core set (`Codex`, `Gemini`, `Groq`, `Anthropic`) and remove retired `Kimi` or `GLM` routes from the first-level runner
-- [x] Align `evo-audit-claude-meta.sh` and `evo-groq-watchdog.sh` to the reduced core partner model and workspace-native path or context-chain outputs
+- [x] Reduce `evo-audit-partners.sh` to the preferred core set (`Codex`, `Gemini`, `Anthropic`) and remove retired routes from the first-level runner
+- [x] Align `evo-audit-claude-meta.sh` to the reduced core partner model and workspace-native path or context-chain outputs
 
 ## Tech Radar Backlog - 2026-03-22
 

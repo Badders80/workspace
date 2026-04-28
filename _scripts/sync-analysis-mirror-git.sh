@@ -30,7 +30,6 @@ PRUNE_DIR_NAMES=(
   "_archive"
   "_locks"
   "_logs"
-  "_sandbox"
   ".cache"
   ".idea"
   ".mypy_cache"
@@ -70,7 +69,7 @@ Mirror scope:
       * root-level markdown and key build files
       * DNA/, _docs/, _scripts/, gateways/, projects/, research_vault/
       * source code, build/config files, JSON/YAML/TOML data, and scripts
-  - Excludes archives, logs, locks, sandboxes, caches, local env files,
+  - Excludes archives, logs, locks, caches, local env files,
     embedded .git dirs, heavy generated media, and runtime-only state.
 EOF
 }
@@ -114,7 +113,7 @@ is_excluded_path() {
   local rel_lower="$1"
 
   case "$rel_lower" in
-    _archive/*|_locks/*|_logs/*|_sandbox/*|models/*)
+    _archive/*|_locks/*|_logs/*|models/*)
       return 0
       ;;
     */.env|*/.env.*|*.pem|*.key|*.p12|*.pfx|*.crt|*:zone.identifier)
@@ -223,7 +222,7 @@ This repository is the text-first operating mirror of the active workspace. It i
 
 ## Excluded
 
-- \`_archive/\`, \`_logs/\`, \`_locks/\`, \`_sandbox/\`, and \`models/\`
+- \`_archive/\`, \`_logs/\`, \`_locks/\`, and \`models/\`
 - Dependency installs and build output such as \`node_modules/\`, \`.next/\`, \`dist/\`, and \`build/\`
 - Local env and credential-shaped files
 - Heavy generated media such as \`projects/reel-generator/assets/\` and \`projects/Evolution_Platform/public/videos/\`

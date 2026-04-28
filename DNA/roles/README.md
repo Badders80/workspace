@@ -9,7 +9,7 @@ Reserved home for future Hermes-facing staff and role definitions.
 - Hermes is now active as the personal assistant layer.
 - No Hermes staff profiles or role packs are active yet.
 - OpenFang remains the live bounded execution surface under
-  `_docs/openfang-wizard/` and `_sandbox/agent-stack/`.
+  `_docs/openfang-wizard/` and `tools/agent-stack/`.
 - Use this folder only when repeated Hermes usage defines stable profile
   boundaries, memory rules, and handoff behavior.
 
