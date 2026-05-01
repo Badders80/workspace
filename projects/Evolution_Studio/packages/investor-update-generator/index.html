@@ -1,0 +1,1501 @@
+<!--
+  Evolution Update Generator v0.2
+  v0.1: Evolution_Content. v1.0 target: Evolution_Studio.
+  Single-file investor update generator producing v2 (full hosted) and v3 (Gmail teaser) HTML.
+  v0.2: Added Ingest mode — paste tagged content to auto-populate block editor.
+  Brand tokens: Gold #d4a964, Black #000, Playfair Display serif, Inter sans.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolution Update | Mission Control</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ── Brand Tokens ── */
+        :root {
+            --gold: #d4a964;
+            --gold-hover: #e5bc7a;
+            --black: #000000;
+            --white: #ffffff;
+            --gray-light: #e8e8e8;
+            --gray-mid: #999999;
+            --gray-border: #e0e0e0;
+            --text-dark: #1a1a1a;
+            --text-body: #1a1a1a;
+            --text-caption: #666666;
+            --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+            --bg-page: #f4f4f4;
+            --bg-email: #333333;
+            --ui-border: #ddd;
+            --ui-bg: #f9f9f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            display: flex;
+            height: 100vh;
+            background: var(--bg-page);
+            color: #333;
+        }
+
+        /* ── Layout ── */
+        #editor-panel {
+            width: 44%;
+            min-width: 360px;
+            height: 100%;
+            background: white;
+            border-right: 1px solid var(--ui-border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+        #preview-panel {
+            width: 56%;
+            min-width: 420px;
+            height: 100%;
+            overflow-y: auto;
+            background: var(--bg-email);
+            display: flex;
+            justify-content: center;
+            padding: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ── Editor Header ── */
+        .panel-header {
+            padding: 16px 20px;
+            background: var(--black);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .panel-header .title {
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+        .panel-header .actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        /* ── Config Section ── */
+        .config-section {
+            padding: 12px 20px;
+            background: var(--ui-bg);
+            border-bottom: 1px solid var(--ui-border);
+            flex-shrink: 0;
+        }
+        .config-section label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+            display: block;
+            margin-bottom: 4px;
+        }
+        .config-section input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid var(--ui-border);
+            border-radius: 4px;
+            font-size: 13px;
+            margin-bottom: 8px;
+            font-family: var(--font-sans);
+        }
+        .config-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .config-row > div { flex: 1; min-width: 200px; }
+
+        /* ── Buttons ── */
+        .btn {
+            padding: 7px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-sans);
+        }
+        .btn-gold { background: var(--gold); color: var(--black); }
+        .btn-gold:hover { background: var(--gold-hover); }
+        .btn-dark { background: var(--black); color: white; }
+        .btn-dark:hover { background: #222; }
+        .btn-outline { background: white; border: 1px solid var(--ui-border); color: #333; }
+        .btn-outline:hover { background: #f5f5f5; }
+        .btn-sm { padding: 5px 10px; font-size: 11px; }
+
+        /* ── Block Editor ── */
+        #blocks-container {
+            flex: 1;
+            overflow-y: auto;
+        }
+        .block {
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--ui-border);
+            background: #fff;
+            position: relative;
+            transition: background 0.15s;
+        }
+        .block:hover { background: #fafafa; }
+        .block-controls {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .block-controls select {
+            width: 110px;
+            padding: 4px 6px;
+            font-size: 12px;
+            border: 1px solid var(--ui-border);
+            border-radius: 4px;
+            background: white;
+            font-family: var(--font-sans);
+        }
+        .block-controls .width-toggle {
+            cursor: pointer;
+            padding: 4px 8px;
+            font-size: 11px;
+            background: #eee;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: var(--font-sans);
+        }
+        .block-controls .width-toggle.active {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
+        }
+        .block-controls .move-btn {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 14px;
+            color: #999;
+            padding: 2px 4px;
+        }
+        .block-controls .move-btn:hover { color: #333; }
+        .block-controls .delete-btn {
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: #cc0000;
+            font-size: 16px;
+            padding: 2px 6px;
+        }
+        .block-controls .delete-btn:hover { color: #ff0000; }
+
+        .block input, .block textarea {
+            width: 100%;
+            padding: 6px 10px;
+            margin-bottom: 6px;
+            border: 1px solid var(--ui-border);
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: var(--font-sans);
+            resize: vertical;
+        }
+        .block textarea { min-height: 60px; }
+        .block input:focus, .block textarea:focus, .block select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212,169,100,0.2);
+        }
+        .field-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+            margin-bottom: 2px;
+            display: block;
+        }
+
+        .add-block-bar {
+            padding: 16px 20px;
+            border-top: 1px solid var(--ui-border);
+            flex-shrink: 0;
+        }
+
+        /* ── Preview Canvas ── */
+        #email-canvas {
+            background: transparent;
+            width: 100%;
+            max-width: 600px;
+            min-height: 400px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+        }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--black);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.gold { border-left: 3px solid var(--gold); }
+
+        /* ── View Toggle ── */
+        .view-toggle {
+            display: flex;
+            background: var(--black);
+            border-bottom: 1px solid #333;
+            flex-shrink: 0;
+        }
+        .view-toggle-btn {
+            flex: 1;
+            padding: 10px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: color 0.2s, border-bottom 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+        .view-toggle-btn:hover { color: #ccc; }
+        .view-toggle-btn.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        /* ── Ingest View ── */
+        #ingest-view {
+            display: none;
+            flex-direction: column;
+            flex: 1;
+            overflow: hidden;
+        }
+        #ingest-view.active { display: flex; }
+        #block-editor-view { display: flex; flex-direction: column; flex: 1; overflow: hidden; }
+        #block-editor-view.hidden { display: none; }
+
+        .ingest-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 16px 20px;
+            overflow: hidden;
+        }
+        .ingest-area textarea {
+            flex: 1;
+            width: 100%;
+            min-height: 300px;
+            padding: 12px;
+            border: 1px solid var(--ui-border);
+            border-radius: 4px;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            resize: none;
+            color: var(--text-dark);
+            background: #fefefe;
+        }
+        .ingest-area textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212,169,100,0.2);
+        }
+        .ingest-area textarea::placeholder { color: #bbb; }
+        .ingest-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-shrink: 0;
+        }
+        .ingest-help {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: var(--ui-bg);
+            border: 1px solid var(--ui-border);
+            border-radius: 4px;
+            font-size: 11px;
+            color: #888;
+            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+        .ingest-help code {
+            background: #e8e8e8;
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 10px;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            body { flex-direction: column; height: auto; overflow: auto; }
+            #editor-panel { width: 100%; height: auto; min-height: 50vh; border-right: none; border-bottom: 1px solid var(--ui-border); min-width: unset; }
+            #preview-panel { width: 100%; height: auto; min-height: 50vh; padding: 16px; min-width: unset; }
+            #email-canvas { width: 100%; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ════ EDITOR PANEL ════ -->
+<div id="editor-panel">
+    <div class="panel-header">
+        <span class="title">Mission Control</span>
+        <div class="actions">
+            <button class="btn btn-outline btn-sm" onclick="loadJSON()">Load JSON</button>
+            <button class="btn btn-outline btn-sm" onclick="exportJSON()">Export JSON</button>
+            <button class="btn btn-gold btn-sm" onclick="copyV2()">Copy v2</button>
+            <button class="btn btn-dark btn-sm" onclick="copyV3()">Copy v3</button>
+        </div>
+    </div>
+
+    <!-- ════ VIEW TOGGLE ════ -->
+    <div class="view-toggle">
+        <button class="view-toggle-btn active" id="btn-block-editor" onclick="switchView('block-editor')">Block Editor</button>
+        <button class="view-toggle-btn" id="btn-ingest" onclick="switchView('ingest')">Ingest</button>
+    </div>
+
+    <div id="block-editor-view">
+        <div class="config-section">
+            <div class="config-row">
+                <div>
+                    <label>Preheader (hidden preview text)</label>
+                    <input type="text" id="preheader" placeholder="e.g. Prudentia runs at Te Rapa this Friday...">
+                </div>
+            </div>
+            <div class="config-row">
+                <div>
+                    <label>Slug (used for v2 URL in CTA)</label>
+                    <input type="text" id="slug" placeholder="e.g. Prudentia-TeRapa-17Apr2026">
+                </div>
+                <div>
+                    <label>Base URL</label>
+                    <input type="text" id="baseUrl" value="https://evolutionstables.nz/updates" placeholder="https://evolutionstables.nz/updates">
+                </div>
+            </div>
+        </div>
+
+        <div id="blocks-container"></div>
+
+        <div class="add-block-bar">
+            <button class="btn btn-outline" style="width:100%" onclick="addBlock()">+ Add Block</button>
+        </div>
+    </div>
+
+    <!-- ════ INGEST VIEW ════ -->
+    <div id="ingest-view">
+        <div class="ingest-area">
+            <textarea id="ingest-text" placeholder="Paste tagged content here...
+
+Heading
+PRUDENTIA LINES UP IN TWO DAYS
+
+Subheader
+STEPPING UP
+Stepping up to benchmark 75 at Te Rapa
+Masa Hashizume rides again from barrier 1
+
+Body
+Prudentia returns to Te Rapa this Friday...
+
+Quote
+"She's taken the next step up."
+— Lance O'Sullivan, Wexford Stables
+
+Link
+Current field: [TAB Te Rapa](https://...)
+
+AB Sign off
+Alex Baddeley
+Evolution Stables
+
+Preheader
+Prudentia steps up to BM75 at Te Rapa this Friday
+
+Slug
+Prudentia-TeRapa-02May2026"></textarea>
+            <div class="ingest-actions">
+                <button class="btn btn-gold" style="flex:1" onclick="buildFromTags()">Build from Tags</button>
+                <button class="btn btn-outline" onclick="clearIngest()">Clear</button>
+            </div>
+            <div class="ingest-help">
+                <strong>Supported tags:</strong>
+                <code>Heading</code> <code>Subheader</code> <code>Body</code> <code>Quote</code> <code>Link</code> <code>AB Sign off</code> <code>Divider</code> <code>Hero Image</code> <code>Preheader</code> <code>Slug</code><br>
+                <strong>Subheader:</strong> First line = label (e.g. STEPPING UP), remaining lines = summary bullets<br>
+                <strong>Quote:</strong> Use <code>—</code> on a separate line for attribution<br>
+                <strong>Link:</strong> Use <code>[Display Text](url)</code> or <code>Label: url</code> or bare URL<br>
+                <strong>AB Sign off:</strong> Line 1 = Name, Line 2 = Title<br>
+                Tags are separated by blank lines. Content runs until the next tag.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ════ PREVIEW PANEL ════ -->
+<div id="preview-panel">
+    <div style="width:100%;display:flex;flex-direction:column;align-items:center;">
+        <div id="email-canvas"></div>
+    </div>
+</div>
+
+<!-- Hidden file input for JSON loading -->
+<input type="file" id="json-file-input" accept=".json" style="display:none" onchange="handleJSONLoad(event)">
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════
+let state = [];
+
+const DEFAULT_SIGNATURE_SRC = 'https://evolutionstables.nz/updates/AB_Signiture.png';
+
+const BLOCK_TYPES = [
+    { value: 'headline', label: 'Headline' },
+    { value: 'subheadline', label: 'Subheadline' },
+    { value: 'hero-image', label: 'Hero Image' },
+    { value: 'body', label: 'Body' },
+    { value: 'quote', label: 'Quote' },
+    { value: 'link-block', label: 'Link / CTA' },
+    { value: 'divider', label: 'Divider' },
+    { value: 'sign-off', label: 'Sign-off' },
+];
+
+// ══════════════════════════════════════════════════
+// DEFAULT STATE — pre-populated for quick start
+// ══════════════════════════════════════════════════
+function getDefaultState() {
+    return [
+        { id: Date.now(), type: 'headline', content: '', width: 'full', open: true },
+    ];
+}
+
+// ══════════════════════════════════════════════════
+// BLOCK MANAGEMENT
+// ══════════════════════════════════════════════════
+function addBlock() {
+    state.push({ id: Date.now() + Math.random(), type: 'body', content: '', width: 'full', open: true });
+    render();
+}
+
+function removeBlock(id) {
+    state = state.filter(b => b.id !== id);
+    render();
+}
+
+function moveBlock(id, dir) {
+    const idx = state.findIndex(b => b.id === id);
+    if (idx < 0) return;
+    const newIdx = idx + dir;
+    if (newIdx < 0 || newIdx >= state.length) return;
+    [state[idx], state[newIdx]] = [state[newIdx], state[idx]];
+    render();
+}
+
+function updateBlock(id, field, value) {
+    const block = state.find(b => b.id === id);
+    if (!block) return;
+    block[field] = value;
+    // When type changes, ensure proper fields exist
+    if (field === 'type') {
+        if (block.type === 'hero-image' && !block.src) block.src = '';
+        if (block.type === 'hero-image' && !block.caption) block.caption = '';
+        if (block.type === 'quote' && !block.quote) block.quote = '';
+        if (block.type === 'quote' && !block.cite) block.cite = '';
+        if (block.type === 'sign-off' && !block.signature_src) block.signature_src = DEFAULT_SIGNATURE_SRC;
+        if (block.type === 'link-block' && !block.url) block.url = '';
+        if (block.type === 'link-block' && !block.label) block.label = '';
+    }
+    render();
+}
+
+function toggleWidth(id) {
+    const block = state.find(b => b.id === id);
+    const cycle = ['full', '1/3', '2/3'];
+    block.width = cycle[(cycle.indexOf(block.width) + 1) % 3];
+    render();
+}
+
+// ══════════════════════════════════════════════════
+// RENDER EDITOR
+// ══════════════════════════════════════════════════
+function render() {
+    const container = document.getElementById('blocks-container');
+    container.innerHTML = '';
+
+    state.forEach((block, idx) => {
+        const div = document.createElement('div');
+        div.className = 'block';
+
+        // Build type dropdown options
+        let typeOptions = BLOCK_TYPES.map(t =>
+            `<option value="${t.value}" ${block.type === t.value ? 'selected' : ''}>${t.label}</option>`
+        ).join('');
+
+        // Build fields based on type
+        let fieldsHtml = '';
+        switch (block.type) {
+            case 'headline':
+                fieldsHtml = `<textarea placeholder="Headline text" oninput="updateBlock(${block.id}, 'content', this.value)">${block.content || ''}</textarea>`;
+                break;
+            case 'subheadline':
+                fieldsHtml = `
+                    <input placeholder="Section label (e.g. FEATURED RUNNER)" value="${block.label || ''}" oninput="updateBlock(${block.id}, 'label', this.value)">
+                    <textarea placeholder="Summary text" oninput="updateBlock(${block.id}, 'content', this.value)">${block.content || ''}</textarea>
+                `;
+                break;
+            case 'hero-image':
+                fieldsHtml = `
+                    <span class="field-label">Image URL</span>
+                    <input placeholder="https://..." value="${block.src || ''}" oninput="updateBlock(${block.id}, 'src', this.value)">
+                    <span class="field-label">Caption</span>
+                    <input placeholder="Image caption" value="${block.caption || ''}" oninput="updateBlock(${block.id}, 'caption', this.value)">
+                `;
+                break;
+            case 'body':
+                fieldsHtml = `<textarea placeholder="Body text. Use [text](url) for links." oninput="updateBlock(${block.id}, 'content', this.value)" style="min-height:80px">${block.content || ''}</textarea>`;
+                break;
+            case 'quote':
+                fieldsHtml = `
+                    <span class="field-label">Quote text</span>
+                    <textarea placeholder="Quote text" oninput="updateBlock(${block.id}, 'quote', this.value)">${block.quote || ''}</textarea>
+                    <span class="field-label">Attribution</span>
+                    <input placeholder="e.g. — Andrew Scott, Wexford Stables" value="${block.cite || ''}" oninput="updateBlock(${block.id}, 'cite', this.value)">
+                `;
+                break;
+            case 'link-block':
+                fieldsHtml = `
+                    <span class="field-label">Display text</span>
+                    <input placeholder="Link label" value="${block.label || ''}" oninput="updateBlock(${block.id}, 'label', this.value)">
+                    <span class="field-label">URL</span>
+                    <input placeholder="https://..." value="${block.url || ''}" oninput="updateBlock(${block.id}, 'url', this.value)">
+                `;
+                break;
+            case 'divider':
+                fieldsHtml = `<p style="color:#999;font-size:12px;font-style:italic;">— Horizontal rule —</p>`;
+                break;
+            case 'sign-off':
+                fieldsHtml = `
+                    <span class="field-label">Name</span>
+                    <input placeholder="Name" value="${block.content || ''}" oninput="updateBlock(${block.id}, 'content', this.value)">
+                    <span class="field-label">Title</span>
+                    <input placeholder="Title" value="${block.title || ''}" oninput="updateBlock(${block.id}, 'title', this.value)">
+                    <span class="field-label">Signature image URL</span>
+                    <input placeholder="https://..." value="${block.signature_src || ''}" oninput="updateBlock(${block.id}, 'signature_src', this.value)">
+                `;
+                break;
+            default:
+                fieldsHtml = `<textarea oninput="updateBlock(${block.id}, 'content', this.value)">${block.content || ''}</textarea>`;
+        }
+
+        div.innerHTML = `
+            <div class="block-controls">
+                <select onchange="updateBlock(${block.id}, 'type', this.value)">${typeOptions}</select>
+                <button class="width-toggle ${block.width === 'full' ? 'active' : ''}" onclick="toggleWidth(${block.id})">${block.width}</button>
+                <button class="move-btn" onclick="moveBlock(${block.id}, -1)" title="Move up">↑</button>
+                <button class="move-btn" onclick="moveBlock(${block.id}, 1)" title="Move down">↓</button>
+                <button class="delete-btn" onclick="removeBlock(${block.id})" title="Delete">✕</button>
+            </div>
+            ${fieldsHtml}
+        `;
+        container.appendChild(div);
+    });
+
+    updatePreview();
+}
+
+// ══════════════════════════════════════════════════
+// MARKDOWN-LINK PARSER: [text](url) → <a>
+// ══════════════════════════════════════════════════
+function parseLinks(text) {
+    return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#d4a964;text-decoration:underline;">$1</a>');
+}
+
+// ══════════════════════════════════════════════════
+// V2 RENDERER — Full Update (inline styles)
+// ══════════════════════════════════════════════════
+function renderV2() {
+    const preheader = document.getElementById('preheader').value || '';
+    const blocks = state;
+
+    let bodyBlocks = '';
+    blocks.forEach(b => {
+        const w = b.width === 'full' ? '100%' : (b.width === '1/3' ? '33.33%' : '66.66%');
+        const pad = b.width === 'full' ? '0' : '10px';
+
+        let html = '';
+        switch (b.type) {
+            case 'headline':
+                html = `<h1 style="font-family:'Playfair Display',serif;font-size:44px;font-weight:400;line-height:1.1;margin:0;color:#000;letter-spacing:-0.5px;">${b.content || ''}</h1>`;
+                break;
+            case 'subheadline': {
+                const labelHtml = b.label ? `<div style="font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#000000;margin-bottom:8px;"><strong>${b.label}</strong></div>` : '';
+                const contentLines = (b.content || '').split('\n');
+                const summariesHtml = contentLines.map(line => `<p style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;line-height:1.4;color:#000;margin:0;">${line}</p>`).join('');
+                html = labelHtml + summariesHtml;
+                break;
+            }
+            case 'hero-image':
+                html = `<div style="background:#e8e8e8;padding:24px;border-left:3px solid #d4a964;border-radius:12px;">
+                    <img src="${b.src || ''}" style="width:100%;max-width:100%;height:auto;display:block;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+                    ${b.caption ? `<p style="font-family:'Inter',sans-serif;font-size:11px;font-style:normal;color:#666;font-weight:600;text-transform:uppercase;letter-spacing:1px;text-align:left;margin-top:16px;">${b.caption}</p>` : ''}
+                </div>`;
+                break;
+            case 'body': {
+                const paragraphs = (b.content || '').split('\n').filter(p => p.trim());
+                html = paragraphs.map(p => `<p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;margin-bottom:2.5em;">${parseLinks(p)}</p>`).join('');
+                break;
+            }
+            case 'quote':
+                html = `<div style="background:#000000;padding:32px 24px;border-left:3px solid #d4a964;margin:0;border-radius:12px;">
+                    <blockquote style="font-family:'Playfair Display',serif;font-size:22px;font-style:italic;line-height:1.6;color:#ffffff;margin:0 0 16px 0;font-weight:500;">
+                        <span style="font-family:'Playfair Display',serif;font-size:32px;line-height:0.8;vertical-align:top;margin-right:4px;">"</span>${b.quote || ''}
+                    </blockquote>
+                    <cite style="font-family:'Inter',sans-serif;font-size:11px;font-style:normal;color:#999999;font-weight:600;text-transform:uppercase;letter-spacing:1px;display:block;">${b.cite || ''}</cite>
+                </div>`;
+                break;
+            case 'link-block':
+                html = `<div style="text-align:center;"><p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;margin-bottom:8px;"><a href="${b.url || '#'}" style="color:#d4a964;text-decoration:underline;">${b.label || 'Learn more'}</a></p></div>`;
+                break;
+            case 'divider':
+                html = `<div style="border-top:1px solid #e0e0e0;margin:8px 0;"></div>`;
+                break;
+            case 'sign-off':
+                html = `<div style="width:100%;margin-top:48px;margin-bottom:32px;">
+                    <div style="border-top:1px solid #e0e0e0;margin-bottom:32px;"></div>
+                    ${b.signature_src ? `<img src="${b.signature_src}" alt="${b.content || ''}" style="display:block;max-width:160px;height:auto;margin-bottom:8px;">` : ''}
+                    <p style="font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:#000;margin:0 0 2px 0;">${b.content || ''}</p>
+                    <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:400;color:#666;margin:0;">${b.title || ''}</p>
+                </div>`;
+                break;
+        }
+
+        if (html) {
+            bodyBlocks += `<div style="width:${w};margin-bottom:32px;${b.width !== 'full' ? `padding:0 ${pad};` : ''}">${html}</div>`;
+        }
+    });
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+${preheader ? `<div style="display:none;font-size:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:0;overflow:hidden;">${preheader}</div>` : ''}
+<style>
+body { font-family: 'Inter', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; }
+</style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow-x:hidden;width:100%}
+body{background:#333333;color:#000000;font-family:'Inter',sans-serif;margin:0;padding:20px;min-height:100vh}
+@media (max-width: 600px) { body { padding: 16px; } }
+</style>
+</head>
+<body style="background-color:#333333;">
+
+<div style="background-color:#ffffff;color:#000000;font-family:'Inter','Helvetica','Arial',sans-serif;width:100%;max-width:600px;margin:0 auto;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+
+  <!-- HEADER -->
+  <div style="width:100%;max-width:600px;background:#000000;padding:40px 24px 20px 24px;display:flex;justify-content:flex-start;align-items:flex-end;margin:0 auto;border-radius:12px 12px 0 0;">
+    <div style="display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:8px;">
+      <div style="display:block;line-height:0;margin-bottom:2px;">
+        <img src="https://evolutionstables.nz/updates/Evolution-Stables-Logo-White.png" alt="Evolution Stables" style="height:auto;max-height:137.5px;max-width:100%;display:block;">
+      </div>
+      <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#999999;margin-top:12px;">STABLE UPDATE</div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div style="padding:32px 48px;">
+    ${bodyBlocks}
+  </div>
+
+  <!-- FOOTER -->
+  <div style="background:#000000;color:#ffffff;padding:40px 48px;margin-top:40px;text-align:center;border-radius:0 0 12px 12px;">
+    <div style="margin-bottom:32px;">
+      <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:#fff;margin:0 0 32px 0;">
+        The Future of <span style="color:#d4a964;">Ownership</span><br>Has Arrived
+      </h2>
+      <p style="font-family:'Inter',sans-serif;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin:0;">
+        Digital-Syndication, by Evolution Stables, Powered By Tokinvest
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>`;
+}
+
+// ══════════════════════════════════════════════════
+// V3 RENDERER — Gmail Teaser (CSS classes)
+// ══════════════════════════════════════════════════
+function renderV3() {
+    const preheader = document.getElementById('preheader').value || '';
+    const slug = document.getElementById('slug').value || 'update';
+    const baseUrl = document.getElementById('baseUrl').value || 'https://evolutionstables.nz/updates';
+    const v2Url = `${baseUrl}/${slug}.html`;
+    const blocks = state;
+
+    // Collect subheadline summaries and first hero image for v3
+    let summaries = [];
+    let heroSrc = '';
+    let signOff = null;
+
+    blocks.forEach(b => {
+        if (b.type === 'subheadline') {
+            summaries.push({ label: b.label || '', content: b.content || '' });
+        }
+        if (b.type === 'hero-image' && !heroSrc) {
+            heroSrc = b.src || '';
+        }
+        if (b.type === 'sign-off') {
+            signOff = b;
+        }
+    });
+
+    // Build summary sections
+    let summaryHtml = '';
+    summaries.forEach(s => {
+        const lines = s.content.split('\n').filter(l => l.trim());
+        summaryHtml += `
+            <div class="section" style="padding-left:20px;padding-right:20px;">
+                ${s.label ? `<div class="section-label">${s.label}</div>` : ''}
+                ${lines.map(l => `<p>${l}</p>`).join('')}
+            </div>`;
+    });
+
+    // Sign-off
+    let signOffHtml = '';
+    if (signOff) {
+        signOffHtml = `
+            <div class="signature">
+                ${signOff.signature_src ? `<img src="${signOff.signature_src}" alt="${signOff.content || ''}" style="display:block;max-width:140px;height:auto;margin-bottom:8px;">` : ''}
+                <p class="signature-name">${signOff.content || ''}</p>
+                <p class="signature-company">${signOff.title || ''}</p>
+            </div>`;
+    }
+
+    return `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Evolution Stables Update</title>
+    <style>
+        body {
+            font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #000;
+            margin: 0;
+            padding: 20px;
+            background-color: #333333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 0;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: #000000;
+            padding: 40px 24px 20px 24px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+        .logo {
+            height: auto;
+            max-height: 100px;
+            max-width: 100%;
+            display: block;
+        }
+        .stables-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #999999;
+            margin-top: 8px;
+        }
+        .content {
+            padding: 32px 48px;
+        }
+        .section {
+            margin-bottom: 24px;
+        }
+        .section p {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.4;
+            color: #000;
+            margin: 0;
+        }
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #000000;
+            margin-bottom: 8px;
+        }
+        .hero-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+        .signature {
+            margin-top: 40px;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 24px;
+        }
+        .signature p {
+            margin: 4px 0;
+            font-family: 'Inter', sans-serif;
+        }
+        .signature-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #000;
+        }
+        .signature-company {
+            font-size: 13px;
+            font-weight: 400;
+            color: #666;
+        }
+        @keyframes subtleShimmer {
+            0% { box-shadow: 0 0 0 rgba(212, 169, 100, 0.3); }
+            50% { box-shadow: 0 0 10px rgba(212, 169, 100, 0.6); }
+            100% { box-shadow: 0 0 0 rgba(212, 169, 100, 0.3); }
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: bold;
+            border: 2px solid #d4a964;
+            box-shadow: 0 0 10px rgba(212,169,100,0.3);
+            animation: subtleShimmer 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            border-color: #fff;
+            box-shadow: 0 0 20px rgba(212,169,100,0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo-section">
+                <img src="https://evolutionstables.nz/updates/Evolution-Stables-Logo-White.png" alt="Evolution Stables" class="logo">
+                <div class="stables-label">STABLE UPDATE</div>
+            </div>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+            ${heroSrc ? `<div style="text-align:center;margin-bottom:24px;"><img src="${heroSrc}" alt="Hero image" class="hero-image"></div>` : ''}
+
+            ${summaryHtml}
+
+            <div style="text-align:center;margin:40px auto;">
+                <a href="${v2Url}" class="cta-button">READ FULL UPDATE</a>
+            </div>
+
+            ${signOffHtml}
+        </div>
+
+        <!-- FOOTER -->
+        <div style="background:#000000;color:#ffffff;padding:40px 48px;margin-top:40px;text-align:center;border-radius:0 0 12px 12px;">
+            <div style="margin-bottom:32px;">
+                <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:#fff;margin:0 0 32px 0;">
+                    The Future of <span style="color:#d4a964;">Ownership</span><br>Has Arrived
+                </h2>
+                <p style="font-family:'Inter',sans-serif;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin:0;">
+                    Digital-Syndication, by Evolution Stables, Powered By Tokinvest
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>`;
+}
+
+// ══════════════════════════════════════════════════
+// PREVIEW RENDER (in-browser display)
+// ══════════════════════════════════════════════════
+function updatePreview() {
+    const canvas = document.getElementById('email-canvas');
+    canvas.innerHTML = renderV2Preview();
+}
+
+// V2 Preview — renders body content in a preview-friendly way
+function renderV2Preview() {
+    const blocks = state;
+
+    let bodyBlocks = '';
+    blocks.forEach(b => {
+        let html = '';
+        switch (b.type) {
+            case 'headline':
+                html = `<h1 style="font-family:'Playfair Display',serif;font-size:44px;font-weight:400;line-height:1.1;margin:0;color:#000;letter-spacing:-0.5px;">${b.content || '<em style="color:#999;">Headline</em>'}</h1>`;
+                break;
+            case 'subheadline': {
+                const labelHtml = b.label ? `<div style="font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#000;margin-bottom:8px;"><strong>${b.label}</strong></div>` : '';
+                const lines = (b.content || '').split('\n');
+                const sumHtml = lines.map(l => `<p style="font-family:'Playfair Display',serif;font-size:20px;font-weight:400;line-height:1.4;color:#000;margin:0;">${l || '<em style="color:#999;">Summary</em>'}</p>`).join('');
+                html = labelHtml + sumHtml;
+                break;
+            }
+            case 'hero-image':
+                html = `<div style="background:#e8e8e8;padding:24px;border-left:3px solid #d4a964;border-radius:12px;">
+                    <img src="${b.src || ''}" style="width:100%;max-width:100%;height:auto;display:block;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.08);" onerror="this.style.display='none'">
+                    ${b.caption ? `<p style="font-family:'Inter',sans-serif;font-size:11px;font-style:normal;color:#666;font-weight:600;text-transform:uppercase;letter-spacing:1px;text-align:left;margin-top:16px;">${b.caption}</p>` : ''}
+                </div>`;
+                break;
+            case 'body': {
+                const paragraphs = (b.content || '').split('\n').filter(p => p.trim());
+                if (paragraphs.length === 0) {
+                    html = `<p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.75;color:#999;margin-bottom:2.5em;font-style:italic;">Body text</p>`;
+                } else {
+                    html = paragraphs.map(p => `<p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;margin-bottom:2.5em;">${parseLinks(p)}</p>`).join('');
+                }
+                break;
+            }
+            case 'quote':
+                html = `<div style="background:#000000;padding:32px 24px;border-left:3px solid #d4a964;margin:0;border-radius:12px;">
+                    <blockquote style="font-family:'Playfair Display',serif;font-size:22px;font-style:italic;line-height:1.6;color:#ffffff;margin:0 0 16px 0;font-weight:500;">
+                        <span style="font-family:'Playfair Display',serif;font-size:32px;line-height:0.8;vertical-align:top;margin-right:4px;">"</span>${b.quote || '<em>Quote text</em>'}
+                    </blockquote>
+                    <cite style="font-family:'Inter',sans-serif;font-size:11px;font-style:normal;color:#999999;font-weight:600;text-transform:uppercase;letter-spacing:1px;display:block;">${b.cite || ''}</cite>
+                </div>`;
+                break;
+            case 'link-block':
+                html = `<div style="text-align:center;"><p style="font-family:'Inter',sans-serif;font-size:15px;line-height:1.75;color:#1a1a1a;margin-bottom:8px;"><a href="${b.url || '#'}" style="color:#d4a964;text-decoration:underline;">${b.label || 'Learn more'}</a></p></div>`;
+                break;
+            case 'divider':
+                html = `<div style="border-top:1px solid #e0e0e0;margin:8px 0;"></div>`;
+                break;
+            case 'sign-off':
+                html = `<div style="width:100%;margin-top:48px;margin-bottom:32px;">
+                    <div style="border-top:1px solid #e0e0e0;margin-bottom:32px;"></div>
+                    ${b.signature_src ? `<img src="${b.signature_src}" alt="${b.content || ''}" style="display:block;max-width:160px;height:auto;margin-bottom:8px;">` : ''}
+                    <p style="font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:#000;margin:0 0 2px 0;">${b.content || 'Name'}</p>
+                    <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:400;color:#666;margin:0;">${b.title || 'Title'}</p>
+                </div>`;
+                break;
+        }
+
+        if (html) {
+            bodyBlocks += `<div style="width:100%;margin-bottom:32px;">${html}</div>`;
+        }
+    });
+
+    return `
+    <div style="background-color:#ffffff;color:#000000;font-family:'Inter','Helvetica','Arial',sans-serif;width:100%;max-width:600px;margin:0 auto;border-radius:12px;overflow:hidden;">
+        <!-- HEADER -->
+        <div style="width:100%;max-width:600px;background:#000000;padding:40px 24px 20px 24px;display:flex;justify-content:flex-start;align-items:flex-end;margin:0 auto;border-radius:12px 12px 0 0;">
+            <div style="display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:8px;">
+                <div style="display:block;line-height:0;margin-bottom:2px;">
+                    <img src="https://evolutionstables.nz/updates/Evolution-Stables-Logo-White.png" alt="Evolution Stables" style="height:auto;max-height:80px;max-width:100%;display:block;">
+                </div>
+                <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#999999;margin-top:12px;">STABLE UPDATE</div>
+            </div>
+        </div>
+        <!-- BODY -->
+        <div style="padding:32px 48px;">
+            ${bodyBlocks}
+        </div>
+        <!-- FOOTER -->
+        <div style="background:#000000;color:#ffffff;padding:40px 48px;margin-top:40px;text-align:center;border-radius:0 0 12px 12px;">
+            <div style="margin-bottom:32px;">
+                <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:#fff;margin:0 0 32px 0;">
+                    The Future of <span style="color:#d4a964;">Ownership</span><br>Has Arrived
+                </h2>
+                <p style="font-family:'Inter',sans-serif;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin:0;">
+                    Digital-Syndication, by Evolution Stables, Powered By Tokinvest
+                </p>
+            </div>
+        </div>
+    </div>`;
+}
+
+// V3 Preview — renders a simplified teaser view
+function renderV3Preview() {
+    const slug = document.getElementById('slug').value || 'update';
+    const baseUrl = document.getElementById('baseUrl').value || 'https://evolutionstables.nz/updates';
+    const v2Url = `${baseUrl}/${slug}.html`;
+    const blocks = state;
+
+    let summaries = [];
+    let heroSrc = '';
+    let signOff = null;
+
+    blocks.forEach(b => {
+        if (b.type === 'subheadline') {
+            summaries.push({ label: b.label || '', content: b.content || '' });
+        }
+        if (b.type === 'hero-image' && !heroSrc) {
+            heroSrc = b.src || '';
+        }
+        if (b.type === 'sign-off') {
+            signOff = b;
+        }
+    });
+
+    let summaryHtml = '';
+    summaries.forEach(s => {
+        const lines = s.content.split('\n').filter(l => l.trim());
+        summaryHtml += `
+            <div style="padding-left:20px;padding-right:20px;margin-bottom:24px;">
+                ${s.label ? `<div style="font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#000000;margin-bottom:8px;">${s.label}</div>` : ''}
+                ${lines.map(l => `<p style="font-family:'Playfair Display',Georgia,serif;font-size:18px;line-height:1.4;color:#000;margin:0;">${l}</p>`).join('')}
+            </div>`;
+    });
+
+    let signOffHtml = '';
+    if (signOff) {
+        signOffHtml = `
+            <div style="margin-top:40px;border-top:1px solid #e0e0e0;padding-top:24px;">
+                ${signOff.signature_src ? `<img src="${signOff.signature_src}" alt="${signOff.content || ''}" style="display:block;max-width:140px;height:auto;margin-bottom:8px;">` : ''}
+                <p style="font-family:'Inter',sans-serif;font-size:15px;font-weight:600;color:#000;margin:4px 0;">${signOff.content || ''}</p>
+                <p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:400;color:#666;margin:4px 0;">${signOff.title || ''}</p>
+            </div>`;
+    }
+
+    return `
+    <div style="max-width:600px;margin:0 auto;background:white;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+        <!-- HEADER -->
+        <div style="background:#000000;padding:40px 24px 20px 24px;border-radius:12px 12px 0 0;display:flex;justify-content:flex-start;align-items:flex-end;">
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px;">
+                <img src="https://evolutionstables.nz/updates/Evolution-Stables-Logo-White.png" alt="Evolution Stables" style="height:auto;max-height:80px;max-width:100%;display:block;">
+                <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#999999;margin-top:8px;">STABLE UPDATE</div>
+            </div>
+        </div>
+        <!-- CONTENT -->
+        <div style="padding:32px 48px;">
+            ${heroSrc ? `<div style="text-align:center;margin-bottom:24px;"><img src="${heroSrc}" alt="Hero" style="width:100%;max-width:100%;height:auto;display:block;border-radius:8px;"></div>` : ''}
+            ${summaryHtml}
+            <div style="text-align:center;margin:40px auto;">
+                <a href="${v2Url}" style="display:inline-block;padding:14px 32px;background-color:#000;color:#fff;text-decoration:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;font-weight:bold;border:2px solid #d4a964;box-shadow:0 0 10px rgba(212,169,100,0.3);">READ FULL UPDATE</a>
+            </div>
+            ${signOffHtml}
+        </div>
+        <!-- FOOTER -->
+        <div style="background:#000000;color:#fff;padding:40px 24px;margin-top:40px;text-align:center;border-radius:0 0 12px 12px;">
+            <div style="margin-bottom:24px;">
+                <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:400;color:#fff;margin:0 0 12px 0;">The Future of <span style="color:#d4a964;">Ownership</span><br>Has Arrived</h2>
+                <p style="font-family:'Inter',sans-serif;font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px;margin:0;">Digital-Syndication, by Evolution Stables, Powered By Tokinvest</p>
+            </div>
+        </div>
+    </div>`;
+}
+
+// ══════════════════════════════════════════════════
+// EXPORT FUNCTIONS
+// ══════════════════════════════════════════════════
+function showToast(msg, duration = 2500) {
+    const toast = document.getElementById('toast');
+    toast.textContent = msg;
+    toast.className = 'toast gold show';
+    setTimeout(() => { toast.className = 'toast gold'; }, duration);
+}
+
+function copyV2() {
+    const html = renderV2();
+    navigator.clipboard.writeText(html).then(() => showToast('v2 HTML copied to clipboard!'));
+}
+
+function copyV3() {
+    const html = renderV3();
+    navigator.clipboard.writeText(html).then(() => showToast('v3 HTML copied to clipboard!'));
+}
+
+function exportJSON() {
+    const data = {
+        preheader: document.getElementById('preheader').value,
+        slug: document.getElementById('slug').value,
+        baseUrl: document.getElementById('baseUrl').value,
+        blocks: state
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${data.slug || 'update'}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('JSON exported!');
+}
+
+function loadJSON() {
+    document.getElementById('json-file-input').click();
+}
+
+function migrateBlock(b) {
+    // Map old type names to new
+    const typeMap = { 'heading': 'headline', 'subheading': 'subheadline', 'media': 'hero-image' };
+    if (typeMap[b.type]) b.type = typeMap[b.type];
+    // Migrate old media format (content → src)
+    if (b.type === 'hero-image' && b.content && !b.src) {
+        b.src = b.content;
+        delete b.content;
+    }
+    // Migrate old quote format (content → quote)
+    if (b.type === 'quote' && b.content && !b.quote) {
+        b.quote = b.content;
+        delete b.content;
+    }
+    // Migrate old link-block format: extract label and url from markdown [text](url)
+    if (b.type === 'link-block' && b.content && !b.label) {
+        const mdMatch = b.content.match(/\[([^\]]+)\]\(([^)]+)\)/);
+        if (mdMatch) {
+            b.label = mdMatch[1];
+            b.url = mdMatch[2];
+        } else {
+            b.label = b.content;
+            b.url = '';
+        }
+        delete b.content;
+    }
+    // Migrate old sign-off format: split "Name\nTitle" into separate fields
+    if (b.type === 'sign-off' && b.content && !b.title) {
+        const parts = b.content.split('\n');
+        if (parts.length > 1) {
+            b.content = parts[0];
+            b.title = parts.slice(1).join('\n');
+        } else {
+            b.title = '';
+        }
+    }
+    // Ensure required fields exist
+    if (b.type === 'subheadline' && !b.label) b.label = '';
+    if (b.type === 'hero-image' && !b.caption) b.caption = '';
+    if (b.type === 'quote' && !b.cite) b.cite = '';
+    if (b.type === 'link-block' && !b.url) b.url = '';
+    if (b.type === 'link-block' && !b.label) b.label = '';
+    if (b.type === 'sign-off' && !b.title) b.title = '';
+    if (b.type === 'sign-off' && !b.signature_src) b.signature_src = DEFAULT_SIGNATURE_SRC;
+    if (!b.width) b.width = 'full';
+    return b;
+}
+
+function handleJSONLoad(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            // Support both plain array format and wrapped format
+            let blocks;
+            if (Array.isArray(data)) {
+                blocks = data;
+            } else if (data.blocks) {
+                blocks = data.blocks;
+                if (data.preheader) document.getElementById('preheader').value = data.preheader;
+                if (data.slug) document.getElementById('slug').value = data.slug;
+                if (data.baseUrl) document.getElementById('baseUrl').value = data.baseUrl;
+            } else {
+                throw new Error('Unrecognized JSON format');
+            }
+            // Migrate old block formats
+            state = blocks.map(migrateBlock);
+            render();
+            showToast('JSON loaded!');
+        } catch (err) {
+            alert('Invalid JSON file: ' + err.message);
+        }
+    };
+    reader.readAsText(file);
+    // Reset input so same file can be loaded again
+    event.target.value = '';
+}
+
+// ══════════════════════════════════════════════════
+// VIEW SWITCHING
+// ══════════════════════════════════════════════════
+function switchView(view) {
+    const blockEditor = document.getElementById('block-editor-view');
+    const ingestView = document.getElementById('ingest-view');
+    const btnBlock = document.getElementById('btn-block-editor');
+    const btnIngest = document.getElementById('btn-ingest');
+
+    if (view === 'ingest') {
+        blockEditor.classList.add('hidden');
+        ingestView.classList.add('active');
+        btnBlock.classList.remove('active');
+        btnIngest.classList.add('active');
+    } else {
+        blockEditor.classList.remove('hidden');
+        ingestView.classList.remove('active');
+        btnBlock.classList.add('active');
+        btnIngest.classList.remove('active');
+    }
+}
+
+function clearIngest() {
+    document.getElementById('ingest-text').value = '';
+}
+
+// ══════════════════════════════════════════════════
+// TAG PARSER — Ingest tagged content into blocks
+// ══════════════════════════════════════════════════
+function buildFromTags() {
+    const raw = document.getElementById('ingest-text').value.trim();
+    if (!raw) {
+        showToast('Paste tagged content first');
+        return;
+    }
+
+    // Define known tags (case-insensitive)
+    const TAG_MAP = {
+        'heading': 'headline',
+        'subheader': 'subheadline',
+        'subheadline': 'subheadline',
+        'body': 'body',
+        'quote': 'quote',
+        'link': 'link-block',
+        'ab sign off': 'sign-off',
+        'ab sign-off': 'sign-off',
+        'sign off': 'sign-off',
+        'sign-off': 'sign-off',
+        'divider': 'divider',
+        'hero image': 'hero-image',
+        'hero-image': 'hero-image',
+        'preheader': '_config_preheader',
+        'slug': '_config_slug',
+    };
+
+    // Parse the tagged content into sections
+    // A tag is a line that matches a known tag name (case-insensitive)
+    // Content follows until the next tag
+    const lines = raw.split('\n');
+    const sections = [];
+    let currentTag = null;
+    let currentContent = [];
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const trimmed = line.trim();
+        const tagLower = trimmed.toLowerCase();
+
+        // Check if this line is a tag
+        if (TAG_MAP[tagLower] !== undefined) {
+            // Save previous section
+            if (currentTag !== null) {
+                sections.push({ tag: currentTag, content: currentContent.join('\n') });
+            }
+            currentTag = tagLower;
+            currentContent = [];
+        } else {
+            currentContent.push(line);
+        }
+    }
+    // Don't forget the last section
+    if (currentTag !== null) {
+        sections.push({ tag: currentTag, content: currentContent.join('\n') });
+    }
+
+    if (sections.length === 0) {
+        showToast('No recognized tags found. See help for supported tags.');
+        return;
+    }
+
+    // Convert sections to blocks
+    const newBlocks = [];
+    let preheaderValue = '';
+    let slugValue = '';
+
+    sections.forEach(section => {
+        const blockType = TAG_MAP[section.tag];
+        if (!blockType) return;
+
+        // Handle config tags (Preheader, Slug)
+        if (blockType === '_config_preheader') {
+            preheaderValue = section.content.trim();
+            return;
+        }
+        if (blockType === '_config_slug') {
+            slugValue = section.content.trim();
+            return;
+        }
+
+        const content = section.content.trim();
+
+        switch (blockType) {
+            case 'headline': {
+                const headlineText = content.split('\n')[0].trim();
+                newBlocks.push({ id: Date.now() + Math.random(), type: 'headline', content: headlineText, width: 'full' });
+                break;
+            }
+            case 'subheadline': {
+                const subLines = content.split('\n');
+                const label = subLines[0] ? subLines[0].trim() : '';
+                const bodyLines = subLines.slice(1).join('\n').trim();
+                newBlocks.push({ id: Date.now() + Math.random(), type: 'subheadline', content: bodyLines, label: label, width: 'full' });
+                break;
+            }
+            case 'body': {
+                if (content) {
+                    newBlocks.push({ id: Date.now() + Math.random(), type: 'body', content: content, width: 'full' });
+                }
+                break;
+            }
+            case 'quote': {
+                // Extract attribution: lines starting with — or –
+                const quoteLines = content.split('\n');
+                let quoteText = [];
+                let citeText = '';
+                for (const ql of quoteLines) {
+                    const trimmed = ql.trim();
+                    if (trimmed.startsWith('—') || trimmed.startsWith('–') || trimmed.startsWith('--')) {
+                        citeText = trimmed.replace(/^[—–-]+\s*/, '');
+                    } else {
+                        quoteText.push(ql);
+                    }
+                }
+                newBlocks.push({ id: Date.now() + Math.random(), type: 'quote', quote: quoteText.join('\n').trim(), cite: citeText, width: 'full' });
+                break;
+            }
+            case 'link-block': {
+                // Parse link: [Display Text](url) or Label: url or bare URL
+                const linkContent = content.trim();
+                let linkLabel = '';
+                let linkUrl = '';
+
+                // Try markdown format: [text](url)
+                const mdMatch = linkContent.match(/\[([^\]]+)\]\(([^)]+)\)/);
+                if (mdMatch) {
+                    linkLabel = mdMatch[1];
+                    linkUrl = mdMatch[2];
+                } else {
+                    // Try "Label: url" format
+                    const colonMatch = linkContent.match(/^(.+?)\s*:\s*(https?:\/\/\S+)$/);
+                    if (colonMatch) {
+                        linkLabel = colonMatch[1].trim();
+                        linkUrl = colonMatch[2].trim();
+                    } else {
+                        // Bare URL
+                        const urlMatch = linkContent.match(/(https?:\/\/\S+)/);
+                        if (urlMatch) {
+                            linkLabel = linkContent.replace(urlMatch[0], '').trim() || urlMatch[1];
+                            linkUrl = urlMatch[1];
+                        } else {
+                            linkLabel = linkContent;
+                            linkUrl = '';
+                        }
+                    }
+                }
+                newBlocks.push({ id: Date.now() + Math.random(), type: 'link-block', label: linkLabel, url: linkUrl, width: 'full' });
+                break;
+            }
+            case 'divider': {
+                newBlocks.push({ id: Date.now() + Math.random(), type: 'divider', content: '', width: 'full' });
+                break;
+            }
+            case 'hero-image': {
+                const imgLines = content.split('\n');
+                const imgSrc = imgLines[0] ? imgLines[0].trim() : '';
+                const imgCaption = imgLines[1] ? imgLines[1].trim() : '';
+                newBlocks.push({ id: Date.now() + Math.random(), type: 'hero-image', src: imgSrc, caption: imgCaption, width: 'full' });
+                break;
+            }
+            case 'sign-off': {
+                const soLines = content.split('\n');
+                const soName = soLines[0] ? soLines[0].trim() : '';
+                const soTitle = soLines[1] ? soLines[1].trim() : '';
+                const soSig = soLines[2] ? soLines[2].trim() : DEFAULT_SIGNATURE_SRC;
+                newBlocks.push({ id: Date.now() + Math.random(), type: 'sign-off', content: soName, title: soTitle, signature_src: soSig, width: 'full' });
+                break;
+            }
+        }
+    });
+
+    if (newBlocks.length === 0 && !preheaderValue && !slugValue) {
+        showToast('No blocks generated. Check your tags.');
+        return;
+    }
+
+    // Set config fields
+    if (preheaderValue) document.getElementById('preheader').value = preheaderValue;
+    if (slugValue) document.getElementById('slug').value = slugValue;
+
+    // Replace state with new blocks (or add to existing)
+    if (newBlocks.length > 0) {
+        state = newBlocks;
+    }
+
+    // Switch to block editor view and render
+    switchView('block-editor');
+    render();
+    showToast(`Built ${newBlocks.length} blocks from tags`);
+}
+
+// ══════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════
+state = getDefaultState();
+render();
+</script>
+</body>
+</html>
